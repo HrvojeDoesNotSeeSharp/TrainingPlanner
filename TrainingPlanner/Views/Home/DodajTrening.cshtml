@@ -37,6 +37,8 @@
                 @Html.TextAreaFor(x => x.Napomena, new { rows = "11", cols = "40" })
 
             </div>
+            <br />
+                <text> Broj krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova) </text>
             <input type ="submit" name ="DodajTrening" value="Dodaj Trening" />
         </div>
         }
@@ -98,8 +100,7 @@
                         }
                     </table>                   
                 
-                    <br />
-                <text> Broj krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova) </text>
+                    
                 }
                 
                 <br />
