@@ -79,6 +79,6 @@ D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.xml
 D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.xml
 D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.xml
 D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.xml
-D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.csprojResolveAssemblyReference.cache
 D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.dll
 D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.pdb
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.csprojResolveAssemblyReference.cache

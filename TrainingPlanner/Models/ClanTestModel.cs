@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace TrainingPlanner.Models
 {
     public class ClanTestModel
     {
         public Clan Clan { get; set; }
-        public List<Test> listaTest { get; set; }
+        public List<Test> ListaTest { get; set; }
     }
 }

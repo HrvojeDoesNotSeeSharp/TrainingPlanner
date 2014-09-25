@@ -13,13 +13,13 @@
 </head>
 <body>
     <div>
-        <h1>@Model.clan.Ime @Model.clan.Prezime</h1>
+        <h1>@Model.Clan.Ime @Model.Clan.Prezime</h1>
         Popis testova:
 
         <div>
-            @if(Model.listaTestova != null)
+            @if(Model.ListaTestova != null)
             {
-            foreach (var test in Model.listaTestova)
+            foreach (var test in Model.ListaTestova)
             {
                 <table>                    
                     <tr>
@@ -33,7 +33,7 @@
             }
         </div>
         <br/>
-        @Html.ActionLink("Dodaj Test", "DodajTest", "Home", new {id = Model.clan.ClanId }, null)
+        @Html.ActionLink("Dodaj Test", "DodajTest", "Home", new {id = Model.Clan.ClanId }, null)
         <br/>
         @Html.ActionLink("Natrag na popis sportasa", "Index", "Home")
     </div>

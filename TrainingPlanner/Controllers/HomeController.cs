@@ -1,24 +1,21 @@
-﻿using TrainingPlanner;
-using TrainingPlanner.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Data;
-using System.IO;
-using System.Reflection;
+using TrainingPlanner.Models;
 
 namespace TrainingPlanner.Controllers
 {
     public class HomeController : Controller
     {
-        private TreningModelContainer context = new TreningModelContainer();
+        private readonly TreningModelContainer _context = new TreningModelContainer();
 
     
         public ActionResult Index()
         {
-            List<Clan> lista = context.Clan.ToList();
+            var lista = _context.Clan.ToList();
             return View(lista);
         }
 
@@ -26,181 +23,168 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult ZagrijavanjePopis()
         {
-            List<ZagrijavanjePopis> listaZagrijavanja = new List<ZagrijavanjePopis>();
-            listaZagrijavanja = context.ZagrijavanjePopis.ToList();
+            List<ZagrijavanjePopis> listaZagrijavanja = _context.ZagrijavanjePopis.ToList();
             if (listaZagrijavanja.Count == 0)
             {
-                listaZagrijavanja = new List<ZagrijavanjePopis>(){new ZagrijavanjePopis{ ZagrijavanjeId = 0, Info="", Naziv=""}};
+                listaZagrijavanja = new List<ZagrijavanjePopis> {new ZagrijavanjePopis{ ZagrijavanjeId = 0, Info="", Naziv=""}};
                 return View(listaZagrijavanja);
             }
-            else
-            {
-                return View(listaZagrijavanja);
-            }
-            
+            return View(listaZagrijavanja);
         }
 
         public ActionResult IzbrisiZagrijavanje(int id=0)
         {
-            ZagrijavanjePopis zp = context.ZagrijavanjePopis.Find(id);
-            context.ZagrijavanjePopis.Remove(zp);
-            context.SaveChanges();
+            var zp = _context.ZagrijavanjePopis.Find(id);
+            _context.ZagrijavanjePopis.Remove(zp);
+            _context.SaveChanges();
             return RedirectToAction("ZagrijavanjePopis", "Home");
         }
 
         public ActionResult DetaljiZagrijavanja(int id = 0)
         {
-            ZagrijavanjePopis zp = context.ZagrijavanjePopis.Find(id);
+            var zp = _context.ZagrijavanjePopis.Find(id);
             return View(zp);
         }
 
         [HttpGet]
         public ActionResult DodajNovoZagrijavanje()
         {
-            ZagrijavanjePopis zp = new ZagrijavanjePopis();
+            var zp = new ZagrijavanjePopis();
             return View(zp);
         }
 
         [HttpPost]
         public ActionResult DodajNovoZagrijavanje(ZagrijavanjePopis zp)
         {
-            context.ZagrijavanjePopis.Add(zp);
-            context.SaveChanges();
+            _context.ZagrijavanjePopis.Add(zp);
+            _context.SaveChanges();
             return RedirectToAction("ZagrijavanjePopis", "Home");
         }
 
         [HttpGet]
         public ActionResult IzmijeniZagrijavanje(int id = 0)
         {
-            ZagrijavanjePopis zp = context.ZagrijavanjePopis.Find(id);
+            var zp = _context.ZagrijavanjePopis.Find(id);
             return View(zp);
         }
 
         [HttpPost]
         public ActionResult IzmijeniZagrijavanje(ZagrijavanjePopis zp)
         {
-            context.Entry(zp).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(zp).State = EntityState.Modified;
+            _context.SaveChanges();
             return RedirectToAction("ZagrijavanjePopis", "Home");
         }
 
         [HttpGet]
         public ActionResult VjezbePopis()
         {
-            List<VjezbePopis> listaVjezbi = new List<VjezbePopis>();
-            listaVjezbi = context.VjezbePopis.ToList();
+            List<VjezbePopis> listaVjezbi = _context.VjezbePopis.ToList();
             if (listaVjezbi.Count == 0)
             {
-                listaVjezbi = new List<VjezbePopis>() { new VjezbePopis { VjezbeId = 0, ImeVjezbe = "", Info="", Slika=null } };
+                listaVjezbi = new List<VjezbePopis> { new VjezbePopis { VjezbeId = 0, ImeVjezbe = "", Info="", Slika=null } };
                 return View(listaVjezbi);
             }
-            else
-            {
-                return View(listaVjezbi);
-            }
+            return View(listaVjezbi);
         }
 
         public ActionResult IzbrisiVjezbu(int id = 0)
         {
-            VjezbePopis vjp = context.VjezbePopis.Find(id);
-            context.VjezbePopis.Remove(vjp);
-            context.SaveChanges();
+            var vjp = _context.VjezbePopis.Find(id);
+            _context.VjezbePopis.Remove(vjp);
+            _context.SaveChanges();
             return RedirectToAction("VjezbePopis", "Home");
         }
 
         public ActionResult DetaljiVjezbe(int id = 0)
         {
-            VjezbePopis vjp = context.VjezbePopis.Find(id);
+            var vjp = _context.VjezbePopis.Find(id);
             return View(vjp);
         }
 
         [HttpGet]
         public ActionResult DodajNovuVjezbu()
         {
-            VjezbePopis vjp = new VjezbePopis();
+            var vjp = new VjezbePopis();
             return View(vjp);
         }
 
         [HttpPost]
         public ActionResult DodajNovuVjezbu(VjezbePopis vjp)
         {
-            context.VjezbePopis.Add(vjp);
-            context.SaveChanges();
+            _context.VjezbePopis.Add(vjp);
+            _context.SaveChanges();
             return RedirectToAction("VjezbePopis", "Home");
         }
 
         [HttpGet]
         public ActionResult IzmijeniVjezbu(int id = 0)
         {
-            VjezbePopis vjp = context.VjezbePopis.Find(id);
+            var vjp = _context.VjezbePopis.Find(id);
             return View(vjp);
         }
 
         [HttpPost]
         public ActionResult IzmijeniVjezbu(VjezbePopis vjp)
         {
-            context.Entry(vjp).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(vjp).State = EntityState.Modified;
+            _context.SaveChanges();
             return RedirectToAction("VjezbePopis", "Home");
         }
 
         [HttpGet]
         public ActionResult IstezanjePopis()
         {
-            List<IstezanjePopis> listaIstezanja = new List<IstezanjePopis>();
-            listaIstezanja = context.IstezanjePopis.ToList();
+            List<IstezanjePopis> listaIstezanja = _context.IstezanjePopis.ToList();
             if (listaIstezanja.Count == 0)
             {
-                listaIstezanja = new List<IstezanjePopis>() { new IstezanjePopis { IstezanjeId=0, Naziv="", Info="" } };
+                listaIstezanja = new List<IstezanjePopis> { new IstezanjePopis { IstezanjeId=0, Naziv="", Info="" } };
                 return View(listaIstezanja);
             }
-            else
-            {
-                return View(listaIstezanja);
-            }
+            return View(listaIstezanja);
         }
 
         public ActionResult IzbrisiIstezanje(int id = 0)
         {
-            IstezanjePopis ip = context.IstezanjePopis.Find(id);
-            context.IstezanjePopis.Remove(ip);
-            context.SaveChanges();
+            var ip = _context.IstezanjePopis.Find(id);
+            _context.IstezanjePopis.Remove(ip);
+            _context.SaveChanges();
             return RedirectToAction("IstezanjePopis", "Home");
         }
 
         public ActionResult DetaljiIstezanja(int id = 0)
         {
-            IstezanjePopis ip = context.IstezanjePopis.Find(id);
+            var ip = _context.IstezanjePopis.Find(id);
             return View(ip);
         }
 
         [HttpGet]
         public ActionResult DodajNovoIstezanje()
         {
-            IstezanjePopis ip = new IstezanjePopis();
+            var ip = new IstezanjePopis();
             return View(ip);
         }
 
         [HttpPost]
         public ActionResult DodajNovoIstezanje(IstezanjePopis ip)
         {
-            context.IstezanjePopis.Add(ip);
-            context.SaveChanges();
+            _context.IstezanjePopis.Add(ip);
+            _context.SaveChanges();
             return RedirectToAction("IstezanjePopis", "Home");
         }
 
         [HttpGet]
         public ActionResult IzmijeniIstezanje(int id = 0)
         {
-            IstezanjePopis ip = context.IstezanjePopis.Find(id);
+            var ip = _context.IstezanjePopis.Find(id);
             return View(ip);
         }
 
         [HttpPost]
         public ActionResult IzmijeniIstezanje(IstezanjePopis ip)
         {
-            context.Entry(ip).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(ip).State = EntityState.Modified;
+            _context.SaveChanges();
             return RedirectToAction("IstezanjePopis", "Home");
         }
 
@@ -209,82 +193,82 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DodajClana()
         {      
-            Clan c = new Clan();
+            var c = new Clan();
             return View(c);
         }
 
         [HttpPost]
         public ActionResult DodajClana(Clan c)
         {
-            short age = (short)((DateTime.Now - c.GodinaRodenja).TotalDays / 365.242199);
+            var age = (short)((DateTime.Now - c.GodinaRodenja).TotalDays / 365.242199);
             c.GodineStarosti = age;
-            context.Clan.Add(c);
-            context.SaveChanges();
+            _context.Clan.Add(c);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         public ActionResult IzbrisiClana(int id)
         {
-            Clan c = context.Clan.Find(id);
+            var c = _context.Clan.Find(id);
             
-            var query = from x in context.Trening
+            var query = from x in _context.Trening
                         where x.ClanId == id
                         select x;
 
             if (query.FirstOrDefault() != null)
             {
-                foreach (Trening a in query.ToList())
+                foreach (var a in query.ToList())
                 {
-                var query1 = from x in context.Trening
-                             join z in context.Zagrijavanje on x.TreningId equals z.TreningId
+                var query1 = from x in _context.Trening
+                             join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
                              where x.TreningId == a.TreningId
                              select z;
 
-                var query2 = from x in context.Trening
-                             join v in context.Vjezba on x.TreningId equals v.TreningId
+                var query2 = from x in _context.Trening
+                             join v in _context.Vjezba on x.TreningId equals v.TreningId
                              where x.TreningId == a.TreningId
                              select v;
 
-                var query3 = from x in context.Trening
-                             join i in context.Istezanje on x.TreningId equals i.TreningId
+                var query3 = from x in _context.Trening
+                             join i in _context.Istezanje on x.TreningId equals i.TreningId
                              where x.TreningId == a.TreningId
                              select i;
 
-                foreach (Zagrijavanje b in query1.ToList())
+                foreach (var b in query1.ToList())
                 {
-                    context.Zagrijavanje.Remove(b);
+                    _context.Zagrijavanje.Remove(b);
                 }
 
-                foreach (Vjezba b in query2.ToList())
+                foreach (var b in query2.ToList())
                 {
-                    context.Vjezba.Remove(b);
+                    _context.Vjezba.Remove(b);
                 }
 
-                foreach (Istezanje b in query3.ToList())
+                foreach (var b in query3.ToList())
                 {
-                    context.Istezanje.Remove(b);
+                    _context.Istezanje.Remove(b);
                 }
                 
-                    context.Trening.Remove(a);
+                    _context.Trening.Remove(a);
                 }
 
             }
 
-            var queryTest = from x in context.Test
+            var queryTest = from x in _context.Test
                             where x.ClanId == id
                             select x;
 
             if (queryTest.FirstOrDefault() != null)
             {
-                foreach (Test a in queryTest.ToList())
+                foreach (var a in queryTest.ToList())
                 {
-                    context.Test.Remove(a);
+                    _context.Test.Remove(a);
                 }
             }
 
-            context.Clan.Remove(c);
-            context.SaveChanges();
+            _context.Clan.Remove(c);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -292,17 +276,17 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult IzmijeniClana(int id = 0)
         {
-            Clan c = context.Clan.Find(id);
+            var c = _context.Clan.Find(id);
             return View(c);
         }
 
         [HttpPost]
         public ActionResult IzmijeniClana(Clan c)
         {
-            short age = (short)((DateTime.Now - c.GodinaRodenja).TotalDays / 365.242199);
+            var age = (short)((DateTime.Now - c.GodinaRodenja).TotalDays / 365.242199);
             c.GodineStarosti = age;
-            context.Entry(c).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(c).State = EntityState.Modified;
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -310,13 +294,13 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DetaljiClana(int id = 0)
         {
-            Clan c = context.Clan.Find(id);
+            var c = _context.Clan.Find(id);
 
-            var queryTest = from x in context.Test
+            var queryTest = from x in _context.Test
                             where x.ClanId == id
                             select x;
 
-            ClanTestModel ctm = new ClanTestModel() {Clan = c, listaTest = queryTest.ToList() };
+            var ctm = new ClanTestModel {Clan = c, ListaTest = queryTest.ToList() };
 
             return View(ctm);
         }
@@ -324,22 +308,22 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult Test(int id = 0)
         {
-            var query = from x in context.Test
+            var query = from x in _context.Test
                         where x.ClanId == id
                         select x;
 
-            var query1 = from x in context.Clan
+            var query1 = from x in _context.Clan
                          where x.ClanId == id
                          select x;
 
-            Clan c = query1.Single();
+            var c = query1.Single();
 
-            TestList listaT = new TestList() {clan = c };
+            var listaT = new TestList {Clan = c };
             
             if (query.FirstOrDefault() != null)
             {
-                listaT.listaTestova = query.ToList();
-            };
+                listaT.ListaTestova = query.ToList();
+            }
 
             return View(listaT);
         }
@@ -347,7 +331,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DodajTest(int id = 0)
         {
-            Test t = new Test() {ClanId = id };
+            var t = new Test {ClanId = id };
             return View(t);
         }
 
@@ -364,32 +348,25 @@ namespace TrainingPlanner.Controllers
 
             }
  
-            context.Test.Add(t);
-            context.SaveChanges();
+            _context.Test.Add(t);
+            _context.SaveChanges();
 
             return RedirectToAction("Test", new {id = t.ClanId });
         }
 
-        public FileContentResult GetImage(int TestId)
+        public FileContentResult GetImage(int testId)
         {
-            Test t = context.Test.Find(TestId);
+            var t = _context.Test.Find(testId);
 
-            if (t != null)
-            {
-                return File(t.Dijagnostika, t.DijagnostikaType);
-            }
-            else
-            {
-                return null;
-            }
+            return t != null ? File(t.Dijagnostika, t.DijagnostikaType) : null;
         }
 
         public ActionResult IzbrisiTest(int id)
         {
-            Test t = context.Test.Find(id);
+            var t = _context.Test.Find(id);
 
-            context.Test.Remove(t);
-            context.SaveChanges();
+            _context.Test.Remove(t);
+            _context.SaveChanges();
 
             return RedirectToAction("Test", new { id = t.ClanId });
             
@@ -398,7 +375,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult IzmijeniTest(int id = 0)
         {
-            Test t = context.Test.Find(id);
+            var t = _context.Test.Find(id);
             return View(t);
         }
 
@@ -412,15 +389,15 @@ namespace TrainingPlanner.Controllers
                 dijagnostika.InputStream.Read(t.Dijagnostika, 0, dijagnostika.ContentLength);
             }
 
-            context.Entry(t).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(t).State = EntityState.Modified;
+            _context.SaveChanges();
 
             return RedirectToAction("Test", new { id = t.ClanId });
         }
 
         public ActionResult DetaljiTest(int id)
         {
-            Test t = context.Test.Find(id);
+            var t = _context.Test.Find(id);
             return View(t);
 
         }
@@ -431,60 +408,60 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult TreningPopis(int id = 0)
         {
-            var query1 = from x in context.Clan
+            var query1 = from x in _context.Clan
                          where x.ClanId == id
                          select x;
 
-            Clan c = (Clan)query1.Single();
+            var c = query1.Single();
 
             ViewData["ImeClana"] = c.Ime;
             ViewData["PrezimeClana"] = c.Prezime;
 
-            var query = from x in context.Trening
-                        join y in context.Clan on x.ClanId equals y.ClanId
+            var query = from x in _context.Trening
+                        join y in _context.Clan on x.ClanId equals y.ClanId
                         where y.ClanId == id
                         orderby x.DatumTreninga ascending
                         select x;
 
-            foreach (Trening tr in query.ToList())
+            foreach (var tr in query.ToList())
 	        {
 		        if(tr.ImeTreninga == null)
                 {
-                    var query4 = from x in context.Trening
-                         join z in context.Zagrijavanje on x.TreningId equals z.TreningId
+                    var query4 = from x in _context.Trening
+                         join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
                          where x.TreningId == tr.TreningId
                          select z;
 
-                    var query2 = from x in context.Trening
-                         join v in context.Vjezba on x.TreningId equals v.TreningId
+                    var query2 = from x in _context.Trening
+                         join v in _context.Vjezba on x.TreningId equals v.TreningId
                          where x.TreningId == tr.TreningId
                          select v;
 
-                    var query3 = from x in context.Trening
-                         join i in context.Istezanje on x.TreningId equals i.TreningId
+                    var query3 = from x in _context.Trening
+                         join i in _context.Istezanje on x.TreningId equals i.TreningId
                          where x.TreningId == tr.TreningId
                          select i;
 
-                    foreach (Zagrijavanje a in query4.ToList())
+                    foreach (var a in query4.ToList())
                     {
-                    context.Zagrijavanje.Remove(a);
+                    _context.Zagrijavanje.Remove(a);
                     }
 
-                    foreach (Vjezba a in query2.ToList())
+                    foreach (var a in query2.ToList())
                     {
-                        context.Vjezba.Remove(a);
+                        _context.Vjezba.Remove(a);
                     }
 
-                    foreach (Istezanje a in query3.ToList())
+                    foreach (var a in query3.ToList())
                     {
-                        context.Istezanje.Remove(a);
+                        _context.Istezanje.Remove(a);
                     }
-                            context.Trening.Remove(tr);
-                            context.SaveChanges();
+                            _context.Trening.Remove(tr);
+                            _context.SaveChanges();
                     }
 	        }
 
-            List<Trening> listaTreninga = new List<Trening>();
+            List<Trening> listaTreninga;
             if (query.ToList().Count == 0)
             {
                 listaTreninga = new List<Trening>{
@@ -502,111 +479,124 @@ namespace TrainingPlanner.Controllers
         public ActionResult IzbrisiTrening(int id = 0)
         {
             
-            var query = from x in context.Trening
-                        join y in context.Clan on x.ClanId equals y.ClanId
+            var query = from x in _context.Trening
+                        join y in _context.Clan on x.ClanId equals y.ClanId
                         where x.TreningId == id
                         select new { x, y };
 
-            var query1 = from x in context.Trening
-                         join z in context.Zagrijavanje on x.TreningId equals z.TreningId
+            var query1 = from x in _context.Trening
+                         join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
                          where x.TreningId == id
                          select z;
 
-            var query2 = from x in context.Trening
-                         join v in context.Vjezba on x.TreningId equals v.TreningId
+            var query2 = from x in _context.Trening
+                         join v in _context.Vjezba on x.TreningId equals v.TreningId
                          where x.TreningId == id
                          select v;
 
-            var query3 = from x in context.Trening
-                         join i in context.Istezanje on x.TreningId equals i.TreningId
+            var query3 = from x in _context.Trening
+                         join i in _context.Istezanje on x.TreningId equals i.TreningId
                          where x.TreningId == id
                          select i;
 
-            var k = (int)query.FirstOrDefault().y.ClanId;
-
-            foreach (Zagrijavanje a in query1.ToList())
+            var firstOrDefault = query.FirstOrDefault();
+            if (firstOrDefault != null)
             {
-                context.Zagrijavanje.Remove(a);
+                var k = firstOrDefault.y.ClanId;
+
+                foreach (var a in query1.ToList())
+                {
+                    _context.Zagrijavanje.Remove(a);
+                }
+
+                foreach (var a in query2.ToList())
+                {
+                    _context.Vjezba.Remove(a);
+                }
+
+                foreach (var a in query3.ToList())
+                {
+                    _context.Istezanje.Remove(a);
+                }
+
+                var tr = firstOrDefault.x;
+                _context.Trening.Remove(tr);
+
+                _context.SaveChanges();
+
+                return RedirectToAction("TreningPopis", new { id = k });
             }
-
-            foreach (Vjezba a in query2.ToList())
-            {
-                context.Vjezba.Remove(a);
-            }
-
-            foreach (Istezanje a in query3.ToList())
-            {
-                context.Istezanje.Remove(a);
-            }
-
-            Trening tr = (Trening)query.FirstOrDefault().x;
-            context.Trening.Remove(tr);
-
-            context.SaveChanges();
-
-            return RedirectToAction("TreningPopis", new { id = k });
+            return null;
         }
 
         [HttpGet]
-        public ActionResult IzmijeniTrening(int id = 0, int IzmijeniTrening = 0)
+        public ActionResult IzmijeniTrening(int id = 0, int izmijeniTrening = 0)
         {
-            var query = from x in context.Trening
-                        join y in context.Clan on x.ClanId equals y.ClanId
+            var query = from x in _context.Trening
+                        join y in _context.Clan on x.ClanId equals y.ClanId
                         where x.TreningId == id
                         select new {x,y};
 
-            var query1 = from x in context.Trening
-                         join z in context.Zagrijavanje on x.TreningId equals z.TreningId
+            var query1 = from x in _context.Trening
+                         join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
                         where x.TreningId == id
                         select z;
 
-            var query2 = from x in context.Trening
-                         join v in context.Vjezba on x.TreningId equals v.TreningId
+            var query2 = from x in _context.Trening
+                         join v in _context.Vjezba on x.TreningId equals v.TreningId
                          where x.TreningId == id
                          select v;
 
-            var query3 = from x in context.Trening
-                         join i in context.Istezanje on x.TreningId equals i.TreningId
+            var query3 = from x in _context.Trening
+                         join i in _context.Istezanje on x.TreningId equals i.TreningId
                          where x.TreningId == id
                          select i;
 
 
-            TreningDataModel trm = new TreningDataModel()
+            var firstOrDefault = query.FirstOrDefault();
+            if (firstOrDefault != null)
             {
-                ClanId = query.FirstOrDefault().y.ClanId,
-                ClanIme = query.FirstOrDefault().y.Ime,
-                ClanPrezime = query.FirstOrDefault().y.Prezime,
-                TreningDatum = (DateTime)query.FirstOrDefault().x.DatumTreninga,
-                TreningBrojKrugova = query.FirstOrDefault().x.BrojKrugova,
-                TreningImeTreninga = query.FirstOrDefault().x.ImeTreninga,
-                Napomena = query.FirstOrDefault().x.Napomena,
-                TreningId = query.FirstOrDefault().x.TreningId
-            };
+                if (firstOrDefault.x.DatumTreninga != null)
+                {
+                    var trm = new TreningDataModel
+                    {
+                        ClanId = firstOrDefault.y.ClanId,
+                        ClanIme = firstOrDefault.y.Ime,
+                        ClanPrezime = firstOrDefault.y.Prezime,
+                        TreningDatum = (DateTime)firstOrDefault.x.DatumTreninga,
+                        TreningBrojKrugova = firstOrDefault.x.BrojKrugova,
+                        TreningImeTreninga = firstOrDefault.x.ImeTreninga,
+                        Napomena = firstOrDefault.x.Napomena,
+                        TreningId = firstOrDefault.x.TreningId
+                    };
 
-            if (query1.FirstOrDefault() != null)
-            {
-                trm.ListaZagrijavanja = query1.ToList();
-            }
-            if (query2.FirstOrDefault() != null)
-            {
-                trm.ListaVjezbi = query2.ToList();
-            }
-            if (query3.FirstOrDefault() != null)
-            {
-                trm.ListaIstezanja = query3.ToList();
-            }
+                    if (query1.FirstOrDefault() != null)
+                    {
+                        trm.ListaZagrijavanja = query1.ToList();
+                    }
+                    if (query2.FirstOrDefault() != null)
+                    {
+                        trm.ListaVjezbi = query2.ToList();
+                    }
+                    if (query3.FirstOrDefault() != null)
+                    {
+                        trm.ListaIstezanja = query3.ToList();
+                    }
 
-            return View(trm);
+                    return View(trm);
+                }
+            }
+            return null;
         }
 
         [HttpPost]
         public ActionResult IzmijeniTrening(TreningDataModel trm)
         {
-            var query = from x in context.Trening
+            var query = from x in _context.Trening
                         where x.TreningId == trm.TreningId
                         select x;
 
-            Trening tr = (Trening)query.Single();
+            var tr = query.Single();
 
             tr.ImeTreninga = trm.TreningImeTreninga;
             tr.BrojKrugova = trm.TreningBrojKrugova;
@@ -615,10 +605,10 @@ namespace TrainingPlanner.Controllers
             if (trm.TreningTip != null)
             {
                 tr.TipTreninga = trm.TreningTip;
-            };
+            }
 
-            context.Entry(tr).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(tr).State = EntityState.Modified;
+            _context.SaveChanges();
 
             return RedirectToAction("TreningPopis", new { id = tr.ClanId });
         }
@@ -626,113 +616,121 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DetaljiTrening(int id = 0)
         {
-            var query = from x in context.Trening
-                        join y in context.Clan on x.ClanId equals y.ClanId
+            var query = from x in _context.Trening
+                        join y in _context.Clan on x.ClanId equals y.ClanId
                         where x.TreningId == id
                         select new { x, y };
 
-            var query1 = from x in context.Trening
-                         join z in context.Zagrijavanje on x.TreningId equals z.TreningId
+            var query1 = from x in _context.Trening
+                         join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
                          where x.TreningId == id
                          select z;
 
-            var query2 = from x in context.Trening
-                         join v in context.Vjezba on x.TreningId equals v.TreningId
+            var query2 = from x in _context.Trening
+                         join v in _context.Vjezba on x.TreningId equals v.TreningId
                          where x.TreningId == id
                          select v;
 
-            var query3 = from x in context.Trening
-                         join i in context.Istezanje on x.TreningId equals i.TreningId
+            var query3 = from x in _context.Trening
+                         join i in _context.Istezanje on x.TreningId equals i.TreningId
                          where x.TreningId == id
                          select i;
 
 
-            TreningDataModel trm = new TreningDataModel()
+            var firstOrDefault = query.FirstOrDefault();
+            if (firstOrDefault != null)
             {
-                ClanId = query.FirstOrDefault().y.ClanId,
-                ClanIme = query.FirstOrDefault().y.Ime,
-                ClanPrezime = query.FirstOrDefault().y.Prezime,
-                TreningDatum = (DateTime)query.FirstOrDefault().x.DatumTreninga,
-                TreningBrojKrugova = query.FirstOrDefault().x.BrojKrugova,
-                TreningImeTreninga = query.FirstOrDefault().x.ImeTreninga,
-                TreningId = query.FirstOrDefault().x.TreningId,
-                Napomena = query.FirstOrDefault().x.Napomena
-            };
+                if (firstOrDefault.x.DatumTreninga != null)
+                {
+                    var trm = new TreningDataModel
+                    {
+                        ClanId = firstOrDefault.y.ClanId,
+                        ClanIme = firstOrDefault.y.Ime,
+                        ClanPrezime = firstOrDefault.y.Prezime,
+                        TreningDatum = (DateTime)firstOrDefault.x.DatumTreninga,
+                        TreningBrojKrugova = firstOrDefault.x.BrojKrugova,
+                        TreningImeTreninga = firstOrDefault.x.ImeTreninga,
+                        TreningId = firstOrDefault.x.TreningId,
+                        Napomena = firstOrDefault.x.Napomena
+                    };
 
-            if (query1.FirstOrDefault() != null)
-            {
-                trm.ListaZagrijavanja = query1.ToList();
-            }
-            if (query2.FirstOrDefault() != null)
-            {
-                trm.ListaVjezbi = query2.ToList();
-            }
-            if (query3.FirstOrDefault() != null)
-            {
-                trm.ListaIstezanja = query3.ToList();
-            }
+                    if (query1.FirstOrDefault() != null)
+                    {
+                        trm.ListaZagrijavanja = query1.ToList();
+                    }
+                    if (query2.FirstOrDefault() != null)
+                    {
+                        trm.ListaVjezbi = query2.ToList();
+                    }
+                    if (query3.FirstOrDefault() != null)
+                    {
+                        trm.ListaIstezanja = query3.ToList();
+                    }
 
-            return View(trm);
+                    return View(trm);
+                }
+            }
+            return null;
         }
 
         [HttpGet]
-        public ActionResult DodajTrening(int id = 0, int DodajVjezbu = 0)
+        public ActionResult DodajTrening(int id = 0, int dodajVjezbu = 0)
         {
-            Trening tr = new Trening();
-            TreningDataModel trm = new TreningDataModel();
+            var tr = new Trening();
+            var trm = new TreningDataModel();
 
-            if (DodajVjezbu == 0)
+            if (dodajVjezbu == 0)
             {
                 tr.ClanId = id;
-                context.Trening.Add(tr);
-                context.SaveChanges();
+                _context.Trening.Add(tr);
+                _context.SaveChanges();
 
                 trm.ClanId = id;
 
-                var query = from x in context.Trening
-                            join y in context.Clan on x.ClanId equals y.ClanId
+                var query = from x in _context.Trening
+                            join y in _context.Clan on x.ClanId equals y.ClanId
                             where y.ClanId == id
                             orderby x.TreningId descending
                             select x;
 
-                tr = (Trening)query.FirstOrDefault();
-                trm.TreningId = tr.TreningId;
+                tr = query.FirstOrDefault();
+                if (tr != null) trm.TreningId = tr.TreningId;
 
-                Clan c = context.Clan.Find(id);
+                var c = _context.Clan.Find(id);
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
             }
-            else if(DodajVjezbu == 1)
+            else if(dodajVjezbu == 1)
             {
                 trm.TreningId = id;
 
-                var query4 = from x in context.Zagrijavanje
-                             join y in context.Trening on x.TreningId equals y.TreningId
+                var query4 = from x in _context.Zagrijavanje
+                             join y in _context.Trening on x.TreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaZagrijavanja = (List<Zagrijavanje>)query4.ToList();
+                trm.ListaZagrijavanja = query4.ToList();
 
-                var query3 = from x in context.Istezanje
-                             join y in context.Trening on x.TreningId equals y.TreningId
+                var query3 = from x in _context.Istezanje
+                             join y in _context.Trening on x.TreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaIstezanja = (List<Istezanje>)query3.ToList();
+                trm.ListaIstezanja = query3.ToList();
 
-                var query2 = from x in context.Vjezba
-                             join y in context.Trening on x.TreningId equals y.TreningId
+                var query2 = from x in _context.Vjezba
+                             join y in _context.Trening on x.TreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaVjezbi = (List<Vjezba>)query2.ToList();
+                trm.ListaVjezbi = query2.ToList();
 
-                var query1 = from x in context.Clan
-                            join y in context.Trening on x.ClanId equals y.ClanId
+                var query1 = from x in _context.Clan
+                            join y in _context.Trening on x.ClanId equals y.ClanId
                             where y.TreningId == id
                             select x;
 
-                Clan c = (Clan)query1.Single();
+                var c = query1.Single();
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
             }
@@ -740,33 +738,33 @@ namespace TrainingPlanner.Controllers
             {
                 trm.TreningId = id;
 
-                var query4 = from x in context.Zagrijavanje
-                             join y in context.Trening on x.TreningId equals y.TreningId
+                var query4 = from x in _context.Zagrijavanje
+                             join y in _context.Trening on x.TreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaZagrijavanja = (List<Zagrijavanje>)query4.ToList();
+                trm.ListaZagrijavanja = query4.ToList();
 
-                var query3 = from x in context.Istezanje
-                             join y in context.Trening on x.TreningId equals y.TreningId
+                var query3 = from x in _context.Istezanje
+                             join y in _context.Trening on x.TreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaIstezanja = (List<Istezanje>)query3.ToList();
+                trm.ListaIstezanja = query3.ToList();
 
-                var query2 = from x in context.Vjezba
-                            join y in context.Trening on x.TreningId equals y.TreningId
+                var query2 = from x in _context.Vjezba
+                            join y in _context.Trening on x.TreningId equals y.TreningId
                             where y.TreningId == id
                             select x;
 
-                trm.ListaVjezbi = (List<Vjezba>)query2.ToList();
+                trm.ListaVjezbi = query2.ToList();
 
-                var query1 = from x in context.Clan
-                            join y in context.Trening on x.ClanId equals y.ClanId
+                var query1 = from x in _context.Clan
+                            join y in _context.Trening on x.ClanId equals y.ClanId
                             where y.TreningId == id
                             select x;
 
-                Clan c = (Clan)query1.Single();
+                var c = query1.Single();
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
             }
@@ -777,11 +775,11 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajTrening(TreningDataModel trm)
         {
-            var query = from x in context.Trening
+            var query = from x in _context.Trening
                         where x.TreningId == trm.TreningId
                         select x;
 
-            Trening tr = (Trening)query.Single();
+            var tr = query.Single();
             
             tr.ImeTreninga = trm.TreningImeTreninga;
             tr.BrojKrugova = trm.TreningBrojKrugova;
@@ -792,10 +790,10 @@ namespace TrainingPlanner.Controllers
             if(trm.TreningTip != null)
             {
             tr.TipTreninga = trm.TreningTip;
-            };
+            }
 
-            context.Entry(tr).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(tr).State = EntityState.Modified;
+            _context.SaveChanges();
 
             return RedirectToAction("TreningPopis", new {id = tr.ClanId });
         }
@@ -804,22 +802,22 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DodajVjezbuTrening(int id, int izmijeni = 0)
         {
-            VjezbePopisLista vj = new VjezbePopisLista() { vjezbePopis = context.VjezbePopis.ToList(), TreningId = id, Izmijeni = izmijeni};
+            var vj = new VjezbePopisLista{ VjezbePopis = _context.VjezbePopis.ToList(), TreningId = id, Izmijeni = izmijeni};
             ViewData["izmijeni"] = izmijeni;
             return View(vj);
         }
 
         [HttpPost]
-        public ActionResult DodajVjezbuTrening(int vjpID = 0, int id = 0, int vjpIzmijeni = 0)
+        public ActionResult DodajVjezbuTrening(int vjpId = 0, int id = 0, int vjpIzmijeni = 0)
         {
-            var query = from x in context.VjezbePopis
-                         where x.VjezbeId == vjpID
+            var query = from x in _context.VjezbePopis
+                         where x.VjezbeId == vjpId
                          select x;
 
-            VjezbePopis vjp = (VjezbePopis)query.Single();
+            var vjp = query.Single();
 
 
-            Vjezba vj = new Vjezba() {ImeVjezbe = vjp.ImeVjezbe, TreningId = id };
+            var vj = new Vjezba {ImeVjezbe = vjp.ImeVjezbe, TreningId = id };
             if (vjp.Info != null)
             {
                 vj.Info = vjp.Info;
@@ -829,45 +827,31 @@ namespace TrainingPlanner.Controllers
                 vj.Slika = vjp.Slika;
             }
  
-            context.Vjezba.Add(vj);
-            context.SaveChanges();
+            _context.Vjezba.Add(vj);
+            _context.SaveChanges();
 
             ViewData["izmijeni"] = vjpIzmijeni;
-            if (vjpIzmijeni != 0)
-            {
-                return RedirectToAction("IzmijeniTrening", new { id });
-            }
-            else
-            {
-                return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            }
+            return vjpIzmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
         public ActionResult IzbrisiVjezbuTrening(int id = 0, int izmijeni = 0)
         {
-            Vjezba vj = context.Vjezba.Find(id);
+            var vj = _context.Vjezba.Find(id);
             id = vj.TreningId;
-            context.Vjezba.Remove(vj);
-            context.SaveChanges();
+            _context.Vjezba.Remove(vj);
+            _context.SaveChanges();
 
-            if (izmijeni != 0)
-            {
-                return RedirectToAction("IzmijeniTrening", new { id });
-            }
-            else
-            {
-                return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            }
+            return izmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
         public ActionResult DetaljiVjezbeTrening(int id = 0, int izmijeni = 0)
         {
-            var query = from x in context.Vjezba
+            var query = from x in _context.Vjezba
                         where x.VjezbaId == id
                         select x;
-            Vjezba vj = (Vjezba)query.Single();
+            var vj = query.Single();
             ViewData["izmijeni"] = izmijeni;
             return View(vj);
         }
@@ -876,7 +860,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DodajIstezanjeTrening(int id, int izmijeni = 0)
         {
-            IstezanjeZagrijavanjeLista istp = new IstezanjeZagrijavanjeLista() { IstezanjePopis = context.IstezanjePopis.ToList(), TreningId = id, Izmijeni = izmijeni };
+            var istp = new IstezanjeZagrijavanjeLista { IstezanjePopis = _context.IstezanjePopis.ToList(), TreningId = id, Izmijeni = izmijeni };
             ViewData["izmijeni"] = izmijeni;
             return View(istp);
         }
@@ -884,58 +868,44 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajIstezanjeTrening(int istpId = 0, int id = 0, int istpIzmijeni = 0)
         {
-            var query = from x in context.IstezanjePopis
+            var query = from x in _context.IstezanjePopis
                         where x.IstezanjeId == istpId
                         select x;
 
-            IstezanjePopis istp = (IstezanjePopis)query.Single();
+            var istp = query.Single();
 
 
-            Istezanje ist = new Istezanje() { Naziv = istp.Naziv, TreningId = id };
+            var ist = new Istezanje { Naziv = istp.Naziv, TreningId = id };
             if (istp.Info != null)
             {
                 ist.Info = istp.Info;
             }
 
-            context.Istezanje.Add(ist);
-            context.SaveChanges();
+            _context.Istezanje.Add(ist);
+            _context.SaveChanges();
 
             ViewData["izmijeni"] = istpIzmijeni;
-            if (istpIzmijeni != 0)
-            {
-                return RedirectToAction("IzmijeniTrening", new { id });
-            }
-            else
-            {
-                return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            }
+            return istpIzmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
         public ActionResult IzbrisiIstezanjeTrening(int id = 0, int izmijeni = 0)
         {
-            Istezanje ist = context.Istezanje.Find(id);
+            var ist = _context.Istezanje.Find(id);
             id = ist.TreningId;
-            context.Istezanje.Remove(ist);
-            context.SaveChanges();
+            _context.Istezanje.Remove(ist);
+            _context.SaveChanges();
 
-            if (izmijeni != 0)
-            {
-                return RedirectToAction("IzmijeniTrening", new { id });
-            }
-            else
-            {
-                return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            }
+            return izmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
         public ActionResult DetaljiIstezanjeTrening(int id = 0, int izmijeni = 0)
         {
-            var query = from x in context.Istezanje
+            var query = from x in _context.Istezanje
                         where x.IstezanjeId == id
                         select x;
-            Istezanje ist = (Istezanje)query.Single();
+            var ist = query.Single();
             ViewData["izmijeni"] = izmijeni;
             return View(ist);
         }
@@ -944,7 +914,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult DodajZagrijavanjeTrening(int id, int izmijeni = 0)
         {
-            IstezanjeZagrijavanjeLista zgp = new IstezanjeZagrijavanjeLista() { ZagrijavanjePopis = context.ZagrijavanjePopis.ToList(), TreningId = id, Izmijeni = izmijeni };
+            var zgp = new IstezanjeZagrijavanjeLista { ZagrijavanjePopis = _context.ZagrijavanjePopis.ToList(), TreningId = id, Izmijeni = izmijeni };
             ViewData["izmijeni"] = izmijeni;
             return View(zgp);
         }
@@ -952,79 +922,65 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0)
         {
-            var query = from x in context.ZagrijavanjePopis
+            var query = from x in _context.ZagrijavanjePopis
                         where x.ZagrijavanjeId == zgpId
                         select x;
 
-            ZagrijavanjePopis zgp = (ZagrijavanjePopis)query.Single();
+            var zgp = query.Single();
 
 
-            Zagrijavanje zg = new Zagrijavanje() { Naziv = zgp.Naziv, TreningId = id };
+            var zg = new Zagrijavanje{ Naziv = zgp.Naziv, TreningId = id };
             if (zgp.Info != null)
             {
                 zg.Info = zgp.Info;
             }
 
-            context.Zagrijavanje.Add(zg);
-            context.SaveChanges();
+            _context.Zagrijavanje.Add(zg);
+            _context.SaveChanges();
             ViewData["izmijeni"] = zgpIzmijeni;
-            if (zgpIzmijeni != 0)
-            {
-                return RedirectToAction("IzmijeniTrening", new { id });
-            }
-            else
-            {
-                return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            }
+            return zgpIzmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
         public ActionResult IzbrisiZagrijavanjeTrening(int id = 0, int izmijeni = 0)
         {
-            Zagrijavanje zg = context.Zagrijavanje.Find(id);
+            Zagrijavanje zg = _context.Zagrijavanje.Find(id);
             id = zg.TreningId;
-            context.Zagrijavanje.Remove(zg);
-            context.SaveChanges();
+            _context.Zagrijavanje.Remove(zg);
+            _context.SaveChanges();
 
-            if (izmijeni != 0)
-            {
-                return RedirectToAction("IzmijeniTrening", new { id });
-            }
-            else
-            {
-                return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            }
+            return izmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
             
         }
 
         [HttpGet]
         public ActionResult DetaljiZagrijavanjeTrening(int id = 0, int izmijeni = 0)
         {
-            var query = from x in context.Zagrijavanje
+            var query = from x in _context.Zagrijavanje
                         where x.ZagrijavanjeId == id
                         select x;
-            Zagrijavanje zg = (Zagrijavanje)query.Single();
+            var zg = query.Single();
             ViewData["izmijeni"] = izmijeni;
 
             return View(zg);
         }
 
         [HttpPost]
-        public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string BrojSerija = null, string Tezina = null, string Odmor = null, int id = 0, int VjezbaId = 0)
+        public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string brojSerija = null, string tezina = null, string odmor = null, int id = 0, int vjezbaId = 0)
         {
 
-            var query = from x in context.Vjezba
-                        where x.VjezbaId == VjezbaId
+            var query = from x in _context.Vjezba
+                        where x.VjezbaId == vjezbaId
                         select x;
 
-            Vjezba vj = (Vjezba)query.Single();
+            var vj = query.Single();
                 vj.BrojPonavljanja = brojPonavljanja;
-                vj.BrojSerija = BrojSerija;
-                vj.Kilogrami = Tezina;
-                vj.Odmor = Odmor;
+                vj.BrojSerija = brojSerija;
+                vj.Kilogrami = tezina;
+                vj.Odmor = odmor;
 
-            context.Entry(vj).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(vj).State = EntityState.Modified;
+            _context.SaveChanges();
 
             return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
