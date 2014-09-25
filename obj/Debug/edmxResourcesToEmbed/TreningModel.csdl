@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TreningModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="TreningModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clan" EntityType="TreningModel.Clan" />
+    <EntitySet Name="Test" EntityType="TreningModel.Test" />
+    <EntitySet Name="Trening" EntityType="TreningModel.Trening" />
+    <AssociationSet Name="FK_ClanTrening" Association="TreningModel.FK_ClanTrening">
+      <End Role="Clan" EntitySet="Clan" />
+      <End Role="Trening" EntitySet="Trening" />
+    </AssociationSet>
+    <EntitySet Name="IstezanjePopis" EntityType="TreningModel.IstezanjePopis" />
+    <EntitySet Name="VjezbePopis" EntityType="TreningModel.VjezbePopis" />
+    <EntitySet Name="ZagrijavanjePopis" EntityType="TreningModel.ZagrijavanjePopis" />
+    <EntitySet Name="Zagrijavanje" EntityType="TreningModel.Zagrijavanje" />
+    <EntitySet Name="Vjezba" EntityType="TreningModel.Vjezba" />
+    <EntitySet Name="Istezanje" EntityType="TreningModel.Istezanje" />
+    <AssociationSet Name="TreningZagrijavanje" Association="TreningModel.TreningZagrijavanje">
+      <End Role="Trening" EntitySet="Trening" />
+      <End Role="Zagrijavanje" EntitySet="Zagrijavanje" />
+    </AssociationSet>
+    <AssociationSet Name="TreningIstezanje" Association="TreningModel.TreningIstezanje">
+      <End Role="Trening" EntitySet="Trening" />
+      <End Role="Istezanje" EntitySet="Istezanje" />
+    </AssociationSet>
+    <AssociationSet Name="TreningVjezba" Association="TreningModel.TreningVjezba">
+      <End Role="Trening" EntitySet="Trening" />
+      <End Role="Vjezba" EntitySet="Vjezba" />
+    </AssociationSet>
+    <AssociationSet Name="ClanTest" Association="TreningModel.ClanTest">
+      <End Role="Clan" EntitySet="Clan" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clan">
+    <Key>
+      <PropertyRef Name="ClanId" />
+    </Key>
+    <Property Type="Int32" Name="ClanId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Ime" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Prezime" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="DateTime" Name="GodinaRodenja" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Visina" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Tezina" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Trening" Relationship="TreningModel.FK_ClanTrening" FromRole="Clan" ToRole="Trening" />
+    <Property Type="Int16" Name="GodineStarosti" Nullable="false" />
+    <NavigationProperty Name="Test" Relationship="TreningModel.ClanTest" FromRole="Clan" ToRole="Test" />
+    <Property Type="String" Name="Sport" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Amneza" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Napomena" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="TestId" />
+    </Key>
+    <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Binary" Name="Dijagnostika" MaxLength="Max" FixedLength="false" />
+    <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
+    <Property Type="Int16" Name="Ergometar" Nullable="false" />
+    <Property Type="Int16" Name="Zgibovi" Nullable="false" />
+    <Property Type="Int16" Name="Sklekovi" Nullable="false" />
+    <Property Type="Int16" Name="Trbusnjaci" Nullable="false" />
+    <Property Type="Int16" Name="Cucnjevi" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DijagnostikaType" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clan" Relationship="TreningModel.ClanTest" FromRole="Test" ToRole="Clan" />
+    <Property Type="Int32" Name="ClanId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trening">
+    <Key>
+      <PropertyRef Name="TreningId" />
+    </Key>
+    <Property Type="Int32" Name="TreningId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TipTreninga" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="DateTime" Name="DatumTreninga" Precision="3" />
+    <Property Type="Int16" Name="BrojKrugova" />
+    <Property Type="String" Name="ImeTreninga" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ClanId" Nullable="false" />
+    <NavigationProperty Name="Clan" Relationship="TreningModel.FK_ClanTrening" FromRole="Trening" ToRole="Clan" />
+    <NavigationProperty Name="Zagrijavanje" Relationship="TreningModel.TreningZagrijavanje" FromRole="Trening" ToRole="Zagrijavanje" />
+    <NavigationProperty Name="Istezanje" Relationship="TreningModel.TreningIstezanje" FromRole="Trening" ToRole="Istezanje" />
+    <NavigationProperty Name="Vjezba" Relationship="TreningModel.TreningVjezba" FromRole="Trening" ToRole="Vjezba" />
+    <Property Type="String" Name="Napomena" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_ClanTrening">
+    <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
+    <End Type="TreningModel.Trening" Role="Trening" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clan">
+        <PropertyRef Name="ClanId" />
+      </Principal>
+      <Dependent Role="Trening">
+        <PropertyRef Name="ClanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="IstezanjePopis">
+    <Key>
+      <PropertyRef Name="IstezanjeId" />
+    </Key>
+    <Property Type="Int32" Name="IstezanjeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="VjezbePopis">
+    <Key>
+      <PropertyRef Name="VjezbeId" />
+    </Key>
+    <Property Type="Int32" Name="VjezbeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ImeVjezbe" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="Binary" Name="Slika" Nullable="true" FixedLength="false" MaxLength="Max" />
+    <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ZagrijavanjePopis">
+    <Key>
+      <PropertyRef Name="ZagrijavanjeId" />
+    </Key>
+    <Property Type="Int32" Name="ZagrijavanjeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Zagrijavanje">
+    <Key>
+      <PropertyRef Name="ZagrijavanjeId" />
+    </Key>
+    <Property Type="Int32" Name="ZagrijavanjeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Trening" Relationship="TreningModel.TreningZagrijavanje" FromRole="Zagrijavanje" ToRole="Trening" />
+    <Property Type="Int32" Name="TreningId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vjezba">
+    <Key>
+      <PropertyRef Name="VjezbaId" />
+    </Key>
+    <Property Type="Int32" Name="VjezbaId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ImeVjezbe" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="Binary" Name="Slika" Nullable="true" MaxLength="Max" FixedLength="false" />
+    <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Trening" Relationship="TreningModel.TreningVjezba" FromRole="Vjezba" ToRole="Trening" />
+    <Property Type="Int32" Name="TreningId" Nullable="false" />
+    <Property Type="String" Name="BrojPonavljanja" Nullable="true" />
+    <Property Type="String" Name="BrojSerija" Nullable="true" />
+    <Property Type="String" Name="Kilogrami" Nullable="true" />
+    <Property Type="String" Name="Odmor" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Istezanje">
+    <Key>
+      <PropertyRef Name="IstezanjeId" />
+    </Key>
+    <Property Type="Int32" Name="IstezanjeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Trening" Relationship="TreningModel.TreningIstezanje" FromRole="Istezanje" ToRole="Trening" />
+    <Property Type="Int32" Name="TreningId" Nullable="false" />
+  </EntityType>
+  <Association Name="TreningZagrijavanje">
+    <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
+    <End Type="TreningModel.Zagrijavanje" Role="Zagrijavanje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trening">
+        <PropertyRef Name="TreningId" />
+      </Principal>
+      <Dependent Role="Zagrijavanje">
+        <PropertyRef Name="TreningId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TreningIstezanje">
+    <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
+    <End Type="TreningModel.Istezanje" Role="Istezanje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trening">
+        <PropertyRef Name="TreningId" />
+      </Principal>
+      <Dependent Role="Istezanje">
+        <PropertyRef Name="TreningId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TreningVjezba">
+    <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
+    <End Type="TreningModel.Vjezba" Role="Vjezba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trening">
+        <PropertyRef Name="TreningId" />
+      </Principal>
+      <Dependent Role="Vjezba">
+        <PropertyRef Name="TreningId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClanTest">
+    <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
+    <End Type="TreningModel.Test" Role="Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clan">
+        <PropertyRef Name="ClanId" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="ClanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

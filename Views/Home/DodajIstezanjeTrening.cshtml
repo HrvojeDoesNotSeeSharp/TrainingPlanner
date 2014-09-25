@@ -1,0 +1,57 @@
+﻿@using TrainingPlanner
+@model TrainingPlanner.Models.IstezanjeZagrijavanjeLista
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Popis istezanja za dodavanje</title>
+</head>
+<body>
+    <fieldset>
+
+        <legend>Popis istezanja</legend>
+                   
+        @foreach (IstezanjePopis istp in Model.IstezanjePopis)
+        {
+            using (Html.BeginForm("DodajIstezanjeTrening", "Home", FormMethod.Post, new { id = Model.TreningId}))
+        {
+            @Html.Hidden("istpIzmijeni", Model.Izmijeni)
+            @Html.Hidden("istpId", istp.IstezanjeId)
+        <div>
+            @Html.DisplayName(istp.Naziv)
+            @Html.Display(istp.Naziv)
+            
+        </div>
+            
+        if(istp.Info != null)
+        {    
+        <div>
+            @Html.DisplayName(istp.Info)
+            @Html.Display(istp.Info)
+        </div>
+            
+        }
+        <input type="submit" value="Dodaj Istezanje" /> 
+           <br />
+            
+        }        
+        }
+    </fieldset>
+    <p>
+        @if ((int)ViewData["izmijeni"] == 0)
+        {
+            @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
+        }
+    </p>
+</body>
+</html>

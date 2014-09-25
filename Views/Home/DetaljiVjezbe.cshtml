@@ -1,0 +1,48 @@
+﻿@model TrainingPlanner.VjezbePopis
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalji Vjezbe </title>
+</head>
+<body>
+    <fieldset>
+        <legend>Vjezbe Popis</legend>
+    
+             @Html.HiddenFor(model => model.VjezbeId)
+            
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ImeVjezbe)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ImeVjezbe)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Info)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Info)
+        </div>
+        @if(Model.Slika != null)
+        {
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Slika)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Slika)
+        </div>
+        }
+    </fieldset>
+    <p>
+        @Html.ActionLink("Izmijeni", "IzmijeniVjezbu", new { id=Model.VjezbeId}) |
+        @Html.ActionLink("Natrag na popis vjezbi", "VjezbePopis")
+    </p>
+</body>
+</html>

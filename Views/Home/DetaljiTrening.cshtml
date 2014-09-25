@@ -1,0 +1,103 @@
+﻿@using TrainingPlanner
+@model TrainingPlanner.Models.TreningDataModel
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<h2>Detalji Trening</h2>
+
+<fieldset>
+    <legend>TreningDataModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ClanIme)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClanIme)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ClanPrezime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClanPrezime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TreningImeTreninga)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TreningImeTreninga)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TreningDatum)
+    </div>
+    <div class="display-field">
+        @Model.TreningDatum.ToShortDateString()
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TreningTip)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TreningTip)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TreningBrojKrugova)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TreningBrojKrugova)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ListaZagrijavanja)
+    </div>
+    @if(Model.ListaZagrijavanja != null)
+    {
+    <div class="display-field">
+        @foreach (Zagrijavanje zg in Model.ListaZagrijavanja)
+        {
+            @zg.Naziv
+            <br />
+        }   
+    </div>
+    }
+    
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ListaVjezbi)
+    </div>
+    @if(Model.ListaVjezbi != null){
+    <div class="display-field">
+        @foreach (Vjezba vj in Model.ListaVjezbi)
+        {
+            @vj.ImeVjezbe
+            <br />
+        }   
+    </div>
+    }
+    
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ListaIstezanja)
+    </div>
+    @if(Model.ListaZagrijavanja != null){
+    <div class="display-field">
+        @foreach (Istezanje ist in Model.ListaIstezanja)
+        {
+            @ist.Naziv
+            <br />
+        }   
+    </div>
+    <div class="display-field">
+          Napomena:
+          @Html.DisplayFor(model => model.Napomena)
+
+    </div>
+    }
+
+</fieldset>
+<p>
+    @Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, null)
+</p>

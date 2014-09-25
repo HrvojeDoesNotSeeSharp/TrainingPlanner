@@ -1,0 +1,118 @@
+﻿@model TrainingPlanner.Models.TreningDataModel
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Izmijeni Trening</title>
+</head>
+<body>
+    <div>
+        @using(Html.BeginForm("IzmijeniTrening", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.TreningId)
+            
+        <div style="border:dotted; width:400px">
+            <h4>Ime i prezime</h4>
+            @Model.ClanIme @Model.ClanPrezime
+            
+        </div>
+            <br />
+        <div style="border:solid; width:400px">
+            <h2>Trening</h2>
+            
+            @Html.HiddenFor(x=>x.TreningImeTreninga)
+            Datum: @Html.TextBoxFor(x=>x.TreningDatum, "{0:dd-MM-yyyy}", new { @class = "dateInput", @placeholder = "Please enter date" })
+            <br />
+            <div style="margin:5px; border:solid" >
+                <h4>Zagrijavanje</h4>
+                 @if (Model.ListaZagrijavanja == null)
+                {
+                    <div>Pocni sa dodavanjem zagrijavanja</div>
+                }
+                else
+                {
+                foreach (var zagrijavanje in Model.ListaZagrijavanja)
+                {
+                    <table>
+                        <tr>
+                            <td>@zagrijavanje.Naziv</td>
+                            <td>@Html.ActionLink("Izbrisi", "IzbrisiZagrijavanjeTrening", "Home", new {id = zagrijavanje.ZagrijavanjeId, izmijeni = 1}, null)</td> 
+                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new {id = zagrijavanje.ZagrijavanjeId, izmijeni = 1}, null)</td>
+                        </tr>
+                    </table>                     
+                }
+                }
+               
+                <br />
+                @Html.ActionLink("Dodaj Zagrijavanje", "DodajZagrijavanjeTrening", "Home", new {id = Model.TreningId, izmijeni = 1}, null)
+            </div>
+            <br />
+            <div style="margin:5px; border:solid" >
+                <h4>Vjezbe</h4>
+                @if (Model.ListaVjezbi == null)
+                {
+                    <div>Pocni sa dodavanjem vjezbi.</div>
+                }
+                else
+                {
+                foreach (var vjezba in Model.ListaVjezbi)
+                {
+                    <table>
+                        <tr>
+                            <td>@vjezba.ImeVjezbe</td>
+                            <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbuTrening", "Home", new {id = vjezba.VjezbaId, izmijeni = 1}, null)</td> 
+                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new {id = vjezba.VjezbaId, izmijeni = 1}, null)</td>
+                        </tr>
+                    </table>   
+                    
+                }
+                <text> Broj krugova: @Html.TextAreaFor(x=>x.TreningBrojKrugova) </text>
+                }
+                
+                <br />
+                @Html.ActionLink("Dodaj Vjezbu", "DodajVjezbuTrening", "Home", new {id = Model.TreningId, izmijeni = 1}, null)
+            </div>
+            <br />
+            <div style="margin:5px; border:solid" >
+                <h4>Istezanje</h4>
+                @if (Model.ListaIstezanja == null)
+                {
+                    <div>Pocni sa dodavanjem istezanja</div>
+                }
+                else
+                {
+                foreach (var istezanje in Model.ListaIstezanja)
+                {
+                    <table>
+                        <tr>
+                            <td>@istezanje.Naziv</td>
+                            <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeTrening", "Home", new {id = istezanje.IstezanjeId, izmijeni = 1}, null)</td> 
+                            <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new {id = istezanje.IstezanjeId, izmijeni = 1}, null)</td>
+                        </tr>
+                    </table>                       
+                }
+                }
+                
+                <br />
+                @Html.ActionLink("Dodaj Istezanje", "DodajIstezanjeTrening", "Home", new {id = Model.TreningId, izmijeni = 1}, null)
+            </div>
+            <br />
+            <div style="margin:5px; border:solid" >
+                <h4>Napomena</h4>
+                @Html.TextAreaFor(x=>x.Napomena, new{rows = "11", cols = "40"})
+
+            </div>
+            <br />
+        </div>
+            <input type ="submit" name ="IzmijeniTrening" value="Izmijeni Trening" />
+        }
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,98 @@
+﻿@model TrainingPlanner.Test
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("DodajTest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Test</legend>
+        
+
+        @Html.HiddenFor(x => x.ClanId)
+        <div class="editor-label"
+            >@Html.LabelFor(model => model.Dijagnostika)
+        </div>
+
+        <div class="editor-field">
+            @if (Model.Dijagnostika == null)
+            {
+                @:None
+            } else {
+                <img width="150" height="150" src ="@Url.Action("GetImage", "Home", new {Model.TestId})" />
+            }
+            <div>Dodaj dijagnostiku: <input type="file" name ="dijagnostika1" /></div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DatumTesta)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DatumTesta, "{0:dd-MM-yyyy}", new { @class = "dateInput", @placeholder = "Please enter date" })
+            @Html.ValidationMessageFor(model => model.DatumTesta)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ergometar)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ergometar)
+            @Html.ValidationMessageFor(model => model.Ergometar)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Zgibovi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Zgibovi)
+            @Html.ValidationMessageFor(model => model.Zgibovi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sklekovi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sklekovi)
+            @Html.ValidationMessageFor(model => model.Sklekovi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Trbusnjaci)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Trbusnjaci)
+            @Html.ValidationMessageFor(model => model.Trbusnjaci)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Cucnjevi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Cucnjevi)
+            @Html.ValidationMessageFor(model => model.Cucnjevi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <p>
+            <input type="submit" value="Dodaj test" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Natrag na Popis Clanova", "Index")
+</div>

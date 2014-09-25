@@ -1,0 +1,42 @@
+﻿@model TrainingPlanner.Istezanje
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<h2>Detalji Istezanja</h2>
+
+<fieldset>
+        <legend>Istezanja Popis</legend>
+    
+             @Html.HiddenFor(model => model.IstezanjeId)
+            
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Naziv)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Naziv)
+        </div>
+        @if(Model.Info != null)
+        {
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Info)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Info)
+        </div>
+        }
+
+        
+    </fieldset>
+    <p>
+        
+        @if ((int)ViewData["izmijeni"] == 0)
+        {
+            @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
+        }
+    </p>
