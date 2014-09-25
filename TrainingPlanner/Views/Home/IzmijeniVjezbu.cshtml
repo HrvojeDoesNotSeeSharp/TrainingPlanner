@@ -1,0 +1,61 @@
+﻿@model TrainingPlanner.VjezbePopis
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IzmijeniVjezbu</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>ZagrijavanjePopis</legend>   
+            
+                @Html.HiddenFor(model => model.VjezbeId)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ImeVjezbe)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ImeVjezbe)
+                @Html.ValidationMessageFor(model => model.ImeVjezbe)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Info)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Info)
+                @Html.ValidationMessageFor(model => model.Info)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Slika)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Slika)
+                @Html.ValidationMessageFor(model => model.Slika)
+            </div>
+    
+            <p>
+                <input type="submit" value="Spremi izmijene" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Natrag na Popis Vjezbi", "VjezbePopis")
+    </div>
+</body>
+</html>

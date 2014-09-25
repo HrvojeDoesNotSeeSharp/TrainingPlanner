@@ -1,0 +1,49 @@
+﻿@model TrainingPlanner.Vjezba
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<h2>DetaljiVjezbeTrening</h2>
+
+<fieldset>
+        <legend>Vjezbe Popis</legend>
+    
+             @Html.HiddenFor(model => model.VjezbaId)
+            
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ImeVjezbe)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ImeVjezbe)
+        </div>
+        @if(Model.Info != null)
+        {
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Info)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Info)
+        </div>
+        }
+        @if(Model.Slika != null)
+        {
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Slika)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Slika)
+        </div>
+        }
+    </fieldset>
+    <p>
+        
+        @if ((int)ViewData["izmijeni"] == 0)
+        {
+            @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
+        }
+    </p>

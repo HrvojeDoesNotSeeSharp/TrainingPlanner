@@ -1,0 +1,87 @@
+﻿@using TrainingPlanner
+@model Clan
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dodaj Clana</title>
+</head>
+<body>
+
+    <div id="clan">
+        @using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
+        {
+            <table>
+            <tr>
+                <td>
+                    Ime:
+                </td>
+                <td>
+                   @Html.TextAreaFor(x=>x.Ime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Prezime:
+                </td>
+                <td>
+                   @Html.TextAreaFor(x=>x.Prezime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Visina:
+                </td>
+                <td>
+                   @Html.TextAreaFor(x=>x.Visina)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tezina:
+                </td>
+                <td>
+                   @Html.TextAreaFor(x=>x.Tezina)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Godina Rodenja:
+                </td>
+                <td>
+                   @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:dd-MM-yyyy}", new { @class = "dateInput", @placeholder = "Please enter date" })
+                </td>
+            </tr>
+                <tr>
+                <td>
+                    Amneza:
+                </td>
+                <td>
+                   @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
+                </td>
+            </tr>
+                <tr>
+                <td>
+                    Napomena:
+                </td>
+                <td>
+                   @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
+                </td>
+            </tr>
+                
+            </table>
+            
+            <input type ="submit" name ="DodajClana" value="Dodaj Clana" />
+        }
+    </div>
+   <div>
+    @Html.ActionLink("Natrag na Popis Clanova", "Index")
+</div>
+</body>
+</html>

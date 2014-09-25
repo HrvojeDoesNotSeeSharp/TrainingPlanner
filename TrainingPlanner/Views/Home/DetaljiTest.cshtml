@@ -1,0 +1,86 @@
+﻿@model TrainingPlanner.Test
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetaljiTest</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                   @Html.LabelFor(x => x.Name);
+                </td>
+                <td>
+                   @Model.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x=>x.Sklekovi)
+                </td>
+                <td>
+                   @Model.Sklekovi
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x=>x.DatumTesta)
+                </td>
+                <td>
+                   @Model.DatumTesta.ToShortDateString()
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x=>x.Ergometar)
+                </td>
+                <td>
+                   @Model.Ergometar
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x=>x.Cucnjevi)
+                </td>
+                <td>
+                   @Model.Cucnjevi
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.Trbusnjaci)
+                </td>
+                <td>
+                   @Model.Trbusnjaci
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.Zgibovi)
+                </td>
+                <td>
+                   @Model.Zgibovi
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.Dijagnostika)
+                </td>
+                <td>
+                   @Model.Dijagnostika
+                </td>
+            </tr>
+             
+            </table>
+        @Html.ActionLink("Povratak na popis testova", "Test", "Home", new {id = Model.ClanId }, null)
+    </div>
+</body>
+</html>

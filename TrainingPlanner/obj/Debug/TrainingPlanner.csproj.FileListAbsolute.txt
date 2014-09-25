@@ -1,0 +1,84 @@
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\TrainingPlanner.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\TrainingPlanner.pdb
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\Newtonsoft.Json.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Net.Http.Formatting.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Helpers.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.WebHost.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Mvc.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\Newtonsoft.Json.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Net.Http.Formatting.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Helpers.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.WebHost.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Mvc.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.xml
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.csprojResolveAssemblyReference.cache
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.pdb
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\EntityFramework.dll
+C:\Users\Hrva\documents\visual studio 2012\Projects\TrainingPlanner\TrainingPlanner\bin\EntityFramework.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\TrainingPlanner.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\TrainingPlanner.pdb
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\EntityFramework.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\Newtonsoft.Json.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Net.Http.Formatting.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Helpers.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.WebHost.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Mvc.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\EntityFramework.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\Newtonsoft.Json.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Net.Http.Formatting.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Helpers.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.WebHost.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Mvc.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.xml
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.dll
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.pdb
+C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.csprojResolveAssemblyReference.cache
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\TrainingPlanner.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\TrainingPlanner.pdb
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\EntityFramework.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\Microsoft.Web.Infrastructure.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\Newtonsoft.Json.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Net.Http.Formatting.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Helpers.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.WebHost.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Mvc.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\EntityFramework.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\Newtonsoft.Json.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Net.Http.Formatting.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Helpers.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Http.WebHost.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Mvc.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.Razor.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Deployment.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\bin\System.Web.WebPages.Razor.xml
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.csprojResolveAssemblyReference.cache
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.dll
+D:\TrainingPlanner\TrainingPlanner\TrainingPlanner\obj\Debug\TrainingPlanner.pdb

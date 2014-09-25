@@ -1,0 +1,55 @@
+﻿@using TrainingPlanner
+@model List<Clan>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Pocetna stranica </title>
+        <meta charset="utf-8">
+        <link href="@Url.Content("~/Content/Grid.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/Vanjski.css")" rel="stylesheet" type="text/css" />
+        <script type="javascript" src="@Url.Content("~/scripts/myScripts.js?" + DateTime.Now.ToString("ddMMHHmmss"))"></script>
+        </head>
+    <body>
+        <div class="container_12">
+        <div class ="grid_12 header">Training Planner</div>        
+        <div class="grid_8">
+            <h3>Popis Sportasa</h3>
+            <hr />
+<table>
+    <thead><tr><th>Ime</th><th>Prezime</th><th>Godine</th></tr></thead>
+<tbody>
+@foreach (Clan c in Model) {
+<tr>
+<td>@c.Ime</td> <td>@c.Prezime</td> <td>@c.GodineStarosti</td> <td>@Html.ActionLink("Izbrisi", "IzbrisiClana", "Home", new {id = c.ClanId}, null)</td> 
+<td>@Html.ActionLink("Izmijeni", "IzmijeniClana", "Home", new {id = c.ClanId}, null)</td>
+<td>@Html.ActionLink("Test", "Test", "Home", new {id = c.ClanId}, null)</td>
+<td>@Html.ActionLink("Detalji", "DetaljiClana", "Home", new {id = c.ClanId}, null)</td>
+<td>@Html.ActionLink("Trening", "TreningPopis", "Home", new {id = c.ClanId}, null)</td>
+</tr>
+}
+</tbody>
+</table>
+
+<br/>
+@Html.ActionLink("Dodaj", "DodajClana", "Home")
+<br/>
+</div>
+
+
+<div class="grid_4">
+    <h3>Vjezbe za trening</h3>
+    <hr />
+    <p>@Html.ActionLink("Pregled Vjezbi Zagrijavanja", "ZagrijavanjePopis", "Home", null, new { @class="buttonlinkzagrijavanje" })</p>
+    <p>@Html.ActionLink("Pregled Vjezbi Treninga", "VjezbePopis", "Home", null, new { @class="buttonlinkvjezba" })</p>
+    <p>@Html.ActionLink("Pregled Vjezbi Istezanja", "IstezanjePopis", "Home", null, new { @class="buttonlinkistezanje" })</p>
+</div>
+</div>
+        </body>
+</html>

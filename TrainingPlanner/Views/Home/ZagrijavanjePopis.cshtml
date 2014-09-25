@@ -1,0 +1,45 @@
+﻿@using TrainingPlanner
+@model List<ZagrijavanjePopis>
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ZagrijavanjePopis</title>
+    </head>
+
+    <body>
+
+    <div>
+         
+        <table>
+         
+        @foreach (ZagrijavanjePopis zp in Model) {
+             if(zp.ZagrijavanjeId == 0)
+        {
+           <tr>
+               <td>Trenutno nema vjezbi zagrijavanja.</td>
+           </tr>
+        }
+        else
+        {
+        <tr>
+        <td>@zp.Naziv</td> <td>@zp.Info</td> 
+        <td>@Html.ActionLink("Izbrisi", "IzbrisiZagrijavanje", "Home", new {id = zp.ZagrijavanjeId}, null)</td> 
+        <td>@Html.ActionLink("Izmijeni", "IzmijeniZagrijavanje", "Home", new {id = zp.ZagrijavanjeId}, null)</td>
+        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new {id = zp.ZagrijavanjeId}, null)</td>
+        </tr>
+        }
+        }
+            </table>
+        @Html.ActionLink("Dodaj", "DodajNovoZagrijavanje", "Home")     
+    </div>
+        @Html.ActionLink("Natrag na Popis Clanova", "Index", "Home")
+
+</body>
+</html>

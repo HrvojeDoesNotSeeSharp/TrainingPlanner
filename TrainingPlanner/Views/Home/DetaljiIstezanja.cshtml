@@ -1,0 +1,39 @@
+﻿@model TrainingPlanner.IstezanjePopis
+
+@{
+    Layout = "~/Views/_LayoutWithCSS.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetaljiIstezanja</title>
+</head>
+<body>
+    <fieldset>
+        <legend>ZagrijavanjePopis</legend>
+    
+             @Html.HiddenFor(model => model.IstezanjeId)
+            
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Naziv)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Naziv)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Info)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Info)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Izmijeni", "IzmijeniIstezanje", new { id=Model.IstezanjeId}) |
+        @Html.ActionLink("Natrag na popis Istezanja", "IstezanjePopis")
+    </p>
+</body>
+</html>
