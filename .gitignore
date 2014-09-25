@@ -1,0 +1,8 @@
+*.suo
+*.dll
+TrainingPlanner/bin/TrainingPlanner.pdb
+TrainingPlanner/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+TrainingPlanner/obj/Debug/TrainingPlanner.csproj.FileListAbsolute.txt
+TrainingPlanner/obj/Debug/TrainingPlanner.csprojResolveAssemblyReference.cache
+TrainingPlanner/obj/Debug/TrainingPlanner.dll
+TrainingPlanner/obj/Debug/TrainingPlanner.pdb
