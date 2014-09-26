@@ -55,7 +55,7 @@
                     Godina Rodenja:
                 </td>
                 <td>
-                   @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:dd-MM-yyyy}", new { @class = "dateInput", @placeholder = "Please enter date" })
+                   @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput", @placeholder = "Please enter date" })
                 </td>
             </tr>
                 <tr>

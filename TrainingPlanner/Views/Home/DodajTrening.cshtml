@@ -29,7 +29,7 @@
             Ime treninga: @Html.TextBoxFor(x => x.TreningImeTreninga)
             <br />
             <br />
-            Datum: @Html.TextBoxFor(x => x.TreningDatum, "{0:dd-MM-yyyy}", new { @class = "dateInput", @placeholder = "Please enter date" })
+            Datum: @Html.TextBoxFor(x => x.TreningDatum, new {@Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date"})
             <br />
             
             <div>
