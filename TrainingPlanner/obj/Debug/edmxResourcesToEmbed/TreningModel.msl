@@ -82,6 +82,9 @@
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
+          <ScalarProperty Name="Tempo" ColumnName="Tempo" />
+          <ScalarProperty Name="Puls" ColumnName="Puls" />
+          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -107,6 +110,8 @@
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
+          <ScalarProperty Name="VrijemeIzdrzaja" ColumnName="VrijemeIzdrzaja" />
+          <ScalarProperty Name="VrstaIstezanja" ColumnName="VrstaIstezanja" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

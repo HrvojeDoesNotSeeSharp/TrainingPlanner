@@ -966,6 +966,25 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
+        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string napomena = null, int id = 0, int ZagrijavanjeId = 0)
+        {
+
+            var query = from x in _context.Zagrijavanje
+                        where x.ZagrijavanjeId == ZagrijavanjeId
+                        select x;
+
+            var zg = query.Single();
+            zg.Tempo = tempo;
+            zg.Puls = puls;
+            zg.Napomena = napomena;
+
+            _context.Entry(zg).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpPost]
         public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string brojSerija = null, string tezina = null, string odmor = null, int id = 0, int vjezbaId = 0)
         {
 
@@ -980,6 +999,24 @@ namespace TrainingPlanner.Controllers
                 vj.Odmor = odmor;
 
             _context.Entry(vj).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpPost]
+        public ActionResult SpremiIstezanjeInfo(string VrijemeIzdrzaja, string VrstaIstezanja = null, int id = 0, int IstezanjeId = 0)
+        {
+
+            var query = from x in _context.Istezanje
+                        where x.IstezanjeId == IstezanjeId
+                        select x;
+
+            var ist = query.Single();
+            ist.VrijemeIzdrzaja = VrijemeIzdrzaja;
+            ist.VrstaIstezanja = VrstaIstezanja;
+
+            _context.Entry(ist).State = EntityState.Modified;
             _context.SaveChanges();
 
             return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });

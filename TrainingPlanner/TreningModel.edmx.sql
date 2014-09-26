@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/20/2014 17:26:38
--- Generated from EDMX file: C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\TrainingPlanner\TrainingPlanner\TrainingPlanner\TreningModel.edmx
+-- Date Created: 09/26/2014 17:07:29
+-- Generated from EDMX file: C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\NoviTrening\TrainingPlanner\TrainingPlanner\TreningModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -142,7 +142,10 @@ CREATE TABLE [dbo].[Zagrijavanje] (
     [ZagrijavanjeId] int IDENTITY(1,1) NOT NULL,
     [Naziv] nvarchar(max)  NOT NULL,
     [Info] nvarchar(max)  NULL,
-    [TreningId] int  NOT NULL
+    [TreningId] int  NOT NULL,
+    [Tempo] nvarchar(max)  NULL,
+    [Puls] nvarchar(max)  NULL,
+    [Napomena] nvarchar(max)  NULL
 );
 GO
 
@@ -165,7 +168,9 @@ CREATE TABLE [dbo].[Istezanje] (
     [IstezanjeId] int IDENTITY(1,1) NOT NULL,
     [Naziv] nvarchar(max)  NOT NULL,
     [Info] nvarchar(max)  NULL,
-    [TreningId] int  NOT NULL
+    [TreningId] int  NOT NULL,
+    [VrijemeIzdrzaja] nvarchar(max)  NULL,
+    [VrstaIstezanja] nvarchar(max)  NULL
 );
 GO
 

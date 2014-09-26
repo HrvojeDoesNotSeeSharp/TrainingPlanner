@@ -18,6 +18,8 @@ namespace TrainingPlanner
         public string Naziv { get; set; }
         public string Info { get; set; }
         public int TreningId { get; set; }
+        public string VrijemeIzdrzaja { get; set; }
+        public string VrstaIstezanja { get; set; }
     
         public virtual Trening Trening { get; set; }
     }

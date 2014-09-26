@@ -12,3 +12,13 @@ TrainingPlanner/bin/TrainingPlanner.pdb
 TrainingPlanner/obj/Debug/TrainingPlanner.csprojResolveAssemblyReference.cache
 TrainingPlanner/obj/Debug/TrainingPlanner.dll
 *.suo
+*.suo
+*.dll
+*.pdb
+*.csdl
+*.msl
+*.ssdl
+*.dll
+*.dll
+*.dll
+*.pdb

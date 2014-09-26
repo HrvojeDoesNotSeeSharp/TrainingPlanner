@@ -112,6 +112,9 @@
     <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TreningId" Type="int" Nullable="false" />
+    <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>
@@ -135,6 +138,8 @@
     <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TreningId" Type="int" Nullable="false" />
+    <Property Name="VrijemeIzdrzaja" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="VrstaIstezanja" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -327,6 +332,9 @@
           <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Trening" Relationship="TreningModel.TreningZagrijavanje" FromRole="Zagrijavanje" ToRole="Trening" />
           <Property Type="Int32" Name="TreningId" Nullable="false" />
+          <Property Type="String" Name="Tempo" Nullable="true" />
+          <Property Type="String" Name="Puls" Nullable="true" />
+          <Property Type="String" Name="Napomena" Nullable="true" />
         </EntityType>
         <EntityType Name="Vjezba">
           <Key>
@@ -352,6 +360,8 @@
           <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Trening" Relationship="TreningModel.TreningIstezanje" FromRole="Istezanje" ToRole="Trening" />
           <Property Type="Int32" Name="TreningId" Nullable="false" />
+          <Property Type="String" Name="VrijemeIzdrzaja" Nullable="true" />
+          <Property Type="String" Name="VrstaIstezanja" Nullable="true" />
         </EntityType>
         <Association Name="TreningZagrijavanje">
           <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
@@ -488,6 +498,9 @@
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
+          <ScalarProperty Name="Tempo" ColumnName="Tempo" />
+          <ScalarProperty Name="Puls" ColumnName="Puls" />
+          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -513,6 +526,8 @@
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
+          <ScalarProperty Name="VrijemeIzdrzaja" ColumnName="VrijemeIzdrzaja" />
+          <ScalarProperty Name="VrstaIstezanja" ColumnName="VrstaIstezanja" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

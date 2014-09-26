@@ -127,6 +127,9 @@
     <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Trening" Relationship="TreningModel.TreningZagrijavanje" FromRole="Zagrijavanje" ToRole="Trening" />
     <Property Type="Int32" Name="TreningId" Nullable="false" />
+    <Property Type="String" Name="Tempo" Nullable="true" />
+    <Property Type="String" Name="Puls" Nullable="true" />
+    <Property Type="String" Name="Napomena" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>
@@ -152,6 +155,8 @@
     <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Trening" Relationship="TreningModel.TreningIstezanje" FromRole="Istezanje" ToRole="Trening" />
     <Property Type="Int32" Name="TreningId" Nullable="false" />
+    <Property Type="String" Name="VrijemeIzdrzaja" Nullable="true" />
+    <Property Type="String" Name="VrstaIstezanja" Nullable="true" />
   </EntityType>
   <Association Name="TreningZagrijavanje">
     <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
