@@ -1,11 +1,10 @@
-﻿@using TrainingPlanner
-@model TrainingPlanner.Test
+﻿@model TrainingPlanner.Test
 
 @{
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-@using (Html.BeginForm("IzmijeniTest", "Home", FormMethod.Post, new { enctype = "multipart/formdata" }))
+@using (Html.BeginForm("IzmijeniTest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
 
