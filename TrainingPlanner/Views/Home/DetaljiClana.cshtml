@@ -90,9 +90,9 @@
                  <tr>
                  @foreach (Test t in Model.ListaTest)
                  {
-                <td>
-                   @t.Name |
-                </td>
+                     <td>
+                         @Html.ActionLink(@t.Name , "DetaljiTest", new { id = @t.TestId})
+                     </td>
                  }
                  </tr>
             
