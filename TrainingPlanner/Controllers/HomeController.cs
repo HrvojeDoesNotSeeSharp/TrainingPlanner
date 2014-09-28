@@ -1018,7 +1018,23 @@ namespace TrainingPlanner.Controllers
 
             return RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
+
+        public ActionResult IzbrisiSliku(int id, int? slika)
+        {
+            var t = _context.Test.Find(id);
+            var imageToDelete = _context.Slika.Find(slika);
+
+            _context.Slika.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.Slika.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniTest", t);
+        }
     }
+
+    
 
     //klasa za nested forme
 

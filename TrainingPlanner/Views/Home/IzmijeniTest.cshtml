@@ -1,4 +1,5 @@
-﻿@model TrainingPlanner.Test
+﻿@using TrainingPlanner
+@model TrainingPlanner.Test
 
 @{
     Layout = "~/Views/_LayoutWithCSS.cshtml";
@@ -24,7 +25,8 @@
             } else {
                 foreach(var item in Model.Slika)
                 {
-                <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" />
+                    <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" />
+                    <div>@Html.ActionLink("IzbrisiSliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, null)</div>
                 }
             }
             <div>Dodaj dijagnostiku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
