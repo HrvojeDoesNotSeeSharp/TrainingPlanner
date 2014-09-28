@@ -21,7 +21,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Test)">
         <MappingFragment StoreEntitySet="Test">
           <ScalarProperty Name="TestId" ColumnName="TestId" />
-          <ScalarProperty Name="Dijagnostika" ColumnName="Dijagnostika" />
           <ScalarProperty Name="DatumTesta" ColumnName="DatumTesta" />
           <ScalarProperty Name="Ergometar" ColumnName="Ergometar" />
           <ScalarProperty Name="Zgibovi" ColumnName="Zgibovi" />
@@ -29,7 +28,6 @@
           <ScalarProperty Name="Trbusnjaci" ColumnName="Trbusnjaci" />
           <ScalarProperty Name="Cucnjevi" ColumnName="Cucnjevi" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DijagnostikaType" ColumnName="DijagnostikaType" />
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -112,6 +110,15 @@
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="VrijemeIzdrzaja" ColumnName="VrijemeIzdrzaja" />
           <ScalarProperty Name="VrstaIstezanja" ColumnName="VrstaIstezanja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slika">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Slika)">
+        <MappingFragment StoreEntitySet="Slika">
+          <ScalarProperty Name="SlikaId" ColumnName="SlikaId" />
+          <ScalarProperty Name="TestTestId" ColumnName="TestTestId" />
+          <ScalarProperty Name="SlikaIme" ColumnName="SlikaIme" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

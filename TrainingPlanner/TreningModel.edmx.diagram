@@ -7,9 +7,9 @@
       <Diagram DiagramId="1bbb759cdf874ca5b1fc0cf074215f6d" Name="Diagram1" ZoomLevel="93" >
         <EntityTypeShape EntityType="TreningModel.Clan" Width="1.5" PointX="0.75" PointY="0.5" />
         <EntityTypeShape EntityType="TreningModel.Test" Width="1.5" PointX="9.875" PointY="0.625" />
-        <EntityTypeShape EntityType="TreningModel.Trening" Width="2.375" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreningModel.Trening" Width="2.375" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.FK_ClanTrening" />
-        <EntityTypeShape EntityType="TreningModel.IstezanjePopis" Width="1.5" PointX="4" PointY="8.875" />
+        <EntityTypeShape EntityType="TreningModel.IstezanjePopis" Width="1.5" PointX="4.125" PointY="9.25" />
         <EntityTypeShape EntityType="TreningModel.VjezbePopis" Width="1.5" PointX="2.25" PointY="8.75" />
         <EntityTypeShape EntityType="TreningModel.ZagrijavanjePopis" Width="1.5" PointX="0.5" PointY="8.875" />
         <EntityTypeShape EntityType="TreningModel.Zagrijavanje" Width="1.5" PointX="5.25" PointY="3.25" />
@@ -19,6 +19,8 @@
         <AssociationConnector Association="TreningModel.TreningIstezanje" />
         <AssociationConnector Association="TreningModel.TreningVjezba" />
         <AssociationConnector Association="TreningModel.ClanTest" />
+        <EntityTypeShape EntityType="TreningModel.Slika" Width="1.5" PointX="6.375" PointY="0.75" />
+        <AssociationConnector Association="TreningModel.FK_TestSlika" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

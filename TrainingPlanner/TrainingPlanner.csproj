@@ -129,6 +129,9 @@
     <Compile Include="Models\TreningDataModel.cs" />
     <Compile Include="Models\VjezbePopisLista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Slika.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Test.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
@@ -183,6 +186,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Content\Slike\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>

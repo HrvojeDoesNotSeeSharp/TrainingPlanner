@@ -14,8 +14,12 @@ namespace TrainingPlanner
     
     public partial class Test
     {
+        public Test()
+        {
+            this.Slika = new HashSet<Slika>();
+        }
+    
         public int TestId { get; set; }
-        public byte[] Dijagnostika { get; set; }
         public System.DateTime DatumTesta { get; set; }
         public short Ergometar { get; set; }
         public short Zgibovi { get; set; }
@@ -23,9 +27,9 @@ namespace TrainingPlanner
         public short Trbusnjaci { get; set; }
         public short Cucnjevi { get; set; }
         public string Name { get; set; }
-        public string DijagnostikaType { get; set; }
         public int ClanId { get; set; }
     
         public virtual Clan Clan { get; set; }
+        public virtual ICollection<Slika> Slika { get; set; }
     }
 }

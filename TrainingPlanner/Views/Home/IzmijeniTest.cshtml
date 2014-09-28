@@ -14,17 +14,20 @@
         @Html.HiddenFor(x => x.TestId)
         @Html.HiddenFor(x => x.ClanId)
         <div class="editor-label"
-            >@Html.LabelFor(model => model.Dijagnostika)
+            >@Html.LabelFor(model => model.Slika)
         </div>
 
         <div class="editor-field">
-            @if (Model.Dijagnostika == null)
+            @if (Model.Slika.Count == 0)
             {
                 @:None
             } else {
-                <img width="150" height="150" src ="@Url.Action("GetImage", "Home", new {Model.TestId})" />
+                foreach(var item in Model.Slika)
+                {
+                <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" />
+                }
             }
-            <div>Dodaj dijagnostiku: <input type="file" name ="dijagnostika" /></div>
+            <div>Dodaj dijagnostiku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
         </div>
 
         <div class="editor-label">

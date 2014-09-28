@@ -14,21 +14,14 @@
 
     <fieldset>
         <legend>Test</legend>
-        
 
         @Html.HiddenFor(x => x.ClanId)
         <div class="editor-label"
-            >@Html.LabelFor(model => model.Dijagnostika)
+            >@Html.LabelFor(model => model.Slika)
         </div>
 
         <div class="editor-field">
-            @if (Model.Dijagnostika == null)
-            {
-                @:None
-            } else {
-                <img width="150" height="150" src ="@Url.Action("GetImage", "Home", new {Model.TestId})" />
-            }
-            <div>Dodaj dijagnostiku: <input type="file" name ="dijagnostika1" /></div>
+            <div>Dodaj dijagnostiku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
         </div>
 
         <div class="editor-label">
@@ -86,13 +79,11 @@
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-
         <p>
             <input type="submit" value="Dodaj test" />
         </p>
     </fieldset>
 }
-
 <div>
     @Html.ActionLink("Natrag na Popis Clanova", "Index")
 </div>

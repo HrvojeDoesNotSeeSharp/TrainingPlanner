@@ -30,6 +30,11 @@
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Test" EntitySet="Test" />
     </AssociationSet>
+    <EntitySet Name="Slika" EntityType="TreningModel.Slika" />
+    <AssociationSet Name="TestSlika" Association="TreningModel.FK_TestSlika">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="Slika" EntitySet="Slika" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
     <Key>
@@ -53,7 +58,6 @@
       <PropertyRef Name="TestId" />
     </Key>
     <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Binary" Name="Dijagnostika" MaxLength="Max" FixedLength="false" />
     <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
     <Property Type="Int16" Name="Ergometar" Nullable="false" />
     <Property Type="Int16" Name="Zgibovi" Nullable="false" />
@@ -61,9 +65,9 @@
     <Property Type="Int16" Name="Trbusnjaci" Nullable="false" />
     <Property Type="Int16" Name="Cucnjevi" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="DijagnostikaType" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Clan" Relationship="TreningModel.ClanTest" FromRole="Test" ToRole="Clan" />
     <Property Type="Int32" Name="ClanId" Nullable="false" />
+    <NavigationProperty Name="Slika" Relationship="TreningModel.FK_TestSlika" FromRole="Test" ToRole="Slika" />
   </EntityType>
   <EntityType Name="Trening">
     <Key>
@@ -203,6 +207,27 @@
       </Principal>
       <Dependent Role="Test">
         <PropertyRef Name="ClanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Slika">
+    <Key>
+      <PropertyRef Name="SlikaId" />
+    </Key>
+    <Property Type="Int32" Name="SlikaId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Test" Relationship="TreningModel.FK_TestSlika" FromRole="Slika" ToRole="Test" />
+    <Property Type="Int32" Name="TestTestId" Nullable="false" />
+    <Property Type="String" Name="SlikaIme" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TestSlika">
+    <End Type="TreningModel.Test" Role="Test" Multiplicity="1" />
+    <End Type="TreningModel.Slika" Role="Slika" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestId" />
+      </Principal>
+      <Dependent Role="Slika">
+        <PropertyRef Name="TestTestId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

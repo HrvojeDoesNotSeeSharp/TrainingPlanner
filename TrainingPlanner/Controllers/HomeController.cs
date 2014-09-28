@@ -11,7 +11,6 @@ namespace TrainingPlanner.Controllers
     public class HomeController : Controller
     {
         private readonly TreningModelContainer _context = new TreningModelContainer();
-
     
         public ActionResult Index()
         {
@@ -23,7 +22,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult ZagrijavanjePopis()
         {
-            List<ZagrijavanjePopis> listaZagrijavanja = _context.ZagrijavanjePopis.ToList();
+            var listaZagrijavanja = _context.ZagrijavanjePopis.ToList();
             if (listaZagrijavanja.Count == 0)
             {
                 listaZagrijavanja = new List<ZagrijavanjePopis> {new ZagrijavanjePopis{ ZagrijavanjeId = 0, Info="", Naziv=""}};
@@ -79,7 +78,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult VjezbePopis()
         {
-            List<VjezbePopis> listaVjezbi = _context.VjezbePopis.ToList();
+            var listaVjezbi = _context.VjezbePopis.ToList();
             if (listaVjezbi.Count == 0)
             {
                 listaVjezbi = new List<VjezbePopis> { new VjezbePopis { VjezbeId = 0, ImeVjezbe = "", Info="", Slika=null } };
@@ -135,7 +134,7 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult IstezanjePopis()
         {
-            List<IstezanjePopis> listaIstezanja = _context.IstezanjePopis.ToList();
+            var listaIstezanja = _context.IstezanjePopis.ToList();
             if (listaIstezanja.Count == 0)
             {
                 listaIstezanja = new List<IstezanjePopis> { new IstezanjePopis { IstezanjeId=0, Naziv="", Info="" } };
@@ -189,7 +188,6 @@ namespace TrainingPlanner.Controllers
         }
 
         /****************Akcije sa clanovima i testovima****************/
-
         [HttpGet]
         public ActionResult DodajClana()
         {      
@@ -252,7 +250,6 @@ namespace TrainingPlanner.Controllers
                 
                     _context.Trening.Remove(a);
                 }
-
             }
 
             var queryTest = from x in _context.Test
@@ -336,40 +333,49 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult DodajTest(Test t, HttpPostedFileBase dijagnostika1)
+        public ActionResult DodajTest(Test t, HttpPostedFileBase[] slike)
         {
-
-            if (dijagnostika1 != null)
+            if (slike != null)
             {
-                t.DijagnostikaType = dijagnostika1.ContentType;
-                
-                t.Dijagnostika = new byte[dijagnostika1.ContentLength];
-                dijagnostika1.InputStream.Read(t.Dijagnostika, 0, dijagnostika1.ContentLength);
+                var path = Server.MapPath("~/Content/Slike/");
+                foreach (var file in slike)
+                {
+                    var slika = new Slika();
+                    file.SaveAs(path + file.FileName);
 
+                    slika.SlikaIme = file.FileName;
+                    slika.TestTestId = t.TestId;
+
+                    t.Slika.Add(slika);
+                    _context.Slika.Add(slika);
+                }
             }
- 
             _context.Test.Add(t);
             _context.SaveChanges();
 
             return RedirectToAction("Test", new {id = t.ClanId });
         }
 
-        public FileContentResult GetImage(int testId)
-        {
-            var t = _context.Test.Find(testId);
-
-            return t != null ? File(t.Dijagnostika, t.DijagnostikaType) : null;
-        }
-
         public ActionResult IzbrisiTest(int id)
         {
             var t = _context.Test.Find(id);
 
+            if (t.Slika.Count > 0)
+            {
+                var query = from x in _context.Test
+                            join i in _context.Slika on x.TestId equals i.TestTestId
+                            where x.TestId == id
+                            select i;
+
+                foreach (var a in query.ToList())
+                {
+                    _context.Slika.Remove(a);
+                }
+            }
             _context.Test.Remove(t);
             _context.SaveChanges();
 
             return RedirectToAction("Test", new { id = t.ClanId });
-            
         }
 
         [HttpGet]
@@ -380,13 +386,22 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult IzmijeniTest(Test t, HttpPostedFileBase dijagnostika)
+        public ActionResult IzmijeniTest(Test t, HttpPostedFileBase[] slike)
         {
-            if (dijagnostika != null)
+            if (slike != null)
             {
-                t.DijagnostikaType = dijagnostika.ContentType;
-                t.Dijagnostika = new byte[dijagnostika.ContentLength];
-                dijagnostika.InputStream.Read(t.Dijagnostika, 0, dijagnostika.ContentLength);
+                var path = Server.MapPath("~/Content/Slike/");
+                foreach (var file in slike)
+                {
+                    var slika = new Slika();
+                    file.SaveAs(path + file.FileName);
+
+                    slika.SlikaIme = file.FileName;
+                    slika.TestTestId = t.TestId;
+
+                    t.Slika.Add(slika);
+                    _context.Slika.Add(slika);
+                }
             }
 
             _context.Entry(t).State = EntityState.Modified;
@@ -402,12 +417,9 @@ namespace TrainingPlanner.Controllers
 
         }
 
-
         /*****************Akcije sa treningom*****************/
-
         [HttpGet]
-        public ActionResult TreningPopis(int id = 0)
-        {
+        public ActionResult TreningPopis(int id = 0)        {
             var query1 = from x in _context.Clan
                          where x.ClanId == id
                          select x;
@@ -444,7 +456,7 @@ namespace TrainingPlanner.Controllers
 
                     foreach (var a in query4.ToList())
                     {
-                    _context.Zagrijavanje.Remove(a);
+                        _context.Zagrijavanje.Remove(a);
                     }
 
                     foreach (var a in query2.ToList())
@@ -456,8 +468,8 @@ namespace TrainingPlanner.Controllers
                     {
                         _context.Istezanje.Remove(a);
                     }
-                            _context.Trening.Remove(tr);
-                            _context.SaveChanges();
+                        _context.Trening.Remove(tr);
+                        _context.SaveChanges();
                     }
 	        }
 
@@ -478,7 +490,6 @@ namespace TrainingPlanner.Controllers
 
         public ActionResult IzbrisiTrening(int id = 0)
         {
-            
             var query = from x in _context.Trening
                         join y in _context.Clan on x.ClanId equals y.ClanId
                         where x.TreningId == id
@@ -521,7 +532,6 @@ namespace TrainingPlanner.Controllers
 
                 var tr = firstOrDefault.x;
                 _context.Trening.Remove(tr);
-
                 _context.SaveChanges();
 
                 return RedirectToAction("TreningPopis", new { id = k });
@@ -552,7 +562,6 @@ namespace TrainingPlanner.Controllers
                          where x.TreningId == id
                          select i;
 
-
             var firstOrDefault = query.FirstOrDefault();
             if (firstOrDefault != null)
             {
@@ -582,7 +591,6 @@ namespace TrainingPlanner.Controllers
                     {
                         trm.ListaIstezanja = query3.ToList();
                     }
-
                     return View(trm);
                 }
             }
@@ -636,7 +644,6 @@ namespace TrainingPlanner.Controllers
                          where x.TreningId == id
                          select i;
 
-
             var firstOrDefault = query.FirstOrDefault();
             if (firstOrDefault != null)
             {
@@ -666,7 +673,6 @@ namespace TrainingPlanner.Controllers
                     {
                         trm.ListaIstezanja = query3.ToList();
                     }
-
                     return View(trm);
                 }
             }
@@ -768,7 +774,6 @@ namespace TrainingPlanner.Controllers
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
             }
-
             return View(trm);
         }
 
@@ -785,7 +790,6 @@ namespace TrainingPlanner.Controllers
             tr.BrojKrugova = trm.TreningBrojKrugova;
             tr.DatumTreninga = trm.TreningDatum;
             tr.Napomena = trm.Napomena;
-            
 
             if(trm.TreningTip != null)
             {
@@ -815,7 +819,6 @@ namespace TrainingPlanner.Controllers
                          select x;
 
             var vjp = query.Single();
-
 
             var vj = new Vjezba {ImeVjezbe = vjp.ImeVjezbe, TreningId = id };
             if (vjp.Info != null)
@@ -874,7 +877,6 @@ namespace TrainingPlanner.Controllers
 
             var istp = query.Single();
 
-
             var ist = new Istezanje { Naziv = istp.Naziv, TreningId = id };
             if (istp.Info != null)
             {
@@ -928,7 +930,6 @@ namespace TrainingPlanner.Controllers
 
             var zgp = query.Single();
 
-
             var zg = new Zagrijavanje{ Naziv = zgp.Naziv, TreningId = id };
             if (zgp.Info != null)
             {
@@ -944,13 +945,12 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult IzbrisiZagrijavanjeTrening(int id = 0, int izmijeni = 0)
         {
-            Zagrijavanje zg = _context.Zagrijavanje.Find(id);
+            var zg = _context.Zagrijavanje.Find(id);
             id = zg.TreningId;
             _context.Zagrijavanje.Remove(zg);
             _context.SaveChanges();
 
             return izmijeni != 0 ? RedirectToAction("IzmijeniTrening", new { id }) : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
-            
         }
 
         [HttpGet]
@@ -968,7 +968,6 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string napomena = null, int id = 0, int ZagrijavanjeId = 0)
         {
-
             var query = from x in _context.Zagrijavanje
                         where x.ZagrijavanjeId == ZagrijavanjeId
                         select x;
@@ -987,7 +986,6 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string brojSerija = null, string tezina = null, string odmor = null, int id = 0, int vjezbaId = 0)
         {
-
             var query = from x in _context.Vjezba
                         where x.VjezbaId == vjezbaId
                         select x;
@@ -1005,16 +1003,15 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SpremiIstezanjeInfo(string VrijemeIzdrzaja, string VrstaIstezanja = null, int id = 0, int IstezanjeId = 0)
+        public ActionResult SpremiIstezanjeInfo(string vrijemeIzdrzaja, string vrstaIstezanja = null, int id = 0, int istezanjeId = 0)
         {
-
             var query = from x in _context.Istezanje
-                        where x.IstezanjeId == IstezanjeId
+                        where x.IstezanjeId == istezanjeId
                         select x;
 
             var ist = query.Single();
-            ist.VrijemeIzdrzaja = VrijemeIzdrzaja;
-            ist.VrstaIstezanja = VrstaIstezanja;
+            ist.VrijemeIzdrzaja = vrijemeIzdrzaja;
+            ist.VrstaIstezanja = vrstaIstezanja;
 
             _context.Entry(ist).State = EntityState.Modified;
             _context.SaveChanges();

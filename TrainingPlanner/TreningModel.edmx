@@ -15,6 +15,7 @@
     <EntitySet Name="Zagrijavanje" EntityType="TreningModel.Store.Zagrijavanje" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Vjezba" EntityType="TreningModel.Store.Vjezba" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Istezanje" EntityType="TreningModel.Store.Istezanje" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Slika" EntityType="TreningModel.Store.Slika" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -34,6 +35,10 @@
     <AssociationSet Name="ClanTest" Association="TreningModel.Store.ClanTest">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+    <AssociationSet Name="TestSlika" Association="TreningModel.Store.FK_TestSlika">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="Slika" EntitySet="Slika" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
@@ -56,7 +61,6 @@
       <PropertyRef Name="TestId" />
     </Key>
     <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Dijagnostika" Type="varbinary(max)" Nullable="true" />
     <Property Name="DatumTesta" Type="datetime" Nullable="false" />
     <Property Name="Ergometar" Type="smallint" Nullable="false" />
     <Property Name="Zgibovi" Type="smallint" Nullable="false" />
@@ -64,7 +68,6 @@
     <Property Name="Trbusnjaci" Type="smallint" Nullable="false" />
     <Property Name="Cucnjevi" Type="smallint" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DijagnostikaType" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="ClanId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Trening">
@@ -141,6 +144,14 @@
     <Property Name="VrijemeIzdrzaja" Type="nvarchar(max)" Nullable="true" />
     <Property Name="VrstaIstezanja" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
+  <EntityType Name="Slika">
+    <Key>
+      <PropertyRef Name="SlikaId" />
+    </Key>
+    <Property Name="SlikaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TestTestId" Type="int" Nullable="false" />
+    <Property Name="SlikaIme" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
     <End Role="Trening" Type="TreningModel.Store.Trening" Multiplicity="*" />
@@ -201,6 +212,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TestSlika">
+    <End Role="Test" Type="TreningModel.Store.Test" Multiplicity="1" />
+    <End Role="Slika" Type="TreningModel.Store.Slika" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestId" />
+      </Principal>
+      <Dependent Role="Slika">
+        <PropertyRef Name="TestTestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -235,6 +258,11 @@
             <End Role="Clan" EntitySet="Clan" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
+          <EntitySet Name="Slika" EntityType="TreningModel.Slika" />
+          <AssociationSet Name="TestSlika" Association="TreningModel.FK_TestSlika">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Slika" EntitySet="Slika" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
           <Key>
@@ -258,7 +286,6 @@
             <PropertyRef Name="TestId" />
           </Key>
           <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Binary" Name="Dijagnostika" MaxLength="Max" FixedLength="false" />
           <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
           <Property Type="Int16" Name="Ergometar" Nullable="false" />
           <Property Type="Int16" Name="Zgibovi" Nullable="false" />
@@ -266,9 +293,9 @@
           <Property Type="Int16" Name="Trbusnjaci" Nullable="false" />
           <Property Type="Int16" Name="Cucnjevi" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DijagnostikaType" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clan" Relationship="TreningModel.ClanTest" FromRole="Test" ToRole="Clan" />
           <Property Type="Int32" Name="ClanId" Nullable="false" />
+          <NavigationProperty Name="Slika" Relationship="TreningModel.FK_TestSlika" FromRole="Test" ToRole="Slika" />
         </EntityType>
         <EntityType Name="Trening">
           <Key>
@@ -411,6 +438,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Slika">
+          <Key>
+            <PropertyRef Name="SlikaId" />
+          </Key>
+          <Property Type="Int32" Name="SlikaId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Test" Relationship="TreningModel.FK_TestSlika" FromRole="Slika" ToRole="Test" />
+          <Property Type="Int32" Name="TestTestId" Nullable="false" />
+          <Property Type="String" Name="SlikaIme" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TestSlika">
+          <End Type="TreningModel.Test" Role="Test" Multiplicity="1" />
+          <End Type="TreningModel.Slika" Role="Slika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestId" />
+            </Principal>
+            <Dependent Role="Slika">
+              <PropertyRef Name="TestTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -437,7 +485,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Test)">
         <MappingFragment StoreEntitySet="Test">
           <ScalarProperty Name="TestId" ColumnName="TestId" />
-          <ScalarProperty Name="Dijagnostika" ColumnName="Dijagnostika" />
           <ScalarProperty Name="DatumTesta" ColumnName="DatumTesta" />
           <ScalarProperty Name="Ergometar" ColumnName="Ergometar" />
           <ScalarProperty Name="Zgibovi" ColumnName="Zgibovi" />
@@ -445,7 +492,6 @@
           <ScalarProperty Name="Trbusnjaci" ColumnName="Trbusnjaci" />
           <ScalarProperty Name="Cucnjevi" ColumnName="Cucnjevi" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DijagnostikaType" ColumnName="DijagnostikaType" />
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -528,6 +574,15 @@
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="VrijemeIzdrzaja" ColumnName="VrijemeIzdrzaja" />
           <ScalarProperty Name="VrstaIstezanja" ColumnName="VrstaIstezanja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slika">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Slika)">
+        <MappingFragment StoreEntitySet="Slika">
+          <ScalarProperty Name="SlikaId" ColumnName="SlikaId" />
+          <ScalarProperty Name="TestTestId" ColumnName="TestTestId" />
+          <ScalarProperty Name="SlikaIme" ColumnName="SlikaIme" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/26/2014 17:07:29
--- Generated from EDMX file: C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\NoviTrening\TrainingPlanner\TrainingPlanner\TreningModel.edmx
+-- Date Created: 09/28/2014 14:46:57
+-- Generated from EDMX file: D:\TrainingPlanner\TrainingPlanner\TreningModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -31,6 +31,9 @@ IF OBJECT_ID(N'[dbo].[FK_TreningVjezba]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClanTest]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Test] DROP CONSTRAINT [FK_ClanTest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TestSlika]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Slika] DROP CONSTRAINT [FK_TestSlika];
 GO
 
 -- --------------------------------------------------
@@ -64,6 +67,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Istezanje]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Istezanje];
 GO
+IF OBJECT_ID(N'[dbo].[Slika]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Slika];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -87,7 +93,6 @@ GO
 -- Creating table 'Test'
 CREATE TABLE [dbo].[Test] (
     [TestId] int IDENTITY(1,1) NOT NULL,
-    [Dijagnostika] varbinary(max)  NULL,
     [DatumTesta] datetime  NOT NULL,
     [Ergometar] smallint  NOT NULL,
     [Zgibovi] smallint  NOT NULL,
@@ -95,7 +100,6 @@ CREATE TABLE [dbo].[Test] (
     [Trbusnjaci] smallint  NOT NULL,
     [Cucnjevi] smallint  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [DijagnostikaType] nvarchar(50)  NULL,
     [ClanId] int  NOT NULL
 );
 GO
@@ -174,6 +178,14 @@ CREATE TABLE [dbo].[Istezanje] (
 );
 GO
 
+-- Creating table 'Slika'
+CREATE TABLE [dbo].[Slika] (
+    [SlikaId] int IDENTITY(1,1) NOT NULL,
+    [TestTestId] int  NOT NULL,
+    [SlikaIme] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -230,6 +242,12 @@ GO
 ALTER TABLE [dbo].[Istezanje]
 ADD CONSTRAINT [PK_Istezanje]
     PRIMARY KEY CLUSTERED ([IstezanjeId] ASC);
+GO
+
+-- Creating primary key on [SlikaId] in table 'Slika'
+ALTER TABLE [dbo].[Slika]
+ADD CONSTRAINT [PK_Slika]
+    PRIMARY KEY CLUSTERED ([SlikaId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -304,6 +322,20 @@ ADD CONSTRAINT [FK_ClanTest]
 CREATE INDEX [IX_FK_ClanTest]
 ON [dbo].[Test]
     ([ClanId]);
+GO
+
+-- Creating foreign key on [TestTestId] in table 'Slika'
+ALTER TABLE [dbo].[Slika]
+ADD CONSTRAINT [FK_TestSlika]
+    FOREIGN KEY ([TestTestId])
+    REFERENCES [dbo].[Test]
+        ([TestId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TestSlika'
+CREATE INDEX [IX_FK_TestSlika]
+ON [dbo].[Slika]
+    ([TestTestId]);
 GO
 
 -- --------------------------------------------------
