@@ -136,6 +136,20 @@ namespace TrainingPlanner.Controllers
         public ActionResult IzbrisiVjezbu(int id = 0)
         {
             var vjp = _context.VjezbePopis.Find(id);
+
+            if (vjp.VjezbeSlike.Count > 0)
+            {
+                var query = from x in _context.VjezbePopis
+                            join i in _context.VjezbeSlike on x.VjezbeId equals i.VjezbePopisVjezbeId
+                            where x.VjezbeId == id
+                            select i;
+
+                foreach (var a in query.ToList())
+                {
+                    _context.VjezbeSlike.Remove(a);
+                }
+            }
+
             _context.VjezbePopis.Remove(vjp);
             _context.SaveChanges();
             return RedirectToAction("VjezbePopis", "Home");
@@ -155,8 +169,24 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult DodajNovuVjezbu(VjezbePopis vjp)
+        public ActionResult DodajNovuVjezbu(VjezbePopis vjp, HttpPostedFileBase[] slike)
         {
+            if (slike != null)
+            {
+                var path = Server.MapPath("~/Content/VjezbeSlike/");
+                foreach (var file in slike)
+                {
+                    var slika = new VjezbeSlike();
+                    file.SaveAs(path + file.FileName);
+
+                    slika.VjezbeSlikaIme = file.FileName;
+                    slika.VjezbePopisVjezbeId = vjp.VjezbeId;
+
+                    vjp.VjezbeSlike.Add(slika);
+                    _context.VjezbeSlike.Add(slika);
+                }
+            }
+
             _context.VjezbePopis.Add(vjp);
             _context.SaveChanges();
             return RedirectToAction("VjezbePopis", "Home");
@@ -170,8 +200,25 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult IzmijeniVjezbu(VjezbePopis vjp)
+        public ActionResult IzmijeniVjezbu(VjezbePopis vjp, HttpPostedFileBase[] slike)
         {
+            if (slike != null && slike.FirstOrDefault() != null)
+            {
+                var path = Server.MapPath("~/Content/VjezbeSlike/");
+
+                foreach (var file in slike)
+                {
+                    var slika = new VjezbeSlike();
+                    file.SaveAs(path + file.FileName);
+
+                    slika.VjezbeSlikaIme = file.FileName;
+                    slika.VjezbePopisVjezbeId = vjp.VjezbeId;
+
+                    vjp.VjezbeSlike.Add(slika);
+                    _context.VjezbeSlike.Add(slika);
+                }
+            }
+
             _context.Entry(vjp).State = EntityState.Modified;
             _context.SaveChanges();
             return RedirectToAction("VjezbePopis", "Home");
@@ -1091,6 +1138,20 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return View("IzmijeniZagrijavanje", t);
+        }
+
+        public ActionResult IzbrisiSlikuVjezbe(int id, int? slika)
+        {
+            var t = _context.VjezbePopis.Find(id);
+            var imageToDelete = _context.VjezbeSlike.Find(slika);
+
+            _context.VjezbeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.VjezbeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniVjezbu", t);
         }
     }
 

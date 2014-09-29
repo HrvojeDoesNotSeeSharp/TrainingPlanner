@@ -30,15 +30,20 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Info)
         </div>
-        @if(Model.Slika != null)
-        {
         <div class="display-label">
-             @Html.DisplayNameFor(model => model.Slika)
+            @Html.DisplayNameFor(model => model.VjezbeSlike)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.Slika)
+            @if (Model.VjezbeSlike.Count == 0)
+            {
+                @:None
+            } else {
+                foreach (var item in Model.VjezbeSlike)
+                {
+                <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
+                }
+            }   
         </div>
-        }
     </fieldset>
     <p>
         @Html.ActionLink("Izmijeni", "IzmijeniVjezbu", new { id=Model.VjezbeId}) |
