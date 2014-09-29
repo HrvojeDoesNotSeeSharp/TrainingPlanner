@@ -346,12 +346,19 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajClana(Clan c)
         {
-            var age = (short) ((DateTime.Now - c.GodinaRodenja).TotalDays/365.242199);
-            c.GodineStarosti = age;
-            _context.Clan.Add(c);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var age = (short) ((DateTime.Now - c.GodinaRodenja).TotalDays/365.242199);
+                c.GodineStarosti = age;
+                _context.Clan.Add(c);
+                _context.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("DodajClana");
+            }
         }
 
         public ActionResult IzbrisiClana(int id)

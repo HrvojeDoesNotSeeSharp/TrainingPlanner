@@ -6,32 +6,32 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Dodaj Clana</title>
+    <title>Novi član</title>
 </head>
 <body>
-
     <div id="clan">
         @using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
         {
             <table>
-            <tr>
-                <td>
-                    Ime:
-                </td>
-                <td>
-                   @Html.TextAreaFor(x=>x.Ime)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        Ime:
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(x=>x.Ime)
+                        @Html.ValidationMessageFor(m=>m.Ime)
+                    </td>
+                </tr>
             <tr>
                 <td>
                     Prezime:
                 </td>
                 <td>
                    @Html.TextAreaFor(x=>x.Prezime)
+                   @Html.ValidationMessageFor(m=>m.Prezime)
                 </td>
             </tr>
             <tr>
@@ -39,23 +39,26 @@
                     Visina:
                 </td>
                 <td>
-                   @Html.TextAreaFor(x=>x.Visina)
+                    @Html.TextAreaFor(x=>x.Visina)
+                    @Html.ValidationMessageFor(m=>m.Visina)
                 </td>
             </tr>
             <tr>
                 <td>
-                    Tezina:
+                    Težina:
                 </td>
                 <td>
-                   @Html.TextAreaFor(x=>x.Tezina)
+                    @Html.TextAreaFor(x=>x.Tezina)
+                    @Html.ValidationMessageFor(m=>m.Tezina)
                 </td>
             </tr>
             <tr>
                 <td>
-                    Godina Rodenja:
+                    Datum rođenja:
                 </td>
                 <td>
-                   @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput", @placeholder = "Please enter date" })
+                   @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput" })
+                   @Html.ValidationMessageFor(m=>m.GodinaRodenja)
                 </td>
             </tr>
                 <tr>
@@ -64,6 +67,7 @@
                 </td>
                 <td>
                    @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
+                   @Html.ValidationMessageFor(m=>m.Amneza)
                 </td>
             </tr>
                 <tr>
@@ -72,16 +76,16 @@
                 </td>
                 <td>
                    @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
+                   @Html.ValidationMessageFor(m=>m.Napomena)
                 </td>
             </tr>
-                
             </table>
             
-            <input type ="submit" name ="DodajClana" value="Dodaj Clana" />
+            <input type ="submit" name ="DodajClana" value="Dodaj člana" />
         }
     </div>
-   <div>
-    @Html.ActionLink("Natrag na Popis Clanova", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Natrag na popis članova", "Index")
+    </div>
 </body>
 </html>

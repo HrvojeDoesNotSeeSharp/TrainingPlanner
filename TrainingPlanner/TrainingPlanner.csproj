@@ -126,6 +126,7 @@
     <Compile Include="IstezanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClanMetadata.cs" />
     <Compile Include="Models\ClanTestModel.cs" />
     <Compile Include="Models\IstezanjeZagrijavanjeLista.cs" />
     <Compile Include="Models\TestList.cs" />
@@ -180,6 +181,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Grid.css" />
+    <Content Include="Content\JavaScripts\jquery-1.11.1.js" />
+    <Content Include="Content\JavaScripts\jquery.validate.js" />
+    <Content Include="Content\JavaScripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Vanjski.css" />
     <Content Include="Global.asax" />
     <Content Include="TreningModel.edmx.sql" />
