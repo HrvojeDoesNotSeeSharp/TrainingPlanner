@@ -127,7 +127,7 @@
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ZagrijavanjeNapomena" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>

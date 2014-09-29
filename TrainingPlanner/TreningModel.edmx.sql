@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/29/2014 16:49:24
--- Generated from EDMX file: D:\TrainingPlanner\TrainingPlanner\TreningModel.edmx
+-- Date Created: 09/29/2014 16:38:46
+-- Generated from EDMX file: C:\Users\hvukovic\Documents\Visual Studio 2012\Projects\NoviTrening\TrainingPlanner\TrainingPlanner\TreningModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -34,6 +34,15 @@ IF OBJECT_ID(N'[dbo].[FK_ClanTest]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_TestSlika]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Slika] DROP CONSTRAINT [FK_TestSlika];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZagrijavanjeSlikeZagrijavanjePopis]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZagrijavanjeSlike] DROP CONSTRAINT [FK_ZagrijavanjeSlikeZagrijavanjePopis];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VjezbeSlikeVjezbePopis]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VjezbeSlike] DROP CONSTRAINT [FK_VjezbeSlikeVjezbePopis];
+GO
+IF OBJECT_ID(N'[dbo].[FK_IstezanjeSlikeIstezanjePopis]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[IstezanjeSlike] DROP CONSTRAINT [FK_IstezanjeSlikeIstezanjePopis];
 GO
 
 -- --------------------------------------------------
@@ -69,6 +78,15 @@ IF OBJECT_ID(N'[dbo].[Istezanje]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Slika]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Slika];
+GO
+IF OBJECT_ID(N'[dbo].[ZagrijavanjeSlike]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ZagrijavanjeSlike];
+GO
+IF OBJECT_ID(N'[dbo].[VjezbeSlike]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VjezbeSlike];
+GO
+IF OBJECT_ID(N'[dbo].[IstezanjeSlike]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[IstezanjeSlike];
 GO
 
 -- --------------------------------------------------
@@ -149,7 +167,7 @@ CREATE TABLE [dbo].[Zagrijavanje] (
     [TreningId] int  NOT NULL,
     [Tempo] nvarchar(max)  NULL,
     [Puls] nvarchar(max)  NULL,
-    [Napomena] nvarchar(max)  NULL
+    [ZagrijavanjeNapomena] nvarchar(max)  NULL
 );
 GO
 

@@ -22,3 +22,15 @@ TrainingPlanner/obj/Debug/TrainingPlanner.dll
 *.dll
 *.dll
 *.pdb
+*.suo
+*.suo
+*.dll
+*.pdb
+*.cache
+*.csdl
+*.msl
+*.ssdl
+*.dll
+*.pdb
+*.dll
+*.sql

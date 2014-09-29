@@ -20,7 +20,7 @@ namespace TrainingPlanner
         public int TreningId { get; set; }
         public string Tempo { get; set; }
         public string Puls { get; set; }
-        public string Napomena { get; set; }
+        public string ZagrijavanjeNapomena { get; set; }
     
         public virtual Trening Trening { get; set; }
     }

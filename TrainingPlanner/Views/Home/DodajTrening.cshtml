@@ -65,7 +65,7 @@
                             <td>@zagrijavanje.Naziv</td>
                             <td>@Html.TextArea("Puls", zagrijavanje.Puls)</td>
                             <td>@Html.TextArea("Tempo", zagrijavanje.Tempo)</td>
-                            <td>@Html.TextArea("Napomena", zagrijavanje.Napomena)</td>
+                            <td>@Html.TextArea("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena)</td>
                             <td>@Html.ActionLink("Izbrisi", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, null)</td>
                             <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId  }, null)</td>
                             <td><input type ="submit" name ="SpremiZagrijavanjeInfo" value="Spremi" /></td>                                 
@@ -137,7 +137,7 @@
                             <td>@Html.TextArea("VrijemeIzdrzaja", istezanje.VrijemeIzdrzaja)</td>
                             <td>@Html.TextArea("VrstaIstezanja", istezanje.VrstaIstezanja)</td>
                             <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
+                            <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
                             <td><input type ="submit" name ="SpremiIstezanjeInfo" value="Spremi" /></td>                                 
                         </tr>
                             }

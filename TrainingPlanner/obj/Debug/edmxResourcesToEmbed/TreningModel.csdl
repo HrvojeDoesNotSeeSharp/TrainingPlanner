@@ -151,7 +151,7 @@
     <Property Type="Int32" Name="TreningId" Nullable="false" />
     <Property Type="String" Name="Tempo" Nullable="true" />
     <Property Type="String" Name="Puls" Nullable="true" />
-    <Property Type="String" Name="Napomena" Nullable="true" />
+    <Property Type="String" Name="ZagrijavanjeNapomena" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>

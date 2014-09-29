@@ -706,7 +706,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpGet]
-        public ActionResult IzmijeniTrening(int id = 0, int izmijeniTrening = 0)
+        public ActionResult IzmijeniTrening(int id = 0)
         {
             var query = from x in _context.Trening
                 join y in _context.Clan on x.ClanId equals y.ClanId
@@ -1162,8 +1162,8 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string napomena = null, int id = 0,
-            int ZagrijavanjeId = 0)
+        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string ZagrijavanjeNapomena = null, int id = 0,
+            int ZagrijavanjeId = 0, int izmijeni = 0)
         {
             var query = from x in _context.Zagrijavanje
                 where x.ZagrijavanjeId == ZagrijavanjeId
@@ -1172,17 +1172,19 @@ namespace TrainingPlanner.Controllers
             var zg = query.Single();
             zg.Tempo = tempo;
             zg.Puls = puls;
-            zg.Napomena = napomena;
+            zg.ZagrijavanjeNapomena = ZagrijavanjeNapomena;
 
             _context.Entry(zg).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
+            return izmijeni != 0
+               ? RedirectToAction("IzmijeniTrening", new { id })
+               : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpPost]
         public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string brojSerija = null, string tezina = null,
-            string odmor = null, int id = 0, int vjezbaId = 0)
+            string odmor = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
         {
             var query = from x in _context.Vjezba
                 where x.VjezbaId == vjezbaId
@@ -1197,12 +1199,14 @@ namespace TrainingPlanner.Controllers
             _context.Entry(vj).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
+            return izmijeni != 0
+               ? RedirectToAction("IzmijeniTrening", new { id })
+               : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpPost]
         public ActionResult SpremiIstezanjeInfo(string vrijemeIzdrzaja, string vrstaIstezanja = null, int id = 0,
-            int istezanjeId = 0)
+            int istezanjeId = 0, int izmijeni = 0)
         {
             var query = from x in _context.Istezanje
                 where x.IstezanjeId == istezanjeId
@@ -1215,7 +1219,9 @@ namespace TrainingPlanner.Controllers
             _context.Entry(ist).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
+            return izmijeni != 0
+               ? RedirectToAction("IzmijeniTrening", new { id })
+               : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         public ActionResult IzbrisiSliku(int id, int? slika)

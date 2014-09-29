@@ -132,7 +132,7 @@
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ZagrijavanjeNapomena" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>
@@ -454,7 +454,7 @@
           <Property Type="Int32" Name="TreningId" Nullable="false" />
           <Property Type="String" Name="Tempo" Nullable="true" />
           <Property Type="String" Name="Puls" Nullable="true" />
-          <Property Type="String" Name="Napomena" Nullable="true" />
+          <Property Type="String" Name="ZagrijavanjeNapomena" Nullable="true" />
         </EntityType>
         <EntityType Name="Vjezba">
           <Key>
@@ -702,7 +702,7 @@
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="Tempo" ColumnName="Tempo" />
           <ScalarProperty Name="Puls" ColumnName="Puls" />
-          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+          <ScalarProperty Name="ZagrijavanjeNapomena" ColumnName="ZagrijavanjeNapomena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
