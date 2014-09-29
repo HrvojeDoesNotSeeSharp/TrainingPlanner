@@ -30,6 +30,21 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Info)
         </div>
+        
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ZagrijavanjeSlike)
+        </div>
+        <div class="display-field">
+            @if (Model.ZagrijavanjeSlike.Count == 0)
+            {
+                @:None
+            } else {
+                foreach (var item in Model.ZagrijavanjeSlike)
+                {
+                <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
+                }
+            }   
+        </div>
     </fieldset>
     <p>
         @Html.ActionLink("Izmijeni", "IzmijeniZagrijavanje", new { id=Model.ZagrijavanjeId}) |

@@ -195,7 +195,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Content\IstezanjeSlike\" />
     <Folder Include="Content\Slike\" />
+    <Folder Include="Content\VjezbeSlike\" />
+    <Folder Include="Content\ZagrijavanjeSlike\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>

@@ -16,11 +16,19 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm("DodajNovoZagrijavanje", "Home", FormMethod.Post)) {
+    @using (Html.BeginForm("DodajNovoZagrijavanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
         @Html.ValidationSummary(true)
     
         <fieldset>
             <legend>ZagrijavanjePopis</legend>
+            
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ZagrijavanjeSlike)
+            </div>
+            <div class="editor-field">
+                <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
+            </div>
         
             <div class="editor-label">
                 @Html.LabelFor(model => model.Naziv)

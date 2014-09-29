@@ -16,13 +16,28 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("IzmijeniZagrijavanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
         @Html.ValidationSummary(true)
     
         <fieldset>
             <legend>ZagrijavanjePopis</legend>   
             
-                @Html.HiddenFor(model => model.ZagrijavanjeId)
+            @Html.HiddenFor(model => model.ZagrijavanjeId)
+            
+            <div class="editor-field">
+                @if (Model.ZagrijavanjeSlike.Count == 0)
+                {
+                    @:None
+                } else {
+                    foreach(var item in Model.ZagrijavanjeSlike)
+                    {
+                        <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
+                        <div>@Html.ActionLink("IzbrisiSliku", "IzbrisiSlikuZagrijavanje", "Home", new { id = Model.ZagrijavanjeId, slika = item.ZagrijavanjeSlikeId }, null)</div>
+                    }
+                }
+                <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
+            </div>
 
             <div class="editor-label">
                 @Html.LabelFor(model => model.Naziv)

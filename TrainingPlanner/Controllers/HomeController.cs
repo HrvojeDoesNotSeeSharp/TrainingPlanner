@@ -34,6 +34,19 @@ namespace TrainingPlanner.Controllers
         public ActionResult IzbrisiZagrijavanje(int id=0)
         {
             var zp = _context.ZagrijavanjePopis.Find(id);
+
+            if (zp.ZagrijavanjeSlike.Count > 0)
+            {
+                var query = from x in _context.ZagrijavanjePopis
+                            join i in _context.ZagrijavanjeSlike on x.ZagrijavanjeId equals i.ZagrijavanjePopisZagrijavanjeId
+                            where x.ZagrijavanjeId == id
+                            select i;
+
+                foreach (var a in query.ToList())
+                {
+                    _context.ZagrijavanjeSlike.Remove(a);
+                }
+            }
             _context.ZagrijavanjePopis.Remove(zp);
             _context.SaveChanges();
             return RedirectToAction("ZagrijavanjePopis", "Home");
@@ -53,13 +66,29 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult DodajNovoZagrijavanje(ZagrijavanjePopis zp)
+        public ActionResult DodajNovoZagrijavanje(ZagrijavanjePopis zp, HttpPostedFileBase[] slike)
         {
+            if (slike != null)
+            {
+                var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
+                foreach (var file in slike)
+                {
+                    var slika = new ZagrijavanjeSlike();
+                    file.SaveAs(path + file.FileName);
+
+                    slika.ZagrijavanjeSlikaIme = file.FileName;
+                    slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
+
+                    zp.ZagrijavanjeSlike.Add(slika);
+                    _context.ZagrijavanjeSlike.Add(slika);
+                }
+            }
+
             _context.ZagrijavanjePopis.Add(zp);
             _context.SaveChanges();
             return RedirectToAction("ZagrijavanjePopis", "Home");
         }
-
+        
         [HttpGet]
         public ActionResult IzmijeniZagrijavanje(int id = 0)
         {
@@ -68,8 +97,25 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult IzmijeniZagrijavanje(ZagrijavanjePopis zp)
+        public ActionResult IzmijeniZagrijavanje(ZagrijavanjePopis zp, HttpPostedFileBase[] slike)
         {
+            if (slike != null && slike.FirstOrDefault() != null)
+            {
+                var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
+                
+                    foreach (var file in slike)
+                    {
+                        var slika = new ZagrijavanjeSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.ZagrijavanjeSlikaIme = file.FileName;
+                        slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
+
+                        zp.ZagrijavanjeSlike.Add(slika);
+                        _context.ZagrijavanjeSlike.Add(slika);
+                    }
+            }
+
             _context.Entry(zp).State = EntityState.Modified;
             _context.SaveChanges();
             return RedirectToAction("ZagrijavanjePopis", "Home");
@@ -388,7 +434,7 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult IzmijeniTest(Test t, HttpPostedFileBase[] slike)
         {
-            if (slike != null)
+            if (slike != null && slike.FirstOrDefault() != null)
             {
                 var path = Server.MapPath("~/Content/Slike/");
                 foreach (var file in slike)
@@ -1031,6 +1077,20 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return View("IzmijeniTest", t);
+        }
+
+        public ActionResult IzbrisiSlikuZagrijavanje(int id, int? slika)
+        {
+            var t = _context.ZagrijavanjePopis.Find(id);
+            var imageToDelete = _context.ZagrijavanjeSlike.Find(slika);
+
+            _context.ZagrijavanjeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.ZagrijavanjeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniZagrijavanje", t);
         }
     }
 
