@@ -17,11 +17,11 @@ namespace TrainingPlanner.Models
         public System.DateTime GodinaRodenja { get; set; }
 
         [Required(ErrorMessage = "Unesite visinu")]
-        [Range(1, 999, ErrorMessage = "Unesite ispravan broj")]
+        [RegularExpression(@"^-*[0-9,\.]+$", ErrorMessage = "Unesite ispravan broj")]
         public string Visina { get; set; }
 
         [Required(ErrorMessage = "Unesite težinu")]
-        [Range(1, 999, ErrorMessage = "Unesite ispravan broj")]
+        [RegularExpression(@"^-*[0-9,\.]+$", ErrorMessage = "Unesite ispravan broj")]
         public string Tezina { get; set; }
 
         [StringLength(1000, ErrorMessage = "Maksimum 1000 znakova")]

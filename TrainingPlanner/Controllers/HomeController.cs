@@ -355,10 +355,7 @@ namespace TrainingPlanner.Controllers
 
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return RedirectToAction("DodajClana");
-            }
+            return RedirectToAction("DodajClana");
         }
 
         public ActionResult IzbrisiClana(int id)
@@ -435,12 +432,16 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult IzmijeniClana(Clan c)
         {
-            var age = (short) ((DateTime.Now - c.GodinaRodenja).TotalDays/365.242199);
-            c.GodineStarosti = age;
-            _context.Entry(c).State = EntityState.Modified;
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var age = (short) ((DateTime.Now - c.GodinaRodenja).TotalDays/365.242199);
+                c.GodineStarosti = age;
+                _context.Entry(c).State = EntityState.Modified;
+                _context.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("IzmijeniClana");
         }
 
         [HttpGet]
