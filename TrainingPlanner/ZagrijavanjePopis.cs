@@ -14,8 +14,15 @@ namespace TrainingPlanner
     
     public partial class ZagrijavanjePopis
     {
+        public ZagrijavanjePopis()
+        {
+            this.ZagrijavanjeSlike = new HashSet<ZagrijavanjeSlike>();
+        }
+    
         public int ZagrijavanjeId { get; set; }
         public string Naziv { get; set; }
         public string Info { get; set; }
+    
+        public virtual ICollection<ZagrijavanjeSlike> ZagrijavanjeSlike { get; set; }
     }
 }

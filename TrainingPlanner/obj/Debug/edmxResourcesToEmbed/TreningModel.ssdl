@@ -11,6 +11,9 @@
     <EntitySet Name="Vjezba" EntityType="TreningModel.Store.Vjezba" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Istezanje" EntityType="TreningModel.Store.Istezanje" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Slika" EntityType="TreningModel.Store.Slika" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ZagrijavanjeSlike" EntityType="TreningModel.Store.ZagrijavanjeSlike" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VjezbeSlike" EntityType="TreningModel.Store.VjezbeSlike" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IstezanjeSlike" EntityType="TreningModel.Store.IstezanjeSlike" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -34,6 +37,18 @@
     <AssociationSet Name="TestSlika" Association="TreningModel.Store.FK_TestSlika">
       <End Role="Test" EntitySet="Test" />
       <End Role="Slika" EntitySet="Slika" />
+    </AssociationSet>
+    <AssociationSet Name="ZagrijavanjeSlikeZagrijavanjePopis" Association="TreningModel.Store.ZagrijavanjeSlikeZagrijavanjePopis">
+      <End Role="ZagrijavanjeSlike" EntitySet="ZagrijavanjeSlike" />
+      <End Role="ZagrijavanjePopis" EntitySet="ZagrijavanjePopis" />
+    </AssociationSet>
+    <AssociationSet Name="VjezbeSlikeVjezbePopis" Association="TreningModel.Store.VjezbeSlikeVjezbePopis">
+      <End Role="VjezbeSlike" EntitySet="VjezbeSlike" />
+      <End Role="VjezbePopis" EntitySet="VjezbePopis" />
+    </AssociationSet>
+    <AssociationSet Name="IstezanjeSlikeIstezanjePopis" Association="TreningModel.Store.IstezanjeSlikeIstezanjePopis">
+      <End Role="IstezanjeSlike" EntitySet="IstezanjeSlike" />
+      <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
@@ -147,6 +162,30 @@
     <Property Name="TestTestId" Type="int" Nullable="false" />
     <Property Name="SlikaIme" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="ZagrijavanjeSlike">
+    <Key>
+      <PropertyRef Name="ZagrijavanjeSlikeId" />
+    </Key>
+    <Property Name="ZagrijavanjeSlikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="int" Nullable="false" />
+    <Property Name="ZagrijavanjeSlikaIme" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VjezbeSlike">
+    <Key>
+      <PropertyRef Name="VjezbeSlikeId" />
+    </Key>
+    <Property Name="VjezbeSlikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VjezbeSlikaIme" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VjezbePopisVjezbeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IstezanjeSlike">
+    <Key>
+      <PropertyRef Name="IstezanjeSlikeId" />
+    </Key>
+    <Property Name="IstezanjeSlikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IstezanjeSlikaIme" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IstezanjePopisIstezanjeId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
     <End Role="Trening" Type="TreningModel.Store.Trening" Multiplicity="*" />
@@ -216,6 +255,42 @@
       </Principal>
       <Dependent Role="Slika">
         <PropertyRef Name="TestTestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ZagrijavanjeSlikeZagrijavanjePopis">
+    <End Role="ZagrijavanjeSlike" Type="TreningModel.Store.ZagrijavanjeSlike" Multiplicity="*" />
+    <End Role="ZagrijavanjePopis" Type="TreningModel.Store.ZagrijavanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ZagrijavanjePopis">
+        <PropertyRef Name="ZagrijavanjeId" />
+      </Principal>
+      <Dependent Role="ZagrijavanjeSlike">
+        <PropertyRef Name="ZagrijavanjePopisZagrijavanjeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VjezbeSlikeVjezbePopis">
+    <End Role="VjezbeSlike" Type="TreningModel.Store.VjezbeSlike" Multiplicity="*" />
+    <End Role="VjezbePopis" Type="TreningModel.Store.VjezbePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="VjezbePopis">
+        <PropertyRef Name="VjezbeId" />
+      </Principal>
+      <Dependent Role="VjezbeSlike">
+        <PropertyRef Name="VjezbePopisVjezbeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IstezanjeSlikeIstezanjePopis">
+    <End Role="IstezanjeSlike" Type="TreningModel.Store.IstezanjeSlike" Multiplicity="*" />
+    <End Role="IstezanjePopis" Type="TreningModel.Store.IstezanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="IstezanjePopis">
+        <PropertyRef Name="IstezanjeId" />
+      </Principal>
+      <Dependent Role="IstezanjeSlike">
+        <PropertyRef Name="IstezanjePopisIstezanjeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

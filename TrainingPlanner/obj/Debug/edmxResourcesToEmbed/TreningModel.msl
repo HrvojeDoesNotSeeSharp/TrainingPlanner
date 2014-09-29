@@ -122,5 +122,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ZagrijavanjeSlike">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.ZagrijavanjeSlike)">
+        <MappingFragment StoreEntitySet="ZagrijavanjeSlike">
+          <ScalarProperty Name="ZagrijavanjeSlikeId" ColumnName="ZagrijavanjeSlikeId" />
+          <ScalarProperty Name="ZagrijavanjePopisZagrijavanjeId" ColumnName="ZagrijavanjePopisZagrijavanjeId" />
+          <ScalarProperty Name="ZagrijavanjeSlikaIme" ColumnName="ZagrijavanjeSlikaIme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VjezbeSlike">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.VjezbeSlike)">
+        <MappingFragment StoreEntitySet="VjezbeSlike">
+          <ScalarProperty Name="VjezbeSlikeId" ColumnName="VjezbeSlikeId" />
+          <ScalarProperty Name="VjezbeSlikaIme" ColumnName="VjezbeSlikaIme" />
+          <ScalarProperty Name="VjezbePopisVjezbeId" ColumnName="VjezbePopisVjezbeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IstezanjeSlike">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.IstezanjeSlike)">
+        <MappingFragment StoreEntitySet="IstezanjeSlike">
+          <ScalarProperty Name="IstezanjeSlikeId" ColumnName="IstezanjeSlikeId" />
+          <ScalarProperty Name="IstezanjeSlikaIme" ColumnName="IstezanjeSlikaIme" />
+          <ScalarProperty Name="IstezanjePopisIstezanjeId" ColumnName="IstezanjePopisIstezanjeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

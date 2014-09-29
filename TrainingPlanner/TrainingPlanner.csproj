@@ -123,6 +123,9 @@
     <Compile Include="IstezanjePopis.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IstezanjeSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClanTestModel.cs" />
     <Compile Include="Models\IstezanjeZagrijavanjeLista.cs" />
     <Compile Include="Models\TestList.cs" />
@@ -159,10 +162,16 @@
     <Compile Include="VjezbePopis.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="VjezbeSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Zagrijavanje.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZagrijavanjePopis.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZagrijavanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

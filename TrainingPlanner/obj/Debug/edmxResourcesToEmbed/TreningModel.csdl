@@ -35,6 +35,21 @@
       <End Role="Test" EntitySet="Test" />
       <End Role="Slika" EntitySet="Slika" />
     </AssociationSet>
+    <EntitySet Name="ZagrijavanjeSlike" EntityType="TreningModel.ZagrijavanjeSlike" />
+    <AssociationSet Name="ZagrijavanjeSlikeZagrijavanjePopis" Association="TreningModel.ZagrijavanjeSlikeZagrijavanjePopis">
+      <End Role="ZagrijavanjeSlike" EntitySet="ZagrijavanjeSlike" />
+      <End Role="ZagrijavanjePopis" EntitySet="ZagrijavanjePopis" />
+    </AssociationSet>
+    <EntitySet Name="VjezbeSlike" EntityType="TreningModel.VjezbeSlike" />
+    <AssociationSet Name="VjezbeSlikeVjezbePopis" Association="TreningModel.VjezbeSlikeVjezbePopis">
+      <End Role="VjezbeSlike" EntitySet="VjezbeSlike" />
+      <End Role="VjezbePopis" EntitySet="VjezbePopis" />
+    </AssociationSet>
+    <EntitySet Name="IstezanjeSlike" EntityType="TreningModel.IstezanjeSlike" />
+    <AssociationSet Name="IstezanjeSlikeIstezanjePopis" Association="TreningModel.IstezanjeSlikeIstezanjePopis">
+      <End Role="IstezanjeSlike" EntitySet="IstezanjeSlike" />
+      <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
     <Key>
@@ -104,6 +119,7 @@
     <Property Type="Int32" Name="IstezanjeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="IstezanjeSlike" Relationship="TreningModel.IstezanjeSlikeIstezanjePopis" FromRole="IstezanjePopis" ToRole="IstezanjeSlike" />
   </EntityType>
   <EntityType Name="VjezbePopis">
     <Key>
@@ -113,6 +129,7 @@
     <Property Type="String" Name="ImeVjezbe" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Type="Binary" Name="Slika" Nullable="true" FixedLength="false" MaxLength="Max" />
     <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="VjezbeSlike" Relationship="TreningModel.VjezbeSlikeVjezbePopis" FromRole="VjezbePopis" ToRole="VjezbeSlike" />
   </EntityType>
   <EntityType Name="ZagrijavanjePopis">
     <Key>
@@ -121,6 +138,7 @@
     <Property Type="Int32" Name="ZagrijavanjeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="ZagrijavanjeSlike" Relationship="TreningModel.ZagrijavanjeSlikeZagrijavanjePopis" FromRole="ZagrijavanjePopis" ToRole="ZagrijavanjeSlike" />
   </EntityType>
   <EntityType Name="Zagrijavanje">
     <Key>
@@ -228,6 +246,69 @@
       </Principal>
       <Dependent Role="Slika">
         <PropertyRef Name="TestTestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ZagrijavanjeSlike">
+    <Key>
+      <PropertyRef Name="ZagrijavanjeSlikeId" />
+    </Key>
+    <Property Type="Int32" Name="ZagrijavanjeSlikeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ZagrijavanjePopis" Relationship="TreningModel.ZagrijavanjeSlikeZagrijavanjePopis" FromRole="ZagrijavanjeSlike" ToRole="ZagrijavanjePopis" />
+    <Property Type="Int32" Name="ZagrijavanjePopisZagrijavanjeId" Nullable="false" />
+    <Property Type="String" Name="ZagrijavanjeSlikaIme" Nullable="false" />
+  </EntityType>
+  <Association Name="ZagrijavanjeSlikeZagrijavanjePopis">
+    <End Type="TreningModel.ZagrijavanjeSlike" Role="ZagrijavanjeSlike" Multiplicity="*" />
+    <End Type="TreningModel.ZagrijavanjePopis" Role="ZagrijavanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ZagrijavanjePopis">
+        <PropertyRef Name="ZagrijavanjeId" />
+      </Principal>
+      <Dependent Role="ZagrijavanjeSlike">
+        <PropertyRef Name="ZagrijavanjePopisZagrijavanjeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="VjezbeSlike">
+    <Key>
+      <PropertyRef Name="VjezbeSlikeId" />
+    </Key>
+    <Property Type="Int32" Name="VjezbeSlikeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="VjezbeSlikaIme" Nullable="false" />
+    <NavigationProperty Name="VjezbePopis" Relationship="TreningModel.VjezbeSlikeVjezbePopis" FromRole="VjezbeSlike" ToRole="VjezbePopis" />
+    <Property Type="Int32" Name="VjezbePopisVjezbeId" Nullable="false" />
+  </EntityType>
+  <Association Name="VjezbeSlikeVjezbePopis">
+    <End Type="TreningModel.VjezbeSlike" Role="VjezbeSlike" Multiplicity="*" />
+    <End Type="TreningModel.VjezbePopis" Role="VjezbePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="VjezbePopis">
+        <PropertyRef Name="VjezbeId" />
+      </Principal>
+      <Dependent Role="VjezbeSlike">
+        <PropertyRef Name="VjezbePopisVjezbeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="IstezanjeSlike">
+    <Key>
+      <PropertyRef Name="IstezanjeSlikeId" />
+    </Key>
+    <Property Type="Int32" Name="IstezanjeSlikeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="IstezanjeSlikaIme" Nullable="false" />
+    <NavigationProperty Name="IstezanjePopis" Relationship="TreningModel.IstezanjeSlikeIstezanjePopis" FromRole="IstezanjeSlike" ToRole="IstezanjePopis" />
+    <Property Type="Int32" Name="IstezanjePopisIstezanjeId" Nullable="false" />
+  </EntityType>
+  <Association Name="IstezanjeSlikeIstezanjePopis">
+    <End Type="TreningModel.IstezanjeSlike" Role="IstezanjeSlike" Multiplicity="*" />
+    <End Type="TreningModel.IstezanjePopis" Role="IstezanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="IstezanjePopis">
+        <PropertyRef Name="IstezanjeId" />
+      </Principal>
+      <Dependent Role="IstezanjeSlike">
+        <PropertyRef Name="IstezanjePopisIstezanjeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -14,9 +14,16 @@ namespace TrainingPlanner
     
     public partial class VjezbePopis
     {
+        public VjezbePopis()
+        {
+            this.VjezbeSlike = new HashSet<VjezbeSlike>();
+        }
+    
         public int VjezbeId { get; set; }
         public string ImeVjezbe { get; set; }
         public byte[] Slika { get; set; }
         public string Info { get; set; }
+    
+        public virtual ICollection<VjezbeSlike> VjezbeSlike { get; set; }
     }
 }

@@ -21,6 +21,12 @@
         <AssociationConnector Association="TreningModel.ClanTest" />
         <EntityTypeShape EntityType="TreningModel.Slika" Width="1.5" PointX="6.375" PointY="0.75" />
         <AssociationConnector Association="TreningModel.FK_TestSlika" />
+        <EntityTypeShape EntityType="TreningModel.ZagrijavanjeSlike" Width="1.5" PointX="0.5" PointY="11.5" />
+        <AssociationConnector Association="TreningModel.ZagrijavanjeSlikeZagrijavanjePopis" />
+        <EntityTypeShape EntityType="TreningModel.VjezbeSlike" Width="1.5" PointX="2.375" PointY="11.5" />
+        <AssociationConnector Association="TreningModel.VjezbeSlikeVjezbePopis" />
+        <EntityTypeShape EntityType="TreningModel.IstezanjeSlike" Width="1.5" PointX="4.25" PointY="11.5" />
+        <AssociationConnector Association="TreningModel.IstezanjeSlikeIstezanjePopis" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/28/2014 22:13:13
+-- Date Created: 09/29/2014 16:49:24
 -- Generated from EDMX file: D:\TrainingPlanner\TrainingPlanner\TreningModel.edmx
 -- --------------------------------------------------
 
@@ -186,6 +186,30 @@ CREATE TABLE [dbo].[Slika] (
 );
 GO
 
+-- Creating table 'ZagrijavanjeSlike'
+CREATE TABLE [dbo].[ZagrijavanjeSlike] (
+    [ZagrijavanjeSlikeId] int IDENTITY(1,1) NOT NULL,
+    [ZagrijavanjePopisZagrijavanjeId] int  NOT NULL,
+    [ZagrijavanjeSlikaIme] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'VjezbeSlike'
+CREATE TABLE [dbo].[VjezbeSlike] (
+    [VjezbeSlikeId] int IDENTITY(1,1) NOT NULL,
+    [VjezbeSlikaIme] nvarchar(max)  NOT NULL,
+    [VjezbePopisVjezbeId] int  NOT NULL
+);
+GO
+
+-- Creating table 'IstezanjeSlike'
+CREATE TABLE [dbo].[IstezanjeSlike] (
+    [IstezanjeSlikeId] int IDENTITY(1,1) NOT NULL,
+    [IstezanjeSlikaIme] nvarchar(max)  NOT NULL,
+    [IstezanjePopisIstezanjeId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -248,6 +272,24 @@ GO
 ALTER TABLE [dbo].[Slika]
 ADD CONSTRAINT [PK_Slika]
     PRIMARY KEY CLUSTERED ([SlikaId] ASC);
+GO
+
+-- Creating primary key on [ZagrijavanjeSlikeId] in table 'ZagrijavanjeSlike'
+ALTER TABLE [dbo].[ZagrijavanjeSlike]
+ADD CONSTRAINT [PK_ZagrijavanjeSlike]
+    PRIMARY KEY CLUSTERED ([ZagrijavanjeSlikeId] ASC);
+GO
+
+-- Creating primary key on [VjezbeSlikeId] in table 'VjezbeSlike'
+ALTER TABLE [dbo].[VjezbeSlike]
+ADD CONSTRAINT [PK_VjezbeSlike]
+    PRIMARY KEY CLUSTERED ([VjezbeSlikeId] ASC);
+GO
+
+-- Creating primary key on [IstezanjeSlikeId] in table 'IstezanjeSlike'
+ALTER TABLE [dbo].[IstezanjeSlike]
+ADD CONSTRAINT [PK_IstezanjeSlike]
+    PRIMARY KEY CLUSTERED ([IstezanjeSlikeId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -336,6 +378,48 @@ ADD CONSTRAINT [FK_TestSlika]
 CREATE INDEX [IX_FK_TestSlika]
 ON [dbo].[Slika]
     ([TestTestId]);
+GO
+
+-- Creating foreign key on [ZagrijavanjePopisZagrijavanjeId] in table 'ZagrijavanjeSlike'
+ALTER TABLE [dbo].[ZagrijavanjeSlike]
+ADD CONSTRAINT [FK_ZagrijavanjeSlikeZagrijavanjePopis]
+    FOREIGN KEY ([ZagrijavanjePopisZagrijavanjeId])
+    REFERENCES [dbo].[ZagrijavanjePopis]
+        ([ZagrijavanjeId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ZagrijavanjeSlikeZagrijavanjePopis'
+CREATE INDEX [IX_FK_ZagrijavanjeSlikeZagrijavanjePopis]
+ON [dbo].[ZagrijavanjeSlike]
+    ([ZagrijavanjePopisZagrijavanjeId]);
+GO
+
+-- Creating foreign key on [VjezbePopisVjezbeId] in table 'VjezbeSlike'
+ALTER TABLE [dbo].[VjezbeSlike]
+ADD CONSTRAINT [FK_VjezbeSlikeVjezbePopis]
+    FOREIGN KEY ([VjezbePopisVjezbeId])
+    REFERENCES [dbo].[VjezbePopis]
+        ([VjezbeId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VjezbeSlikeVjezbePopis'
+CREATE INDEX [IX_FK_VjezbeSlikeVjezbePopis]
+ON [dbo].[VjezbeSlike]
+    ([VjezbePopisVjezbeId]);
+GO
+
+-- Creating foreign key on [IstezanjePopisIstezanjeId] in table 'IstezanjeSlike'
+ALTER TABLE [dbo].[IstezanjeSlike]
+ADD CONSTRAINT [FK_IstezanjeSlikeIstezanjePopis]
+    FOREIGN KEY ([IstezanjePopisIstezanjeId])
+    REFERENCES [dbo].[IstezanjePopis]
+        ([IstezanjeId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_IstezanjeSlikeIstezanjePopis'
+CREATE INDEX [IX_FK_IstezanjeSlikeIstezanjePopis]
+ON [dbo].[IstezanjeSlike]
+    ([IstezanjePopisIstezanjeId]);
 GO
 
 -- --------------------------------------------------
