@@ -4,6 +4,7 @@ namespace TrainingPlanner.Models
 {
     public class TestMetadata
     {
+        //popraviti validaciju datuma
         [Required(ErrorMessage = "Unesite datum")]
         [DataType(DataType.Date, ErrorMessage = "Unesite ispravan datum")]
         public System.DateTime DatumTesta { get; set; }

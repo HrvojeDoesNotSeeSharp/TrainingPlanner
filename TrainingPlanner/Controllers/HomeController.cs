@@ -72,25 +72,29 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajNovoZagrijavanje(ZagrijavanjePopis zp, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new ZagrijavanjeSlike();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new ZagrijavanjeSlike();
+                        file.SaveAs(path + file.FileName);
 
-                    slika.ZagrijavanjeSlikaIme = file.FileName;
-                    slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
+                        slika.ZagrijavanjeSlikaIme = file.FileName;
+                        slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
 
-                    zp.ZagrijavanjeSlike.Add(slika);
-                    _context.ZagrijavanjeSlike.Add(slika);
+                        zp.ZagrijavanjeSlike.Add(slika);
+                        _context.ZagrijavanjeSlike.Add(slika);
+                    }
                 }
-            }
 
-            _context.ZagrijavanjePopis.Add(zp);
-            _context.SaveChanges();
-            return RedirectToAction("ZagrijavanjePopis", "Home");
+                _context.ZagrijavanjePopis.Add(zp);
+                _context.SaveChanges();
+                return RedirectToAction("ZagrijavanjePopis", "Home");
+            }
+            return RedirectToAction("DodajNovoZagrijavanje");
         }
 
         [HttpGet]
@@ -103,26 +107,30 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult IzmijeniZagrijavanje(ZagrijavanjePopis zp, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
-
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new ZagrijavanjeSlike();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
 
-                    slika.ZagrijavanjeSlikaIme = file.FileName;
-                    slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
+                    foreach (var file in slike)
+                    {
+                        var slika = new ZagrijavanjeSlike();
+                        file.SaveAs(path + file.FileName);
 
-                    zp.ZagrijavanjeSlike.Add(slika);
-                    _context.ZagrijavanjeSlike.Add(slika);
+                        slika.ZagrijavanjeSlikaIme = file.FileName;
+                        slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
+
+                        zp.ZagrijavanjeSlike.Add(slika);
+                        _context.ZagrijavanjeSlike.Add(slika);
+                    }
                 }
-            }
 
-            _context.Entry(zp).State = EntityState.Modified;
-            _context.SaveChanges();
-            return RedirectToAction("ZagrijavanjePopis", "Home");
+                _context.Entry(zp).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("ZagrijavanjePopis", "Home");
+            }
+            return RedirectToAction("IzmijeniZagrijavanje", zp);
         }
 
         [HttpGet]
@@ -178,25 +186,29 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajNovuVjezbu(VjezbePopis vjp, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/VjezbeSlike/");
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new VjezbeSlike();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new VjezbeSlike();
+                        file.SaveAs(path + file.FileName);
 
-                    slika.VjezbeSlikaIme = file.FileName;
-                    slika.VjezbePopisVjezbeId = vjp.VjezbeId;
+                        slika.VjezbeSlikaIme = file.FileName;
+                        slika.VjezbePopisVjezbeId = vjp.VjezbeId;
 
-                    vjp.VjezbeSlike.Add(slika);
-                    _context.VjezbeSlike.Add(slika);
+                        vjp.VjezbeSlike.Add(slika);
+                        _context.VjezbeSlike.Add(slika);
+                    }
                 }
-            }
 
-            _context.VjezbePopis.Add(vjp);
-            _context.SaveChanges();
-            return RedirectToAction("VjezbePopis", "Home");
+                _context.VjezbePopis.Add(vjp);
+                _context.SaveChanges();
+                return RedirectToAction("VjezbePopis", "Home");
+            }
+            return RedirectToAction("DodajNovuVjezbu", "Home");
         }
 
         [HttpGet]
@@ -209,26 +221,30 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult IzmijeniVjezbu(VjezbePopis vjp, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/VjezbeSlike/");
-
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new VjezbeSlike();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/VjezbeSlike/");
 
-                    slika.VjezbeSlikaIme = file.FileName;
-                    slika.VjezbePopisVjezbeId = vjp.VjezbeId;
+                    foreach (var file in slike)
+                    {
+                        var slika = new VjezbeSlike();
+                        file.SaveAs(path + file.FileName);
 
-                    vjp.VjezbeSlike.Add(slika);
-                    _context.VjezbeSlike.Add(slika);
+                        slika.VjezbeSlikaIme = file.FileName;
+                        slika.VjezbePopisVjezbeId = vjp.VjezbeId;
+
+                        vjp.VjezbeSlike.Add(slika);
+                        _context.VjezbeSlike.Add(slika);
+                    }
                 }
-            }
 
-            _context.Entry(vjp).State = EntityState.Modified;
-            _context.SaveChanges();
-            return RedirectToAction("VjezbePopis", "Home");
+                _context.Entry(vjp).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("VjezbePopis", "Home");
+            }
+            return RedirectToAction("IzmijeniVjezbu", "Home", vjp);
         }
 
         [HttpGet]
@@ -281,25 +297,29 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajNovoIstezanje(IstezanjePopis ip, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/IstezanjeSlike/");
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new IstezanjeSlike();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/IstezanjeSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new IstezanjeSlike();
+                        file.SaveAs(path + file.FileName);
 
-                    slika.IstezanjeSlikaIme = file.FileName;
-                    slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
+                        slika.IstezanjeSlikaIme = file.FileName;
+                        slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
 
-                    ip.IstezanjeSlike.Add(slika);
-                    _context.IstezanjeSlike.Add(slika);
+                        ip.IstezanjeSlike.Add(slika);
+                        _context.IstezanjeSlike.Add(slika);
+                    }
                 }
-            }
 
-            _context.IstezanjePopis.Add(ip);
-            _context.SaveChanges();
-            return RedirectToAction("IstezanjePopis", "Home");
+                _context.IstezanjePopis.Add(ip);
+                _context.SaveChanges();
+                return RedirectToAction("IstezanjePopis", "Home");
+            }
+            return RedirectToAction("DodajNovoIstezanje", "Home");
         }
 
         [HttpGet]
@@ -312,26 +332,30 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult IzmijeniIstezanje(IstezanjePopis ip, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/IstezanjeSlike/");
-
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new IstezanjeSlike();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/IstezanjeSlike/");
 
-                    slika.IstezanjeSlikaIme = file.FileName;
-                    slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
+                    foreach (var file in slike)
+                    {
+                        var slika = new IstezanjeSlike();
+                        file.SaveAs(path + file.FileName);
 
-                    ip.IstezanjeSlike.Add(slika);
-                    _context.IstezanjeSlike.Add(slika);
+                        slika.IstezanjeSlikaIme = file.FileName;
+                        slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
+
+                        ip.IstezanjeSlike.Add(slika);
+                        _context.IstezanjeSlike.Add(slika);
+                    }
                 }
-            }
 
-            _context.Entry(ip).State = EntityState.Modified;
-            _context.SaveChanges();
-            return RedirectToAction("IstezanjePopis", "Home");
+                _context.Entry(ip).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("IstezanjePopis", "Home");
+            }
+            return RedirectToAction("IzmijeniIstezanje", "Home", ip);
         }
 
         /****************Akcije sa clanovima i testovima****************/
@@ -441,7 +465,7 @@ namespace TrainingPlanner.Controllers
 
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("IzmijeniClana");
+            return RedirectToAction("IzmijeniClana", c);
         }
 
         [HttpGet]
@@ -491,25 +515,28 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajTest(Test t, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/Slike/");
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new Slika();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/Slike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new Slika();
+                        file.SaveAs(path + file.FileName);
 
-                    slika.SlikaIme = file.FileName;
-                    slika.TestTestId = t.TestId;
+                        slika.SlikaIme = file.FileName;
+                        slika.TestTestId = t.TestId;
 
-                    t.Slika.Add(slika);
-                    _context.Slika.Add(slika);
+                        t.Slika.Add(slika);
+                        _context.Slika.Add(slika);
+                    }
                 }
+                _context.Test.Add(t);
+                _context.SaveChanges();
+                return RedirectToAction("Test", new { id = t.ClanId });
             }
-            _context.Test.Add(t);
-            _context.SaveChanges();
-
-            return RedirectToAction("Test", new {id = t.ClanId});
+            return RedirectToAction("DodajTest");
         }
 
         public ActionResult IzbrisiTest(int id)
@@ -544,26 +571,30 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult IzmijeniTest(Test t, HttpPostedFileBase[] slike)
         {
-            if (slike != null && slike.FirstOrDefault() != null)
+            if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/Content/Slike/");
-                foreach (var file in slike)
+                if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var slika = new Slika();
-                    file.SaveAs(path + file.FileName);
+                    var path = Server.MapPath("~/Content/Slike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new Slika();
+                        file.SaveAs(path + file.FileName);
 
-                    slika.SlikaIme = file.FileName;
-                    slika.TestTestId = t.TestId;
+                        slika.SlikaIme = file.FileName;
+                        slika.TestTestId = t.TestId;
 
-                    t.Slika.Add(slika);
-                    _context.Slika.Add(slika);
+                        t.Slika.Add(slika);
+                        _context.Slika.Add(slika);
+                    }
                 }
+
+                _context.Entry(t).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return RedirectToAction("Test", new {id = t.ClanId});
             }
-
-            _context.Entry(t).State = EntityState.Modified;
-            _context.SaveChanges();
-
-            return RedirectToAction("Test", new {id = t.ClanId});
+            return RedirectToAction("IzmijeniTest", t);
         }
 
         public ActionResult DetaljiTest(int id)

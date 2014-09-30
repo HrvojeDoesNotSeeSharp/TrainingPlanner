@@ -24,7 +24,7 @@
             @Html.LabelFor(model => model.DatumTesta)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.DatumTesta, new { @Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date" })
+            @Html.TextBoxFor(model => model.DatumTesta, new { @Value=DateTime.Now.ToShortDateString(), @class = "dateInput" })
             @Html.ValidationMessageFor(model => model.DatumTesta)
         </div>
 
