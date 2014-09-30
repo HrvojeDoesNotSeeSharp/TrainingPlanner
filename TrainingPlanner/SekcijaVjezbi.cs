@@ -12,17 +12,18 @@ namespace TrainingPlanner
     using System;
     using System.Collections.Generic;
     
-    public partial class IstezanjePopis
+    public partial class SekcijaVjezbi
     {
-        public IstezanjePopis()
+        public SekcijaVjezbi()
         {
-            this.IstezanjeSlike = new HashSet<IstezanjeSlike>();
+            this.Vjezba = new HashSet<Vjezba>();
         }
     
-        public int IstezanjeId { get; set; }
-        public string Naziv { get; set; }
-        public string Info { get; set; }
+        public int SekcijaId { get; set; }
+        public int TreningId { get; set; }
+        public string BrojKrugova { get; set; }
     
-        public virtual ICollection<IstezanjeSlike> IstezanjeSlike { get; set; }
+        public virtual Trening Trening { get; set; }
+        public virtual ICollection<Vjezba> Vjezba { get; set; }
     }
 }

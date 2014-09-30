@@ -46,13 +46,6 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.TreningBrojKrugova)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TreningBrojKrugova)
-    </div>
-
-    <div class="display-label">
          @Html.DisplayNameFor(model => model.ListaZagrijavanja)
     </div>
     @if(Model.ListaZagrijavanja != null)
@@ -67,13 +60,14 @@
     }
     
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ListaVjezbi)
+         @Html.DisplayNameFor(model => model.SekcijaVjezbi)
     </div>
-    @if(Model.ListaVjezbi != null){
+    @if (Model.SekcijaVjezbi != null)
+    {
     <div class="display-field">
-        @foreach (Vjezba vj in Model.ListaVjezbi)
+        @foreach (SekcijaVjezbi sek in Model.SekcijaVjezbi)
         {
-            @vj.ImeVjezbe
+            @sek.SekcijaId
             <br />
         }   
     </div>

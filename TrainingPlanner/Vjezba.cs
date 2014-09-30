@@ -18,12 +18,12 @@ namespace TrainingPlanner
         public string ImeVjezbe { get; set; }
         public byte[] Slika { get; set; }
         public string Info { get; set; }
-        public int TreningId { get; set; }
         public string BrojPonavljanja { get; set; }
         public string BrojSerija { get; set; }
         public string Kilogrami { get; set; }
         public string Odmor { get; set; }
+        public int SekcijaId { get; set; }
     
-        public virtual Trening Trening { get; set; }
+        public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
     }
 }

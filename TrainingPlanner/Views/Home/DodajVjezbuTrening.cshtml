@@ -11,7 +11,7 @@
         
     @foreach (VjezbePopis vjp in Model.VjezbePopis)
     {
-        using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.TreningId}))
+        using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.SekcijaId }))
     {
         @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
         @Html.Hidden("vjpID", vjp.VjezbeId)
@@ -38,10 +38,10 @@
 <p>
     @if ((int)ViewData["izmijeni"] == 0)
     {
-        @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
+        @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]), DodajVjezbu = 1 }, null)
     }
     else
     {
-        @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
+        @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]) }, null)
     }
 </p>

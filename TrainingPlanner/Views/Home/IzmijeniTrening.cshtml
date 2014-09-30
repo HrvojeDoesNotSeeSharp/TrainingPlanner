@@ -30,7 +30,7 @@
 
     </div>
     <br />
-        <text> Broj krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova) </text>
+
     <input type ="submit" name ="IzmijeniTrening" value="Izmijeni Trening" />
 </div>
 }
@@ -38,6 +38,7 @@
 
 <div style="float:left; margin-left: 20px;">
     <div>
+        <!-- Zagrijavanje -->
         <h4>Zagrijavanje</h4>
         @if (Model.ListaZagrijavanja == null)
         {
@@ -72,18 +73,21 @@
         @Html.ActionLink("Dodaj Zagrijavanje", "DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1  }, null)
     </div>
     <br />
+    <!-- Vjezbe -->
     <div>
         <h4>Vjezbe</h4>
-        @if (Model.ListaVjezbi == null)
-        {
-            <div>Pocni sa dodavanjem vjezbi.</div>
-        }
-        else
-        {                    
+        @if (Model.SekcijaVjezbi == null)
+                { 
+                    <p>Pocni sa dodavanjem sekcija.</p>
+                }
+                else
+                {
+                foreach (var item in Model.SekcijaVjezbi)
+                {                  
             <table>
                 <thead><tr><th>Ime Vjezbe</th><th>Broj ponavljanja</th><th>Broj serija</th><th>Tezina</th><th>Odmor</th></tr></thead>
-                @foreach (var vjezba in Model.ListaVjezbi)
-                {
+                @foreach (var vjezba in item.Vjezba)
+                        {
                     using (Html.BeginForm("SpremiVjezbuInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
                     {  
                 <tr>
@@ -95,19 +99,31 @@
                     <td>@Html.TextArea("Tezina", vjezba.Kilogrami)</td>
                     <td>@Html.TextArea("Odmor", vjezba.Odmor)</td>
                     <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId, izmijeni = 1 }, null)</td>
-                    <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId, izmijeni = 1 }, null)</td>
-                    @*<td>@Html.ActionLink("Spremiiiiii", "SpremiVjezbuInfo", "Home", new { vjezba.BrojPonavljanja, vjezba.BrojSerija, vjezba.Kilogrami, vjezba.Odmor, Model.TreningId, idv = vjezba.VjezbaId }, null)</td>*@
+                    <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId,  id1 = Model.TreningId.ToString(), izmijeni = 1 }, null)</td>
+                   
                     <td><input type ="submit" name ="SpremiVjezbuInfo" value="Spremi" /></td>                                 
                 </tr>
                     }
                 }
-            </table>                   
-                
-                    
-        }
-                
+            </table>                                           
         <br />
-        @Html.ActionLink("Dodaj Vjezbu", "DodajVjezbuTrening", "Home", new { id = Model.TreningId, izmijeni = 1  }, null)
+        @Html.ActionLink("Dodaj Vjezbu", "DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1  }, null)
+            <br />
+                    using (Html.BeginForm("SpremiBrojKrugova", "Home", new { izmijeni = 1 }, FormMethod.Post))
+                    {
+                    @Html.Hidden("id", Model.TreningId)
+                    @Html.Hidden("sekcijaId", item.SekcijaId)
+                    @Html.Label("Broj Krugova:")
+                    <br />
+                    @Html.TextArea("BrojKrugova", item.BrojKrugova)
+                    <input type ="submit" name ="SpremiBrojKrugova" value="Spremi broj krugova" />
+                    }
+                           
+                    @Html.ActionLink("Izbrisi Sekciju vjezbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId, izmijeni = 1}, null)            
+                }
+                }                             
+                <br />
+                @Html.ActionLink("Dodaj Novu Sekciju vjezbi", "DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 }, null)
     </div>
     <br />
     <h4>Istezanje</h4>

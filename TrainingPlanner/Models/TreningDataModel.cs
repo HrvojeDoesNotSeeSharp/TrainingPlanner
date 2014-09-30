@@ -20,13 +20,12 @@ namespace TrainingPlanner.Models
         public string TreningImeTreninga { get; set; }
         public DateTime TreningDatum { get; set; }
         public string TreningTip { get; set; }
-        public short? TreningBrojKrugova { get; set; }
         
         /*Zagrijavanje tablica*/
         public List<Zagrijavanje> ListaZagrijavanja { get; set; }
 
-        /*Vjezbe tablica*/
-        public List<Vjezba> ListaVjezbi { get; set; }
+        /*Sekcija popisa vjezbi*/
+        public List<SekcijaVjezbi> SekcijaVjezbi { get; set; }
 
         /*Istezanje tablica*/
         public List<Istezanje> ListaIstezanja { get; set; }

@@ -137,6 +137,9 @@
     <Compile Include="Models\VjezbePopisMetadata.cs" />
     <Compile Include="Models\ZagrijavanjePopisMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SekcijaVjezbi.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Slika.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>

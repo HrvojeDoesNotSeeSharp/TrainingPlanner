@@ -38,5 +38,6 @@ namespace TrainingPlanner
         public DbSet<ZagrijavanjeSlike> ZagrijavanjeSlike { get; set; }
         public DbSet<VjezbeSlike> VjezbeSlike { get; set; }
         public DbSet<IstezanjeSlike> IstezanjeSlike { get; set; }
+        public DbSet<SekcijaVjezbi> SekcijaVjezbi { get; set; }
     }
 }
