@@ -1,0 +1,126 @@
+﻿#inputArea
+{
+    width: 20%;
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    background-color: #d6e5f4;
+    padding: 10px;
+}
+
+#inputAreaImages
+{
+    width: 70%;
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    background-color: #d6e5f4;
+    padding: 10px;
+}
+
+#inputArea input[type="text"], #inputArea textarea
+{
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+    padding: 4px;
+    border: solid 1px #85b1de; 
+    width: 300px;
+    background-color: #EDF2F7;
+}
+
+#inputArea input[type="text"]:focus, #inputArea textarea:focus
+{
+    background-image: none;
+    background-color: #ffffff;
+    border: solid 1px #33677F;
+}
+
+.bigFont{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:24px;
+	margin-top: 0px; margin-bottom: 0px;
+	text-align: center;
+    font-weight: normal;
+    color: #222;
+}
+
+.smallFont{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:20px;
+	margin-top: 0px; margin-bottom: 0px;
+	text-align: center;
+    font-weight: normal;
+    color: #222;
+}
+
+.marginHeadline {
+    margin-bottom: 25px;
+}
+
+.marginHeadlineTop {
+    margin-top: 25px;
+}
+
+.marginText {
+    margin-top: 18px;
+}
+
+.marginTextBottom {
+    margin-top: 18px;
+}
+
+.marginInputBottom {
+    margin-bottom: 4px;
+}
+
+.marginInputTop {
+    margin-top: 4px;
+}
+
+.marginLeft {
+    margin-left: 8px;
+}
+
+.button_example, .a, .a:visited, .a:active, .a:link{
+border:1px solid #CCCCCC;
+-webkit-box-shadow: #FEFFFF 0px 1px 1px ;
+-moz-box-shadow: #FEFFFF 0px 1px 1px ; 
+box-shadow: #FEFFFF 0px 1px 1px ; 
+-webkit-border-radius: 3px; 
+-moz-border-radius: 3px;
+border-radius: 3px;
+font-size:20px;
+font-family: Georgia, "Times New Roman", Times, serif; 
+padding: 10px 10px 10px 10px; 
+text-decoration:none; 
+display:inline-block;
+font-weight:normal; 
+color: #222;
+background-color: #E6E6E6; 
+background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#CCCCCC));
+background-image: -webkit-linear-gradient(top, #E6E6E6, #CCCCCC);
+background-image: -moz-linear-gradient(top, #E6E6E6, #CCCCCC);
+background-image: -ms-linear-gradient(top, #E6E6E6, #CCCCCC);
+background-image: -o-linear-gradient(top, #E6E6E6, #CCCCCC);
+background-image: linear-gradient(to bottom, #E6E6E6, #CCCCCC);
+filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E6E6E6, endColorstr=#CCCCCC);
+}
+
+.button_example:hover, .a:hover{
+ border:1px solid #ADADAD;
+ text-decoration:none; 
+ background-color: #cdcdcd; 
+ background-image: -webkit-gradient(linear, left top, left bottom, from(#cdcdcd), to(#b3b3b3));
+ background-image: -webkit-linear-gradient(top, #cdcdcd, #b3b3b3);
+ background-image: -moz-linear-gradient(top, #cdcdcd, #b3b3b3);
+ background-image: -ms-linear-gradient(top, #cdcdcd, #b3b3b3);
+ background-image: -o-linear-gradient(top, #cdcdcd, #b3b3b3);
+ background-image: linear-gradient(to bottom, #cdcdcd, #b3b3b3);
+ filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#cdcdcd, endColorstr=#b3b3b3);
+}
+
+a:link { text-decoration: none; color: #222;}
+a:active { text-decoration: none; color: #222;}
+a:visited { text-decoration: none; color: #222;}
+a:hover { text-decoration: none; color: #222;} 
+a:focus { outline: none; color: #222;}

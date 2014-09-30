@@ -7,48 +7,58 @@
 @using (Html.BeginForm("IzmijeniZagrijavanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
-    
-    <fieldset>
-        <legend>ZagrijavanjePopis</legend>   
+
+    <div id="inputArea" style="float: left;">
+        <p class="bigFont marginHeadline">Izmjeni zagrijavanje</p> 
             
         @Html.HiddenFor(model => model.ZagrijavanjeId)
-            
-        <div class="editor-field">
-            @if (Model.ZagrijavanjeSlike.Count == 0)
-            {
-                @:None
-            } else {
-                foreach(var item in Model.ZagrijavanjeSlike)
-                {
-                    <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
-                    <div>@Html.ActionLink("IzbrisiSliku", "IzbrisiSlikuZagrijavanje", "Home", new { id = Model.ZagrijavanjeId, slika = item.ZagrijavanjeSlikeId }, null)</div>
-                }
-            }
-            <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Naziv)
-        </div>
-        <div class="editor-field">
+        <div>
+            <div class="marginInputBottom">@Html.LabelFor(model => model.Naziv, new { @class="smallFont" })</div>
             @Html.EditorFor(model => model.Naziv)
             @Html.ValidationMessageFor(model => model.Naziv)
         </div>
     
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Info)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Info)
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.LabelFor(model => model.Info, new { @class="smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(model => model.Info, new {rows = "10", cols = "40"})
             @Html.ValidationMessageFor(model => model.Info)
+        </div> 
+        
+        @if (Model.ZagrijavanjeSlike.Count == 0){
+        <div class="marginText">
+            @Html.Label("Dodaj sliku", new { @class="smallFont" })
+            <div>
+                <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
+            </div>
         </div>
+        }
+        
+        <div class="marginHeadlineTop marginTextBottom">
+            <input type="submit" value="Spremi izmjene" class="button_example"/>
+        </div>
+        
+        <div class="marginHeadlineTop marginTextBottom button_example">
+            @Html.ActionLink("Natrag na Popis Zagrijavanja", "ZagrijavanjePopis")
+        </div>
+    </div>
     
-        <p>
-            <input type="submit" value="Spremi izmijene" />
-        </p>
-    </fieldset>
+    if (Model.ZagrijavanjeSlike.Count > 0){
+        <div id="inputAreaImages" style="float: left;">
+            <p class="bigFont marginHeadline">Slike</p> 
+            @foreach(var item in Model.ZagrijavanjeSlike)
+            {
+                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                    <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" /></div>
+                    <div class="marginLeft marginInputTop marginTextBottom button_example">@Html.ActionLink("Izbriši sliku", "IzbrisiSlikuZagrijavanje", "Home", new { id = Model.ZagrijavanjeId, slika = item.ZagrijavanjeSlikeId }, null)</div>
+                </div>    
+            }
+            <div class="marginText" style="clear: both;">
+                @Html.Label("Dodaj sliku", new { @class="smallFont" })
+                <div>
+                    <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
+                </div>
+            </div> 
+        </div>
+    }
 }
-    
-<div>
-    @Html.ActionLink("Natrag na Popis Zagrijavanja", "ZagrijavanjePopis")
-</div>

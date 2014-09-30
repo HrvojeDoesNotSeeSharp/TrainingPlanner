@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TrainingPlanner.Models
 {
@@ -7,7 +8,7 @@ namespace TrainingPlanner.Models
         //popraviti validaciju datuma
         [Required(ErrorMessage = "Unesite datum")]
         [DataType(DataType.Date, ErrorMessage = "Unesite ispravan datum")]
-        public System.DateTime DatumTesta { get; set; }
+        public DateTime DatumTesta { get; set; }
 
         [RegularExpression(@"^\s*-?[0-9]{1,5}\s*$", ErrorMessage = "Unesite ispravan broj")]
         public short Ergometar { get; set; }
@@ -25,7 +26,7 @@ namespace TrainingPlanner.Models
         public short Cucnjevi { get; set; }
 
         [Required(ErrorMessage = "Unesite ime")]
-        [StringLength(15, ErrorMessage = "Maksimum 15 znakova")]
+        [StringLength(50, ErrorMessage = "Maksimum 50 znakova")]
         public string Name { get; set; }
     }
 }
