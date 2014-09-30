@@ -3,63 +3,52 @@
 @{
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Izmijeni Istezanje</title>
-</head>
-<body>
     
-    @using (Html.BeginForm("IzmijeniIstezanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.ValidationSummary(true)
+@using (Html.BeginForm("IzmijeniIstezanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
     
-        <fieldset>
-            <legend>ZagrijavanjePopis</legend>   
+    <fieldset>
+        <legend>ZagrijavanjePopis</legend>   
             
-                @Html.HiddenFor(model => model.IstezanjeId)
+            @Html.HiddenFor(model => model.IstezanjeId)
             
-            <div class="editor-field">
-                @if (Model.IstezanjeSlike.Count == 0)
+        <div class="editor-field">
+            @if (Model.IstezanjeSlike.Count == 0)
+            {
+                @:None
+            } else {
+                foreach (var item in Model.IstezanjeSlike)
                 {
-                    @:None
-                } else {
-                    foreach (var item in Model.IstezanjeSlike)
-                    {
-                        <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" />
-                        <div>@Html.ActionLink("IzbrisiSliku", "IzbrisiSlikuIstezanje", "Home", new { id = Model.IstezanjeId, slika = item.IstezanjeSlikeId }, null)</div>
-                    }
+                    <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" />
+                    <div>@Html.ActionLink("IzbrisiSliku", "IzbrisiSlikuIstezanje", "Home", new { id = Model.IstezanjeId, slika = item.IstezanjeSlikeId }, null)</div>
                 }
-                <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
-            </div>
+            }
+            <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
+        </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Naziv)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Naziv)
-                @Html.ValidationMessageFor(model => model.Naziv)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Naziv)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Naziv)
+            @Html.ValidationMessageFor(model => model.Naziv)
+        </div>
     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Info)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Info)
-                @Html.ValidationMessageFor(model => model.Info)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Info)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Info)
+            @Html.ValidationMessageFor(model => model.Info)
+        </div>
     
-            <p>
-                <input type="submit" value="Spremi izmijene" />
-            </p>
-        </fieldset>
-    }
+        <p>
+            <input type="submit" value="Spremi izmijene" />
+        </p>
+    </fieldset>
+}
     
-    <div>
-        @Html.ActionLink("Natrag na Popis Istezanja", "IstezanjePopis")
-    </div>
-</body>
-</html>
+<div>
+    @Html.ActionLink("Natrag na Popis Istezanja", "IstezanjePopis")
+</div>

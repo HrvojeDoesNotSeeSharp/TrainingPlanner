@@ -35,7 +35,7 @@
             @Html.LabelFor(model => model.DatumTesta)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.DatumTesta, "{0:d}", new { @class = "dateInput", @placeholder = "Please enter date" })
+            @Html.TextBoxFor(model => model.DatumTesta, "{0:d}", new { @class = "dateInput" })
             @Html.ValidationMessageFor(model => model.DatumTesta)
         </div>
 

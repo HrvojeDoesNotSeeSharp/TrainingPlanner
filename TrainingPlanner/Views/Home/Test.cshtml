@@ -4,21 +4,17 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Test</title>
-</head>
-<body>
+<div>
+    <h1>@Model.Clan.Ime @Model.Clan.Prezime</h1>
+    Popis testova:
+    @if(Model.ListaTestova == null)
+    {
+        <div>Trenutno nema testova.</div>
+    }
+        
     <div>
-        <h1>@Model.Clan.Ime @Model.Clan.Prezime</h1>
-        Popis testova:
-
-        <div>
-            @if(Model.ListaTestova != null)
-            {
+        @if(Model.ListaTestova != null)
+        {
             foreach (var test in Model.ListaTestova)
             {
                 <table>                    
@@ -30,12 +26,10 @@
                     </tr>
                 </table>
             }
-            }
-        </div>
-        <br/>
-        @Html.ActionLink("Dodaj Test", "DodajTest", "Home", new {id = Model.Clan.ClanId }, null)
-        <br/>
-        @Html.ActionLink("Natrag na popis sportasa", "Index", "Home")
+        }
     </div>
-</body>
-</html>
+    <br/>
+    @Html.ActionLink("Dodaj Test", "DodajTest", "Home", new {id = Model.Clan.ClanId }, null)
+    <br/>
+    @Html.ActionLink("Natrag na popis sportasa", "Index", "Home")
+</div>
