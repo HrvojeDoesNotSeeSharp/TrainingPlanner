@@ -4,51 +4,41 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>DetaljiZagrijavanja</title>
-</head>
-<body>
-    <fieldset>
-        <legend>ZagrijavanjePopis</legend>
+<fieldset>
+    <legend>ZagrijavanjePopis</legend>
     
-             @Html.HiddenFor(model => model.ZagrijavanjeId)
+            @Html.HiddenFor(model => model.ZagrijavanjeId)
             
-        <div class="display-label">
-             @Html.DisplayNameFor(model => model.Naziv)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Naziv)
-        </div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Naziv)
+    </div>
     
-        <div class="display-label">
-             @Html.DisplayNameFor(model => model.Info)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Info)
-        </div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Info)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Info)
+    </div>
         
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.ZagrijavanjeSlike)
-        </div>
-        <div class="display-field">
-            @if (Model.ZagrijavanjeSlike.Count == 0)
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ZagrijavanjeSlike)
+    </div>
+    <div class="display-field">
+        @if (Model.ZagrijavanjeSlike.Count == 0)
+        {
+            @:None
+        } else {
+            foreach (var item in Model.ZagrijavanjeSlike)
             {
-                @:None
-            } else {
-                foreach (var item in Model.ZagrijavanjeSlike)
-                {
-                <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
-                }
-            }   
-        </div>
-    </fieldset>
-    <p>
-        @Html.ActionLink("Izmijeni", "IzmijeniZagrijavanje", new { id=Model.ZagrijavanjeId}) |
-        @Html.ActionLink("Natrag na popis zagrijavanja", "ZagrijavanjePopis")
-    </p>
-</body>
-</html>
+            <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
+            }
+        }   
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Izmijeni", "IzmijeniZagrijavanje", new { id=Model.ZagrijavanjeId}) |
+    @Html.ActionLink("Natrag na popis zagrijavanja", "ZagrijavanjePopis")
+</p>

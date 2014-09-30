@@ -4,151 +4,140 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
+<div style="float:left">
+@using (Html.BeginForm("DodajTrening", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.TreningId)
+            
+<div>
+    <h4>Ime i prezime</h4>
+    @Model.ClanIme @Model.ClanPrezime
+            
+</div>
+    <br />
+<div>
+    <h2>Trening</h2>
+            
+    Ime treninga: @Html.TextBoxFor(x => x.TreningImeTreninga)
+    <br />
+    <br />
+    Datum: @Html.TextBoxFor(x => x.TreningDatum, new {@Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date"})
+    <br />
+            
+    <div>
+        <h4>Napomena</h4>
+        @Html.TextAreaFor(x => x.Napomena, new { rows = "11", cols = "40" })
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>DodajTrening</title>
-</head>
-<body>
-    <div style="float:left">
-        @using (Html.BeginForm("DodajTrening", "Home", FormMethod.Post))
-        {
-            @Html.HiddenFor(x => x.TreningId)
-            
-        <div>
-            <h4>Ime i prezime</h4>
-            @Model.ClanIme @Model.ClanPrezime
-            
-        </div>
-            <br />
-        <div>
-            <h2>Trening</h2>
-            
-            Ime treninga: @Html.TextBoxFor(x => x.TreningImeTreninga)
-            <br />
-            <br />
-            Datum: @Html.TextBoxFor(x => x.TreningDatum, new {@Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date"})
-            <br />
-            
-            <div>
-                <h4>Napomena</h4>
-                @Html.TextAreaFor(x => x.Napomena, new { rows = "11", cols = "40" })
-
-            </div>
-            <br />
-                <text> Broj krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova) </text>
-            <input type ="submit" name ="DodajTrening" value="Dodaj Trening" />
-        </div>
-        }
     </div>
+    <br />
+        <text> Broj krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova) </text>
+    <input type ="submit" name ="DodajTrening" value="Dodaj Trening" />
+</div>
+}
+</div>
 
-    <div style="float:left; margin-left: 20px;">
-        <div>
-                <h4>Zagrijavanje</h4>
-                @if (Model.ListaZagrijavanja == null)
+<div style="float:left; margin-left: 20px;">
+<div>
+        <h4>Zagrijavanje</h4>
+        @if (Model.ListaZagrijavanja == null)
+        {
+            <div>Pocni sa dodavanjem zagrijavanja.</div>
+        }
+        else
+        {                    
+            <table>
+                <thead><tr><th>Ime Zagrijavanja</th><th>Puls</th><th>Tempo</th>><th>Napomena</th></tr></thead>
+                @foreach (var zagrijavanje in Model.ListaZagrijavanja)
                 {
-                    <div>Pocni sa dodavanjem zagrijavanja.</div>
+                    using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", FormMethod.Post))
+                    {  
+                <tr>
+                    @Html.Hidden("id", Model.TreningId)
+                    @Html.Hidden("ZagrijavanjeId", zagrijavanje.ZagrijavanjeId)
+                    <td>@zagrijavanje.Naziv</td>
+                    <td>@Html.TextArea("Puls", zagrijavanje.Puls)</td>
+                    <td>@Html.TextArea("Tempo", zagrijavanje.Tempo)</td>
+                    <td>@Html.TextArea("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena)</td>
+                    <td>@Html.ActionLink("Izbrisi", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, null)</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId  }, null)</td>
+                    <td><input type ="submit" name ="SpremiZagrijavanjeInfo" value="Spremi" /></td>                                 
+                </tr>
+                    }
                 }
-                else
-                {                    
-                    <table>
-                        <thead><tr><th>Ime Zagrijavanja</th><th>Puls</th><th>Tempo</th>><th>Napomena</th></tr></thead>
-                        @foreach (var zagrijavanje in Model.ListaZagrijavanja)
-                        {
-                            using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", FormMethod.Post))
-                            {  
-                        <tr>
-                            @Html.Hidden("id", Model.TreningId)
-                            @Html.Hidden("ZagrijavanjeId", zagrijavanje.ZagrijavanjeId)
-                            <td>@zagrijavanje.Naziv</td>
-                            <td>@Html.TextArea("Puls", zagrijavanje.Puls)</td>
-                            <td>@Html.TextArea("Tempo", zagrijavanje.Tempo)</td>
-                            <td>@Html.TextArea("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena)</td>
-                            <td>@Html.ActionLink("Izbrisi", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, null)</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId  }, null)</td>
-                            <td><input type ="submit" name ="SpremiZagrijavanjeInfo" value="Spremi" /></td>                                 
-                        </tr>
-                            }
-                        }
-                    </table>                   
+            </table>                   
                     
-                }
+        }
                 
-                <br />
-                @Html.ActionLink("Dodaj Zagrijavanje", "DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId }, null)
-            </div>
-            <br />
-            <div>
-                <h4>Vjezbe</h4>
-                @if (Model.ListaVjezbi == null)
+        <br />
+        @Html.ActionLink("Dodaj Zagrijavanje", "DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId }, null)
+    </div>
+    <br />
+    <div>
+        <h4>Vjezbe</h4>
+        @if (Model.ListaVjezbi == null)
+        {
+            <div>Pocni sa dodavanjem vjezbi.</div>
+        }
+        else
+        {                    
+            <table>
+                <thead><tr><th>Ime Vjezbe</th><th>Broj ponavljanja</th><th>Broj serija</th><th>Tezina</th><th>Odmor</th></tr></thead>
+                @foreach (var vjezba in Model.ListaVjezbi)
                 {
-                    <div>Pocni sa dodavanjem vjezbi.</div>
+                    using (Html.BeginForm("SpremiVjezbuInfo", "Home", FormMethod.Post))
+                    {  
+                <tr>
+                    @Html.Hidden("id", Model.TreningId)
+                    @Html.Hidden("VjezbaId", vjezba.VjezbaId)
+                    <td>@vjezba.ImeVjezbe</td>
+                    <td>@Html.TextArea("BrojPonavljanja", vjezba.BrojPonavljanja)</td>
+                    <td>@Html.TextArea("BrojSerija", vjezba.BrojSerija)</td>
+                    <td>@Html.TextArea("Tezina", vjezba.Kilogrami)</td>
+                    <td>@Html.TextArea("Odmor", vjezba.Odmor)</td>
+                    <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, null)</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId }, null)</td>
+                    @*<td>@Html.ActionLink("Spremiiiiii", "SpremiVjezbuInfo", "Home", new { vjezba.BrojPonavljanja, vjezba.BrojSerija, vjezba.Kilogrami, vjezba.Odmor, Model.TreningId, idv = vjezba.VjezbaId }, null)</td>*@
+                    <td><input type ="submit" name ="SpremiVjezbuInfo" value="Spremi" /></td>                                 
+                </tr>
+                    }
                 }
-                else
-                {                    
-                    <table>
-                        <thead><tr><th>Ime Vjezbe</th><th>Broj ponavljanja</th><th>Broj serija</th><th>Tezina</th><th>Odmor</th></tr></thead>
-                        @foreach (var vjezba in Model.ListaVjezbi)
-                        {
-                            using (Html.BeginForm("SpremiVjezbuInfo", "Home", FormMethod.Post))
-                            {  
-                        <tr>
-                            @Html.Hidden("id", Model.TreningId)
-                            @Html.Hidden("VjezbaId", vjezba.VjezbaId)
-                            <td>@vjezba.ImeVjezbe</td>
-                            <td>@Html.TextArea("BrojPonavljanja", vjezba.BrojPonavljanja)</td>
-                            <td>@Html.TextArea("BrojSerija", vjezba.BrojSerija)</td>
-                            <td>@Html.TextArea("Tezina", vjezba.Kilogrami)</td>
-                            <td>@Html.TextArea("Odmor", vjezba.Odmor)</td>
-                            <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, null)</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId }, null)</td>
-                            @*<td>@Html.ActionLink("Spremiiiiii", "SpremiVjezbuInfo", "Home", new { vjezba.BrojPonavljanja, vjezba.BrojSerija, vjezba.Kilogrami, vjezba.Odmor, Model.TreningId, idv = vjezba.VjezbaId }, null)</td>*@
-                            <td><input type ="submit" name ="SpremiVjezbuInfo" value="Spremi" /></td>                                 
-                        </tr>
-                            }
-                        }
-                    </table>                   
+            </table>                   
                     
-                }
+        }
                 
-                <br />
-                @Html.ActionLink("Dodaj Vjezbu", "DodajVjezbuTrening", "Home", new { id = Model.TreningId }, null)
-            </div>
-            <br />
-           <h4>Istezanje</h4>
-                @if (Model.ListaIstezanja == null)
+        <br />
+        @Html.ActionLink("Dodaj Vjezbu", "DodajVjezbuTrening", "Home", new { id = Model.TreningId }, null)
+    </div>
+    <br />
+    <h4>Istezanje</h4>
+        @if (Model.ListaIstezanja == null)
+        {
+            <div>Pocni sa dodavanjem istezanja.</div>
+        }
+        else
+        {                    
+            <table>
+                <thead><tr><th>Ime Istezanja</th><th>Vrijeme izdrzaja</th><th>Vrsta istezanja</th></tr></thead>
+                @foreach (var istezanje in Model.ListaIstezanja)
                 {
-                    <div>Pocni sa dodavanjem istezanja.</div>
+                    using (Html.BeginForm("SpremiIstezanjeInfo", "Home", FormMethod.Post))
+                    {  
+                <tr>
+                    @Html.Hidden("id", Model.TreningId)
+                    @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
+                    <td>@istezanje.Naziv</td>
+                    <td>@Html.TextArea("VrijemeIzdrzaja", istezanje.VrijemeIzdrzaja)</td>
+                    <td>@Html.TextArea("VrstaIstezanja", istezanje.VrstaIstezanja)</td>
+                    <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
+                    <td><input type ="submit" name ="SpremiIstezanjeInfo" value="Spremi" /></td>                                 
+                </tr>
+                    }
                 }
-                else
-                {                    
-                    <table>
-                        <thead><tr><th>Ime Istezanja</th><th>Vrijeme izdrzaja</th><th>Vrsta istezanja</th></tr></thead>
-                        @foreach (var istezanje in Model.ListaIstezanja)
-                        {
-                            using (Html.BeginForm("SpremiIstezanjeInfo", "Home", FormMethod.Post))
-                            {  
-                        <tr>
-                            @Html.Hidden("id", Model.TreningId)
-                            @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
-                            <td>@istezanje.Naziv</td>
-                            <td>@Html.TextArea("VrijemeIzdrzaja", istezanje.VrijemeIzdrzaja)</td>
-                            <td>@Html.TextArea("VrstaIstezanja", istezanje.VrstaIstezanja)</td>
-                            <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, null)</td>
-                            <td><input type ="submit" name ="SpremiIstezanjeInfo" value="Spremi" /></td>                                 
-                        </tr>
-                            }
-                        }
-                    </table>                   
+            </table>                   
                     
-                }
+        }
                 
-                <br />
-                @Html.ActionLink("Dodaj Istezanje", "DodajIstezanjeTrening", "Home", new { id = Model.TreningId }, null)
-            </div>
-
-</body>
-</html>
+        <br />
+        @Html.ActionLink("Dodaj Istezanje", "DodajIstezanjeTrening", "Home", new { id = Model.TreningId }, null)
+    </div>

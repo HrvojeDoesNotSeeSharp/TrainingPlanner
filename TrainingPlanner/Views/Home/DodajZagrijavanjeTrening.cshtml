@@ -5,54 +5,44 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Popis zagrijavanja za dodavanje</title>
-</head>
-<body>
-    <fieldset>
+<fieldset>
         
-        <legend>Popis zagrijavanja</legend>
+    <legend>Popis zagrijavanja</legend>
                    
-        @foreach (ZagrijavanjePopis zgp in Model.ZagrijavanjePopis)
-        {
-            using (Html.BeginForm("DodajZagrijavanjeTrening", "Home", FormMethod.Post, new { id = Model.TreningId}))
-        {
-            @Html.Hidden("zgpIzmijeni", Model.Izmijeni)
-            @Html.Hidden("zgpId", zgp.ZagrijavanjeId)
-        <div>
-            @Html.DisplayName(zgp.Naziv)
-            @Html.Display(zgp.Naziv)
+    @foreach (ZagrijavanjePopis zgp in Model.ZagrijavanjePopis)
+    {
+        using (Html.BeginForm("DodajZagrijavanjeTrening", "Home", FormMethod.Post, new { id = Model.TreningId}))
+    {
+        @Html.Hidden("zgpIzmijeni", Model.Izmijeni)
+        @Html.Hidden("zgpId", zgp.ZagrijavanjeId)
+    <div>
+        @Html.DisplayName(zgp.Naziv)
+        @Html.Display(zgp.Naziv)
             
-        </div>
+    </div>
             
-            if (zgp.Info != null)
-        {    
-        <div>
-            @Html.DisplayName(zgp.Info)
-            @Html.Display(zgp.Info)
-        </div>
+        if (zgp.Info != null)
+    {    
+    <div>
+        @Html.DisplayName(zgp.Info)
+        @Html.Display(zgp.Info)
+    </div>
             
-        }
-        <input type="submit" value="Dodaj Zagrijavanje" /> 
-           <br />
+    }
+    <input type="submit" value="Dodaj Zagrijavanje" /> 
+        <br />
             
-        }        
-        }
-    </fieldset>
-    <p>
-        @if ((int)ViewData["izmijeni"] == 0)
-        {
-            @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
-        }
-        else
-        {
-            @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
-        }
-    </p>
-</body>
-</html>
+    }        
+    }
+</fieldset>
+<p>
+    @if ((int)ViewData["izmijeni"] == 0)
+    {
+        @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
+    }
+    else
+    {
+        @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
+    }
+</p>
 

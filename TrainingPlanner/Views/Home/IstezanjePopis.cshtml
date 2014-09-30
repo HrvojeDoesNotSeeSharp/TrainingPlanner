@@ -5,41 +5,26 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>IstezanjePopis</title>
-    </head>
-
-    <body>
-
-    <div>
-         
-        <table>
-         
-        @foreach (IstezanjePopis ip in Model) {
-            if (ip.IstezanjeId == 0)
+<div>
+    <table>
+    @foreach (IstezanjePopis ip in Model) {
+        if (ip.IstezanjeId == 0)
         {
-           <tr>
-               <td>Trenutno nema vjezbi istezanja.</td>
-           </tr>
+            <tr>
+                <td>Trenutno nema vjezbi istezanja.</td>
+            </tr>
         }
         else
         {
-        <tr>
-        <td>@ip.Naziv</td> <td>@ip.Info</td> 
-        <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanje", "Home", new {id = ip.IstezanjeId}, null)</td> 
-        <td>@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new {id = ip.IstezanjeId}, null)</td>
-        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new {id = ip.IstezanjeId}, null)</td>
-        </tr>
+            <tr>
+                <td>@ip.Naziv</td> <td>@ip.Info</td> 
+                <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanje", "Home", new {id = ip.IstezanjeId}, null)</td> 
+                <td>@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new {id = ip.IstezanjeId}, null)</td>
+                <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new {id = ip.IstezanjeId}, null)</td>
+            </tr>
         }
-        }
-            </table>
-        @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home")     
-    </div>
-        @Html.ActionLink("Natrag na Popis Clanova", "Index", "Home")
-
-</body>
-</html>
+    }
+    </table>
+    @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home")     
+</div>
+    @Html.ActionLink("Natrag na Popis Clanova", "Index", "Home")

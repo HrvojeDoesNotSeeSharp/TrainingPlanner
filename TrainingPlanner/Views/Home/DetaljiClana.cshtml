@@ -6,99 +6,89 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>DetaljiClana</title>
-</head>
-<body>
-    <div>
-        <table>
+<div>
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(x=>x.Clan.Ime)
+            </td>
+            <td>
+                @Model.Clan.Ime
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(x=>x.Clan.Prezime)
+            </td>
+            <td>
+                @Model.Clan.Prezime
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(x=>x.Clan.Visina)
+            </td>
+            <td>
+                @Model.Clan.Visina
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(x=>x.Clan.Tezina)
+            </td>
+            <td>
+                @Model.Clan.Tezina
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(x => x.Clan.GodinaRodenja)
+            </td>
+            <td>
+                @Model.Clan.GodinaRodenja.ToShortDateString()
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(x => x.Clan.GodineStarosti)
+            </td>
+            <td>
+                @Model.Clan.GodineStarosti
+            </td>
+        </tr>
             <tr>
-                <td>
-                   @Html.LabelFor(x=>x.Clan.Ime)
-                </td>
-                <td>
-                   @Model.Clan.Ime
-                </td>
-            </tr>
+            <td>
+                @Html.LabelFor(x => x.Clan.Amneza)
+            </td>
+            <td>
+                @Model.Clan.Amneza
+            </td>
+        </tr>
             <tr>
-                <td>
-                    @Html.LabelFor(x=>x.Clan.Prezime)
-                </td>
-                <td>
-                   @Model.Clan.Prezime
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(x=>x.Clan.Visina)
-                </td>
-                <td>
-                   @Model.Clan.Visina
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(x=>x.Clan.Tezina)
-                </td>
-                <td>
-                   @Model.Clan.Tezina
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(x => x.Clan.GodinaRodenja)
-                </td>
-                <td>
-                   @Model.Clan.GodinaRodenja.ToShortDateString()
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(x => x.Clan.GodineStarosti)
-                </td>
-                <td>
-                   @Model.Clan.GodineStarosti
-                </td>
-            </tr>
+            <td>
+                @Html.LabelFor(x => x.Clan.Napomena)
+            </td>
+            <td>
+                @Model.Clan.Napomena
+            </td>
+        </tr>
+            @if(Model.ListaTest != null)
+            {
+        <tr>
+            <td>
+                Popis Testova:
+            </td>
+        </tr>
                 <tr>
-                <td>
-                    @Html.LabelFor(x => x.Clan.Amneza)
-                </td>
-                <td>
-                   @Model.Clan.Amneza
-                </td>
-            </tr>
-                <tr>
-                <td>
-                    @Html.LabelFor(x => x.Clan.Napomena)
-                </td>
-                <td>
-                   @Model.Clan.Napomena
-                </td>
-            </tr>
-             @if(Model.ListaTest != null)
-             {
-            <tr>
-                <td>
-                    Popis Testova:
-                </td>
-            </tr>
-                 <tr>
-                 @foreach (Test t in Model.ListaTest)
-                 {
-                     <td>
-                         @Html.ActionLink(@t.Name , "DetaljiTest", new { id = @t.TestId})
-                     </td>
-                 }
-                 </tr>
+                @foreach (Test t in Model.ListaTest)
+                {
+                    <td>
+                        @Html.ActionLink(@t.Name , "DetaljiTest", new { id = @t.TestId})
+                    </td>
+                }
+                </tr>
             
-             }
-            </table>
-        @Html.ActionLink("Povratak na popis clanova", "Index")
-    </div>
-</body>
-</html>
+            }
+        </table>
+    @Html.ActionLink("Povratak na popis clanova", "Index")
+</div>

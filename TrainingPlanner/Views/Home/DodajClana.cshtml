@@ -5,87 +5,78 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Novi član</title>
-</head>
-<body>
-    <div id="clan">
-        @using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
-        {
-            <table>
-                <tr>
-                    <td>
-                        Ime:
-                    </td>
-                    <td>
-                        @Html.TextAreaFor(x=>x.Ime)
-                        @Html.ValidationMessageFor(m=>m.Ime)
-                    </td>
-                </tr>
+<div id="clan">
+    @using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
+    {
+        <table>
             <tr>
                 <td>
-                    Prezime:
+                    Ime:
                 </td>
                 <td>
-                   @Html.TextAreaFor(x=>x.Prezime)
-                   @Html.ValidationMessageFor(m=>m.Prezime)
+                    @Html.TextAreaFor(x=>x.Ime)
+                    @Html.ValidationMessageFor(m=>m.Ime)
                 </td>
             </tr>
+        <tr>
+            <td>
+                Prezime:
+            </td>
+            <td>
+                @Html.TextAreaFor(x=>x.Prezime)
+                @Html.ValidationMessageFor(m=>m.Prezime)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Visina:
+            </td>
+            <td>
+                @Html.TextAreaFor(x=>x.Visina)
+                @Html.ValidationMessageFor(m=>m.Visina)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Težina:
+            </td>
+            <td>
+                @Html.TextAreaFor(x=>x.Tezina)
+                @Html.ValidationMessageFor(m=>m.Tezina)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Datum rođenja:
+            </td>
+            <td>
+                @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput" })
+                @Html.ValidationMessageFor(m=>m.GodinaRodenja)
+            </td>
+        </tr>
             <tr>
-                <td>
-                    Visina:
-                </td>
-                <td>
-                    @Html.TextAreaFor(x=>x.Visina)
-                    @Html.ValidationMessageFor(m=>m.Visina)
-                </td>
-            </tr>
+            <td>
+                Amneza:
+            </td>
+            <td>
+                @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
+                @Html.ValidationMessageFor(m=>m.Amneza)
+            </td>
+        </tr>
             <tr>
-                <td>
-                    Težina:
-                </td>
-                <td>
-                    @Html.TextAreaFor(x=>x.Tezina)
-                    @Html.ValidationMessageFor(m=>m.Tezina)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Datum rođenja:
-                </td>
-                <td>
-                   @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput" })
-                   @Html.ValidationMessageFor(m=>m.GodinaRodenja)
-                </td>
-            </tr>
-                <tr>
-                <td>
-                    Amneza:
-                </td>
-                <td>
-                   @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
-                   @Html.ValidationMessageFor(m=>m.Amneza)
-                </td>
-            </tr>
-                <tr>
-                <td>
-                    Napomena:
-                </td>
-                <td>
-                   @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
-                   @Html.ValidationMessageFor(m=>m.Napomena)
-                </td>
-            </tr>
-            </table>
+            <td>
+                Napomena:
+            </td>
+            <td>
+                @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(m=>m.Napomena)
+            </td>
+        </tr>
+        </table>
             
-            <input type ="submit" name ="DodajClana" value="Dodaj člana" />
-        }
-    </div>
-    <div>
-        @Html.ActionLink("Natrag na popis članova", "Index")
-    </div>
-</body>
-</html>
+        <input type ="submit" name ="DodajClana" value="Dodaj člana" />
+    }
+</div>
+<div>
+    @Html.ActionLink("Natrag na popis članova", "Index")
+</div>
