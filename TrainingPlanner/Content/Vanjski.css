@@ -19,7 +19,7 @@ tr:nth-child(even) {
     background-color:#D8D8D8;
 }
 
-a:link.buttonlinkvjezba{
+/*a:link.buttonlinkvjezba{
     background: url(../Content/Images/UteziPhotoshopedgray.jpg) no-repeat;
     display: block;
     width: 300px;
@@ -61,7 +61,7 @@ a:link.buttonlinkistezanje:hover {
     background: url(../Content/Images/balunphotoshoped1.jpg) no-repeat;
 }
 
-/* This button was generated using CSSButtonGenerator.com */
+/* This button was generated using CSSButtonGenerator.com *//*
 a:link {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -111,9 +111,9 @@ a:visited {
 	position:relative;
 	top:1px;
     border:1px solid #dcdcdc;
-}
+}*/
 
-div.ui-btn, input[type="submit"] {
+/*div.ui-btn, input[type="submit"] {
  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -147,4 +147,4 @@ div.ui-btn, input[type="submit"] {
 	text-shadow:1px 1px 0px #ffffff;
     margin:7px;
     padding: 7px;
-}
+}*/

@@ -6,57 +6,62 @@
     
 @using (Html.BeginForm("IzmijeniVjezbu", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.ValidationSummary(true)
     
-    <fieldset>
-        <legend>ZagrijavanjePopis</legend>   
-            
-            @Html.HiddenFor(model => model.VjezbeId)
-            
-        <div class="editor-field">
-            @if (Model.VjezbeSlike.Count == 0)
-            {
-                @:None
-            } else {
-                foreach(var item in Model.VjezbeSlike)
-                {
-                    <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
-                    <div>@Html.ActionLink("IzbrisiSliku", "IzbrisiSlikuVjezbe", "Home", new { id = Model.VjezbeId, slika = item.VjezbeSlikeId }, null)</div>
-                }
-            }
-            <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
-        </div>
+    @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImeVjezbe)
-        </div>
-        <div class="editor-field">
+    <div id="inputArea" style="float: left;">
+        <p class="bigFont marginHeadline">Izmjeni vježbu</p> 
+            
+        @Html.HiddenFor(model => model.VjezbeId)
+
+        <div>
+            <div class="marginInputBottom">@Html.LabelFor(model => model.ImeVjezbe, new { @class="smallFont" })</div>
             @Html.EditorFor(model => model.ImeVjezbe)
             @Html.ValidationMessageFor(model => model.ImeVjezbe)
         </div>
     
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Info)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Info)
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.LabelFor(model => model.Info, new { @class="smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(model => model.Info, new {rows = "10", cols = "40"})
             @Html.ValidationMessageFor(model => model.Info)
+        </div> 
+        
+        @if (Model.VjezbeSlike.Count == 0)
+        {
+        <div class="marginText">
+            @Html.Label("Dodaj sliku", new { @class="smallFont" })
+            <div>
+                <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
+            </div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Slika)
+        }
+        
+        <div class="marginHeadlineTop marginTextBottom">
+            <input type="submit" value="Spremi izmjene" class="button_example"/>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Slika)
-            @Html.ValidationMessageFor(model => model.Slika)
+        
+        <div class="marginHeadlineTop marginTextBottom button_example">
+            @Html.ActionLink("Natrag na Popis Vjezbi", "VjezbePopis")
         </div>
+    </div>
     
-        <p>
-            <input type="submit" value="Spremi izmijene" />
-        </p>
-    </fieldset>
+    if (Model.VjezbeSlike.Count > 0)
+    {
+        <div id="inputAreaImages" style="float: left;">
+            <p class="bigFont marginHeadline">Slike</p> 
+            @foreach (var item in Model.VjezbeSlike)
+            {
+                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                    <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" /></div>
+                    <div class="marginLeft marginInputTop marginTextBottom button_example">@Html.ActionLink("Izbriši sliku", "IzbrisiSlikuVjezbe", "Home", new { id = Model.VjezbeId, slika = item.VjezbeSlikeId }, null)</div>
+                </div>    
+            }
+            <div class="marginText" style="clear: both;">
+                @Html.Label("Dodaj sliku", new { @class="smallFont" })
+                <div>
+                    <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
+                </div>
+            </div> 
+        </div>
+    }
 }
-    
-<div>
-    @Html.ActionLink("Natrag na Popis Vjezbi", "VjezbePopis")
-</div>

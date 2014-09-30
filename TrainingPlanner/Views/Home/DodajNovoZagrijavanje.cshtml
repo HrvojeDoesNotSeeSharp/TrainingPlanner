@@ -8,38 +8,34 @@
 {
     @Html.ValidationSummary(true)
     
-    <fieldset>
-        <legend>ZagrijavanjePopis</legend>
-            
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ZagrijavanjeSlike)
-        </div>
-        <div class="editor-field">
-            <div>Dodaj sliku: <input type="file" name ="slike" value="" multiple="multiple"/></div>
-        </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Naziv)
-        </div>
-        <div class="editor-field">
+    <div id="inputArea">
+        <p class="bigFont marginHeadline">Novo zagrijavanje</p>
+
+        <div>
+            <div class="marginInputBottom">@Html.LabelFor(model => model.Naziv, new { @class="smallFont" })</div>
             @Html.EditorFor(model => model.Naziv)
             @Html.ValidationMessageFor(model => model.Naziv)
         </div>
-    
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Info)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Info)
+     
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.LabelFor(model => model.Info, new { @class="smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(model => model.Info, new {rows = "10", cols = "40"})
             @Html.ValidationMessageFor(model => model.Info)
+        </div>  
+        
+        <div class="marginText">
+            @Html.Label("Dodaj sliku", new { @class="smallFont" })
+            <div>
+                <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
+            </div>
+        </div> 
+   
+        <div class="marginHeadlineTop marginTextBottom">
+            <input type="submit" value="Dodaj zagrijavanje" class="button_example"/>
         </div>
-    
-        <p>
-            <input type="submit" value="Dodaj zagrijavanje" />
-        </p>
-    </fieldset>
+        
+        <div class="marginHeadlineTop marginTextBottom button_example">
+            @Html.ActionLink("Natrag na listu zagrijavanja", "ZagrijavanjePopis")
+        </div>
+    </div>
 }
-    
-<div>
-    @Html.ActionLink("Natrag na listu zagrijavanja", "ZagrijavanjePopis")
-</div>
