@@ -38,7 +38,7 @@
 
             </div>
             <br />
-                <text> Broj krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova) </text>
+                <!--<text> Broj krugova: @*Html.TextAreaFor(x => x.TreningBrojKrugova)*@ </text> -->
             <input type ="submit" name ="DodajTrening" value="Dodaj Trening" />
         </div>
         }
@@ -54,7 +54,7 @@
                 else
                 {                    
                     <table>
-                        <thead><tr><th>Ime Zagrijavanja</th><th>Puls</th><th>Tempo</th>><th>Napomena</th></tr></thead>
+                        <thead><tr><th>Ime Zagrijavanja</th><th>Puls</th><th>Tempo</th>><th>Napomena</th><td>Broj Krugova: @Html.TextAreaFor(x => x.TreningBrojKrugova)</td></tr></thead>
                         @foreach (var zagrijavanje in Model.ListaZagrijavanja)
                         {
                             using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", FormMethod.Post))
