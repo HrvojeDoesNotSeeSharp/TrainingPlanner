@@ -5,26 +5,32 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div>
-    <table>
-    @foreach (IstezanjePopis ip in Model) {
-        if (ip.IstezanjeId == 0)
-        {
-            <tr>
-                <td>Trenutno nema vjezbi istezanja.</td>
-            </tr>
+<div id="inputAreaTable">
+    <div class="bigFont marginHeadline">Istezanje</div>
+    <table class="responstable">
+        
+        @foreach (IstezanjePopis ip in Model) {
+            if (ip.IstezanjeId == 0)
+            {
+                <tr>
+                    <td class="smallFont">Trenutno nema vježbi istezanja.</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="smallFont">
+                    <td>@ip.Naziv</td> <td>@ip.Info</td> 
+                    <td><div class="button_example_small">@Html.ActionLink("Izbriši", "IzbrisiIstezanje", "Home", new {id = ip.IstezanjeId}, null)</div></td> 
+                    <td><div class="button_example_small">@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new {id = ip.IstezanjeId}, null)</div></td>
+                    <td><div class="button_example_small">@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new {id = ip.IstezanjeId}, null)</div></td>
+                </tr>
+            }
         }
-        else
-        {
-            <tr>
-                <td>@ip.Naziv</td> <td>@ip.Info</td> 
-                <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanje", "Home", new {id = ip.IstezanjeId}, null)</td> 
-                <td>@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new {id = ip.IstezanjeId}, null)</td>
-                <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new {id = ip.IstezanjeId}, null)</td>
-            </tr>
-        }
-    }
     </table>
-    @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home")     
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home")    
+    </div>
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Natrag na popis članova", "Index", "Home")
+    </div>
 </div>
-    @Html.ActionLink("Natrag na Popis Clanova", "Index", "Home")
