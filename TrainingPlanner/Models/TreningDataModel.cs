@@ -4,6 +4,10 @@ using System.Web.Mvc;
 
 namespace TrainingPlanner.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using TrainingPlanner.Models;
+
+    [MetadataType(typeof(TreningDataModelMetadata))]
     public class TreningDataModel
     {
         /*Clan tablica*/

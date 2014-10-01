@@ -38,7 +38,7 @@
         
         <div class="marginText">
             <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class="smallFont marginInputBottom" })</div>
-            @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:dd/MM/yyyy}", new { @Value="1/1/1980", @class = "dateInput" })
+            @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:dd/MM/yyyy}", new { @Value="01/01/1980", @class = "dateInput" })
             @Html.ValidationMessageFor(m=>m.GodinaRodenja)
         </div>
         

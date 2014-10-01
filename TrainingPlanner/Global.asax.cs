@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using TrainingPlanner.Helpers;
 
 namespace TrainingPlanner
 {
@@ -15,6 +16,10 @@ namespace TrainingPlanner
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(
+            typeof(DateFormatValidatorAttribute),
+                typeof(RegularExpressionAttributeAdapter));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using TrainingPlanner.Helpers;
 
 namespace TrainingPlanner.Models
 {
@@ -7,7 +8,7 @@ namespace TrainingPlanner.Models
     {
         //popraviti validaciju datuma
         [Required(ErrorMessage = "Unesite datum")]
-        [DataType(DataType.Date, ErrorMessage = "Unesite ispravan format datuma npr. - 28/08/1984")]
+        [DateFormatValidator(ErrorMessage = "Unesite tocan format datuma - dd/mm/yyyy.")]
         public DateTime DatumTesta { get; set; }
 
         [RegularExpression(@"^\s*-?[0-9]{1,5}\s*$", ErrorMessage = "Unesite ispravan broj")]

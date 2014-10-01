@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TrainingPlanner.Helpers;
 
 namespace TrainingPlanner.Models
 {
@@ -13,7 +14,7 @@ namespace TrainingPlanner.Models
         public string Prezime { get; set; }
 
         [Required(ErrorMessage = "Unesite datum rođenja")]
-        [DataType(DataType.Date, ErrorMessage = "Unesite ispravan format datuma npr. - 28/08/1984")]
+        [DateFormatValidator(ErrorMessage = "Unesite tocan format datuma - dd/mm/yyyy.")]
         public System.DateTime GodinaRodenja { get; set; }
 
         [Required(ErrorMessage = "Unesite visinu")]

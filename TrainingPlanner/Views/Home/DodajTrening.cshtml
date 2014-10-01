@@ -7,6 +7,7 @@
     <div style="float:left">
         @using (Html.BeginForm("DodajTrening", "Home", FormMethod.Post))
         {
+            @Html.ValidationSummary(true)
             @Html.HiddenFor(x => x.TreningId)
             
         <div>
@@ -19,10 +20,12 @@
             <h2>Trening</h2>
             
             Ime treninga: @Html.TextBoxFor(x => x.TreningImeTreninga)
+            @Html.ValidationMessageFor(model => model.TreningImeTreninga)
             <br />
             Tip treninga: @Html.TextBoxFor(x => x.TreningTip)
             <br />
-            Datum: @Html.TextBoxFor(x => x.TreningDatum, new {@Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date"})
+            Datum: @Html.TextBoxFor(x => x.TreningDatum,"{0:dd/MM/yyyy}", new {@Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date"})
+            @Html.ValidationMessageFor(model => model.TreningDatum)
             <br />
             
             <div>

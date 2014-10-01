@@ -113,6 +113,7 @@
     <Compile Include="Clan.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DateFormatValidatorAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -133,6 +134,7 @@
     <Compile Include="Models\TestList.cs" />
     <Compile Include="Models\TestMetadata.cs" />
     <Compile Include="Models\TreningDataModel.cs" />
+    <Compile Include="Models\TreningDataModelMetadata.cs" />
     <Compile Include="Models\VjezbePopisLista.cs" />
     <Compile Include="Models\VjezbePopisMetadata.cs" />
     <Compile Include="Models\ZagrijavanjePopisMetadata.cs" />
