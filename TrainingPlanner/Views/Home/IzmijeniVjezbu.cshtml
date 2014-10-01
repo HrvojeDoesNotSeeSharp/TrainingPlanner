@@ -15,13 +15,13 @@
         @Html.HiddenFor(model => model.VjezbeId)
 
         <div>
-            <div class="marginInputBottom">@Html.LabelFor(model => model.ImeVjezbe, new { @class="smallFont" })</div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class="smallFont" })</div>
             @Html.EditorFor(model => model.ImeVjezbe)
             @Html.ValidationMessageFor(model => model.ImeVjezbe)
         </div>
     
         <div class="marginText">
-            <div class="marginInputBottom">@Html.LabelFor(model => model.Info, new { @class="smallFont marginInputBottom" })</div>
+            <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
             @Html.TextAreaFor(model => model.Info, new {rows = "10", cols = "40"})
             @Html.ValidationMessageFor(model => model.Info)
         </div> 
@@ -41,7 +41,7 @@
         </div>
         
         <div class="marginHeadlineTop marginTextBottom button_example">
-            @Html.ActionLink("Natrag na Popis Vjezbi", "VjezbePopis")
+            @Html.ActionLink("Popis vježbi", "VjezbePopis")
         </div>
     </div>
     

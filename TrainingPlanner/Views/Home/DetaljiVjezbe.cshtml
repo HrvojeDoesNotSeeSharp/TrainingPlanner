@@ -4,40 +4,33 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<fieldset>
-    <legend>Vjezbe Popis</legend>
-    
-            @Html.HiddenFor(model => model.VjezbeId)
-            
-    <div class="display-label">
-            @Html.DisplayNameFor(model => model.ImeVjezbe)
-    </div>
-    <div class="display-field">
+<div id="inputArea" style="float: left;">
+    <p class="bigFont marginHeadline">Detalji vježbe</p> 
+
+    <div>
+        <div class="marginInputBottom">@Html.Label("Naziv", new { @class="smallFont" })</div>
         @Html.DisplayFor(model => model.ImeVjezbe)
     </div>
     
-    <div class="display-label">
-            @Html.DisplayNameFor(model => model.Info)
-    </div>
-    <div class="display-field">
+    <div class="marginText">
+        <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
         @Html.DisplayFor(model => model.Info)
+    </div> 
+        
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Popis vježbi", "VjezbePopis")
     </div>
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.VjezbeSlike)
-    </div>
-    <div class="display-field">
-        @if (Model.VjezbeSlike.Count == 0)
+</div>
+    
+@if (Model.VjezbeSlike.Count > 0)
+{
+    <div id="inputAreaImages" style="float: left;">
+        <p class="bigFont marginHeadline">Slike</p> 
+        @foreach (var item in Model.VjezbeSlike)
         {
-            @:None
-        } else {
-            foreach (var item in Model.VjezbeSlike)
-            {
-            <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
-            }
-        }   
+            <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" /></div>
+            </div>    
+        }
     </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Izmijeni", "IzmijeniVjezbu", new { id=Model.VjezbeId}) |
-    @Html.ActionLink("Natrag na popis vjezbi", "VjezbePopis")
-</p>
+}
