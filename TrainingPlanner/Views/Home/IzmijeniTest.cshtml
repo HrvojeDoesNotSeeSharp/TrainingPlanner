@@ -19,10 +19,9 @@
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-        
         <div>
             <div class="marginText">@Html.Label("Datum", new {@class = "smallFont"})</div>
-            @Html.TextBoxFor(model => model.DatumTesta, "{0:d}", new {@Value = DateTime.Now.ToShortDateString(), @class = "dateInput"})
+            @Html.TextBoxFor(model => model.DatumTesta, "{0:dd/MM/yyyy}", new {@class = "dateInput"})
             @Html.ValidationMessageFor(model => model.DatumTesta)
         </div>
      

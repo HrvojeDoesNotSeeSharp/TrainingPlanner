@@ -11,7 +11,10 @@ namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using TrainingPlanner.Models;
+
+    [MetadataType(typeof(TestMetadata))]
     public partial class Test
     {
         public Test()
