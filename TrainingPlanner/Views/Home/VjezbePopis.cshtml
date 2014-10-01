@@ -5,27 +5,32 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div>
-    <table>
+<div id="inputAreaTable">
+    <div class="bigFont marginHeadline">Vježbe</div>
+    <table class="responstable">
          
     @foreach (VjezbePopis vjp in Model) {
             if(vjp.VjezbeId == 0)
-    {
-        <tr>
-            <td>Trenutno nema vjezbi.</td>
-        </tr>
+        {
+            <tr>
+                <td class="smallFont">Trenutno nema vježbi.</td>
+            </tr>
+        }
+        else
+        {
+            <tr class="smallFont">
+                <td>@vjp.ImeVjezbe</td> <td>@vjp.Info</td> 
+                <td><div class="button_example_small">@Html.ActionLink("Izbrisi", "IzbrisiVjezbu", "Home", new {id = vjp.VjezbeId}, null)</div></td> 
+                <td><div class="button_example_small">@Html.ActionLink("Izmijeni", "IzmijeniVjezbu", "Home", new {id = vjp.VjezbeId}, null)</div></td>
+                <td><div class="button_example_small">@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new {id = vjp.VjezbeId}, null)</div></td>
+            </tr>
+        }
     }
-    else
-    {
-    <tr>
-    <td>@vjp.ImeVjezbe</td> <td>@vjp.Info</td> 
-    <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbu", "Home", new {id = vjp.VjezbeId}, null)</td> 
-    <td>@Html.ActionLink("Izmijeni", "IzmijeniVjezbu", "Home", new {id = vjp.VjezbeId}, null)</td>
-    <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new {id = vjp.VjezbeId}, null)</td>
-    </tr>
-    }
-    }
-        </table>
-    @Html.ActionLink("Dodaj", "DodajNovuVjezbu", "Home")     
+    </table>
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Dodaj", "DodajNovuVjezbu", "Home") 
+    </div>
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Natrag na popis članova", "Index", "Home")
+    </div>
 </div>
-    @Html.ActionLink("Natrag na Popis Clanova", "Index", "Home")
