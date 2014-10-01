@@ -1,4 +1,8 @@
-﻿#inputArea
+﻿.alignLeft {
+    text-align: left;
+}
+
+#inputArea
 {
     width: 20%;
     font-family: Arial, Sans-Serif;

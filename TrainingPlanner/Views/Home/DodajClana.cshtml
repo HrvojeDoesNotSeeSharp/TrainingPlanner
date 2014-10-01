@@ -5,78 +5,61 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div id="clan">
-    @using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
-    {
-        <table>
-            <tr>
-                <td>
-                    Ime:
-                </td>
-                <td>
-                    @Html.TextAreaFor(x=>x.Ime)
-                    @Html.ValidationMessageFor(m=>m.Ime)
-                </td>
-            </tr>
-        <tr>
-            <td>
-                Prezime:
-            </td>
-            <td>
-                @Html.TextAreaFor(x=>x.Prezime)
-                @Html.ValidationMessageFor(m=>m.Prezime)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Visina:
-            </td>
-            <td>
-                @Html.TextAreaFor(x=>x.Visina)
-                @Html.ValidationMessageFor(m=>m.Visina)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Težina:
-            </td>
-            <td>
-                @Html.TextAreaFor(x=>x.Tezina)
-                @Html.ValidationMessageFor(m=>m.Tezina)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Datum rođenja:
-            </td>
-            <td>
-                @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput" })
-                @Html.ValidationMessageFor(m=>m.GodinaRodenja)
-            </td>
-        </tr>
-            <tr>
-            <td>
-                Amneza:
-            </td>
-            <td>
-                @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
-                @Html.ValidationMessageFor(m=>m.Amneza)
-            </td>
-        </tr>
-            <tr>
-            <td>
-                Napomena:
-            </td>
-            <td>
-                @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
-                @Html.ValidationMessageFor(m=>m.Napomena)
-            </td>
-        </tr>
-        </table>
-            
-        <input type ="submit" name ="DodajClana" value="Dodaj člana" />
-    }
-</div>
-<div>
-    @Html.ActionLink("Natrag na popis članova", "Index")
-</div>
+@using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+   
+    <div id="inputArea">
+        <p class="bigFont marginHeadline">Novi član</p>
+         
+        <div>
+            <div class="marginInputBottom">@Html.Label("Ime", new { @class="smallFont" })</div>
+            @Html.EditorFor(x=>x.Ime)
+            @Html.ValidationMessageFor(x=>x.Ime)
+        </div>
+        
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Prezime", new { @class="smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x=>x.Prezime)
+            @Html.ValidationMessageFor(x=>x.Prezime)
+        </div>
+        
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Visina", new { @class="smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x=>x.Visina)
+            @Html.ValidationMessageFor(x=>x.Visina)
+        </div>
+        
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Težina", new { @class="smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x=>x.Tezina)
+            @Html.ValidationMessageFor(x=>x.Tezina)
+        </div>
+        
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class="smallFont marginInputBottom" })</div>
+            @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @Value="1.1.1980.", @class = "dateInput" })
+            @Html.ValidationMessageFor(m=>m.GodinaRodenja)
+        </div>
+        
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Amneza", new { @class="smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
+            @Html.ValidationMessageFor(x=>x.Amneza)
+        </div>
+        
+         <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Napomena", new { @class="smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
+            @Html.ValidationMessageFor(x=>x.Napomena)
+        </div>
+
+        
+        <div class="marginHeadlineTop marginTextBottom">
+            <input type ="submit" name ="DodajClana" value="Dodaj člana" class="button_example" />
+        </div>
+        <div class="marginHeadlineTop marginTextBottom button_example">
+            @Html.ActionLink("Natrag na popis članova", "Index")
+        </div>
+    </div>
+}
