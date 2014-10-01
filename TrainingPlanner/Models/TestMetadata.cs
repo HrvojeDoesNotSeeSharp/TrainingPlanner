@@ -7,7 +7,7 @@ namespace TrainingPlanner.Models
     {
         //popraviti validaciju datuma
         [Required(ErrorMessage = "Unesite datum")]
-        [DataType(DataType.Date, ErrorMessage = "Unesite ispravan datum")]
+        [DataType(DataType.Date, ErrorMessage = "Unesite ispravan format datuma npr. - 28/08/1984")]
         public DateTime DatumTesta { get; set; }
 
         [RegularExpression(@"^\s*-?[0-9]{1,5}\s*$", ErrorMessage = "Unesite ispravan broj")]

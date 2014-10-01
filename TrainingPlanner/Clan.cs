@@ -11,7 +11,10 @@ namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using TrainingPlanner.Models;
+
+    [MetadataType(typeof(ClanMetadata))]
     public partial class Clan
     {
         public Clan()

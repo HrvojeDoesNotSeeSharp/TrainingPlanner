@@ -13,7 +13,7 @@ namespace TrainingPlanner.Models
         public string Prezime { get; set; }
 
         [Required(ErrorMessage = "Unesite datum rođenja")]
-        [DataType(DataType.Date, ErrorMessage = "Unesite ispravan datum")]
+        [DataType(DataType.Date, ErrorMessage = "Unesite ispravan format datuma npr. - 28/08/1984")]
         public System.DateTime GodinaRodenja { get; set; }
 
         [Required(ErrorMessage = "Unesite visinu")]

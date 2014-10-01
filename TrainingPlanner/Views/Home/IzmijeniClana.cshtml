@@ -51,7 +51,7 @@
                 Datum rođenja:
             </td>
             <td>
-                @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:d}", new { @class = "dateInput", @placeholder = "Please enter date" })
+                @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:dd/MM/yyyy}", new { @class = "dateInput", @placeholder = "Please enter date" })
                 @Html.ValidationMessageFor(m=>m.GodinaRodenja)
             </td>
         </tr>
