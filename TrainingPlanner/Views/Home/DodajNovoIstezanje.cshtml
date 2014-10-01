@@ -12,13 +12,13 @@
         <p class="bigFont marginHeadline">Novo istezanje</p>
          
         <div>
-            <div class="marginInputBottom">@Html.LabelFor(model => model.Naziv, new { @class="smallFont" })</div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class="smallFont" })</div>
             @Html.EditorFor(model => model.Naziv)
             @Html.ValidationMessageFor(model => model.Naziv)
         </div>
         
         <div class="marginText">
-            <div class="marginInputBottom">@Html.LabelFor(model => model.Info, new { @class="smallFont marginInputBottom" })</div>
+            <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
             @Html.TextAreaFor(model => model.Info, new {rows = "10", cols = "40"})
             @Html.ValidationMessageFor(model => model.Info)
         </div>
@@ -34,7 +34,7 @@
             <input type="submit" value="Dodaj istezanje" class="button_example"/>
         </div>
         <div class="marginHeadlineTop marginTextBottom button_example">
-            @Html.ActionLink("Natrag na listu istezanja", "IstezanjePopis")
+            @Html.ActionLink("Lista istezanja", "IstezanjePopis")
         </div>
     </div>
 }

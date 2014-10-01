@@ -4,41 +4,33 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<fieldset>
-    <legend>ZagrijavanjePopis</legend>
-    
-            @Html.HiddenFor(model => model.ZagrijavanjeId)
-            
-    <div class="display-label">
-            @Html.DisplayNameFor(model => model.Naziv)
-    </div>
-    <div class="display-field">
+<div id="inputArea" style="float: left;">
+    <p class="bigFont marginHeadline">Detalji zagrijavanja</p> 
+
+    <div>
+        <div class="marginInputBottom">@Html.Label("Naziv", new { @class="smallFont" })</div>
         @Html.DisplayFor(model => model.Naziv)
     </div>
     
-    <div class="display-label">
-            @Html.DisplayNameFor(model => model.Info)
-    </div>
-    <div class="display-field">
+    <div class="marginText">
+        <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
         @Html.DisplayFor(model => model.Info)
-    </div>
+    </div> 
         
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.ZagrijavanjeSlike)
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Popis zagrijavanja", "ZagrijavanjePopis")
     </div>
-    <div class="display-field">
-        @if (Model.ZagrijavanjeSlike.Count == 0)
+</div>
+    
+@if (Model.ZagrijavanjeSlike.Count > 0)
+{
+    <div id="inputAreaImages" style="float: left;">
+        <p class="bigFont marginHeadline">Slike</p> 
+        @foreach (var item in Model.ZagrijavanjeSlike)
         {
-            @:None
-        } else {
-            foreach (var item in Model.ZagrijavanjeSlike)
-            {
-            <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
-            }
-        }   
+            <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" /></div>
+            </div>    
+        }
     </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Izmijeni", "IzmijeniZagrijavanje", new { id=Model.ZagrijavanjeId}) |
-    @Html.ActionLink("Natrag na popis zagrijavanja", "ZagrijavanjePopis")
-</p>
+}
