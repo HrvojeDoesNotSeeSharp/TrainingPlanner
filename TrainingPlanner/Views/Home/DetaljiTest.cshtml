@@ -4,82 +4,61 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div>
-    <table>
-        <tr>
-            <td>
-                @Html.LabelFor(x => x.Name)
-            </td>
-            <td>
-                @Model.Name
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Sklekovi)
-            </td>
-            <td>
-                @Model.Sklekovi
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.DatumTesta)
-            </td>
-            <td>
-                @Model.DatumTesta.ToShortDateString()
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Ergometar)
-            </td>
-            <td>
-                @Model.Ergometar
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Cucnjevi)
-            </td>
-            <td>
-                @Model.Cucnjevi
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x => x.Trbusnjaci)
-            </td>
-            <td>
-                @Model.Trbusnjaci
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x => x.Zgibovi)
-            </td>
-            <td>
-                @Model.Zgibovi
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x => x.Slika)
-            </td>
-            <td>
-                @if (Model.Slika.Count == 0)
-                {
-                    @:None
-                } else {
-                    foreach(var item in Model.Slika)
-                    {
-                    <img width="150" height="150" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" />
-                    }
-                }
-            </td>
-        </tr>
-             
-        </table>
-    @Html.ActionLink("Povratak na popis testova", "Test", "Home", new {id = Model.ClanId }, null)
-    @Html.ActionLink("Detalji o clanu", "DetaljiClana", "Home", new {id = Model.ClanId }, null)
+<div id="inputArea" style="float: left;">
+    <p class="bigFont marginHeadline">Detalji testa</p> 
+
+    <div>
+        <div class="marginInputBottom">@Html.LabelFor(model => model.Name, new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.Name)
+    </div>
+        
+    <div>
+        <div class="marginText">@Html.Label("Datum", new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.DatumTesta, new {@class = "dateInput"})
+    </div>
+     
+    <div>
+        <div class="marginText">@Html.Label("Ergometar", new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.Ergometar)
+    </div>
+        
+    <div>
+        <div class="marginText">@Html.Label("Zgibovi", new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.Zgibovi)
+    </div>
+        
+    <div>
+        <div class="marginText">@Html.Label("Sklekovi", new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.Sklekovi)
+    </div>
+        
+    <div>
+        <div class="marginText">@Html.Label("Trbušnjaci", new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.Trbusnjaci)
+    </div>
+        
+    <div>
+        <div class="marginText">@Html.Label("Čučnjevi", new {@class = "smallFont"})</div>
+        @Html.DisplayFor(model => model.Cucnjevi)
+    </div>
+       
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Natrag na popis testova", "Test", "Home", new {id = Model.ClanId }, null)
+    </div>
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Detalji o clanu", "DetaljiClana", "Home", new {id = Model.ClanId }, null)
+    </div>
 </div>
+
+@if (Model.Slika.Count > 0)
+{
+    <div id="inputAreaImages" style="float: left;">
+        <p class="bigFont marginHeadline">Slike</p> 
+        @foreach (var item in Model.Slika)
+        {
+            <div style="float: left; display: block; clear: right;" class="marginHeadline">
+                <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></div>
+            </div>
+        }
+    </div>
+}
