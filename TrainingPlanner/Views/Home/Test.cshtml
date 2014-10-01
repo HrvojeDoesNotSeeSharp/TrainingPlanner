@@ -1,35 +1,36 @@
-﻿@model TrainingPlanner.Models.TestList
+﻿@using TrainingPlanner.Models
+@model TrainingPlanner.Models.TestList
 
 @{
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div>
-    <h1>@Model.Clan.Ime @Model.Clan.Prezime</h1>
-    Popis testova:
-    @if(Model.ListaTestova == null)
-    {
-        <div>Trenutno nema testova.</div>
-    }
-        
-    <div>
-        @if(Model.ListaTestova != null)
+<div id="inputAreaTable">
+    <div class="bigFont marginHeadline">@Model.Clan.Ime @Model.Clan.Prezime</div>
+    <table class="responstable">
+        @if (Model.ListaTestova == null)
+        {
+            <tr>
+                <td class="smallFont">Trenutno nema testova.</td>
+            </tr>
+        }
+        else
         {
             foreach (var test in Model.ListaTestova)
             {
-                <table>                    
-                    <tr>
-                <td>@test.Name</td> 
-                <td>@Html.ActionLink("Izbrisi", "IzbrisiTest", "Home", new {id = test.TestId}, null)</td> 
-                <td>@Html.ActionLink("Izmijeni", "IzmijeniTest", "Home", new {id = test.TestId}, null)</td>
-                <td>@Html.ActionLink("Detalji", "DetaljiTest", "Home", new {id = test.TestId}, null)</td>
-                    </tr>
-                </table>
+                <tr class="smallFont">
+                    <td>@test.Name</td> 
+                    <td><div class="button_example_small">@Html.ActionLink("Izbrisi", "IzbrisiTest", "Home", new {id = test.TestId}, null)</div></td> 
+                    <td><div class="button_example_small">@Html.ActionLink("Izmijeni", "IzmijeniTest", "Home", new {id = test.TestId}, null)</div></td>
+                    <td><div class="button_example_small">@Html.ActionLink("Detalji", "DetaljiTest", "Home", new {id = test.TestId}, null)</div></td>
+                </tr>
             }
         }
+    </table>
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Dodaj test", "DodajTest", "Home", new {id = Model.Clan.ClanId }, null)  
     </div>
-    <br/>
-    @Html.ActionLink("Dodaj Test", "DodajTest", "Home", new {id = Model.Clan.ClanId }, null)
-    <br/>
-    @Html.ActionLink("Natrag na popis sportasa", "Index", "Home")
+    <div class="marginHeadlineTop marginTextBottom button_example">
+        @Html.ActionLink("Natrag na popis članova", "Index", "Home")
+    </div>
 </div>
