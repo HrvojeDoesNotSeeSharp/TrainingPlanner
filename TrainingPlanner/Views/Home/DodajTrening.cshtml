@@ -20,6 +20,7 @@
             
             Ime treninga: @Html.TextBoxFor(x => x.TreningImeTreninga)
             <br />
+            Tip treninga: @Html.TextBoxFor(x => x.TreningTip)
             <br />
             Datum: @Html.TextBoxFor(x => x.TreningDatum, new {@Value=DateTime.Now.ToShortDateString(), @class = "dateInput", @placeholder = "Please enter date"})
             <br />
@@ -32,6 +33,7 @@
             <br />
 
             <input type ="submit" name ="DodajTrening" value="Dodaj Trening" />
+            @Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, null)
         </div>
         }
     </div>
@@ -41,6 +43,10 @@
         <div>
                 <h4>Zagrijavanje</h4>
                 @if (Model.ListaZagrijavanja == null)
+                {
+                    <div>Pocni sa dodavanjem zagrijavanja.</div>
+                }
+                else if (Model.ListaZagrijavanja.ToList().Count == 0)
                 {
                     <div>Pocni sa dodavanjem zagrijavanja.</div>
                 }
@@ -77,6 +83,10 @@
             <div>
                 <h4>Vjezbe</h4>
                 @if (Model.SekcijaVjezbi == null)
+                { 
+                    <p>Pocni sa dodavanjem sekcija.</p>
+                }
+                else if (Model.SekcijaVjezbi.ToList().Count == 0)
                 { 
                     <p>Pocni sa dodavanjem sekcija.</p>
                 }
@@ -132,7 +142,11 @@
         <!-- Istezanje -->
         <div>
            <h4>Istezanje</h4>
-                @if (Model.ListaIstezanja == null)
+                @if(Model.ListaIstezanja == null)
+                {
+                    <div>Pocni sa dodavanjem istezanja.</div>
+                }
+                else if(Model.ListaIstezanja.ToList().Count == 0)
                 {
                     <div>Pocni sa dodavanjem istezanja.</div>
                 }

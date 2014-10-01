@@ -786,6 +786,7 @@ namespace TrainingPlanner.Controllers
                         ClanPrezime = firstOrDefault.y.Prezime,
                         TreningDatum = (DateTime) firstOrDefault.x.DatumTreninga,
                         TreningImeTreninga = firstOrDefault.x.ImeTreninga,
+                        TreningTip = firstOrDefault.x.TipTreninga != null ? firstOrDefault.x.TipTreninga : null,
                         Napomena = firstOrDefault.x.Napomena,
                         TreningId = firstOrDefault.x.TreningId
                     };
@@ -818,6 +819,7 @@ namespace TrainingPlanner.Controllers
             var tr = query.Single();
 
             tr.ImeTreninga = trm.TreningImeTreninga;
+            tr.TipTreninga = trm.TreningTip != null ? trm.TreningTip : null;
             tr.DatumTreninga = trm.TreningDatum;
             tr.Napomena = trm.Napomena;
             if (trm.TreningTip != null)
@@ -866,6 +868,7 @@ namespace TrainingPlanner.Controllers
                         ClanPrezime = firstOrDefault.y.Prezime,
                         TreningDatum = (DateTime) firstOrDefault.x.DatumTreninga,
                         TreningImeTreninga = firstOrDefault.x.ImeTreninga,
+                        TreningTip = firstOrDefault.x.TipTreninga != null ? firstOrDefault.x.TipTreninga : null,
                         TreningId = firstOrDefault.x.TreningId,
                         Napomena = firstOrDefault.x.Napomena
                     };
