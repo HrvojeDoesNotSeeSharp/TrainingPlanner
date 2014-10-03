@@ -34,3 +34,6 @@ TrainingPlanner/obj/Debug/TrainingPlanner.dll
 *.pdb
 *.dll
 *.sql
+*.JPG
+*.cache
+*.dll
