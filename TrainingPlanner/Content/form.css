@@ -57,6 +57,15 @@
     border: solid 1px #33677F;
 }
 
+.extraBigFont{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:32px;
+	margin-top: 0px; margin-bottom: 0px;
+	text-align: center;
+    font-weight: normal;
+    color: #222;
+}
+
 .bigFont{
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size:24px;
@@ -223,11 +232,11 @@ section {
   width: 50%;
   margin: 0 auto;
 }
-h2 {
+h1 {
   position: relative;
   background: #edf2f7; 
 }
-h2:before, h2:after {
+h1:before, h1:after {
   content: "";
   position: absolute;
   background: #edf2f7;  /* Match the background */
@@ -235,9 +244,9 @@ h2:before, h2:after {
   bottom: 0;
   width: 9999px;   /* some huge width */
 } 
-h2:before {
+h1:before {
   right: 100%; 
 }
-h2:after {
+h1:after {
   left: 100%;
 }

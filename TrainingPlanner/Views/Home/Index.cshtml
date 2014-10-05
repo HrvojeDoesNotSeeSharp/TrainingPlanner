@@ -19,7 +19,7 @@
 <body>
 
     <section>
-        <h2 class="bigFont marginHeadline">Trening planer</h2>
+        <h1 class="extraBigFont marginHeadline">Trening planer</h1>
     </section>
 
     <div class="container_12">
@@ -54,11 +54,13 @@
             </div>
         </div>
         <div class="grid_4">
-            <h3>Vježbe za trening</h3>
-            <hr />
-            <p>@Html.ActionLink("Pregled Vjezbi Zagrijavanja", "ZagrijavanjePopis", "Home", null, new { @class = "buttonlinkzagrijavanje" })</p>
-            <p>@Html.ActionLink("Pregled Vjezbi Treninga", "VjezbePopis", "Home", null, new { @class = "buttonlinkvjezba" })</p>
-            <p>@Html.ActionLink("Pregled Vjezbi Istezanja", "IstezanjePopis", "Home", null, new { @class = "buttonlinkistezanje" })</p>
+            <div id="inputAreaTableHome">
+                <p class="bigFont marginHeadline">Vježbe za trening</p>
+
+                <p>@Html.ActionLink("Pregled Vjezbi Zagrijavanja", "ZagrijavanjePopis", "Home", null, new { @class = "button_example" })</p>
+                <p>@Html.ActionLink("Pregled Vjezbi Treninga", "VjezbePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
+                <p>@Html.ActionLink("Pregled Vjezbi Istezanja", "IstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
+            </div>
         </div>
     </div>
 
