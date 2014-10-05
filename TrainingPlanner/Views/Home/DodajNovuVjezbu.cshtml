@@ -33,9 +33,7 @@
         <div class="marginHeadlineTop marginTextBottom">
             <input type="submit" value="Dodaj vježbu" class="button_example"/>
         </div>
-        
-        <div class="marginHeadlineTop marginTextBottom button_example">
-            @Html.ActionLink("Lista vježbi", "VjezbePopis")
-        </div>
+
+        @Html.ActionLink("Lista vježbi", "VjezbePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
 }

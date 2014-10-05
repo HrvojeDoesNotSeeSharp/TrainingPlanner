@@ -16,10 +16,8 @@
         <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
         @Html.DisplayFor(model => model.Info)
     </div> 
-        
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Popis zagrijavanja", "ZagrijavanjePopis")
-    </div>
+
+    @Html.ActionLink("Popis zagrijavanja", "ZagrijavanjePopis", null, new{ @class="marginHeadlineTop marginTextBottom button_example" })
 </div>
     
 @if (Model.ZagrijavanjeSlike.Count > 0)
