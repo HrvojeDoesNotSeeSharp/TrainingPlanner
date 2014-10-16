@@ -11,10 +11,7 @@ namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using TrainingPlanner.Models;
-
-    [MetadataType(typeof(TestMetadata))]
+    
     public partial class Test
     {
         public Test()
@@ -24,13 +21,15 @@ namespace TrainingPlanner
     
         public int TestId { get; set; }
         public System.DateTime DatumTesta { get; set; }
-        public short Ergometar { get; set; }
-        public short Zgibovi { get; set; }
-        public short Sklekovi { get; set; }
-        public short Trbusnjaci { get; set; }
-        public short Cucnjevi { get; set; }
+        public string Antropometrija { get; set; }
+        public Nullable<short> Tezina { get; set; }
+        public string Visina { get; set; }
+        public string PotkoznoMasnoTkivo { get; set; }
+        public string BezmasnaMasa { get; set; }
         public string Name { get; set; }
         public int ClanId { get; set; }
+        public string FunkcionalneSposobnosti { get; set; }
+        public string MotorickeSposobnosti { get; set; }
     
         public virtual Clan Clan { get; set; }
         public virtual ICollection<Slika> Slika { get; set; }

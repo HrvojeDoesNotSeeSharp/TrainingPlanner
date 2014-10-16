@@ -11,10 +11,7 @@ namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using TrainingPlanner.Models;
-
-    [MetadataType(typeof(IstezanjePopisMetadata))]
+    
     public partial class IstezanjePopis
     {
         public IstezanjePopis()
