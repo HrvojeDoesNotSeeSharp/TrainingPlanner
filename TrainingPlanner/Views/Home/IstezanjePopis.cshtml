@@ -20,17 +20,14 @@
             {
                 <tr class="smallFont">
                     <td>@ip.Naziv</td> <td>@ip.Info</td> 
-                    <td><div class="button_example_small">@Html.ActionLink("Izbriši", "IzbrisiIstezanje", "Home", new {id = ip.IstezanjeId}, null)</div></td> 
-                    <td><div class="button_example_small">@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new {id = ip.IstezanjeId}, null)</div></td>
-                    <td><div class="button_example_small">@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new {id = ip.IstezanjeId}, null)</div></td>
+                    <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td> 
+                    <td>@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
                 </tr>
             }
         }
     </table>
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home")    
-    </div>
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Popis članova", "Index", "Home")
-    </div>
+
+    @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })    
+    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </div>

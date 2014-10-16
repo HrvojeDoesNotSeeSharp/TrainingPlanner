@@ -20,17 +20,14 @@
             {
                 <tr class="smallFont">
                     <td>@test.Name</td> 
-                    <td><div class="button_example_small">@Html.ActionLink("Izbrisi", "IzbrisiTest", "Home", new {id = test.TestId}, null)</div></td> 
-                    <td><div class="button_example_small">@Html.ActionLink("Izmijeni", "IzmijeniTest", "Home", new {id = test.TestId}, null)</div></td>
-                    <td><div class="button_example_small">@Html.ActionLink("Detalji", "DetaljiTest", "Home", new {id = test.TestId}, null)</div></td>
+                    <td>@Html.ActionLink("Izbrisi", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td> 
+                    <td>@Html.ActionLink("Izmijeni", "IzmijeniTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
                 </tr>
             }
         }
     </table>
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Dodaj test", "DodajTest", "Home", new {id = Model.Clan.ClanId }, null)  
-    </div>
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Popis članova", "Index", "Home")
-    </div>
+
+    @Html.ActionLink("Dodaj test", "DodajTest", "Home", new { id = Model.Clan.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })  
+    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </div>

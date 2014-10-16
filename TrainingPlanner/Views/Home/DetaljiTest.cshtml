@@ -41,13 +41,9 @@
         <div class="marginText">@Html.Label("Čučnjevi", new {@class = "smallFont"})</div>
         @Html.DisplayFor(model => model.Cucnjevi)
     </div>
-       
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Popis testova", "Test", "Home", new {id = Model.ClanId }, null)
-    </div>
-    <div class="marginHeadlineTop marginTextBottom button_example">
-        @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new {id = Model.ClanId }, null)
-    </div>
+
+    @Html.ActionLink("Popis testova", "Test", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </div>
 
 @if (Model.Slika.Count > 0)

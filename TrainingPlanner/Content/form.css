@@ -20,6 +20,15 @@
     padding: 10px;
 }
 
+#inputAreaTableHome
+{
+    width: 100%;
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    background-color: #d6e5f4;
+    padding: 10px;
+}
+
 #inputAreaImages
 {
     width: 70%;
@@ -46,6 +55,15 @@
     background-image: none;
     background-color: #ffffff;
     border: solid 1px #33677F;
+}
+
+.extraBigFont{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:32px;
+	margin-top: 0px; margin-bottom: 0px;
+	text-align: center;
+    font-weight: normal;
+    color: #222;
 }
 
 .bigFont{
@@ -202,4 +220,33 @@ a:focus { outline: none; color: #222;}
     display: table-cell;
     padding: 1em;
   }
+}
+
+
+
+html, body {
+    overflow-x: hidden;
+}
+
+section {
+  width: 50%;
+  margin: 0 auto;
+}
+h1 {
+  position: relative;
+  background: #edf2f7; 
+}
+h1:before, h1:after {
+  content: "";
+  position: absolute;
+  background: #edf2f7;  /* Match the background */
+  top: 0;
+  bottom: 0;
+  width: 9999px;   /* some huge width */
+} 
+h1:before {
+  right: 100%; 
+}
+h1:after {
+  left: 100%;
 }

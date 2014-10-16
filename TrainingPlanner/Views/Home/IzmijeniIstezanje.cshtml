@@ -38,10 +38,8 @@
         <div class="marginHeadlineTop marginTextBottom">
             <input type="submit" value="Spremi izmjene" class="button_example"/>
         </div>
-        
-        <div class="marginHeadlineTop marginTextBottom button_example">
-            @Html.ActionLink("Popis istezanja", "IstezanjePopis")
-        </div>
+
+        @Html.ActionLink("Popis istezanja", "IstezanjePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
     
     if (Model.IstezanjeSlike.Count > 0)
@@ -52,7 +50,7 @@
             {
                 <div style="float: left; display: block; clear:right;" class="marginHeadline">
                     <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" /></div>
-                    <div class="marginLeft marginInputTop marginTextBottom button_example">@Html.ActionLink("Izbriši sliku", "IzbrisiSlikuIstezanje", "Home", new { id = Model.IstezanjeId, slika = item.IstezanjeSlikeId }, null)</div>
+                    @Html.ActionLink("Izbriši sliku", "IzbrisiSlikuIstezanje", "Home", new { id = Model.IstezanjeId, slika = item.IstezanjeSlikeId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
                 </div>    
             }
             <div class="marginText" style="clear: both;">

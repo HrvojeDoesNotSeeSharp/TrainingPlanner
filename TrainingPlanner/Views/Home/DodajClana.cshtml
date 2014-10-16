@@ -58,9 +58,7 @@
         <div class="marginHeadlineTop marginTextBottom">
             <input type ="submit" name ="DodajClana" value="Dodaj člana" class="button_example" />
         </div>
-        <div class="marginHeadlineTop marginTextBottom button_example">
-            @Html.ActionLink("Popis članova", "Index")
-        </div>
+        @Html.ActionLink("Popis članova", "Index", null, new{ @class="marginHeadlineTop marginTextBottom button_example" })
     </div>
 }
 
