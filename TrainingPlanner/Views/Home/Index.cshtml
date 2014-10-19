@@ -32,7 +32,7 @@
                         foreach (Clan c in Model)
                         {
                             <tr class="smallFont">
-                                <td>@c.Ime&nbsp;@c.Prezime</td>
+                                <td>@c.Ime&nbsp;<br/>@c.Prezime</td>
 
                                 <td>@c.GodineStarosti &nbsp; god.</td>                            
                                 <td>@Html.ActionLink("Izmjeni", "IzmijeniClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>

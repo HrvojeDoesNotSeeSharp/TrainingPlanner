@@ -60,6 +60,7 @@
         }
         else
         {
+            <tr><td>Naziv</td><td>Puls</td><td>Tempo</td><td>Napomena</td></tr>
             foreach (var zagrijavanje in Model.ListaZagrijavanja)
             {
                 using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", FormMethod.Post))
@@ -68,13 +69,13 @@
                         @Html.Hidden("id", Model.TreningId)
                         @Html.Hidden("ZagrijavanjeId", zagrijavanje.ZagrijavanjeId)
                         <td>@zagrijavanje.Naziv</td>
-                        <td>@Html.TextArea("Puls", zagrijavanje.Puls, new { @class = "smallFont marginInputBottom " })</td>
-                        <td>@Html.TextArea("Tempo", zagrijavanje.Tempo, new { @class = "smallFont marginInputBottom" })</td>
-                        <td>@Html.TextArea("Napomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "smallFont marginInputBottom" })</td>
+                        <td>@Html.TextBox("Puls", zagrijavanje.Puls, new { @class = "marginInputBottom inputNumber" })</td>
+                        <td>@Html.TextBox("Tempo", zagrijavanje.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
+                        <td>@Html.TextBox("Napomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
                         <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
-                        <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" /></td>
+                        <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_small" /></td>
                     </tr>
                 }
             }
@@ -101,6 +102,7 @@
         {
             foreach (var item in Model.SekcijaVjezbi)
             {
+                <tr><td>Naziv</td><td>Broj ponavljanja</td><td>Broj serija</td><td>Težina</td><td>Odmor</td></tr>
                 foreach (var vjezba in item.Vjezba)
                 {
                     using (Html.BeginForm("SpremiVjezbuInfo", "Home", FormMethod.Post))
@@ -109,14 +111,14 @@
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("VjezbaId", vjezba.VjezbaId)
                             <td>@vjezba.ImeVjezbe</td>
-                            <td>@Html.TextArea("Broj ponavljanja", vjezba.BrojPonavljanja, new {@class = "smallFont marginInputBottom "})</td>
-                            <td>@Html.TextArea("Broj serija", vjezba.BrojSerija, new {@class = "smallFont marginInputBottom"})</td>
-                            <td>@Html.TextArea("Tezina", vjezba.Kilogrami, new {@class = "smallFont marginInputBottom"})</td>
-                            <td>@Html.TextArea("Odmor", vjezba.Odmor, new { @class = "smallFont marginInputBottom" })</td>
+                            <td>@Html.TextBox("Broj ponavljanja", vjezba.BrojPonavljanja, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("Broj serija", vjezba.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("Tezina", vjezba.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("Odmor", vjezba.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, new { @class = "button_example_small" })</td>
                             <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId, id1 = Model.TreningId.ToString() }, new { @class = "button_example_small" })</td>
                              
-                            <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" /></td>
+                            <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_small" /></td>
                         </tr>
                     }
                 }
@@ -132,7 +134,7 @@
                     @Html.Label("Broj krugova:")
                     <br />
                     @Html.TextBox("Broj krugova", item.BrojKrugova)
-                    <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" />
+    <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" class="button_example_small" />
                 }
                 <br />
                 @Html.ActionLink("Izbrisi sekciju vjezbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
@@ -158,6 +160,7 @@
         }
         else
         {
+            <tr><td>Naziv</td><td>Vrijeme izdržaja</td><td>Vrsta istezanja</td></tr>
             foreach (var istezanje in Model.ListaIstezanja)
             {
                 using (Html.BeginForm("SpremiIstezanjeInfo", "Home", FormMethod.Post))
@@ -166,13 +169,13 @@
                         @Html.Hidden("id", Model.TreningId)
                         @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
                         <td>@istezanje.Naziv</td>
-                        <td>@Html.TextArea("Vrijeme izdržaja", istezanje.VrijemeIzdrzaja, new { @class = "smallFont marginInputBottom " })</td>
-                        <td>@Html.TextArea("Vrsta istezanja", istezanje.VrstaIstezanja, new { @class = "smallFont marginInputBottom" })</td>
+                        <td>@Html.TextBox("Vrijeme izdržaja", istezanje.VrijemeIzdrzaja, new { @class = "marginInputBottom inputNumber" })</td>
+                        <td>@Html.TextBox("Vrsta istezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
 
                         <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_small" })</td>
                     
-                        <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" /></td>
+                        <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_small" /></td>
                     </tr>
                 }
             }
