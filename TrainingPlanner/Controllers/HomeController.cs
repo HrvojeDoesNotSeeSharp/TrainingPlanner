@@ -951,6 +951,7 @@ namespace TrainingPlanner.Controllers
                 var c = query1.Single();
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
+                trm.ClanId = c.ClanId;
             }
             else
             {
@@ -985,6 +986,7 @@ namespace TrainingPlanner.Controllers
                 var c = query1.Single();
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
+                trm.ClanId = c.ClanId;
             }
             return View(trm);
         }

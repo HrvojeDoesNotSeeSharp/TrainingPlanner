@@ -14,7 +14,14 @@
     
     <div class="marginText">
         <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
-        @Html.DisplayFor(model => model.Info)
+        @if(Model.Info == null)
+        {
+            <text>--</text>
+        }
+        else
+        {
+            @Html.DisplayFor(model => model.Info)
+        })
     </div> 
 
     @Html.ActionLink("Popis zagrijavanja", "ZagrijavanjePopis", null, new{ @class="marginHeadlineTop marginTextBottom button_example" })

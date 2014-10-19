@@ -25,6 +25,17 @@
         @Html.DisplayFor(model => Model.Clan.Tezina)
     </div>
     <div>
+        <div class="marginText">@Html.Label("Sport", new { @class = "smallFont" })</div>
+        @if(Model.Clan.Amneza == null)
+        {
+            <text>--</text>
+        }
+        else
+        {
+            @Html.DisplayFor(model => model.Clan.Sport)
+        }
+    </div>
+    <div>
         <div class="marginText">@Html.Label("Datum rođenja", new { @class = "smallFont" })</div>
         @Html.DisplayFor(model => model.Clan.GodinaRodenja, new { @class = "dateInput" })
     </div>
@@ -34,14 +45,28 @@
     </div>
     <div>
         <div class="marginText">@Html.LabelFor(x => x.Clan.Amneza, new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => model.Clan.Amneza)
+        @if(Model.Clan.Amneza == null)
+        {
+            <text>--</text>
+        }
+        else
+        {
+            @Html.DisplayFor(model => model.Clan.Amneza)
+        }
     </div>
     <div>
         <div class="marginText">@Html.LabelFor(x => x.Clan.Napomena, new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => model.Clan.Napomena)
+        @if(Model.Clan.Napomena == null)
+        {
+            <text>--</text>
+        }
+        else
+        {
+            @Html.DisplayFor(model => model.Clan.Napomena)
+        }
     </div>
     
-    @if (Model.ListaTest != null)
+    @if (Model.ListaTest.Count != 0)
     {
         <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
 
@@ -50,6 +75,11 @@
             @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br/>
         }
 
+    }
+    else
+    {
+        <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
+        <text>Nema testova</text> <br/>
     }
     
     @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })

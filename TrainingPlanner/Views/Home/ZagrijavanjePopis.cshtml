@@ -19,7 +19,15 @@
             else
             {
                 <tr class="smallFont">
-                    <td>@zp.Naziv</td> <td>@zp.Info</td> 
+                    <td>@zp.Naziv</td>
+                    @if(zp.Info == null)
+                    {
+                        <td>--</td> 
+                    }
+                    else
+                    {
+                        <td>@zp.Info</td> 
+                    }
                     <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td> 
                     <td>@Html.ActionLink("Izmjeni", "IzmijeniZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
                     <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>

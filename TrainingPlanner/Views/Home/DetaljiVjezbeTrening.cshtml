@@ -23,7 +23,14 @@
              @Html.DisplayNameFor(model => model.Info)
         </div>
         <div class="display-field">
+            @if(Model.Info == null)
+        {
+            <text>--</text>
+        }
+        else
+        {
             @Html.DisplayFor(model => model.Info)
+        }
         </div>
         }
         @if(Model.Slika != null)
