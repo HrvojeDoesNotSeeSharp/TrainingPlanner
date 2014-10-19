@@ -111,8 +111,8 @@
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("VjezbaId", vjezba.VjezbaId)
                             <td>@vjezba.ImeVjezbe</td>
-                            <td>@Html.TextBox("Broj ponavljanja", vjezba.BrojPonavljanja, new { @class = "marginInputBottom inputNumber" })</td>
-                            <td>@Html.TextBox("Broj serija", vjezba.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("brojPonavljanja", vjezba.BrojPonavljanja, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("brojSerija", vjezba.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Tezina", vjezba.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Odmor", vjezba.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, new { @class = "button_example_small" })</td>
@@ -132,11 +132,9 @@
                     @Html.Hidden("id", Model.TreningId)
                     @Html.Hidden("sekcijaId", item.SekcijaId)
                     @Html.Label("Broj krugova:")
-                    <br />
-                    @Html.TextBox("Broj krugova", item.BrojKrugova)
-    <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" class="button_example_small" />
+                    @Html.TextBox("brojKrugova", item.BrojKrugova, new { @class = "marginInputBottom inputNumber" })
+                <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" class="button_example_small" />
                 }
-                <br />
                 @Html.ActionLink("Izbrisi sekciju vjezbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
             }
         }
@@ -169,8 +167,8 @@
                         @Html.Hidden("id", Model.TreningId)
                         @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
                         <td>@istezanje.Naziv</td>
-                        <td>@Html.TextBox("Vrijeme izdržaja", istezanje.VrijemeIzdrzaja, new { @class = "marginInputBottom inputNumber" })</td>
-                        <td>@Html.TextBox("Vrsta istezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
+                        <td>@Html.TextBox("vrijemeIzdrzaja", istezanje.VrijemeIzdrzaja, new { @class = "marginInputBottom inputNumber" })</td>
+                        <td>@Html.TextBox("vrstaIstezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
 
                         <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_small" })</td>
