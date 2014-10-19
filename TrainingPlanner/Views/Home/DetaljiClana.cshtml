@@ -6,11 +6,11 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div id="inputArea" style="float: left;">
+<div id="inputArea" style="float: left;" class="defaultFont">
     <p class="bigFont marginHeadline">Detalji člana</p>
     <div>
         <div class="marginInputBottom">@Html.LabelFor(x => x.Clan.Ime, new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => Model.Clan.Ime)
+        <div class="defaultFont">@Html.DisplayFor(model => Model.Clan.Ime)</div>
     </div>
     <div>
         <div class="marginText">@Html.LabelFor(x => x.Clan.Prezime, new { @class = "smallFont" })</div>
@@ -40,17 +40,17 @@
         <div class="marginText">@Html.LabelFor(x => x.Clan.Napomena, new { @class = "smallFont" })</div>
         @Html.DisplayFor(model => model.Clan.Napomena)
     </div>
-    
+
     @if (Model.ListaTest != null)
     {
         <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
 
         foreach (Test t in Model.ListaTest)
         {
-            @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br/>
+            @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br />
         }
 
     }
-    
+
     @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </div>

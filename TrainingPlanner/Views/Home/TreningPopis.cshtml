@@ -4,27 +4,32 @@
 @{
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
-<div>
-    <table>
-    <thead><tr><th>@ViewData["ImeClana"]</th><th>@ViewData["PrezimeClana"]</th></tr></thead>
-    <tbody>
-    @foreach (Trening tr in Model) {
-        if (tr.TreningId == 0)
-        {<tr>
-            <td>@tr.ImeTreninga</td>
-            </tr>
+
+<div id="inputAreaTable">
+    <div class="bigFont marginHeadline">Trening</div>
+    <table class="responstable">
+
+        @foreach (Trening tr in Model)
+        {
+            if (tr.TreningId == 0)
+            {
+                <tr>
+                    <td class="smallFont">Trenutno nema treninga.</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="smallFont">
+                    <td>@tr.ImeTreninga</td>
+                    <td>@tr.DatumTreninga</td> 
+                    <td>@Html.ActionLink("Izbriši", "IzbrisiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
+                    <td>@Html.ActionLink("Izmijeni", "IzmijeniTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
+                </tr>
+            }
         }
-        else {
-    <tr>
-    <td>@tr.ImeTreninga</td> <td>@tr.DatumTreninga</td> 
-    <td>@Html.ActionLink("Izbrisi", "IzbrisiTrening", "Home", new {id = tr.TreningId}, null)</td> 
-    <td>@Html.ActionLink("Izmijeni", "IzmijeniTrening", "Home", new {id = tr.TreningId}, null)</td>
-    <td>@Html.ActionLink("Detalji", "DetaljiTrening", "Home", new {id = tr.TreningId}, null)</td>
-    </tr>
-    }
-    }
-    </tbody>
     </table>
+
+    @Html.ActionLink("Dodaj", "DodajTrening", "Home", new { id = Model.FirstOrDefault().ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </div>
-@Html.ActionLink("Dodaj novi trening", "DodajTrening", "Home", new {id = Model.FirstOrDefault().ClanId }, null)
-@Html.ActionLink("Natrag na Popis Clanova", "Index", "Home")
