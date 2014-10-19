@@ -84,6 +84,13 @@
     color: #222;
 }
 
+.defaultFont{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:16px;
+    font-weight:normal;
+    color: #222;
+}
+
 .marginHeadline {
     margin-bottom: 25px;
 }
