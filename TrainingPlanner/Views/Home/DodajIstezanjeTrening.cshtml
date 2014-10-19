@@ -5,42 +5,31 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<fieldset>
-    <legend>Popis istezanja</legend>
-                   
-    @foreach (IstezanjePopis istp in Model.IstezanjePopis)
-    {
-        using (Html.BeginForm("DodajIstezanjeTrening", "Home", FormMethod.Post, new { id = Model.TreningId}))
-    {
-        @Html.Hidden("istpIzmijeni", Model.Izmijeni)
-        @Html.Hidden("istpId", istp.IstezanjeId)
-    <div>
-        @Html.DisplayName(istp.Naziv)
-        @Html.Display(istp.Naziv)
-            
-    </div>
-            
-    if(istp.Info != null)
-    {    
-    <div>
-        @Html.DisplayName(istp.Info)
-        @Html.Display(istp.Info)
-    </div>
-            
-    }
-    <input type="submit" value="Dodaj Istezanje" /> 
-        <br />
-            
-    }        
-    }
-</fieldset>
-<p>
-    @if ((int)ViewData["izmijeni"] == 0)
-    {
-        @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
-    }
-    else
-    {
-        @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
-    }
-</p>
+<div id="inputAreaTable">
+    <div class="bigFont marginHeadline">Popis istezanja</div>
+    <table class="responstable">
+
+        @if (Model.IstezanjePopis.Count == 0)
+        {
+            <tr>
+                <td class="smallFont">Trenutno nema vježbi istezanja.</td>
+            </tr>
+        }
+
+        @foreach (IstezanjePopis istp in Model.IstezanjePopis)
+        {
+            using (Html.BeginForm("DodajIstezanjeTrening", "Home", FormMethod.Post, new { id = Model.TreningId }))
+            {
+                @Html.Hidden("istpIzmijeni", Model.Izmijeni)
+                @Html.Hidden("istpId", istp.IstezanjeId)
+                <tr class="smallFont">
+                    <td>@istp.Naziv</td>
+                    <td>@istp.Naziv</td>
+                    <td><input type="submit" value="Dodaj istezanje" class="button_example" /></td>
+                </tr>
+            }
+        }
+    </table>
+
+    @((int)ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" }) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" }))
+</div>
