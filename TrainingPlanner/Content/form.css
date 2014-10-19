@@ -261,3 +261,7 @@ h1:before {
 h1:after {
   left: 100%;
 }
+
+.inputNumber {
+    width: 70px;
+}
