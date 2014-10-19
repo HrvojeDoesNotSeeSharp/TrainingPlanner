@@ -24,33 +24,45 @@
         </div>
      
         <div>
-            <div class="marginText">@Html.Label("Ergometar", new {@class = "smallFont"})</div>
-            @Html.EditorFor(model => model.Ergometar)
-            @Html.ValidationMessageFor(model => model.Ergometar)
+            <div class="marginText">@Html.Label("Visina", new {@class = "smallFont"})</div>
+            @Html.EditorFor(model => model.Visina)
+            @Html.ValidationMessageFor(model => model.Visina)
         </div>
         
         <div>
-            <div class="marginText">@Html.Label("Zgibovi", new {@class = "smallFont"})</div>
-            @Html.EditorFor(model => model.Zgibovi)
-            @Html.ValidationMessageFor(model => model.Zgibovi)
+            <div class="marginText">@Html.Label("Tezina", new {@class = "smallFont"})</div>
+            @Html.EditorFor(model => model.Tezina)
+            @Html.ValidationMessageFor(model => model.Tezina)
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Antropometrija", new {@class = "smallFont"})</div>
+            @Html.EditorFor(model => model.Antropometrija)
+            @Html.ValidationMessageFor(model => model.Antropometrija)
+        </div>
+          
+        <div>
+            <div class="marginText">@Html.Label("Potkozno Masno Tkivo", new {@class = "smallFont"})</div>
+            @Html.EditorFor(model => model.PotkoznoMasnoTkivo)
+            @Html.ValidationMessageFor(model => model.PotkoznoMasnoTkivo)
+        </div>
+              
+        <div>
+            <div class="marginText">@Html.Label("Bezmasna Masa", new {@class = "smallFont"})</div>
+            @Html.EditorFor(model => model.BezmasnaMasa)
+            @Html.ValidationMessageFor(model => model.BezmasnaMasa)
         </div>
         
         <div>
-            <div class="marginText">@Html.Label("Sklekovi", new {@class = "smallFont"})</div>
-            @Html.EditorFor(model => model.Sklekovi)
-            @Html.ValidationMessageFor(model => model.Sklekovi)
+            <div class="marginText">@Html.Label("Funkcionalne Sposobnosti", new {@class = "smallFont"})</div>
+            @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new {rows = "10", cols = "40" })
+            @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti)
         </div>
         
         <div>
-            <div class="marginText">@Html.Label("Trbušnjaci", new {@class = "smallFont"})</div>
-            @Html.EditorFor(model => model.Trbusnjaci)
-            @Html.ValidationMessageFor(model => model.Trbusnjaci)
-        </div>
-        
-        <div>
-            <div class="marginText">@Html.Label("Čučnjevi", new {@class = "smallFont"})</div>
-            @Html.EditorFor(model => model.Cucnjevi)
-            @Html.ValidationMessageFor(model => model.Cucnjevi)
+            <div class="marginText">@Html.Label("Motoricke Sposobnosti", new {@class = "smallFont"})</div>
+            @Html.TextAreaFor(model => model.MotorickeSposobnosti, new {rows = "10", cols = "40" })
+            @Html.ValidationMessageFor(model => model.MotorickeSposobnosti)
         </div>
         
         <div class="marginText">

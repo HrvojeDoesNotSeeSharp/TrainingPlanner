@@ -6,12 +6,15 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
+using TrainingPlanner.Models;
 
 namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-    
+
+    [MetadataType(typeof(TestMetadata))]
     public partial class Test
     {
         public Test()

@@ -82,13 +82,15 @@
     </Key>
     <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DatumTesta" Type="datetime" Nullable="false" />
-    <Property Name="Ergometar" Type="smallint" Nullable="false" />
-    <Property Name="Zgibovi" Type="smallint" Nullable="false" />
-    <Property Name="Sklekovi" Type="smallint" Nullable="false" />
-    <Property Name="Trbusnjaci" Type="smallint" Nullable="false" />
-    <Property Name="Cucnjevi" Type="smallint" Nullable="false" />
+    <Property Name="Antropometrija" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tezina" Type="smallint" Nullable="true" />
+    <Property Name="Visina" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PotkoznoMasnoTkivo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="BezmasnaMasa" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ClanId" Type="int" Nullable="false" />
+    <Property Name="FunkcionalneSposobnosti" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MotorickeSposobnosti" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Trening">
     <Key>
@@ -406,15 +408,17 @@
           </Key>
           <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
-          <Property Type="Int16" Name="Ergometar" Nullable="false" />
-          <Property Type="Int16" Name="Zgibovi" Nullable="false" />
-          <Property Type="Int16" Name="Sklekovi" Nullable="false" />
-          <Property Type="Int16" Name="Trbusnjaci" Nullable="false" />
-          <Property Type="Int16" Name="Cucnjevi" Nullable="false" />
+          <Property Type="String" Name="Antropometrija" Nullable="true" />
+          <Property Type="Int16" Name="Tezina" Nullable="true" />
+          <Property Type="String" Name="Visina" Nullable="true" />
+          <Property Type="String" Name="PotkoznoMasnoTkivo" Nullable="true" />
+          <Property Type="String" Name="BezmasnaMasa" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clan" Relationship="TreningModel.ClanTest" FromRole="Test" ToRole="Clan" />
           <Property Type="Int32" Name="ClanId" Nullable="false" />
           <NavigationProperty Name="Slika" Relationship="TreningModel.FK_TestSlika" FromRole="Test" ToRole="Slika" />
+          <Property Type="String" Name="FunkcionalneSposobnosti" Nullable="true" />
+          <Property Type="String" Name="MotorickeSposobnosti" Nullable="true" />
         </EntityType>
         <EntityType Name="Trening">
           <Key>
@@ -692,13 +696,15 @@
         <MappingFragment StoreEntitySet="Test">
           <ScalarProperty Name="TestId" ColumnName="TestId" />
           <ScalarProperty Name="DatumTesta" ColumnName="DatumTesta" />
-          <ScalarProperty Name="Ergometar" ColumnName="Ergometar" />
-          <ScalarProperty Name="Zgibovi" ColumnName="Zgibovi" />
-          <ScalarProperty Name="Sklekovi" ColumnName="Sklekovi" />
-          <ScalarProperty Name="Trbusnjaci" ColumnName="Trbusnjaci" />
-          <ScalarProperty Name="Cucnjevi" ColumnName="Cucnjevi" />
+          <ScalarProperty Name="Antropometrija" ColumnName="Antropometrija" />
+          <ScalarProperty Name="Tezina" ColumnName="Tezina" />
+          <ScalarProperty Name="Visina" ColumnName="Visina" />
+          <ScalarProperty Name="PotkoznoMasnoTkivo" ColumnName="PotkoznoMasnoTkivo" />
+          <ScalarProperty Name="BezmasnaMasa" ColumnName="BezmasnaMasa" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
+          <ScalarProperty Name="FunkcionalneSposobnosti" ColumnName="FunkcionalneSposobnosti" />
+          <ScalarProperty Name="MotorickeSposobnosti" ColumnName="MotorickeSposobnosti" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
