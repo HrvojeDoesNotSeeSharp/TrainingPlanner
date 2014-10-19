@@ -7,91 +7,102 @@
 
 <h2>Trening</h2>
 
-<fieldset>
-    <legend>TreningDataModel</legend>
+<div id="inputAreaTableHome" class="defaultFont">
+<p class="bigFont marginHeadline">@Model.ClanIme @Model.ClanPrezime</p>
+        <table class="responstable">
+            <tr class="smallFont">
+                <td style="width:30%">
+                    @Html.DisplayFor(x => x.TreningImeTreninga)
+                </td>
+                <td style="width:30%">
+                    @Html.DisplayFor(x => x.TreningDatum)
+                </td>
+                <td style="width:30%">
+                    @Html.DisplayFor(x => x.TreningTip)
+                </td>
+            </tr>
+        </table>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ClanIme)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ClanIme)
-    </div>
+@if (Model.ListaZagrijavanja == null)
+{ }
+else if (Model.ListaZagrijavanja.ToList().Count == 0)
+{ }
+else
+{
+<div id="inputAreaTableHome" class="defaultFont">
+<p class="bigFont marginHeadline">Zagrijavanje</p>
+        <table class="responstable">
+            <thead><tr><th>Naziv</th><th>Puls</th><th>Tempo</th><th>Napomena</th></tr></thead>
+            @foreach (var zagrijavanje in Model.ListaZagrijavanja)
+            {
+            <tr class="smallFont">
+                <td>@zagrijavanje.Naziv</td>
+                <td>@zagrijavanje.Puls</td>
+                <td>@zagrijavanje.Tempo</td>
+                <td>@zagrijavanje.ZagrijavanjeNapomena</td>
+            </tr>
+            }
+        </table>
+</div>
+}
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ClanPrezime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ClanPrezime)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TreningImeTreninga)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TreningImeTreninga)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TreningDatum)
-    </div>
-    <div class="display-field">
-        @Model.TreningDatum.ToShortDateString()
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TreningTip)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TreningTip)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ListaZagrijavanja)
-    </div>
-    @if(Model.ListaZagrijavanja != null)
-    {
-    <div class="display-field">
-        @foreach (Zagrijavanje zg in Model.ListaZagrijavanja)
-        {
-            @zg.Naziv
-            <br />
-        }   
-    </div>
-    }
-    
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SekcijaVjezbi)
-    </div>
-    @if (Model.SekcijaVjezbi != null)
-    {
-    <div class="display-field">
-        @foreach (SekcijaVjezbi sek in Model.SekcijaVjezbi)
-        {
-            @sek.SekcijaId
-            <br />
-        }   
-    </div>
-    }
-    
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ListaIstezanja)
-    </div>
-    @if(Model.ListaZagrijavanja != null){
-    <div class="display-field">
-        @foreach (Istezanje ist in Model.ListaIstezanja)
-        {
-            @ist.Naziv
-            <br />
-        }   
-    </div>
-    <div class="display-field">
-          Napomena:
-          @Html.DisplayFor(model => model.Napomena)
+@if (Model.SekcijaVjezbi == null)
+{ }
+else if (Model.SekcijaVjezbi.ToList().Count == 0)
+{ }
+else
+{
+<div id="inputAreaTableHome" class="defaultFont">
+<p class="bigFont marginHeadline">Zagrijavanje</p>
+        <table class="responstable">
+            @foreach (var item in Model.SekcijaVjezbi)
+            {
+            <tr><td>Naziv</td><td>Broj ponavljanja</td><td>Broj serija</td><td>Težina</td><td>Odmor</td></tr>
+            foreach (var vjezba in item.Vjezba)
+            {
+            <tr class="smallFont">
+                <td>@vjezba.ImeVjezbe/td>
+                <td>@vjezba.BrojPonavljanja</td>
+                <td>@vjezba.BrojSerija</td>
+                <td>@vjezba.Kilogrami</td>
+                <td>@vjezba.Odmor</td>
+            </tr>
+            }
+            }
+        </table>
+</div>
+}
 
-    </div>
-    }
 
-</fieldset>
+
+
+
+@if (Model.ListaIstezanja == null)
+{ }
+else if (Model.ListaIstezanja.ToList().Count == 0)
+{ }
+else
+{
+<div id="inputAreaTableHome" class="defaultFont">
+<p class="bigFont marginHeadline">Istezanje</p>
+        <table class="responstable">
+            <thead><tr><th>Naziv</th><th>Vrijeme Izdrzaja</th><th>Vrsta Istezanja</th></tr></thead>
+            @foreach (var istezanje in Model.ListaIstezanja)
+            {
+            <tr class="smallFont">
+                <td>@istezanje.Naziv</td>
+                <td>@istezanje.VrijemeIzdrzaja</td>
+                <td>@istezanje.VrstaIstezanja</td>
+            </tr>
+            }
+        </table>
+</div>
+}
 <p>
     @Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, null)
 </p>
