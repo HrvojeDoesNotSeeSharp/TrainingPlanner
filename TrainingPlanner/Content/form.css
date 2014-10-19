@@ -145,7 +145,7 @@
     -webkit-border-radius: 3px; 
     -moz-border-radius: 3px;
     border-radius: 3px;
-    font-size:10px;
+    font-size:18px;
     font-family: Georgia, "Times New Roman", Times, serif; 
     padding: 10px 10px 10px 10px; 
     text-decoration:none; 
@@ -180,6 +180,10 @@ a:active { text-decoration: none; color: #222;}
 a:visited { text-decoration: none; color: #222;}
 a:hover { text-decoration: none; color: #222;} 
 a:focus { outline: none; color: #222;}
+
+.linkText {
+    color: blue;
+}
 
 .responstable {
   margin: 1em 0;

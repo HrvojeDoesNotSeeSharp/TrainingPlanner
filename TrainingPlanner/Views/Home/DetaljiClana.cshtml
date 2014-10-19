@@ -6,89 +6,51 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<div>
-    <table>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Clan.Ime)
-            </td>
-            <td>
-                @Model.Clan.Ime
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Clan.Prezime)
-            </td>
-            <td>
-                @Model.Clan.Prezime
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Clan.Visina)
-            </td>
-            <td>
-                @Model.Clan.Visina
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x=>x.Clan.Tezina)
-            </td>
-            <td>
-                @Model.Clan.Tezina
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x => x.Clan.GodinaRodenja)
-            </td>
-            <td>
-                @Model.Clan.GodinaRodenja.ToShortDateString()
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(x => x.Clan.GodineStarosti)
-            </td>
-            <td>
-                @Model.Clan.GodineStarosti
-            </td>
-        </tr>
-            <tr>
-            <td>
-                @Html.LabelFor(x => x.Clan.Amneza)
-            </td>
-            <td>
-                @Model.Clan.Amneza
-            </td>
-        </tr>
-            <tr>
-            <td>
-                @Html.LabelFor(x => x.Clan.Napomena)
-            </td>
-            <td>
-                @Model.Clan.Napomena
-            </td>
-        </tr>
-            @if(Model.ListaTest != null)
-            {
-        <tr>
-            <td>
-                Popis Testova:
-            </td>
-        </tr>
-                <tr>
-                @foreach (Test t in Model.ListaTest)
-                {
-                    <td>
-                        @Html.ActionLink(@t.Name , "DetaljiTest", new { id = @t.TestId})
-                    </td>
-                }
-                </tr>
-            
-            }
-        </table>
-    @Html.ActionLink("Povratak na popis clanova", "Index")
+<div id="inputArea" style="float: left;">
+    <p class="bigFont marginHeadline">Detalji člana</p>
+    <div>
+        <div class="marginInputBottom">@Html.LabelFor(x => x.Clan.Ime, new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => Model.Clan.Ime)
+    </div>
+    <div>
+        <div class="marginText">@Html.LabelFor(x => x.Clan.Prezime, new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => Model.Clan.Prezime)
+    </div>
+    <div>
+        <div class="marginText">@Html.LabelFor(x => x.Clan.Visina, new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => Model.Clan.Visina)
+    </div>
+    <div>
+        <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => Model.Clan.Tezina)
+    </div>
+    <div>
+        <div class="marginText">@Html.Label("Datum rođenja", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Clan.GodinaRodenja, new { @class = "dateInput" })
+    </div>
+    <div>
+        <div class="marginText">@Html.Label("Godine", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Clan.GodineStarosti)
+    </div>
+    <div>
+        <div class="marginText">@Html.LabelFor(x => x.Clan.Amneza, new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Clan.Amneza)
+    </div>
+    <div>
+        <div class="marginText">@Html.LabelFor(x => x.Clan.Napomena, new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Clan.Napomena)
+    </div>
+    
+    @if (Model.ListaTest != null)
+    {
+        <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
+
+        foreach (Test t in Model.ListaTest)
+        {
+            @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br/>
+        }
+
+    }
+    
+    @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </div>
