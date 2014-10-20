@@ -44,7 +44,7 @@
     
 <div id="inputAreaImages" style="float: left;">
     <!--Zagrijavanje-->
-    <div class="bigFont marginHeadline">Zagrijavanje</div>
+    <div class="bigFont marginHeadline marginHeadlineTop">Zagrijavanje</div>
     <table class="responstable">
         @if (Model.ListaZagrijavanja == null)
         {
@@ -84,7 +84,7 @@
     @Html.ActionLink("Dodaj zagrijavanje", "DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })    
     
     <!--Vjezbe-->   
-    <div class="bigFont marginHeadline">Vježbe</div>
+    <div class="bigFont marginHeadline marginHeadlineTop">Vježbe</div>
   
         @if (Model.SekcijaVjezbi == null)
         {
@@ -136,15 +136,15 @@
                             @Html.TextBox("brojKrugova", item.BrojKrugova, new { @class = "marginInputBottom inputNumber" })
                             <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" class="button_example_small" />
                         }
-                        @Html.ActionLink("Izbrisi sekciju vjezbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
                         @Html.ActionLink("Dodaj Vjezbu", "DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString() }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+                        @Html.ActionLink("Izbrisi sekciju vjezbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginLeft marginHeadlineTop marginTextBottom button_example" })
             }
         }
-                
+    <br/>            
     @Html.ActionLink("Dodaj sekciju vježbi", "DodajSekcijuTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
         
     <!--Istezanje-->   
-    <div class="bigFont marginHeadline">Istezanje</div>
+    <div class="bigFont marginHeadline marginHeadlineTop">Istezanje</div>
     <table class="responstable">
         @if (Model.ListaIstezanja == null)
         {
