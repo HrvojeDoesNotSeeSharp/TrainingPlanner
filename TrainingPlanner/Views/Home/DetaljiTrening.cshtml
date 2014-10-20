@@ -5,9 +5,7 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<h2>Trening</h2>
-
-<div id="inputAreaTableHome" class="defaultFont">
+<div id="inputAreaImages" class="defaultFont">
 <p class="bigFont marginHeadline">@Model.ClanIme @Model.ClanPrezime</p>
         <table class="responstable">
             <tr class="smallFont">
@@ -30,10 +28,11 @@ else if (Model.ListaZagrijavanja.ToList().Count == 0)
 { }
 else
 {
-<div id="inputAreaTableHome" class="defaultFont">
-<p class="bigFont marginHeadline">Zagrijavanje</p>
-        <table class="responstable">
-            <thead><tr><th>Naziv</th><th>Puls</th><th>Tempo</th><th>Napomena</th></tr></thead>
+<div id="inputAreaImages" class="defaultFont">
+        <table class="responstable smallFont">
+            <tr><td><p class="bigFont">Zagrijavanje</p></td></tr>
+            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Puls</td>
+                 <td style="border-bottom:solid">Tempo</td><td style="border-bottom:solid">Napomena</td>
             @foreach (var zagrijavanje in Model.ListaZagrijavanja)
             {
             <tr class="smallFont">
@@ -47,40 +46,45 @@ else
 </div>
 }
 
-
-
-
-
 @if (Model.SekcijaVjezbi == null)
 { }
 else if (Model.SekcijaVjezbi.ToList().Count == 0)
 { }
 else
 {
-<div id="inputAreaTableHome" class="defaultFont">
-<p class="bigFont marginHeadline">Zagrijavanje</p>
-        <table class="responstable">
+<div id="inputAreaImages" class="defaultFont">
+        @{int brojac = 0;}
             @foreach (var item in Model.SekcijaVjezbi)
             {
-            <tr><td>Naziv</td><td>Broj ponavljanja</td><td>Broj serija</td><td>Težina</td><td>Odmor</td></tr>
-            foreach (var vjezba in item.Vjezba)
+                brojac++;
+            <table class="responstable smallFont">
+                @if (Model.SekcijaVjezbi.ToList().Count > 1)
+                {<tr><td><p class="bigFont">Vjezbe @brojac . dio</p></td></tr>}
+                else
+            {<tr><td><p class="bigFont">Vjezbe</p></td></tr>}
+            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Broj ponavljanja</td>
+                <td style="border-bottom:solid">Broj serija</td><td style="border-bottom:solid">Težina</td><td style="border-bottom:solid">Odmor</td></tr>
+            @foreach (var vjezba in item.Vjezba)
             {
-            <tr class="smallFont">
-                <td>@vjezba.ImeVjezbe/td>
+            <tr>
+                <td>@vjezba.ImeVjezbe</td>
                 <td>@vjezba.BrojPonavljanja</td>
                 <td>@vjezba.BrojSerija</td>
                 <td>@vjezba.Kilogrami</td>
                 <td>@vjezba.Odmor</td>
             </tr>
             }
+            <tr>
+                <td colspan="5" style="text-align:left">
+                    Broj krugova:  @item.BrojKrugova
+                </td>
+            </tr>
+            </table>
+                <br />
             }
-        </table>
+        
 </div>
 }
-
-
-
-
 
 @if (Model.ListaIstezanja == null)
 { }
@@ -88,10 +92,11 @@ else if (Model.ListaIstezanja.ToList().Count == 0)
 { }
 else
 {
-<div id="inputAreaTableHome" class="defaultFont">
-<p class="bigFont marginHeadline">Istezanje</p>
+<div id="inputAreaImages" class="defaultFont">
         <table class="responstable">
-            <thead><tr><th>Naziv</th><th>Vrijeme Izdrzaja</th><th>Vrsta Istezanja</th></tr></thead>
+            <tr><td><p class="bigFont">Istezanje</p></td></tr>
+            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Vrijeme izdrzaja</td>
+                <td style="border-bottom:solid">Vrijeme istezanja</td>
             @foreach (var istezanje in Model.ListaIstezanja)
             {
             <tr class="smallFont">
@@ -103,6 +108,19 @@ else
         </table>
 </div>
 }
+
+<div>
+        <div class="marginText">@Html.Label("Napomena", new {@class = "smallFont"})</div>
+        @if(Model.Napomena == null)
+        {
+            <text>--</text>
+        }
+        else
+        {
+            @Html.TextAreaFor(model => model.Napomena, new { rows = "10", cols = "137" , @readonly = true})
+        } 
+</div>
+
 <p>
-    @Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, null)
+    @Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
 </p>
