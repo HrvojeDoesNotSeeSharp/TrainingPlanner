@@ -17,6 +17,7 @@ namespace TrainingPlanner
         public ZagrijavanjePopis()
         {
             this.ZagrijavanjeSlike = new HashSet<ZagrijavanjeSlike>();
+            this.Zagrijavanje = new HashSet<Zagrijavanje>();
         }
     
         public int ZagrijavanjeId { get; set; }
@@ -24,5 +25,6 @@ namespace TrainingPlanner
         public string Info { get; set; }
     
         public virtual ICollection<ZagrijavanjeSlike> ZagrijavanjeSlike { get; set; }
+        public virtual ICollection<Zagrijavanje> Zagrijavanje { get; set; }
     }
 }

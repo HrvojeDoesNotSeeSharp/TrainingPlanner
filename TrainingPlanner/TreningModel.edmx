@@ -60,6 +60,10 @@
       <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
       <End Role="Vjezba" EntitySet="Vjezba" />
     </AssociationSet>
+    <AssociationSet Name="ZagrijavanjeZagrijavanjePopis" Association="TreningModel.Store.ZagrijavanjeZagrijavanjePopis">
+      <End Role="Zagrijavanje" EntitySet="Zagrijavanje" />
+      <End Role="ZagrijavanjePopis" EntitySet="ZagrijavanjePopis" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
     <Key>
@@ -139,6 +143,7 @@
     <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ZagrijavanjeNapomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>
@@ -325,6 +330,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ZagrijavanjeZagrijavanjePopis">
+    <End Role="Zagrijavanje" Type="TreningModel.Store.Zagrijavanje" Multiplicity="*" />
+    <End Role="ZagrijavanjePopis" Type="TreningModel.Store.ZagrijavanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ZagrijavanjePopis">
+        <PropertyRef Name="ZagrijavanjeId" />
+      </Principal>
+      <Dependent Role="Zagrijavanje">
+        <PropertyRef Name="ZagrijavanjePopisZagrijavanjeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -383,6 +400,10 @@
           <AssociationSet Name="SekcijaVjezbiVjezba" Association="TreningModel.SekcijaVjezbiVjezba">
             <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
             <End Role="Vjezba" EntitySet="Vjezba" />
+          </AssociationSet>
+          <AssociationSet Name="ZagrijavanjeZagrijavanjePopis" Association="TreningModel.ZagrijavanjeZagrijavanjePopis">
+            <End Role="Zagrijavanje" EntitySet="Zagrijavanje" />
+            <End Role="ZagrijavanjePopis" EntitySet="ZagrijavanjePopis" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
@@ -474,6 +495,7 @@
           <Property Type="String" Name="Naziv" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ZagrijavanjeSlike" Relationship="TreningModel.ZagrijavanjeSlikeZagrijavanjePopis" FromRole="ZagrijavanjePopis" ToRole="ZagrijavanjeSlike" />
+          <NavigationProperty Name="Zagrijavanje" Relationship="TreningModel.ZagrijavanjeZagrijavanjePopis" FromRole="ZagrijavanjePopis" ToRole="Zagrijavanje" />
         </EntityType>
         <EntityType Name="Zagrijavanje">
           <Key>
@@ -487,6 +509,8 @@
           <Property Type="String" Name="Tempo" Nullable="true" />
           <Property Type="String" Name="Puls" Nullable="true" />
           <Property Type="String" Name="ZagrijavanjeNapomena" Nullable="true" />
+          <NavigationProperty Name="ZagrijavanjePopis" Relationship="TreningModel.ZagrijavanjeZagrijavanjePopis" FromRole="Zagrijavanje" ToRole="ZagrijavanjePopis" />
+          <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Vjezba">
           <Key>
@@ -669,6 +693,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ZagrijavanjeZagrijavanjePopis">
+          <End Type="TreningModel.Zagrijavanje" Role="Zagrijavanje" Multiplicity="*" />
+          <End Type="TreningModel.ZagrijavanjePopis" Role="ZagrijavanjePopis" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ZagrijavanjePopis">
+              <PropertyRef Name="ZagrijavanjeId" />
+            </Principal>
+            <Dependent Role="Zagrijavanje">
+              <PropertyRef Name="ZagrijavanjePopisZagrijavanjeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -758,6 +794,7 @@
           <ScalarProperty Name="Tempo" ColumnName="Tempo" />
           <ScalarProperty Name="Puls" ColumnName="Puls" />
           <ScalarProperty Name="ZagrijavanjeNapomena" ColumnName="ZagrijavanjeNapomena" />
+          <ScalarProperty Name="ZagrijavanjePopisZagrijavanjeId" ColumnName="ZagrijavanjePopisZagrijavanjeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -849,6 +886,7 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

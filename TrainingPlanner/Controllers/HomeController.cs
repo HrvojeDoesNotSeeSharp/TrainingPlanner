@@ -56,9 +56,22 @@ namespace TrainingPlanner.Controllers
             return RedirectToAction("ZagrijavanjePopis", "Home");
         }
 
-        public ActionResult DetaljiZagrijavanja(int id = 0)
+        public ActionResult DetaljiZagrijavanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0)
         {
             var zp = _context.ZagrijavanjePopis.Find(id);
+            if (izmijeni == 1)
+            {
+                ViewData["izmijeni"] = izmijeni;
+            }
+            if (trening == 1)
+            {
+                ViewData["trening"] = trening;
+            }
+            if (treningId > 0)
+            {
+                ViewData["treningId"] = treningId;
+            }
+
             return View(zp);
         }
 
@@ -1177,7 +1190,7 @@ namespace TrainingPlanner.Controllers
 
             var zgp = query.Single();
 
-            var zg = new Zagrijavanje {Naziv = zgp.Naziv, TreningId = id};
+            var zg = new Zagrijavanje {Naziv = zgp.Naziv, TreningId = id, ZagrijavanjePopisZagrijavanjeId = zgpId};
             if (zgp.Info != null)
             {
                 zg.Info = zgp.Info;
@@ -1217,7 +1230,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string Napomena = null, int id = 0,
+        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string NapomenaZagrijavanje = null, int id = 0,
             int ZagrijavanjeId = 0, int izmijeni = 0)
         {
             var query = from x in _context.Zagrijavanje
@@ -1227,7 +1240,7 @@ namespace TrainingPlanner.Controllers
             var zg = query.Single();
             zg.Tempo = tempo;
             zg.Puls = puls;
-            zg.ZagrijavanjeNapomena = Napomena;
+            zg.ZagrijavanjeNapomena = NapomenaZagrijavanje;
 
             _context.Entry(zg).State = EntityState.Modified;
             _context.SaveChanges();
