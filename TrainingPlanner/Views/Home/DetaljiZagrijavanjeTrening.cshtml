@@ -4,26 +4,29 @@
     Layout = "~/Views/_LayoutWithCSS.cshtml";
 }
 
-<h2>Detalji Zagrijavanja</h2>
+<div id="inputArea" style="float: left;">
+    <p class="bigFont marginHeadline">Detalji zagrijavanja</p>
+    @Html.HiddenFor(model => model.ZagrijavanjeId)
+    <div>
+        <div class="marginInputBottom marginText">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Naziv)
+    </div>
+    <div>
+        <div class="marginInputBottom marginText">@Html.Label("Puls", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Puls)
+    </div>
+    <div>
+        <div class="marginInputBottom marginText">@Html.Label("Tempo", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.Tempo)
+    </div>
+    <div>
+        <div class="marginInputBottom marginText">@Html.Label("Napomena", new { @class = "smallFont" })</div>
+        @Html.DisplayFor(model => model.ZagrijavanjeNapomena)
+    </div>
 
-<fieldset>
-        <legend>Zagrijavanja Popis</legend>
-    
-             @Html.HiddenFor(model => model.ZagrijavanjeId)
-            
-        <div class="display-label">
-             @Html.DisplayNameFor(model => model.Naziv)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Naziv)
-        </div>
-        @if(Model.Info != null)
-        {
-        <div class="display-label">
-             @Html.DisplayNameFor(model => model.Info)
-        </div>
-        <div class="display-field">
-            @if(Model.Info == null)
+    <div class="marginText">
+        <div class="marginInputBottom">@Html.Label("Info", new { @class = "smallFont marginInputBottom" })</div>
+        @if (Model.Info == null)
         {
             <text>--</text>
         }
@@ -31,18 +34,14 @@
         {
             @Html.DisplayFor(model => model.Info)
         }
-        </div>
-        }
-
-        
-    </fieldset>
-    <p>
-        @if ((int)ViewData["izmijeni"] == 0)
-        {
-            @Html.ActionLink("Natrag na Trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, null)
-        }
-        else
-        {
-            @Html.ActionLink("Natrag na Trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, null)
-        }
-    </p>
+    </div>
+    
+    @if ((int)ViewData["izmijeni"] == 0)
+    {
+        @Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    }
+    else
+    {
+        @Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    }
+</div>
