@@ -308,9 +308,23 @@ namespace TrainingPlanner.Controllers
             return RedirectToAction("IstezanjePopis", "Home");
         }
 
-        public ActionResult DetaljiIstezanja(int id = 0)
+        public ActionResult DetaljiIstezanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0)
         {
             var ip = _context.IstezanjePopis.Find(id);
+
+            if (izmijeni == 1)
+            {
+                ViewData["izmijeni"] = izmijeni;
+            }
+            if (trening == 1)
+            {
+                ViewData["trening"] = trening;
+            }
+            if (treningId > 0)
+            {
+                ViewData["treningId"] = treningId;
+            }
+
             return View(ip);
         }
 
@@ -1141,7 +1155,7 @@ namespace TrainingPlanner.Controllers
 
             var istp = query.Single();
 
-            var ist = new Istezanje {Naziv = istp.Naziv, TreningId = id};
+            var ist = new Istezanje {Naziv = istp.Naziv, TreningId = id, IstezanjePopisIstezanjeId = istpId};
             if (istp.Info != null)
             {
                 ist.Info = istp.Info;

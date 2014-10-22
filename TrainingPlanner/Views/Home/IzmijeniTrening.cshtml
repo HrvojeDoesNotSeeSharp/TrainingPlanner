@@ -173,7 +173,7 @@
                         <td>@Html.TextBox("vrstaIstezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
 
                         <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId, izmijeni = 1 }, new { @class = "button_example_small" })</td>
-                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId, izmijeni = 1 }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeni = 1, trening = 0, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
 
                         <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_small" /></td>
                     </tr>
