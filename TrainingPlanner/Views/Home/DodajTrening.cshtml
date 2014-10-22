@@ -74,7 +74,7 @@
                         <td>@Html.TextBox("Napomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
                         <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
-                        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zagrijavanje.ZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
                         <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_small" /></td>
                     </tr>
                 }
@@ -121,7 +121,7 @@
                             <td>@Html.TextBox("Tezina", vjezba.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Odmor", vjezba.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, new { @class = "button_example_small" })</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId, id1 = Model.TreningId.ToString() }, new { @class = "button_example_small" })</td>
+                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjezba.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
 
                             <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_small" /></td>
                         </tr>

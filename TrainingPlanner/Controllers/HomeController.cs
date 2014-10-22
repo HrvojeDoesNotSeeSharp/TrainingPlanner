@@ -183,9 +183,23 @@ namespace TrainingPlanner.Controllers
             return RedirectToAction("VjezbePopis", "Home");
         }
 
-        public ActionResult DetaljiVjezbe(int id = 0)
+        public ActionResult DetaljiVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0)
         {
             var vjp = _context.VjezbePopis.Find(id);
+
+            if (izmijeni == 1)
+            {
+                ViewData["izmijeni"] = izmijeni;
+            }
+            if (trening == 1)
+            {
+                ViewData["trening"] = trening;
+            }
+            if (treningId > 0)
+            {
+                ViewData["treningId"] = treningId;
+            }
+
             return View(vjp);
         }
 
@@ -1053,7 +1067,7 @@ namespace TrainingPlanner.Controllers
 
             var vjp = query.Single();
 
-            var vj = new Vjezba {ImeVjezbe = vjp.ImeVjezbe, SekcijaId = id};
+            var vj = new Vjezba {ImeVjezbe = vjp.ImeVjezbe, SekcijaId = id, VjezbePopisVjezbeId = vjpId};
             if (vjp.Info != null)
             {
                 vj.Info = vjp.Info;

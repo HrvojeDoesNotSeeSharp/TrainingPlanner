@@ -121,7 +121,7 @@
                             <td>@Html.TextBox("Tezina", vjezba.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Odmor", vjezba.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId, izmijeni = 1 }, new { @class = "button_example_small" })</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbeTrening", "Home", new { id = vjezba.VjezbaId, id1 = Model.TreningId.ToString(), izmijeni = 1 }, new { @class = "button_example_small" })</td>
+                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjezba.VjezbePopisVjezbeId, izmijeni = 1, trening = 0, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
 
                             <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_small" /></td>
                         </tr>

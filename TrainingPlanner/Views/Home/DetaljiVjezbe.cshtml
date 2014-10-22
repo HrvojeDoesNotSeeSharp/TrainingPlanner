@@ -23,8 +23,19 @@
             @Html.DisplayFor(model => model.Info)
         }
     </div> 
-
-    @Html.ActionLink("Popis vježbi", "VjezbePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    
+    @if (ViewData["trening"] != null)
+    {
+        @Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = (int)ViewData["treningId"], DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    }
+    @if (ViewData["izmijeni"] != null)
+    {
+        @Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    }
+    @if (ViewData["trening"] == null && ViewData["izmijeni"] == null)
+    {
+        @Html.ActionLink("Popis vježbi", "VjezbePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    }
 </div>
     
 @if (Model.VjezbeSlike.Count > 0)
