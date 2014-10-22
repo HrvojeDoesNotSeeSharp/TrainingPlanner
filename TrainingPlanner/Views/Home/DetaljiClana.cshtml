@@ -37,7 +37,7 @@
     </div>
     <div>
         <div class="marginText">@Html.Label("Datum rođenja", new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => model.Clan.GodinaRodenja, new { @class = "dateInput" })
+        @Model.Clan.GodinaRodenja.ToShortDateString()
     </div>
     <div>
         <div class="marginText">@Html.Label("Godine", new { @class = "smallFont" })</div>

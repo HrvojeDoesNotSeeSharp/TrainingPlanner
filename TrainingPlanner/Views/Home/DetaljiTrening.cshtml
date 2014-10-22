@@ -13,7 +13,7 @@
                     @Html.DisplayFor(x => x.TreningImeTreninga)
                 </td>
                 <td style="width:30%">
-                    @Html.DisplayFor(x => x.TreningDatum)
+                    @Model.TreningDatum.ToShortDateString()
                 </td>
                 <td style="width:30%">
                     @Html.DisplayFor(x => x.TreningTip)

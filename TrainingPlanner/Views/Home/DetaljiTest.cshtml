@@ -14,7 +14,7 @@
         
     <div>
         <div class="marginText">@Html.Label("Datum", new {@class = "smallFont"})</div>
-        @Html.DisplayFor(model => model.DatumTesta, new {@class = "dateInput"})
+        @Model.DatumTesta.ToShortDateString()
     </div>
      
     <div>
