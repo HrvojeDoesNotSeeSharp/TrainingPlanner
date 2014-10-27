@@ -1258,7 +1258,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string NapomenaZagrijavanje = null, int id = 0,
+        public ActionResult SpremiZagrijavanjeInfo(string puls, string tempo = null, string Napomena = null, int id = 0,
             int ZagrijavanjeId = 0, int izmijeni = 0)
         {
             var query = from x in _context.Zagrijavanje
@@ -1268,7 +1268,7 @@ namespace TrainingPlanner.Controllers
             var zg = query.Single();
             zg.Tempo = tempo;
             zg.Puls = puls;
-            zg.ZagrijavanjeNapomena = NapomenaZagrijavanje;
+            zg.ZagrijavanjeNapomena = Napomena;
 
             _context.Entry(zg).State = EntityState.Modified;
             _context.SaveChanges();

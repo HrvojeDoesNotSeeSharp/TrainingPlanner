@@ -95,7 +95,7 @@
     <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DatumTesta" Type="datetime" Nullable="false" />
     <Property Name="Antropometrija" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Tezina" Type="smallint" Nullable="true" />
+    <Property Name="Tezina" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Visina" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PotkoznoMasnoTkivo" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BezmasnaMasa" Type="nvarchar(max)" Nullable="true" />
@@ -472,7 +472,7 @@
           <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
           <Property Type="String" Name="Antropometrija" Nullable="true" />
-          <Property Type="Int16" Name="Tezina" Nullable="true" />
+          <Property Type="String" Name="Tezina" Nullable="true" />
           <Property Type="String" Name="Visina" Nullable="true" />
           <Property Type="String" Name="PotkoznoMasnoTkivo" Nullable="true" />
           <Property Type="String" Name="BezmasnaMasa" Nullable="true" />

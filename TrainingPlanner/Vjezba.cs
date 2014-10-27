@@ -23,7 +23,9 @@ namespace TrainingPlanner
         public string Kilogrami { get; set; }
         public string Odmor { get; set; }
         public int SekcijaId { get; set; }
+        public int VjezbePopisVjezbeId { get; set; }
     
         public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
+        public virtual VjezbePopis VjezbePopis { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace TrainingPlanner
         public VjezbePopis()
         {
             this.VjezbeSlike = new HashSet<VjezbeSlike>();
+            this.Vjezba = new HashSet<Vjezba>();
         }
     
         public int VjezbeId { get; set; }
@@ -25,5 +26,6 @@ namespace TrainingPlanner
         public string Info { get; set; }
     
         public virtual ICollection<VjezbeSlike> VjezbeSlike { get; set; }
+        public virtual ICollection<Vjezba> Vjezba { get; set; }
     }
 }

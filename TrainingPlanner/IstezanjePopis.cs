@@ -17,6 +17,7 @@ namespace TrainingPlanner
         public IstezanjePopis()
         {
             this.IstezanjeSlike = new HashSet<IstezanjeSlike>();
+            this.Istezanje = new HashSet<Istezanje>();
         }
     
         public int IstezanjeId { get; set; }
@@ -24,5 +25,6 @@ namespace TrainingPlanner
         public string Info { get; set; }
     
         public virtual ICollection<IstezanjeSlike> IstezanjeSlike { get; set; }
+        public virtual ICollection<Istezanje> Istezanje { get; set; }
     }
 }

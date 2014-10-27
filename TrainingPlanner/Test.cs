@@ -6,15 +6,12 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
-using TrainingPlanner.Models;
 
 namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-
-    [MetadataType(typeof(TestMetadata))]
+    
     public partial class Test
     {
         public Test()
@@ -25,7 +22,7 @@ namespace TrainingPlanner
         public int TestId { get; set; }
         public System.DateTime DatumTesta { get; set; }
         public string Antropometrija { get; set; }
-        public Nullable<short> Tezina { get; set; }
+        public string Tezina { get; set; }
         public string Visina { get; set; }
         public string PotkoznoMasnoTkivo { get; set; }
         public string BezmasnaMasa { get; set; }
