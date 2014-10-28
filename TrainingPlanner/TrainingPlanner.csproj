@@ -194,6 +194,7 @@
     <Content Include="Content\JavaScripts\jquery-1.11.1.js" />
     <Content Include="Content\JavaScripts\jquery.validate.js" />
     <Content Include="Content\JavaScripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\Vanjski.css" />
     <Content Include="Global.asax" />
     <Content Include="TreningModel.edmx.sql" />
@@ -337,6 +338,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_LayoutWithCSS.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

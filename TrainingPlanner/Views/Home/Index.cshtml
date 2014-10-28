@@ -2,68 +2,49 @@
 @model List<Clan>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Početna stranica </title>
-        <meta charset="utf-8">
-        <link href="@Url.Content("~/Content/form.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/Grid.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/Vanjski.css")" rel="stylesheet" type="text/css" />
-        <script type="javascript" src="@Url.Content("~/scripts/myScripts.js?" + DateTime.Now.ToString("ddMMHHmmss"))"></script>
-    </head>
-<body>
 
-    <section>
-        <h1 class="extraBigFont marginHeadline">Trening planer</h1>
-    </section>
+<div id="sidebar">
+    <h2>Vježbe za trening</h2>
+    <p>
+    <p>@Html.ActionLink("Pregled Vjezbi Zagrijavanja", "ZagrijavanjePopis", "Home", null, new { @class = "button_example" })</p>
+    <p>@Html.ActionLink("Pregled Vjezbi Treninga", "VjezbePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
+    <p>@Html.ActionLink("Pregled Vjezbi Istezanja", "IstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
+    </p>
+</div>
+<div id="content">
+    <h2>Popis članova</h2>
+    <p>
+        <table class="responstable">
+            @if (Model.Count > 0)
+            {
+                foreach (Clan c in Model)
+                {
+                    <tr class="smallFont">
+                        <td>@c.Ime&nbsp;<br />@c.Prezime</td>
 
-    <div class="container_12">
-        <div class="grid_8">
-            <div id="inputAreaTableHome">
-                <div class="bigFont marginHeadline">Popis članova</div>
-                <table class="responstable">
-                    @if (Model.Count > 0)
-                    {
-                        foreach (Clan c in Model)
-                        {
-                            <tr class="smallFont">
-                                <td>@c.Ime&nbsp;<br/>@c.Prezime</td>
+                        <td>@c.GodineStarosti &nbsp; god.</td>
+                        <td>@Html.ActionLink("Izmjeni", "IzmijeniClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Test", "Test", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Trening", "TreningPopis", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="smallFont">Nema članova</td>
+                </tr>
+            }
+        </table>
 
-                                <td>@c.GodineStarosti &nbsp; god.</td>                            
-                                <td>@Html.ActionLink("Izmjeni", "IzmijeniClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
-                                <td>@Html.ActionLink("Detalji", "DetaljiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
-                                <td>@Html.ActionLink("Test", "Test", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
-                                <td>@Html.ActionLink("Trening", "TreningPopis", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
-                                <td>@Html.ActionLink("Izbriši", "IzbrisiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
-                            </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td class="smallFont">Nema članova</td>
-                        </tr>
-                    }
-                </table>
+        @Html.ActionLink("Dodaj člana", "DodajClana", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
+</div>
 
-                @Html.ActionLink("Dodaj člana", "DodajClana", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-            </div>
-        </div>
-        <div class="grid_4">
-            <div id="inputAreaTableHome">
-                <p class="bigFont marginHeadline">Vježbe za trening</p>
 
-                <p>@Html.ActionLink("Pregled Vjezbi Zagrijavanja", "ZagrijavanjePopis", "Home", null, new { @class = "button_example" })</p>
-                <p>@Html.ActionLink("Pregled Vjezbi Treninga", "VjezbePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
-                <p>@Html.ActionLink("Pregled Vjezbi Istezanja", "IstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
-            </div>
-        </div>
-    </div>
 
-</body>
-</html>

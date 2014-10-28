@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/layout.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/form1.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Content/JavaScripts/jquery-1.11.1.js")"></script>
+    <script src="@Url.Content("~/Content/JavaScripts/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/Content/JavaScripts/jquery.validate.unobtrusive.js")"></script>
+    <title>@ViewBag.Title</title>
+</head>
+    <body>
+        <div id="wrap">
+            <div id="masthead">
+                <h1>Trening planer</h1>
+                <div id="menucontainer"></div>
+            </div>
+            <div id="container">
+                @RenderBody()
+                
+            </div>
+        </div>
+        <!--<div id="footer">
+            <a href="#">homepage</a> | <a href="mailto:denise@mitchinson.net">contact</a> | <a href="http://validator.w3.org/check?uri=referer">html</a> | <a href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a href="http://www.mitchinson.net"> www.mitchinson.net</a><br />
+            This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>
+        </div>-->
+
+    </body>
+</html>
