@@ -67,6 +67,11 @@ padding: 0 1em 0 1em;
 margin: 0 450px 0 0;
 border-right: 1px solid #eee;
 }
+#contentImg {
+padding: 0 1em 0 1em;
+margin: 0 0 0 0;
+border-right: 1px solid #eee;
+}
 			/*SIDEBAR*/
 #sidebar {
 float: right;

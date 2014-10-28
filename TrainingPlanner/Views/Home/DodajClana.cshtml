@@ -2,69 +2,72 @@
 @model Clan
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using(Html.BeginForm("DodajClana", "Home", FormMethod.Post))
-{
-    @Html.ValidationSummary(true)
-   
-    <div id="inputArea">
-        <p class="bigFont marginHeadline">Novi član</p>
-         
-        <div>
-            <div class="marginInputBottom">@Html.Label("Ime", new { @class="smallFont" })</div>
-            @Html.EditorFor(x=>x.Ime)
-            @Html.ValidationMessageFor(x=>x.Ime)
-        </div>
-        
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Prezime", new { @class="smallFont marginInputBottom" })</div>
-            @Html.EditorFor(x=>x.Prezime)
-            @Html.ValidationMessageFor(x=>x.Prezime)
-        </div>
-        
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Visina", new { @class="smallFont marginInputBottom" })</div>
-            @Html.EditorFor(x=>x.Visina)
-            @Html.ValidationMessageFor(x=>x.Visina)
-        </div>
-        
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Težina", new { @class="smallFont marginInputBottom" })</div>
-            @Html.EditorFor(x=>x.Tezina)
-            @Html.ValidationMessageFor(x=>x.Tezina)
-        </div>
-        
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Sport", new { @class="smallFont marginInputBottom" })</div>
-            @Html.EditorFor(x=>x.Sport)
-            @Html.ValidationMessageFor(x=>x.Sport)
-        </div>
+<div id="sidebar"></div>
+<div id="content">
+    @using (Html.BeginForm("DodajClana", "Home", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
 
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class="smallFont marginInputBottom" })</div>
-            @Html.TextBoxFor(x=>x.GodinaRodenja, "{0:dd/MM/yyyy}", new { @Value="01/01/1980", @class = "dateInput" })
-            @Html.ValidationMessageFor(m=>m.GodinaRodenja)
-        </div>
-        
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Amneza", new { @class="smallFont marginInputBottom" })</div>
-            @Html.TextAreaFor(x=>x.Amneza, new {rows = "10", cols = "40"})
-            @Html.ValidationMessageFor(x=>x.Amneza)
-        </div>
-        
-         <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Napomena", new { @class="smallFont marginInputBottom" })</div>
-            @Html.TextAreaFor(x => x.Napomena, new {rows = "10", cols = "40" })
-            @Html.ValidationMessageFor(x=>x.Napomena)
-        </div>
+        <div id="inputArea">
+            <h2>Novi član</h2>
 
-        
-        <div class="marginHeadlineTop marginTextBottom">
-            <input type ="submit" name ="DodajClana" value="Dodaj člana" class="button_example" />
+            <div>
+                <div class="marginInputBottom">@Html.Label("Ime", new { @class = "smallFont" })</div>
+                @Html.EditorFor(x => x.Ime)
+                @Html.ValidationMessageFor(x => x.Ime)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Prezime", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.EditorFor(x => x.Prezime)
+                @Html.ValidationMessageFor(x => x.Prezime)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Visina", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.EditorFor(x => x.Visina)
+                @Html.ValidationMessageFor(x => x.Visina)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Težina", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.EditorFor(x => x.Tezina)
+                @Html.ValidationMessageFor(x => x.Tezina)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Sport", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.EditorFor(x => x.Sport)
+                @Html.ValidationMessageFor(x => x.Sport)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextBoxFor(x => x.GodinaRodenja, "{0:dd/MM/yyyy}", new { @Value = "01/01/1980", @class = "dateInput" })
+                @Html.ValidationMessageFor(m => m.GodinaRodenja)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Amneza", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextAreaFor(x => x.Amneza, new { rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(x => x.Amneza)
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextAreaFor(x => x.Napomena, new { rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(x => x.Napomena)
+            </div>
+
+
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" name="DodajClana" value="Dodaj člana" class="button_example" />
+            </div>
+            @Html.ActionLink("Popis članova", "Index", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
         </div>
-        @Html.ActionLink("Popis članova", "Index", null, new{ @class="marginHeadlineTop marginTextBottom button_example" })
-    </div>
-}
+    }
+</div>
 

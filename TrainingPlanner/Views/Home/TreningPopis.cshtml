@@ -2,11 +2,13 @@
 @model List<Trening>
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Trening <br />@ViewData["ImeClana"] @ViewData["PrezimeClana"]</div>
+<div id="sidebar"></div>
+<div id="content">
+
+    <h2>Trening - @ViewData["ImeClana"] @ViewData["PrezimeClana"]</h2>
     <table class="responstable">
 
         @foreach (Trening tr in Model)
@@ -21,9 +23,9 @@
             {
                 <tr class="smallFont">
                     <td>@tr.ImeTreninga</td>
-                    <td>@tr.DatumTreninga.Value.Date.ToShortDateString()</td> 
+                    <td>@tr.DatumTreninga.Value.Date.ToShortDateString()</td>
                     <td>@Html.ActionLink("Izbriši", "IzbrisiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
-                    <td>@Html.ActionLink("Izmijeni", "IzmijeniTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
+                    <td>@Html.ActionLink("Izmjeni", "IzmijeniTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
                     <td>@Html.ActionLink("Detalji", "DetaljiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
                 </tr>
             }
