@@ -2,41 +2,44 @@
 @model List<ZagrijavanjePopis>
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Zagrijavanje</div>
-    <table class="responstable">
-  
-        @foreach (ZagrijavanjePopis zp in Model)
-        {
-            if (zp.ZagrijavanjeId == 0)
-            {
-                <tr>
-                    <td class="smallFont">Trenutno nema vježbi zagrijavanja.</td>
-                </tr>
-            }
-            else
-            {
-                <tr class="smallFont">
-                    <td>@zp.Naziv</td>
-                    @if(zp.Info == null)
-                    {
-                        <td>--</td> 
-                    }
-                    else
-                    {
-                        <td>@zp.Info</td> 
-                    }
-                    <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td> 
-                    <td>@Html.ActionLink("Izmjeni", "IzmijeniZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
-                    <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
-                </tr>
-            }
-        }
-    </table>
 
-    @Html.ActionLink("Dodaj", "DodajNovoZagrijavanje", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+<div id="sidebar"></div>
+<div id="content">
+    <h2>Vježbe zagrijavanja</h2>
+    <p>
+        <table class="responstable">
+            @foreach (ZagrijavanjePopis zp in Model)
+            {
+                if (zp.ZagrijavanjeId == 0)
+                {
+                    <tr>
+                        <td class="smallFont">Trenutno nema vježbi zagrijavanja.</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="smallFont">
+                        <td>@zp.Naziv</td>
+                        @if (zp.Info == null)
+                        {
+                            <td>--</td>
+                        }
+                        else
+                        {
+                            <td>@zp.Info</td>
+                        }
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izmjeni", "IzmijeniZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        @Html.ActionLink("Dodaj", "DodajNovoZagrijavanje", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
 </div>
     

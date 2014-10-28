@@ -2,40 +2,43 @@
 @model List<IstezanjePopis>
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Istezanje</div>
-    <table class="responstable">
-        
-        @foreach (IstezanjePopis ip in Model) {
-            if (ip.IstezanjeId == 0)
+<div id="sidebar"></div>
+<div id="content">
+    <h2>Vježbe istezanja</h2>
+    <p>
+        <table class="responstable">
+            @foreach (IstezanjePopis ip in Model)
             {
-                <tr>
-                    <td class="smallFont">Trenutno nema vježbi istezanja.</td>
-                </tr>
+                if (ip.IstezanjeId == 0)
+                {
+                    <tr>
+                        <td class="smallFont">Trenutno nema vježbi istezanja.</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="smallFont">
+                        <td>@ip.Naziv</td>
+                        @if (ip.Info == null)
+                        {
+                            <td>--</td>
+                        }
+                        else
+                        {
+                            <td>@ip.Info</td>
+                        }
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
+                    </tr>
+                }
             }
-            else
-            {
-                <tr class="smallFont">
-                    <td>@ip.Naziv</td> 
-                    @if(ip.Info == null)
-                    {
-                        <td>--</td> 
-                    }
-                    else
-                    {
-                        <td>@ip.Info</td> 
-                    }
-                    <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td> 
-                    <td>@Html.ActionLink("Izmijeni", "IzmijeniIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
-                    <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
-                </tr>
-            }
-        }
-    </table>
+        </table>
 
-    @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })    
-    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Dodaj", "DodajNovoIstezanje", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
 </div>

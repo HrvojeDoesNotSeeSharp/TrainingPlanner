@@ -2,32 +2,35 @@
 @model TrainingPlanner.Models.TestList
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">@Model.Clan.Ime @Model.Clan.Prezime</div>
-    <table class="responstable">
-        @if (Model.ListaTestova == null)
-        {
-            <tr>
-                <td class="smallFont">Trenutno nema testova.</td>
-            </tr>
-        }
-        else
-        {
-            foreach (var test in Model.ListaTestova)
+<div id="sidebar"></div>
+<div id="content">
+    <h2>Testovi - @Model.Clan.Ime @Model.Clan.Prezime</h2>
+    <p>
+        <table class="responstable">
+            @if (Model.ListaTestova == null)
             {
-                <tr class="smallFont">
-                    <td>@test.Name</td> 
-                    <td>@Html.ActionLink("Izbrisi", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td> 
-                    <td>@Html.ActionLink("Izmijeni", "IzmijeniTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
-                    <td>@Html.ActionLink("Detalji", "DetaljiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                <tr>
+                    <td class="smallFont">Trenutno nema testova.</td>
                 </tr>
             }
-        }
-    </table>
+            else
+            {
+                foreach (var test in Model.ListaTestova)
+                {
+                    <tr class="smallFont">
+                        <td>@test.Name</td>
+                        <td>@Html.ActionLink("Izbrisi", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izmijeni", "IzmijeniTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                    </tr>
+                }
+            }
+        </table>
 
-    @Html.ActionLink("Dodaj test", "DodajTest", "Home", new { id = Model.Clan.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })  
-    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Dodaj test", "DodajTest", "Home", new { id = Model.Clan.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
 </div>

@@ -2,40 +2,43 @@
 @model List<VjezbePopis>
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Vježbe</div>
-    <table class="responstable">
-         
-    @foreach (VjezbePopis vjp in Model) {
-            if(vjp.VjezbeId == 0)
-        {
-            <tr>
-                <td class="smallFont">Trenutno nema vježbi.</td>
-            </tr>
-        }
-        else
-        {
-            <tr class="smallFont">
-                <td>@vjp.ImeVjezbe</td>
-                @if(vjp.Info == null)
-                    {
-                        <td>--</td> 
-                    }
-                    else
-                    {
-                        <td>@vjp.Info</td> 
-                    } 
-                <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td> 
-                <td>@Html.ActionLink("Izmijeni", "IzmijeniVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
-                <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
-            </tr>
-        }
-    }
-    </table>
+<div id="sidebar"></div>
+<div id="content">
+    <h2>Vježbe treninga</h2>
+    <p>
+        <table class="responstable">
+            @foreach (VjezbePopis vjp in Model)
+            {
+                if (vjp.VjezbeId == 0)
+                {
+                    <tr>
+                        <td class="smallFont">Trenutno nema vježbi.</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="smallFont">
+                        <td>@vjp.ImeVjezbe</td>
+                        @if (vjp.Info == null)
+                        {
+                            <td>--</td>
+                        }
+                        else
+                        {
+                            <td>@vjp.Info</td>
+                        }
+                        <td>@Html.ActionLink("Izbrisi", "IzbrisiVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izmijeni", "IzmijeniVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
+                    </tr>
+                }
+            }
+        </table>
 
-    @Html.ActionLink("Dodaj", "DodajNovuVjezbu", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" }) 
-    @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Dodaj", "DodajNovuVjezbu", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
 </div>
