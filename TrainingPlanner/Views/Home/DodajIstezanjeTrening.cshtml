@@ -2,11 +2,12 @@
 @model TrainingPlanner.Models.IstezanjeZagrijavanjeLista
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Popis istezanja</div>
+<div id="sidebar"></div>
+<div id="content">
+    <h2>Popis istezanja</h2>
     <table class="responstable">
 
         @if (Model.IstezanjePopis.Count == 0)

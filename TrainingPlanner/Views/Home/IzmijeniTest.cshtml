@@ -1,106 +1,108 @@
 ﻿@model TrainingPlanner.Test
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("IzmijeniTest", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
+<div id="sidebar"></div>
+<div id=@(Model.Slika.Count > 0 ? "contentImg" : "content")>
+    @using (Html.BeginForm("IzmijeniTest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
 
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(x => x.TestId)
-    @Html.HiddenFor(x => x.ClanId)
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.TestId)
+        @Html.HiddenFor(x => x.ClanId)
 
-    <div id="inputArea" style="float: left;">
-        <p class="bigFont marginHeadline">Izmjeni test</p> 
+    <div id=@(Model.Slika.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+        <h2>Izmjeni test</h2>
 
         <div>
-            <div class="marginInputBottom">@Html.Label("Naziv", new {@class = "smallFont"})</div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
         <div>
-            <div class="marginText">@Html.Label("Datum", new {@class = "smallFont"})</div>
+            <div class="marginText">@Html.Label("Datum", new { @class = "smallFont" })</div>
             @Html.TextBoxFor(model => model.DatumTesta, new { @Value = @Model.DatumTesta.ToShortDateString(), @class = "dateInput" })
             @Html.ValidationMessageFor(model => model.DatumTesta)
         </div>
-     
+
         <div>
-            <div class="marginText">@Html.Label("Visina", new {@class = "smallFont"})</div>
+            <div class="marginText">@Html.Label("Visina", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.Visina)
             @Html.ValidationMessageFor(model => model.Visina)
         </div>
-        
+
         <div>
-            <div class="marginText">@Html.Label("Tezina", new {@class = "smallFont"})</div>
+            <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.Tezina)
             @Html.ValidationMessageFor(model => model.Tezina)
         </div>
 
         <div>
-            <div class="marginText">@Html.Label("Antropometrija", new {@class = "smallFont"})</div>
+            <div class="marginText">@Html.Label("Antropometrija", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.Antropometrija)
             @Html.ValidationMessageFor(model => model.Antropometrija)
         </div>
-          
+
         <div>
-            <div class="marginText">@Html.Label("Potkozno Masno Tkivo", new {@class = "smallFont"})</div>
+            <div class="marginText">@Html.Label("Potkožno masno tkivo", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.PotkoznoMasnoTkivo)
             @Html.ValidationMessageFor(model => model.PotkoznoMasnoTkivo)
         </div>
-              
+
         <div>
-            <div class="marginText">@Html.Label("Bezmasna Masa", new {@class = "smallFont"})</div>
+            <div class="marginText">@Html.Label("Bezmasna masa", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.BezmasnaMasa)
             @Html.ValidationMessageFor(model => model.BezmasnaMasa)
         </div>
-        
+
         <div>
-            <div class="marginText">@Html.Label("Funkcionalne Sposobnosti", new {@class = "smallFont"})</div>
-            @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new {rows = "10", cols = "40" })
+            <div class="marginText">@Html.Label("Funkcionalne sposobnosti", new { @class = "smallFont" })</div>
+            @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti)
         </div>
-        
+
         <div>
-            <div class="marginText">@Html.Label("Motoricke Sposobnosti", new {@class = "smallFont"})</div>
-            @Html.TextAreaFor(model => model.MotorickeSposobnosti, new {rows = "10", cols = "40" })
+            <div class="marginText">@Html.Label("Motoričke sposobnosti", new { @class = "smallFont" })</div>
+            @Html.TextAreaFor(model => model.MotorickeSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.MotorickeSposobnosti)
         </div>
-        
+
         @if (Model.Slika.Count == 0)
         {
             <div class="marginText">
-                @Html.Label("Dodaj sliku", new {@class = "smallFont"})
+                @Html.Label("Dodaj sliku", new { @class = "smallFont" })
                 <div>
-                    <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
+                    <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
                 </div>
             </div>
         }
-        
+
         <div class="marginHeadlineTop marginTextBottom">
-            <input type="submit" value="Spremi izmjene" class="button_example"/>
+            <input type="submit" value="Spremi izmjene" class="button_example" />
         </div>
 
         @Html.ActionLink("Popis testova", "Test", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
 
-    if (Model.Slika.Count > 0)
-    {
-        <div id="inputAreaImages" style="float: left;">
-            <p class="bigFont marginHeadline">Slike</p> 
-            @foreach (var item in Model.Slika)
-            {
-                <div style="float: left; display: block; clear: right;" class="marginHeadline">
-                    <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></div>
-                    @Html.ActionLink("Izbriši sliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+        if (Model.Slika.Count > 0)
+        {
+            <div id="inputAreaImages" style="float: left;">
+                @foreach (var item in Model.Slika)
+                {
+                    <div style="float: left; display: block; clear: right;" class="marginHeadline">
+                        <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></div>
+                        @Html.ActionLink("Izbriši sliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                    </div>
+                }
+                <div class="marginText" style="clear: both;">
+                    @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                    <div>
+                        <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                    </div>
                 </div>
-            }
-            <div class="marginText" style="clear: both;">
-                @Html.Label("Dodaj sliku", new {@class = "smallFont"})
-                <div>
-                    <input type="file" name ="slike" value="" multiple="multiple" class="marginInputTop"/>
-                </div>
-            </div> 
-        </div>
+            </div>
+        }
     }
-}
+</div>

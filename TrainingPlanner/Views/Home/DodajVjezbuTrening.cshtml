@@ -2,34 +2,35 @@
 @model TrainingPlanner.Models.VjezbePopisLista
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Popis vježbi</div>
-    <table class="responstable">
+<div id="sidebar"></div>
+<div id="content">
+        <h2>Popis vježbi</h2>
+        <table class="responstable">
 
-        @if (Model.VjezbePopis.Count == 0)
-        {
-            <tr>
-                <td class="smallFont">Trenutno nema vježbi.</td>
-            </tr>
-        }
-
-        @foreach (VjezbePopis vjp in Model.VjezbePopis)
-        {
-            using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.SekcijaId }))
+            @if (Model.VjezbePopis.Count == 0)
             {
-                @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
-                @Html.Hidden("vjpID", vjp.VjezbeId)
-                <tr class="smallFont">
-                    <td>@vjp.ImeVjezbe</td>
-                    <td>@vjp.Info</td>
-                    <td><input type="submit" value="Dodaj vježbu" class="button_example" /></td>
+                <tr>
+                    <td class="smallFont">Trenutno nema vježbi.</td>
                 </tr>
             }
-        }
-    </table>
 
-    @((int)ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]), DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" }) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]) }, new { @class = "marginHeadlineTop marginTextBottom button_example" }))
-</div>
+            @foreach (VjezbePopis vjp in Model.VjezbePopis)
+            {
+                using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.SekcijaId }))
+                {
+                    @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
+                    @Html.Hidden("vjpID", vjp.VjezbeId)
+                    <tr class="smallFont">
+                        <td>@vjp.ImeVjezbe</td>
+                        <td>@vjp.Info</td>
+                        <td><input type="submit" value="Dodaj vježbu" class="button_example" /></td>
+                    </tr>
+                }
+            }
+        </table>
+
+        @((int)ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]), DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" }) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]) }, new { @class = "marginHeadlineTop marginTextBottom button_example" }))
+    </div>

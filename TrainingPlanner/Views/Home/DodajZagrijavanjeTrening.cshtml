@@ -2,17 +2,19 @@
 @model TrainingPlanner.Models.IstezanjeZagrijavanjeLista
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputAreaTable">
-    <div class="bigFont marginHeadline">Popis zagrijavanja</div>
+<div id="sidebar"></div>
+<div id="content">
+    <h2>Popis zagrijavanja</h2>
     <table class="responstable">
-        
-        @if (Model.ZagrijavanjePopis.Count == 0) {
-        <tr>
-            <td class="smallFont">Trenutno nema vježbi zagrijavanja.</td>
-        </tr>
+
+        @if (Model.ZagrijavanjePopis.Count == 0)
+        {
+            <tr>
+                <td class="smallFont">Trenutno nema vježbi zagrijavanja.</td>
+            </tr>
         }
 
         @foreach (ZagrijavanjePopis zgp in Model.ZagrijavanjePopis)
@@ -29,6 +31,6 @@
             }
         }
     </table>
-    
-    @((int) ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new {id = Model.TreningId, DodajVjezbu = 1}, new {@class = "marginHeadlineTop marginTextBottom button_example"}) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new {id = Model.TreningId}, new {@class = "marginHeadlineTop marginTextBottom button_example"}))
+
+    @((int)ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Model.TreningId, DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" }) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" }))
 </div>
