@@ -3,83 +3,86 @@
 @model ClanTestModel
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputArea" style="float: left;" class="defaultFont">
-    <p class="bigFont marginHeadline">Detalji člana</p>
-    <div>
-        <div class="marginInputBottom">@Html.LabelFor(x => x.Clan.Ime, new { @class = "smallFont" })</div>
-        <div class="defaultFont">@Html.DisplayFor(model => Model.Clan.Ime)</div>
-    </div>
-    <div>
-        <div class="marginText">@Html.LabelFor(x => x.Clan.Prezime, new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => Model.Clan.Prezime)
-    </div>
-    <div>
-        <div class="marginText">@Html.LabelFor(x => x.Clan.Visina, new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => Model.Clan.Visina)
-    </div>
-    <div>
-        <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => Model.Clan.Tezina)
-    </div>
-    <div>
-        <div class="marginText">@Html.Label("Sport", new { @class = "smallFont" })</div>
-        @if(Model.Clan.Amneza == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Clan.Sport)
-        }
-    </div>
-    <div>
-        <div class="marginText">@Html.Label("Datum rođenja", new { @class = "smallFont" })</div>
-        @Model.Clan.GodinaRodenja.ToShortDateString()
-    </div>
-    <div>
-        <div class="marginText">@Html.Label("Godine", new { @class = "smallFont" })</div>
-        @Html.DisplayFor(model => model.Clan.GodineStarosti)
-    </div>
-    <div>
-        <div class="marginText">@Html.LabelFor(x => x.Clan.Amneza, new { @class = "smallFont" })</div>
-        @if(Model.Clan.Amneza == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Clan.Amneza)
-        }
-    </div>
-    <div>
-        <div class="marginText">@Html.LabelFor(x => x.Clan.Napomena, new { @class = "smallFont" })</div>
-        @if(Model.Clan.Napomena == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Clan.Napomena)
-        }
-    </div>
-  
-    @if (Model.ListaTest.Count != 0)
-    {
-        <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
+<div id="sidebar"></div>
+<div id="content">
+    <div id="inputArea" style="float: left;" class="defaultFont">
+        <h2>Detalji člana</h2>
+        <div>
+            <div class="marginInputBottom">@Html.LabelFor(x => x.Clan.Ime, new { @class = "smallFont" })</div>
+            <div class="defaultFont">@Html.DisplayFor(model => Model.Clan.Ime)</div>
+        </div>
+        <div>
+            <div class="marginText">@Html.LabelFor(x => x.Clan.Prezime, new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => Model.Clan.Prezime)
+        </div>
+        <div>
+            <div class="marginText">@Html.LabelFor(x => x.Clan.Visina, new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => Model.Clan.Visina)
+        </div>
+        <div>
+            <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => Model.Clan.Tezina)
+        </div>
+        <div>
+            <div class="marginText">@Html.Label("Sport", new { @class = "smallFont" })</div>
+            @if (Model.Clan.Amneza == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Clan.Sport)
+            }
+        </div>
+        <div>
+            <div class="marginText">@Html.Label("Datum rođenja", new { @class = "smallFont" })</div>
+            @Model.Clan.GodinaRodenja.ToShortDateString()
+        </div>
+        <div>
+            <div class="marginText">@Html.Label("Godine", new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => model.Clan.GodineStarosti)
+        </div>
+        <div>
+            <div class="marginText">@Html.LabelFor(x => x.Clan.Amneza, new { @class = "smallFont" })</div>
+            @if (Model.Clan.Amneza == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Clan.Amneza)
+            }
+        </div>
+        <div>
+            <div class="marginText">@Html.LabelFor(x => x.Clan.Napomena, new { @class = "smallFont" })</div>
+            @if (Model.Clan.Napomena == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Clan.Napomena)
+            }
+        </div>
 
-        foreach (Test t in Model.ListaTest)
+        @if (Model.ListaTest.Count != 0)
         {
-            @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br />
-        }
+            <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
 
-    }
-    else
-    {
-        <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
-        <text>Nema testova</text> <br/>
-    }
-    @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
+            foreach (Test t in Model.ListaTest)
+            {
+                @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br />
+            }
+
+        }
+        else
+        {
+            <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
+            <text>Nema testova</text> <br />
+        }
+        @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </div>
 </div>

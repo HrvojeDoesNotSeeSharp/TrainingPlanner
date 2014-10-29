@@ -1,52 +1,54 @@
 ﻿@model TrainingPlanner.IstezanjePopis
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputArea" style="float: left;">
-    <p class="bigFont marginHeadline">Detalji istezanja</p> 
+<div id="sidebar"></div>
+<div id=@(Model.IstezanjeSlike.Count > 0 ? "contentImg" : "content")>
+    <div id=@(Model.IstezanjeSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+        <h2>Detalji istezanja</h2>
 
-    <div>
-        <div class="marginInputBottom">@Html.Label("Naziv", new { @class="smallFont" })</div>
-        @Html.DisplayFor(model => model.Naziv)
+        <div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => model.Naziv)
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Info", new { @class = "smallFont marginInputBottom" })</div>
+            @if (Model.Info == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Info)
+            }
+        </div>
+
+        @if (ViewData["trening"] != null)
+        {
+            @Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = (int)ViewData["treningId"], DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        }
+        @if (ViewData["izmijeni"] != null)
+        {
+            @Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        }
+        @if (ViewData["trening"] == null && ViewData["izmijeni"] == null)
+        {
+            @Html.ActionLink("Popis istezanja", "IstezanjePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        }
     </div>
-    
-    <div class="marginText">
-        <div class="marginInputBottom">@Html.Label("Info", new { @class="smallFont marginInputBottom" })</div>
-        @if(Model.Info == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Info)
-        }
-    </div> 
-    
-    @if (ViewData["trening"] != null)
+
+    @if (Model.IstezanjeSlike.Count > 0)
     {
-        @Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = (int)ViewData["treningId"], DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-    }
-    @if (ViewData["izmijeni"] != null)
-    {
-        @Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-    }
-    @if (ViewData["trening"] == null && ViewData["izmijeni"] == null)
-    {
-        @Html.ActionLink("Popis istezanja", "IstezanjePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        <div id="inputAreaImages" style="float: left;">
+            @foreach (var item in Model.IstezanjeSlike)
+            {
+                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                    <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" /></div>
+                </div>
+            }
+        </div>
     }
 </div>
-    
-@if (Model.IstezanjeSlike.Count > 0)
-{
-    <div id="inputAreaImages" style="float: left;">
-        <p class="bigFont marginHeadline">Slike</p> 
-        @foreach (var item in Model.IstezanjeSlike)
-        {
-            <div style="float: left; display: block; clear:right;" class="marginHeadline">
-                <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" /></div>
-            </div>    
-        }
-    </div>
-}

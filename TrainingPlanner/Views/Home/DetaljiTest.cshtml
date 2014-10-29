@@ -1,119 +1,121 @@
 ﻿@model TrainingPlanner.Test
 
 @{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="inputArea" style="float: left;">
-    <p class="bigFont marginHeadline">Detalji testa</p> 
+<div id="sidebar"></div>
+<div id=@(Model.Slika.Count > 0 ? "contentImg" : "content")>
+    <div id=@(Model.Slika.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+        <h2>Detalji testa</h2>
 
-    <div>
-        <div class="marginInputBottom">@Html.LabelFor(model => model.Name, new {@class = "smallFont"})</div>
-        @Html.DisplayFor(model => model.Name)
-    </div>
-        
-    <div>
-        <div class="marginText">@Html.Label("Datum", new {@class = "smallFont"})</div>
-        @Model.DatumTesta.ToShortDateString()
-    </div>
-     
-    <div>
-        <div class="marginText">@Html.Label("Visina", new {@class = "smallFont"})</div>
-        @if(Model.Visina == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Visina)
-        }
-    </div>
-        
-    <div>
-        <div class="marginText">@Html.Label("Tezina", new {@class = "smallFont"})</div>
-        @if(Model.Tezina == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Tezina)
-        }
-    </div>
-        
-    <div>
-        <div class="marginText">@Html.Label("Antropometrija", new {@class = "smallFont"})</div>
-        @if(Model.Antropometrija == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.Antropometrija)
-        }
-    </div>
-        
-    <div>
-        <div class="marginText">@Html.Label("Potkozno masno tkivo", new {@class = "smallFont"})</div>
-        @if(Model.PotkoznoMasnoTkivo == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.PotkoznoMasnoTkivo)
-        }
-    </div>
-        
-    <div>
-        <div class="marginText">@Html.Label("Bezmasna masa", new {@class = "smallFont"})</div>
-        @if(Model.BezmasnaMasa == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.DisplayFor(model => model.BezmasnaMasa)
-        }
+        <div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Datum", new { @class = "smallFont" })</div>
+            @Model.DatumTesta.ToShortDateString()
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Visina", new { @class = "smallFont" })</div>
+            @if (Model.Visina == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Visina)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
+            @if (Model.Tezina == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Tezina)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Antropometrija", new { @class = "smallFont" })</div>
+            @if (Model.Antropometrija == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Antropometrija)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Potkožno masno tkivo", new { @class = "smallFont" })</div>
+            @if (Model.PotkoznoMasnoTkivo == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.PotkoznoMasnoTkivo)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Bezmasna masa", new { @class = "smallFont" })</div>
+            @if (Model.BezmasnaMasa == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.BezmasnaMasa)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Funkcionalne sposobnosti", new { @class = "smallFont" })</div>
+            @if (Model.FunkcionalneSposobnosti == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.FunkcionalneSposobnosti)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Motoričke sposobnosti", new { @class = "smallFont" })</div>
+            @if (Model.MotorickeSposobnosti == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.MotorickeSposobnosti)
+            }
+        </div>
+
+        @Html.ActionLink("Popis testova", "Test", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
 
-    <div>
-        <div class="marginText">@Html.Label("Funkcionalne sposobnosti", new {@class = "smallFont"})</div>
-        @if(Model.FunkcionalneSposobnosti == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" , @readonly = true})
-        }   
-    </div>
-
-    <div>
-        <div class="marginText">@Html.Label("Motoricke Sposobnosti", new {@class = "smallFont"})</div>
-        @if(Model.MotorickeSposobnosti == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.TextAreaFor(model => model.MotorickeSposobnosti, new { rows = "10", cols = "40" , @readonly = true})
-        } 
-    </div>
-
-    @Html.ActionLink("Popis testova", "Test", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-    @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    @if (Model.Slika.Count > 0)
+    {
+        <div id="inputAreaImages" style="float: left;">
+            @foreach (var item in Model.Slika)
+            {
+                <div style="float: left; display: block; clear: right;" class="marginHeadline">
+                    <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></div>
+                </div>
+            }
+        </div>
+    }
 </div>
-
-@if (Model.Slika.Count > 0)
-{
-    <div id="inputAreaImages" style="float: left;">
-        <p class="bigFont marginHeadline">Slike</p> 
-        @foreach (var item in Model.Slika)
-        {
-            <div style="float: left; display: block; clear: right;" class="marginHeadline">
-                <div><img class="marginLeft" width="250" height="250" src ="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></div>
-            </div>
-        }
-    </div>
-}
