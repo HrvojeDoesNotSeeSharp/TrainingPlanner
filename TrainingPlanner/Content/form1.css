@@ -22,6 +22,7 @@
     font-size: 13px;     
     padding-left: 10px;
     padding-bottom: 50px;
+    border-right: 1px solid #eee;
 }
 
 #inputAreaTable
@@ -47,8 +48,10 @@
     width: 60%;
     font-family: Arial, Sans-Serif;
     font-size: 13px;
-    padding-top: 85px;
+    padding-top: 0px;
     padding-bottom: 50px;
+    padding-left:1em;
+
 }
 
 #inputAreaTrening
@@ -139,6 +142,10 @@
 
 .marginLeft {
     margin-left: 8px;
+    border-radius: 30px;
+    -moz-border-radius: 30px;
+    -khtml-border-radius: 30px;
+    -webkit-border-radius: 30px;
 }
 
 .button_example, .a, .a:visited, .a:active, .a:link{

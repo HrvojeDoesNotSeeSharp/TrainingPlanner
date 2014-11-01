@@ -43,10 +43,11 @@
     @if (Model.IstezanjeSlike.Count > 0)
     {
         <div id="inputAreaImages" style="float: left;">
+            <h2 style="padding-left:15px">Slike istezanja</h2>
             @foreach (var item in Model.IstezanjeSlike)
             {
                 <div style="float: left; display: block; clear:right;" class="marginHeadline">
-                    <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" /></div>
+                    <div><a href="~/Content/IstezanjeSlike/@item.IstezanjeSlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" /></a></div>
                 </div>
             }
         </div>
