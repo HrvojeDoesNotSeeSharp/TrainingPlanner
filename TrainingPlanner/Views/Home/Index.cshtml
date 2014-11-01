@@ -7,7 +7,7 @@
 
 
 <div id="sidebar">
-    <h2>Vježbe za trening</h2>
+    <h2 class="green">Vježbe za trening</h2>
     <p>
     <p>@Html.ActionLink("Pregled vježbi zagrijavanja", "ZagrijavanjePopis", "Home", null, new { @class = "button_example" })</p>
     <p>@Html.ActionLink("Pregled vježbi treninga", "VjezbePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })</p>
@@ -15,7 +15,7 @@
     </p>
 </div>
 <div id="content">
-    <h2>Popis članova</h2>
+    <h2 class="green">Popis članova</h2>
     <p>
         <table class="responstable">
             @if (Model.Count > 0)
@@ -23,7 +23,7 @@
                 foreach (Clan c in Model)
                 {
                     <tr class="smallFont">
-                        <td>@c.Ime&nbsp;<br />@c.Prezime</td>
+                        <td class="green">@c.Ime&nbsp;<br />@c.Prezime</td>
 
                         <td>@c.GodineStarosti &nbsp; god.</td>
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
