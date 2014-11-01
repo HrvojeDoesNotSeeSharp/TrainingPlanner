@@ -1,4 +1,8 @@
-﻿.alignLeft {
+﻿.green {
+    color: green;
+}
+
+.alignLeft {
     text-align: left;
 }
 
@@ -47,7 +51,16 @@
     padding-bottom: 50px;
 }
 
-#inputArea input[type="text"], #inputAreaImgs input[type="text"], #inputArea textarea, #inputAreaImgs textarea
+#inputAreaTrening
+{
+    width: 60%;
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    padding-left: 20px;
+    padding-bottom: 50px;
+}
+
+#inputArea input[type="text"], #inputAreaImgs input[type="text"], #inputAreaTrening input[type="text"], #inputArea textarea, #inputAreaImgs textarea, #inputAreaTrening textarea
 {
     font-family: Arial, Sans-Serif;
     font-size: 13px;
@@ -59,7 +72,7 @@
     background-color: #EDF2F7;
 }
 
-#inputArea input[type="text"]:focus, #inputArea textarea:focus
+#inputArea input[type="text"]:focus, #inputArea textarea:focus, #inputAreaImgs input[type="text"]:focus, #inputAreaImgs textarea:focus, #inputAreaTrening input[type="text"]:focus, #inputAreaTrening textarea:focus
 {
     background-image: none;
     background-color: #ffffff;
@@ -81,7 +94,7 @@
 	margin-top: 0px; margin-bottom: 0px;
 	text-align: center;
     font-weight: normal;
-    color: #222;
+    color: green;
 }
 
 .smallFont{

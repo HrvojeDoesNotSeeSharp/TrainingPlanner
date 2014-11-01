@@ -8,7 +8,7 @@
 <div id="sidebar"></div>
 <div id="content">
 
-    <h2>Trening - @ViewData["ImeClana"] @ViewData["PrezimeClana"]</h2>
+    <h2 class="green">Trening - @ViewData["ImeClana"] @ViewData["PrezimeClana"]</h2>
     <table class="responstable">
 
         @foreach (Trening tr in Model)
@@ -22,7 +22,7 @@
             else
             {
                 <tr class="smallFont">
-                    <td>@tr.ImeTreninga</td>
+                    <td class="green">@tr.ImeTreninga</td>
                     <td>@tr.DatumTreninga.Value.Date.ToShortDateString()</td>
                     <td>@Html.ActionLink("Izbriši", "IzbrisiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
                     <td>@Html.ActionLink("Izmjeni", "IzmijeniTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
