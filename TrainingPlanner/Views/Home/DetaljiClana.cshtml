@@ -9,7 +9,7 @@
 <div id="sidebar"></div>
 <div id="content">
     <div id="inputArea" style="float: left;" class="defaultFont">
-        <h2>Detalji člana</h2>
+        <h2 class="green">Detalji člana</h2>
         <div>
             <div class="marginInputBottom">@Html.LabelFor(x => x.Clan.Ime, new { @class = "smallFont" })</div>
             <div class="defaultFont">@Html.DisplayFor(model => Model.Clan.Ime)</div>
@@ -74,7 +74,7 @@
 
             foreach (Test t in Model.ListaTest)
             {
-                @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br />
+                @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom", @style = "color:blue; text-decoration:underline;" })<br />
             }
 
         }

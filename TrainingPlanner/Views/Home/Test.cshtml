@@ -7,7 +7,7 @@
 
 <div id="sidebar"></div>
 <div id="content">
-    <h2>Testovi - @Model.Clan.Ime @Model.Clan.Prezime</h2>
+    <h2 class="green">Testovi - @Model.Clan.Ime @Model.Clan.Prezime</h2>
     <p>
         <table class="responstable">
             @if (Model.ListaTestova == null)
@@ -21,10 +21,10 @@
                 foreach (var test in Model.ListaTestova)
                 {
                     <tr class="smallFont">
-                        <td>@test.Name</td>
-                        <td>@Html.ActionLink("Izbriši", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                        <td class="green">@test.Name</td>
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati test?');" })</td>
                     </tr>
                 }
             }

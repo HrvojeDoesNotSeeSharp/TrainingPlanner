@@ -7,7 +7,7 @@
 <div id="sidebar"></div>
 <div id=@(Model.Slika.Count > 0 ? "contentImg" : "content")>
     <div id=@(Model.Slika.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
-        <h2>Detalji testa</h2>
+        <h2 class="green">Detalji testa</h2>
 
         <div>
             <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
@@ -110,7 +110,7 @@
     @if (Model.Slika.Count > 0)
     {
         <div id="inputAreaImages" style="float: left;">
-            <h2 style="padding-left:15px">Slike testova</h2>
+            <h2 style="padding-left:15px" class="green">Slike testova</h2>
             @foreach (var item in Model.Slika)
             {
                 <div style="float: left; display: block; clear: right;" class="marginHeadline">
