@@ -74,7 +74,7 @@
 
             foreach (Test t in Model.ListaTest)
             {
-                @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom" })<br />
+                @Html.ActionLink(@t.Name, "DetaljiTest", new { id = @t.TestId }, new { @class = "marginHeadlineTop marginTextBottom", @style = "color:blue; text-decoration:underline;" })<br />
             }
 
         }
