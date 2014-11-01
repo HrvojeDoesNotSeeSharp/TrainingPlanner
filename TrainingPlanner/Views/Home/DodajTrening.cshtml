@@ -76,7 +76,7 @@
                             <td>@Html.TextBox("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
                             <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zagrijavanje.ZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
+                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zagrijavanje.ZagrijavanjePopisZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_small" })</td>
                             <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_small" /></td>
                         </tr>
                     }
