@@ -24,9 +24,9 @@
                 <tr class="smallFont">
                     <td class="green">@tr.ImeTreninga</td>
                     <td>@tr.DatumTreninga.Value.Date.ToShortDateString()</td>
-                    <td>@Html.ActionLink("Izbriši", "IzbrisiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
                     <td>@Html.ActionLink("Izmjeni", "IzmijeniTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
                     <td>@Html.ActionLink("Detalji", "DetaljiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small" })</td>
+                    <td>@Html.ActionLink("Izbriši", "IzbrisiTrening", "Home", new { id = tr.TreningId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati trening?');" })</td>
                 </tr>
             }
         }

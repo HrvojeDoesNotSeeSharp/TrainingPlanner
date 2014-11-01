@@ -22,9 +22,9 @@
                 {
                     <tr class="smallFont">
                         <td class="green">@test.Name</td>
-                        <td>@Html.ActionLink("Izbriši", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiTest", "Home", new { id = test.TestId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati test?');" })</td>
                     </tr>
                 }
             }

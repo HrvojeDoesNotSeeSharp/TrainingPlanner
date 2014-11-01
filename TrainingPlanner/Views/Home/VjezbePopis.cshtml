@@ -30,9 +30,9 @@
                         {
                             <td>@vjp.Info</td>
                         }
-                        <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati vjezbu?');" })</td>
                     </tr>
                 }
             }
