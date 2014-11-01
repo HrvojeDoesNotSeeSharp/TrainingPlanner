@@ -30,7 +30,7 @@
                         <td>@Html.ActionLink("Test", "Test", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Trening", "TreningPopis", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
-                        <td>@Html.ActionLink("Izbriši", "IzbrisiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiClana", "Home", new { id = c.ClanId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati clana? (ovime se brisu svi podaci, testovi i treninzi)');" })</td>
                     </tr>
                 }
             }

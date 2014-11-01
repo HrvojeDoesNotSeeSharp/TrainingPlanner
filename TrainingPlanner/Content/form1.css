@@ -1,4 +1,8 @@
-﻿.green {
+﻿.inputNumber {
+    width: 70px;
+}
+
+.green {
     color: green;
 }
 
@@ -23,6 +27,15 @@
     padding-left: 10px;
     padding-bottom: 50px;
     border-right: 1px solid #eee;
+}
+
+#inputAreaImgsTrening
+{
+    width: 20%;
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;     
+    padding-left: 10px;
+    padding-bottom: 50px;
 }
 
 #inputAreaTable
@@ -56,14 +69,14 @@
 
 #inputAreaTrening
 {
-    width: 60%;
+    width: 75%;
     font-family: Arial, Sans-Serif;
     font-size: 13px;
     padding-left: 20px;
     padding-bottom: 50px;
 }
 
-#inputArea input[type="text"], #inputAreaImgs input[type="text"], #inputAreaTrening input[type="text"], #inputArea textarea, #inputAreaImgs textarea, #inputAreaTrening textarea
+#inputArea input[type="text"], #inputAreaImgs input[type="text"], #inputAreaImgsTrening input[type="text"], #inputArea textarea, #inputAreaImgs textarea, #inputAreaImgsTrening textarea
 {
     font-family: Arial, Sans-Serif;
     font-size: 13px;
@@ -72,6 +85,18 @@
     padding: 4px;
     border: solid 1px #85b1de; 
     width: 95%;
+    background-color: #EDF2F7;
+}
+
+#inputAreaTrening input[type="text"], #inputAreaTrening textarea
+{
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+    padding: 4px;
+    border: solid 1px #85b1de; 
+    width: 83px;
     background-color: #EDF2F7;
 }
 
@@ -114,6 +139,13 @@
     font-size:16px;
     font-weight:normal;
     color: #222;
+}
+
+.treningFont{
+    font-family: "Trebuchet MS", Arial,  Helvetica, Tahoma, sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    color: green;
 }
 
 .marginHeadline {
@@ -177,7 +209,22 @@
     background-color: #BDC9D0; 
 }
 
-.button_example:hover, .button_example_small:hover, .a:hover{
+.button_example_br, .a, .a:visited, .a:active, .a:link{
+
+    -webkit-box-shadow: #BDC9D0 0px 1px 1px ;
+    -moz-box-shadow: #BDC9D0 0px 1px 1px ; 
+    box-shadow: #BDC9D0 0px 1px 1px ; 
+    font-size:18px;
+    font-family: "Trebuchet MS", Arial,  Helvetica, Tahoma, sans-serif; 
+    padding: 2px 2px 2px 2px; 
+    text-decoration:none; 
+    display:inline-block;
+    font-weight:normal; 
+    color: #222;
+    background-color: #BDC9D0; 
+}
+
+.button_example:hover, .button_example_small:hover, .button_example_br:hover, .a:hover{
      
      text-decoration:none; 
      background-color: #BBC7CE; 
@@ -241,6 +288,45 @@ a:focus { outline: none; color: #222;}
 }
 
 
-.inputNumber {
-    width: 70px;
+
+
+.responstableTrening {
+  margin: 0.2em 0;
+  width: 100%;
+  overflow: hidden;
+  background: #FFF;
+  color: #024457;
+  border-radius: 2px;
 }
+.responstableTrening tr {
+  border: 1px solid #D9E4E6;
+}
+.responstableTrening tr:nth-child(odd) {
+  background-color: #F4F7F7;
+}
+.responstableTrening td {
+  display: block;
+  word-wrap: break-word;
+  max-width: 7em;
+}
+.responstableTrening td:first-child {
+  display: table-cell;
+  text-align: center;
+  border-right: 1px solid #D9E4E6;
+}
+@media (min-width: 480px) {
+  .responstableTrening td {
+    border: 1px solid #D9E4E6;
+  }
+}
+.responstableTrening th, .responstableTrening td {
+  /*text-align: left;*/
+  margin: 0.2em 0.2em;
+}
+@media (min-width: 480px) {
+  .responstableTrening th, .responstableTrening td {
+    display: table-cell;
+    padding: 0.2em;
+  }
+}
+
