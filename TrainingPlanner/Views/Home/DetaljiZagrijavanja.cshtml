@@ -7,7 +7,7 @@
 <div id="sidebar"></div>
 <div id=@(Model.ZagrijavanjeSlike.Count > 0 ? "contentImg" : "content")>
     <div id=@(Model.ZagrijavanjeSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
-        <h2>Detalji zagrijavanja</h2>
+        <h2 class="green">Detalji zagrijavanja</h2>
 
         <div>
             <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
@@ -43,7 +43,7 @@
     @if (Model.ZagrijavanjeSlike.Count > 0)
     {
         <div id="inputAreaImages" style="float: left;">
-            <h2 style="padding-left:15px">Slike zagrijavanja</h2>
+            <h2 style="padding-left:15px" class="green">Slike zagrijavanja</h2>
             @foreach (var item in Model.ZagrijavanjeSlike)
             {
                 <div style="float: left; display: block; clear:right;" class="marginHeadline">

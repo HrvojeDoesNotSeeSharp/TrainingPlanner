@@ -11,7 +11,7 @@
         @Html.ValidationSummary(true)
 
         <div id=@(Model.ZagrijavanjeSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
-            <h2>Izmjeni zagrijavanje</h2>
+            <h2 class="green">Izmjeni zagrijavanje</h2>
 
             @Html.HiddenFor(model => model.ZagrijavanjeId)
 
@@ -47,7 +47,7 @@
         if (Model.ZagrijavanjeSlike.Count > 0)
         {
             <div id="inputAreaImages" style="float: left;">
-                <h2 style="padding-left:15px">Slike zagrijavanja</h2>
+                <h2 style="padding-left:15px" class="green">Slike zagrijavanja</h2>
                 @foreach (var item in Model.ZagrijavanjeSlike)
                 {
                     <div style="float: left; display: block; clear:right;" class="marginHeadline">

@@ -7,7 +7,7 @@
 
 <div id="sidebar"></div>
 <div id="content">
-    <h2>Vježbe zagrijavanja</h2>
+    <h2 class="green">Vježbe zagrijavanja</h2>
     <p>
         <table class="responstable">
             @foreach (ZagrijavanjePopis zp in Model)
@@ -21,7 +21,7 @@
                 else
                 {
                     <tr class="smallFont">
-                        <td>@zp.Naziv</td>
+                        <td class="green">@zp.Naziv</td>
                         @if (zp.Info == null)
                         {
                             <td>--</td>
