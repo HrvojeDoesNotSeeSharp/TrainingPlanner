@@ -17,13 +17,13 @@
             <div>
                 <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
                 @Html.EditorFor(model => model.ImeVjezbe)
-                @Html.ValidationMessageFor(model => model.ImeVjezbe)
+                @Html.ValidationMessageFor(model => model.ImeVjezbe, String.Empty, new { @class = "error" })
             </div>
 
             <div class="marginText">
                 <div class="marginInputBottom">@Html.Label("Info", new { @class = "smallFont marginInputBottom" })</div>
                 @Html.TextAreaFor(model => model.Info, new { rows = "10", cols = "40" })
-                @Html.ValidationMessageFor(model => model.Info)
+                @Html.ValidationMessageFor(model => model.Info, String.Empty, new { @class = "error" })
             </div>
 
             <div class="marginText">

@@ -7,11 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using TrainingPlanner.Models;
+
 namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-    
+
+    [MetadataType(typeof(IstezanjePopisMetadata))]
     public partial class IstezanjePopis
     {
         public IstezanjePopis()

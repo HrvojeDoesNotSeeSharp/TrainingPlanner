@@ -1,4 +1,8 @@
-﻿.inputNumber {
+﻿.error {
+    color: red;
+}
+
+.inputNumber {
     width: 70px;
 }
 
