@@ -1118,19 +1118,6 @@ namespace TrainingPlanner.Controllers
                 : RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
         }
 
-        [HttpGet]
-        public ActionResult DetaljiVjezbeTrening(int id, string id1, int izmijeni = 0)
-        {
-            var query = from x in _context.Vjezba
-                where x.VjezbaId == id
-                select x;
-
-            var vj = query.Single();
-            ViewData["id1"] = id1;
-            ViewData["izmijeni"] = izmijeni;
-            return View(vj);
-        }
-
         /*Istezanje*/
 
         [HttpGet]
@@ -1183,17 +1170,6 @@ namespace TrainingPlanner.Controllers
                 : RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
         }
 
-        [HttpGet]
-        public ActionResult DetaljiIstezanjeTrening(int id = 0, int izmijeni = 0)
-        {
-            var query = from x in _context.Istezanje
-                where x.IstezanjeId == id
-                select x;
-            var ist = query.Single();
-            ViewData["izmijeni"] = izmijeni;
-            return View(ist);
-        }
-
         /*Zagrijavanje*/
 
         [HttpGet]
@@ -1243,18 +1219,6 @@ namespace TrainingPlanner.Controllers
             return izmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new {id})
                 : RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
-        }
-
-        [HttpGet]
-        public ActionResult DetaljiZagrijavanjeTrening(int id = 0, int izmijeni = 0)
-        {
-            var query = from x in _context.Zagrijavanje
-                where x.ZagrijavanjeId == id
-                select x;
-            var zg = query.Single();
-            ViewData["izmijeni"] = izmijeni;
-
-            return View(zg);
         }
 
         [HttpPost]

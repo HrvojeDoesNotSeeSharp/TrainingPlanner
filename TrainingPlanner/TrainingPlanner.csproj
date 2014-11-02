@@ -210,7 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
     <Folder Include="Content\IstezanjeSlike\" />
     <Folder Include="Content\Slike\" />
     <Folder Include="Content\VjezbeSlike\" />
@@ -222,9 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\_BasicLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DodajClana.cshtml" />
@@ -311,19 +307,10 @@
     <Content Include="Views\Home\DodajVjezbuTrening.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\DetaljiVjezbeTrening.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\DodajIstezanjeTrening.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\DetaljiIstezanjeTrening.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\DodajZagrijavanjeTrening.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\DetaljiZagrijavanjeTrening.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\IzmijeniTrening.cshtml" />
