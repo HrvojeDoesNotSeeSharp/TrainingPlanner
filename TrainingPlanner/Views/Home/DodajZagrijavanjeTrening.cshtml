@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
-<div id="content">
+<div id="contentImg">
     <h2 class="green">Popis zagrijavanja</h2>
-    <table class="responstable">
+    <table class="responstableTrening">
 
         @if (Model.ZagrijavanjePopis.Count == 0)
         {
@@ -26,6 +25,21 @@
                 <tr class="smallFont">
                     <td class="green">@zgp.Naziv</td>
                     <td>@zgp.Info</td>
+                    <td>
+                        @if (zgp.ZagrijavanjeSlike.Count > 0)
+                        {
+                            foreach (var item in zgp.ZagrijavanjeSlike)
+                            {
+                                <div style="float: left; display: block;">
+                                    <div>
+                                        <a href="~/Content/ZagrijavanjeSlike/@item.ZagrijavanjeSlikaIme" target="_blank">
+                                            <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </td>
                     <td><input type="submit" value="Dodaj zagrijavanje" class="button_example" /></td>
                 </tr>
             }

@@ -307,7 +307,7 @@ a:focus { outline: none; color: #222;}
 .responstableTrening td {
   display: block;
   word-wrap: break-word;
-  max-width: 7em;
+  /*max-width: 7em;*/
 }
 .responstableTrening td:first-child {
   display: table-cell;

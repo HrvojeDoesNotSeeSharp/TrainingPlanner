@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
-<div id="content">
+<div id="contentImg">
     <h2 class="green">Popis istezanja</h2>
-    <table class="responstable">
+    <table class="responstableTrening">
 
         @if (Model.IstezanjePopis.Count == 0)
         {
@@ -26,6 +25,21 @@
                 <tr class="smallFont">
                     <td class="green">@istp.Naziv</td>
                     <td>@istp.Naziv</td>
+                    <td>
+                        @if (istp.IstezanjeSlike.Count > 0)
+                        {
+                            foreach (var item in istp.IstezanjeSlike)
+                            {
+                                <div style="float: left; display: block;">
+                                    <div>
+                                        <a href="~/Content/IstezanjeSlike/@item.IstezanjeSlikaIme" target="_blank">
+                                            <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" />
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </td>
                     <td><input type="submit" value="Dodaj istezanje" class="button_example" /></td>
                 </tr>
             }

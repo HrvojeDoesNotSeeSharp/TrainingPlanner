@@ -5,11 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
-<div id="content">
+<div id="contentImg">
     <h2 class="green">Vježbe treninga</h2>
     <p>
-        <table class="responstable">
+        <table class="responstableTrening">
             @foreach (VjezbePopis vjp in Model)
             {
                 if (vjp.VjezbeId == 0)

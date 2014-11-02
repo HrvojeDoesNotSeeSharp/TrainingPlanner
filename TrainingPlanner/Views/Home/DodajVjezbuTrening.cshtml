@@ -5,32 +5,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
-<div id="content">
-        <h2 class="green">Popis vježbi</h2>
-        <table class="responstable">
+<div id="contentImg">
+    <h2 class="green">Popis vježbi</h2>
+    <table class="responstableTrening">
 
-            @if (Model.VjezbePopis.Count == 0)
+        @if (Model.VjezbePopis.Count == 0)
+        {
+            <tr>
+                <td class="smallFont">Trenutno nema vježbi.</td>
+            </tr>
+        }
+
+        @foreach (VjezbePopis vjp in Model.VjezbePopis)
+        {
+            using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.SekcijaId }))
             {
-                <tr>
-                    <td class="smallFont">Trenutno nema vježbi.</td>
+                @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
+                @Html.Hidden("vjpID", vjp.VjezbeId)
+                <tr class="smallFont">
+                    <td class="green">@vjp.ImeVjezbe</td>
+                    <td>@vjp.Info</td>
+                    <td>
+                        @if (vjp.VjezbeSlike.Count > 0)
+                        {
+                            foreach (var item in vjp.VjezbeSlike)
+                            {
+                                <div style="float: left; display: block;">
+                                    <div>
+                                        <a href="~/Content/VjezbeSlike/@item.VjezbeSlikaIme" target="_blank">
+                                            <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td><input type="submit" value="Dodaj vježbu" class="button_example" /></td>
                 </tr>
             }
+        }
+    </table>
 
-            @foreach (VjezbePopis vjp in Model.VjezbePopis)
-            {
-                using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.SekcijaId }))
-                {
-                    @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
-                    @Html.Hidden("vjpID", vjp.VjezbeId)
-                    <tr class="smallFont">
-                        <td class="green">@vjp.ImeVjezbe</td>
-                        <td>@vjp.Info</td>
-                        <td><input type="submit" value="Dodaj vježbu" class="button_example" /></td>
-                    </tr>
-                }
-            }
-        </table>
+    @((int)ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]), DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" }) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]) }, new { @class = "marginHeadlineTop marginTextBottom button_example" }))
+</div>
 
-        @((int)ViewData["izmijeni"] == 0 ? Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]), DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" }) : Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = Convert.ToInt32(ViewData["id1"]) }, new { @class = "marginHeadlineTop marginTextBottom button_example" }))
-    </div>
