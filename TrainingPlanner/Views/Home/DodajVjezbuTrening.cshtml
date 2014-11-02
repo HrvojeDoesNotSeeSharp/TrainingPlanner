@@ -24,22 +24,33 @@
                 @Html.Hidden("vjpID", vjp.VjezbeId)
                 <tr class="smallFont">
                     <td class="green">@vjp.ImeVjezbe</td>
-                    <td>@vjp.Info</td>
-                    <td>
-                        @if (vjp.VjezbeSlike.Count > 0)
-                        {
-                            foreach (var item in vjp.VjezbeSlike)
+                    @if (vjp.Info == null)
+                    {
+                        <td>--</td>
+                    }
+                    else
+                    {
+                        <td>@vjp.Info</td>
+                    }
+                    @if (vjp.VjezbeSlike.Count > 0)
+                    {
+                        <td>
+                            @foreach (var item in vjp.VjezbeSlike)
                             {
-                                <div style="float: left; display: block;">
-                                    <div>
-                                        <a href="~/Content/VjezbeSlike/@item.VjezbeSlikaIme" target="_blank">
-                                            <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
-                                        </a>
-                                    </div>
+                            <div style="float: left; display: block;">
+                                <div>
+                                    <a href="~/Content/VjezbeSlike/@item.VjezbeSlikaIme" target="_blank">
+                                        <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
+                                    </a>
                                 </div>
+                            </div>
                             }
-                        }
-                    </td>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>--</td>
+                    }
                     <td><input type="submit" value="Dodaj vježbu" class="button_example" /></td>
                 </tr>
             }

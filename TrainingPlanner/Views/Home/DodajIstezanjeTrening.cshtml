@@ -24,11 +24,18 @@
                 @Html.Hidden("istpId", istp.IstezanjeId)
                 <tr class="smallFont">
                     <td class="green">@istp.Naziv</td>
-                    <td>@istp.Naziv</td>
-                    <td>
-                        @if (istp.IstezanjeSlike.Count > 0)
-                        {
-                            foreach (var item in istp.IstezanjeSlike)
+                    @if (istp.Info == null)
+                    {
+                        <td>--</td>
+                    }
+                    else
+                    {
+                        <td>@istp.Info</td>
+                    }
+                    @if (istp.IstezanjeSlike.Count > 0)
+                    {
+                        <td>
+                            @foreach (var item in istp.IstezanjeSlike)
                             {
                                 <div style="float: left; display: block;">
                                     <div>
@@ -38,8 +45,12 @@
                                     </div>
                                 </div>
                             }
-                        }
-                    </td>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>--</td>
+                    }
                     <td><input type="submit" value="Dodaj istezanje" class="button_example" /></td>
                 </tr>
             }

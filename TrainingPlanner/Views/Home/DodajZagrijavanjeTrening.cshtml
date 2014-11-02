@@ -24,11 +24,18 @@
                 @Html.Hidden("zgpId", zgp.ZagrijavanjeId)
                 <tr class="smallFont">
                     <td class="green">@zgp.Naziv</td>
-                    <td>@zgp.Info</td>
-                    <td>
-                        @if (zgp.ZagrijavanjeSlike.Count > 0)
-                        {
-                            foreach (var item in zgp.ZagrijavanjeSlike)
+                    @if (zgp.Info == null)
+                    {
+                        <td>--</td>
+                    }
+                    else
+                    {
+                        <td>@zgp.Info</td>
+                    }
+                    @if (zgp.ZagrijavanjeSlike.Count > 0)
+                    {
+                        <td>
+                            @foreach (var item in zgp.ZagrijavanjeSlike)
                             {
                                 <div style="float: left; display: block;">
                                     <div>
@@ -38,8 +45,12 @@
                                     </div>
                                 </div>
                             }
-                        }
-                    </td>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>--</td>
+                    }
                     <td><input type="submit" value="Dodaj zagrijavanje" class="button_example" /></td>
                 </tr>
             }
