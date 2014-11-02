@@ -78,7 +78,7 @@
                             <td>@Html.TextBox("Tempo", zagrijavanje.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
-                            <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, new { @class = "button_example_br" })</td>
+                            <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId }, new { @class = "button_example_br", onclick = "return confirm('Jeste li sigurni da zelite izbrisati zagrijavanje?');" })</td>
                             <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zagrijavanje.ZagrijavanjePopisZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_br" })</td>
                             <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
@@ -145,7 +145,7 @@
                     <td>@Html.TextBox("brojSerija", vjezba.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
                     <td>@Html.TextBox("Tezina", vjezba.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                     <td>@Html.TextBox("Odmor", vjezba.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
-                    <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, new { @class = "button_example_br" })</td>
+                    <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId }, new { @class = "button_example_br", onclick = "return confirm('Jeste li sigurni da zelite izbrisati vjezbu?');" })</td>
                     <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjezba.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_br" })</td>
 
                     <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_br" /></td>
@@ -156,7 +156,7 @@
 
                 
             @Html.ActionLink("Dodaj vježbu", "DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString() }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-            @Html.ActionLink("Izbriši sekciju vježbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginLeft marginHeadlineTop marginTextBottom button_example" })
+            @Html.ActionLink("Izbriši sekciju vježbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginLeft marginHeadlineTop marginTextBottom button_example", onclick = "return confirm('Jeste li sigurni da zelite izbrisati sekciju vjezbi?');" })
     <hr />i++;
             }
         }
@@ -196,7 +196,7 @@
                             <td>@Html.TextBox("vrijemeIzdrzaja", istezanje.VrijemeIzdrzaja, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("vrstaIstezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
 
-                            <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_br" })</td>
+                            <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_br", onclick = "return confirm('Jeste li sigurni da zelite izbrisati istezanje?');" })</td>
                             <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId }, new { @class = "button_example_br" })</td>
 
                             <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_br" /></td>
