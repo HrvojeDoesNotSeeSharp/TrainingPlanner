@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
 <div id="content">
     @using (Html.BeginForm("IzmijeniClana", "Home", FormMethod.Post))
     {
@@ -47,7 +46,7 @@
 
             <div class="marginText">
                 <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.TextBoxFor(x => x.GodinaRodenja, "{0:dd/MM/yyyy}", new { @class = "dateInput" })
+                @Html.TextBoxFor(x => x.GodinaRodenja, "{0:dd/MM/yyyy}")
                 @Html.ValidationMessageFor(m => m.GodinaRodenja, String.Empty, new { @class = "error" })
             </div>
 

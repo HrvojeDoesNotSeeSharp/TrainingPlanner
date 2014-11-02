@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
   
-<div id="sidebar"></div>
 <div id=@(Model.ZagrijavanjeSlike.Count > 0 ? "contentImg" : "content")>
     @using (Html.BeginForm("IzmijeniZagrijavanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {

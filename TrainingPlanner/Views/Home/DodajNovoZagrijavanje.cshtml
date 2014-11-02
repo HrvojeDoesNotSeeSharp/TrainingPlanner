@@ -4,16 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
 <div id="content">
-
     @using (Html.BeginForm("DodajNovoZagrijavanje", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)
 
         <div id="inputArea">
             <h2 class="green">Novo zagrijavanje</h2>
-
             <div>
                 <div class="marginInputBottom">@Html.LabelFor(model => model.Naziv, new { @class = "smallFont" })</div>
                 @Html.EditorFor(model => model.Naziv)
@@ -40,4 +37,4 @@
             @Html.ActionLink("Lista zagrijavanja", "ZagrijavanjePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
         </div>
     }
-    </div>
+</div>

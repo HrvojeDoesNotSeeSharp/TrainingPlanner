@@ -4,9 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
 <div id="content">
-
     @using (Html.BeginForm("DodajTest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)
@@ -22,7 +20,7 @@
             </div>
             <div>
                 <div class="marginText">@Html.Label("Datum", new { @class = "smallFont" })</div>
-                @Html.TextBoxFor(model => model.DatumTesta, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "dateInput" })
+                @Html.TextBoxFor(model => model.DatumTesta, new { @Value = DateTime.Now.ToString("dd/MM/yyyy") })
                 @Html.ValidationMessageFor(model => model.DatumTesta, String.Empty, new { @class = "error" })
             </div>
 

@@ -1,15 +1,12 @@
-﻿
-@model TrainingPlanner.VjezbePopis
+﻿@model TrainingPlanner.VjezbePopis
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
 <div id=@(Model.VjezbeSlike.Count > 0 ? "contentImg" : "content")>
     @using (Html.BeginForm("IzmijeniVjezbu", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-
         @Html.ValidationSummary(true)
 
         <div id=@(Model.VjezbeSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">

@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="sidebar"></div>
 <div id=@(Model.Slika.Count > 0 ? "contentImg" : "content")>
     @using (Html.BeginForm("IzmijeniTest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -23,7 +22,7 @@
         </div>
         <div>
             <div class="marginText">@Html.Label("Datum", new { @class = "smallFont" })</div>
-            @Html.TextBoxFor(model => model.DatumTesta, new { @Value = @Model.DatumTesta.ToShortDateString(), @class = "dateInput" })
+            @Html.TextBoxFor(model => model.DatumTesta, new { @Value = @Model.DatumTesta.ToShortDateString() })
             @Html.ValidationMessageFor(model => model.DatumTesta, String.Empty, new { @class = "error" })
         </div>
 
