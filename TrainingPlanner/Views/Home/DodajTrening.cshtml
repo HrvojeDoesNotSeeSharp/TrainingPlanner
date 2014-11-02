@@ -25,7 +25,7 @@
 
         <div class="marginText">
             <div class="marginInputBottom">@Html.Label("Datum treninga", new { @class = "smallFont marginInputBottom" })</div>
-            @Html.TextBoxFor(x => x.TreningDatum, "{0:dd/MM/yyyy}", new { @Value = "01/01/1980", @class = "dateInput" })
+            @Html.TextBoxFor(x => x.TreningDatum, "{0:dd/MM/yyyy}", new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "dateInput" })
             @Html.ValidationMessageFor(model => model.TreningDatum, String.Empty, new { @class = "error" })
         </div>
 
