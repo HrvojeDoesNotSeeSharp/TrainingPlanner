@@ -1273,7 +1273,7 @@ namespace TrainingPlanner.Controllers
         /*Zagrijavanje*/
 
         [HttpGet]
-        public ActionResult DodajZagrijavanjeTrening(int id, int izmijeni = 0)
+        public ActionResult DodajZagrijavanjeTrening(int id, int izmijeni = 0, int counter = 0)
         {
             var zgp = new IstezanjeZagrijavanjeLista
             {
@@ -1282,11 +1282,12 @@ namespace TrainingPlanner.Controllers
                 Izmijeni = izmijeni
             };
             ViewData["izmijeni"] = izmijeni;
+            ViewData["counter"] = counter;
             return View(zgp);
         }
 
         [HttpPost]
-        public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0)
+        public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0, int counter = 0)
         {
             var query = from x in _context.ZagrijavanjePopis
                 where x.ZagrijavanjeId == zgpId
@@ -1303,6 +1304,7 @@ namespace TrainingPlanner.Controllers
             _context.Zagrijavanje.Add(zg);
             _context.SaveChanges();
             ViewData["izmijeni"] = zgpIzmijeni;
+            ViewData["counter"] = counter;
             return zgpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new {id})
                 : RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});

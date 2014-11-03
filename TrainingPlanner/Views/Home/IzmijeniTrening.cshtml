@@ -45,7 +45,7 @@
 
     <div id="inputAreaTrening" style="float: left;">
         <!--Zagrijavanje-->
-        <h2 class="green">Zagrijavanje</h2>
+        <h2 id="0" class="green">Zagrijavanje</h2>
         <table class="responstableTrening">
             @if (Model.ListaZagrijavanja == null)
             {
@@ -67,11 +67,12 @@
                     <td class="treningFont">Tempo</td>
                     <td class="treningFont">Napomena</td>
                 </tr>
+                int i = 1;
                 foreach (var zagrijavanje in Model.ListaZagrijavanja)
                 {
                     using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
                     {
-                        <tr class="smallFont">
+                        <tr id ="@i" class="smallFont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("ZagrijavanjeId", zagrijavanje.ZagrijavanjeId)
                             <td>@zagrijavanje.Naziv</td>
@@ -84,11 +85,23 @@
                             <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
                     }
+                    i++;
                 }
             }
         </table>
-
-        @Html.ActionLink("Dodaj zagrijavanje", "DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        
+        @if (Model.ListaZagrijavanja == null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1,  counter = 0 })">Dodaj zagrijavanje</a>
+        }
+        else if (Model.ListaZagrijavanja.ToList().Count == 0)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new {id = Model.TreningId, izmijeni = 1, counter = 0})">Dodaj zagrijavanje</a>
+        }
+        else
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1,  counter = Model.ListaZagrijavanja.Count - 1 })">Dodaj zagrijavanje</a>
+        }
         
         <!--Vjezbe-->
         <h2 class="green marginHeadlineTop">Vježbe</h2>
@@ -164,8 +177,7 @@
             }
         }
         <br />
-        @Html.ActionLink("Dodaj sekciju vježbi", "DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 }, new { @class = "button_example" })
-
+        <a id="dodajSekcijuVjezbi" class="button_example" href="@Url.Action("DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 })#dodajSekcijuVjezbi">Dodaj sekciju vježbi</a>
         <!--Istezanje-->
         <h2 class="green marginHeadlineTop">Istezanje</h2>
         <table class="responstableTrening">
