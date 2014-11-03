@@ -1,4 +1,10 @@
-﻿.error {
+﻿.maxWidth {
+    max-width: 30em;
+    display: block;
+  word-wrap: break-word;
+}
+
+.error {
     color: red;
 }
 
@@ -324,7 +330,7 @@ a:focus { outline: none; color: #222;}
 .responstableTrening td {
   display: block;
   word-wrap: break-word;
-  max-width: 35em;
+  max-width: 28em;
 }
 .responstableTrening td:first-child {
   display: table-cell;

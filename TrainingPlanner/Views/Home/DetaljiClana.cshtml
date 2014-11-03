@@ -45,8 +45,8 @@
             <div class="marginText">@Html.Label("Godine", new { @class = "smallFont" })</div>
             @Html.DisplayFor(model => model.Clan.GodineStarosti)
         </div>
-        <div>
-            <div class="marginText">@Html.LabelFor(x => x.Clan.Amneza, new { @class = "smallFont" })</div>
+        <div class="maxWidth">
+            <div class="marginText maxWidth">@Html.LabelFor(x => x.Clan.Amneza, new { @class = "smallFont" })</div>
             @if (Model.Clan.Amneza == null)
             {
                 <text>--</text>
@@ -56,7 +56,7 @@
                 @Html.DisplayFor(model => model.Clan.Amneza)
             }
         </div>
-        <div>
+        <div class="maxWidth">
             <div class="marginText">@Html.LabelFor(x => x.Clan.Napomena, new { @class = "smallFont" })</div>
             @if (Model.Clan.Napomena == null)
             {
