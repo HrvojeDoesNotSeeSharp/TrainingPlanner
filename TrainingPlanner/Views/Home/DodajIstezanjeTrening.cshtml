@@ -8,7 +8,6 @@
 <div id="contentImg">
     <h2 class="green">Popis istezanja</h2>
     <table class="responstableTrening">
-
         @if (Model.IstezanjePopis.Count == 0)
         {
             <tr>
@@ -18,8 +17,7 @@
 
         @foreach (IstezanjePopis istp in Model.IstezanjePopis)
         {
-            using (Html.BeginForm("DodajIstezanjeTrening", "Home", FormMethod.Post, new { id = Model.TreningId }))
-            {
+            <form action="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId })#@ViewData["counter"]@ViewData["id"]" method="post">
                 @Html.Hidden("istpIzmijeni", Model.Izmijeni)
                 @Html.Hidden("istpId", istp.IstezanjeId)
                 <tr>
@@ -53,7 +51,7 @@
                     }
                     <td><input type="submit" value="Dodaj istezanje" class="button_example" /></td>
                 </tr>
-            }
+            </form>
         }
     </table>
 

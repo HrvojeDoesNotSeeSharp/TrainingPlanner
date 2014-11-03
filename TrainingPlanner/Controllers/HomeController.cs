@@ -1221,7 +1221,7 @@ namespace TrainingPlanner.Controllers
         /*Istezanje*/
 
         [HttpGet]
-        public ActionResult DodajIstezanjeTrening(int id, int izmijeni = 0)
+        public ActionResult DodajIstezanjeTrening(int id, int izmijeni = 0, int counter = 0)
         {
             var istp = new IstezanjeZagrijavanjeLista
             {
@@ -1230,11 +1230,13 @@ namespace TrainingPlanner.Controllers
                 Izmijeni = izmijeni
             };
             ViewData["izmijeni"] = izmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "ist";
             return View(istp);
         }
 
         [HttpPost]
-        public ActionResult DodajIstezanjeTrening(int istpId = 0, int id = 0, int istpIzmijeni = 0)
+        public ActionResult DodajIstezanjeTrening(int istpId = 0, int id = 0, int istpIzmijeni = 0, int counter = 0)
         {
             var query = from x in _context.IstezanjePopis
                 where x.IstezanjeId == istpId
@@ -1252,6 +1254,8 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             ViewData["izmijeni"] = istpIzmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "ist";
             return istpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new {id})
                 : RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});

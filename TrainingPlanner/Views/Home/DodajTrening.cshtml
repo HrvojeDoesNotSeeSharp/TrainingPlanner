@@ -9,43 +9,43 @@
     {
         @Html.ValidationSummary(true)
         @Html.HiddenFor(x => x.TreningId)
-    <h2 class="green">Novi trening - @Model.ClanIme @Model.ClanPrezime</h2>
-    <div id="inputAreaImgsTrening" style="float: left;">
-        <div>
-            <div class="marginInputBottom">@Html.Label("Ime treninga", new { @class = "smallFont" })</div>
-            @Html.TextBoxFor(x => x.TreningImeTreninga)
-            @Html.ValidationMessageFor(model => model.TreningImeTreninga, String.Empty, new { @class = "error" })
-        </div>
+        <h2 class="green">Novi trening - @Model.ClanIme @Model.ClanPrezime</h2>
+        <div id="inputAreaImgsTrening" style="float: left;">
+            <div>
+                <div class="marginInputBottom">@Html.Label("Ime treninga", new { @class = "smallFont" })</div>
+                @Html.TextBoxFor(x => x.TreningImeTreninga)
+                @Html.ValidationMessageFor(model => model.TreningImeTreninga, String.Empty, new { @class = "error" })
+            </div>
 
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Tip treninga", new { @class = "smallFont marginInputBottom" })</div>
-            @Html.TextBoxFor(x => x.TreningTip)
-            @Html.ValidationMessageFor(model => model.TreningTip, String.Empty, new { @class = "error" })
-        </div>
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Tip treninga", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextBoxFor(x => x.TreningTip)
+                @Html.ValidationMessageFor(model => model.TreningTip, String.Empty, new { @class = "error" })
+            </div>
 
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Datum treninga", new { @class = "smallFont marginInputBottom" })</div>
-            @Html.TextBoxFor(x => x.TreningDatum, "{0:dd/MM/yyyy}", new { @Value = DateTime.Now.ToString("dd/MM/yyyy") })
-            @Html.ValidationMessageFor(model => model.TreningDatum, String.Empty, new { @class = "error" })
-        </div>
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Datum treninga", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextBoxFor(x => x.TreningDatum, "{0:dd/MM/yyyy}", new { @Value = DateTime.Now.ToString("dd/MM/yyyy") })
+                @Html.ValidationMessageFor(model => model.TreningDatum, String.Empty, new { @class = "error" })
+            </div>
 
-        <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont marginInputBottom" })</div>
-            @Html.TextAreaFor(x => x.Napomena, new { rows = "10", cols = "40" })
-            @Html.ValidationMessageFor(model => model.Napomena, String.Empty, new { @class = "error" })
-        </div>
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextAreaFor(x => x.Napomena, new { rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(model => model.Napomena, String.Empty, new { @class = "error" })
+            </div>
 
-        <div class="marginHeadlineTop marginTextBottom">
-            <input type="submit" value="Dodaj trening" class="button_example" />
-        </div>
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Dodaj trening" class="button_example" />
+            </div>
 
-        @Html.ActionLink("Popis treninga", "TreningPopis", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-    </div>
+            @Html.ActionLink("Popis treninga", "TreningPopis", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
     }
 
     <div id="inputAreaTrening" style="float: left;">
         <!--Zagrijavanje-->
-        <h2 class="green">Zagrijavanje</h2>
+        <h2 id="0" class="green">Zagrijavanje</h2>
         <table class="responstableTrening">
             @if (Model.ListaZagrijavanja == null)
             {
@@ -67,11 +67,12 @@
                     <td class="treningFont">Tempo</td>
                     <td class="treningFont">Napomena</td>
                 </tr>
+                int i = 1;
                 foreach (var zagrijavanje in Model.ListaZagrijavanja)
                 {
                     using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", FormMethod.Post))
                     {
-                        <tr class="smallFont">
+                        <tr id="@i" class="smallFont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("ZagrijavanjeId", zagrijavanje.ZagrijavanjeId)
                             <td>@zagrijavanje.Naziv</td>
@@ -83,11 +84,23 @@
                             <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
                     }
+                    i++;
                 }
             }
         </table>
-        @Html.ActionLink("Dodaj zagrijavanje", "DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-
+        @if (Model.ListaZagrijavanja == null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, counter = 0 })">Dodaj zagrijavanje</a>
+        }
+        else if (Model.ListaZagrijavanja.ToList().Count == 0)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new {id = Model.TreningId, counter = 0})">Dodaj zagrijavanje</a>
+        }
+        else
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, counter = Model.ListaZagrijavanja.Count - 1 })">Dodaj zagrijavanje</a>
+        }
+        
         <!--Vjezbe-->
         <h2 class="green marginHeadlineTop">Vježbe</h2>
 
@@ -160,10 +173,10 @@
             }
         }
         <br />
-        @Html.ActionLink("Dodaj sekciju vježbi", "DodajSekcijuTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-
+        <a id="dodajSekcijuVjezbi" class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajSekcijuTrening", "Home", new { id = Model.TreningId })#dodajSekcijuVjezbi">Dodaj sekciju vježbi</a>
+        
         <!--Istezanje-->
-        <h2 class="green marginHeadlineTop">Istezanje</h2>
+        <h2 id="0ist" class="green marginHeadlineTop">Istezanje</h2>
         <table class="responstableTrening">
             @if (Model.ListaIstezanja == null)
             {
@@ -184,11 +197,13 @@
                     <td class="treningFont">Vrijeme izdržaja</td>
                     <td class="treningFont">Vrsta istezanja</td>
                 </tr>
+                int i = 1;
+                string ist = "ist";
                 foreach (var istezanje in Model.ListaIstezanja)
                 {
                     using (Html.BeginForm("SpremiIstezanjeInfo", "Home", FormMethod.Post))
                     {
-                        <tr class="smallFont">
+                        <tr id="@i@ist" class="smallFont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
                             <td>@istezanje.Naziv</td>
@@ -201,9 +216,21 @@
                             <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
                     }
+                    i++;
                 }
             }
         </table>
-        @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeTrening", "Home", new { id = Model.TreningId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @if (Model.ListaIstezanja == null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, counter = 0 })">Dodaj istezanje</a>
+        }
+        else if (Model.ListaIstezanja.ToList().Count == 0)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, counter = 0 })">Dodaj istezanje</a>
+        }
+        else
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, counter =  Model.ListaIstezanja.Count })">Dodaj istezanje</a>
+        }
     </div>
 </div>

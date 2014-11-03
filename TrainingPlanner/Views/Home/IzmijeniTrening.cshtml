@@ -179,7 +179,7 @@
         <br />
         <a id="dodajSekcijuVjezbi" class="button_example" href="@Url.Action("DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 })#dodajSekcijuVjezbi">Dodaj sekciju vježbi</a>
         <!--Istezanje-->
-        <h2 class="green marginHeadlineTop">Istezanje</h2>
+        <h2 id="0ist" class="green marginHeadlineTop">Istezanje</h2>
         <table class="responstableTrening">
             @if (Model.ListaIstezanja == null)
             {
@@ -200,11 +200,13 @@
                     <td class="treningFont">Vrijeme izdržaja</td>
                     <td class="treningFont">Vrsta istezanja</td>
                 </tr>
+                int i = 1;
+                string ist = "ist";
                 foreach (var istezanje in Model.ListaIstezanja)
                 {
                     using (Html.BeginForm("SpremiIstezanjeInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
                     {
-                        <tr class="smallFont">
+                        <tr id="@i@ist" class=" smallfont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
                             <td>@istezanje.Naziv</td>
@@ -217,10 +219,21 @@
                             <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
                     }
+                    i++;
                 }
             }
         </table>
-        @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-
+        @if (Model.ListaIstezanja == null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, counter = 0 })">Dodaj istezanje</a>
+        }
+        else if (Model.ListaIstezanja.ToList().Count == 0)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, counter = 0 })">Dodaj istezanje</a>
+        }
+        else
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, counter =  Model.ListaIstezanja.Count })">Dodaj istezanje</a>
+        }
     </div>
 </div>
