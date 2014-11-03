@@ -19,15 +19,15 @@
                 }
                 else
                 {
-                    <tr class="smallFont">
-                        <td class="green">@zp.Naziv</td>
+                    <tr>
+                        <td class="smallFontGreen">@zp.Naziv</td>
                         @if (zp.Info == null)
                         {
-                            <td>--</td>
+                            <td class="smallFont">--</td>
                         }
                         else
                         {
-                            <td>@zp.Info</td>
+                            <td class="smallFontNotCentered">@zp.Info</td>
                         }
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>

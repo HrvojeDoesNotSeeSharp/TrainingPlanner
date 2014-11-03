@@ -22,15 +22,15 @@
             {
                 @Html.Hidden("zgpIzmijeni", Model.Izmijeni)
                 @Html.Hidden("zgpId", zgp.ZagrijavanjeId)
-                <tr class="smallFont">
-                    <td class="green">@zgp.Naziv</td>
+                <tr>
+                    <td class="smallFontGreen">@zgp.Naziv</td>
                     @if (zgp.Info == null)
                     {
-                        <td>--</td>
+                        <td class="smallFont">--</td>
                     }
                     else
                     {
-                        <td>@zgp.Info</td>
+                        <td class="smallFontNotCentered">@zgp.Info</td>
                     }
                     @if (zgp.ZagrijavanjeSlike.Count > 0)
                     {
@@ -49,7 +49,7 @@
                     }
                     else
                     {
-                        <td>--</td>
+                        <td class="smallFont">--</td>
                     }
                     <td><input type="submit" value="Dodaj zagrijavanje" class="button_example" /></td>
                 </tr>

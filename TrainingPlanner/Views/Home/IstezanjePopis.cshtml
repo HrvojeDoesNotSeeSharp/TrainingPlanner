@@ -19,15 +19,15 @@
                 }
                 else
                 {
-                    <tr class="smallFont">
-                        <td class="green">@ip.Naziv</td>
+                    <tr>
+                        <td class="smallFontGreen">@ip.Naziv</td>
                         @if (ip.Info == null)
                         {
-                            <td>--</td>
+                            <td class="smallFont">--</td>
                         }
                         else
                         {
-                            <td>@ip.Info</td>
+                            <td class="smallFontNotCentered">@ip.Info</td>
                         }
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniIstezanje", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = ip.IstezanjeId }, new { @class = "button_example_small" })</td>

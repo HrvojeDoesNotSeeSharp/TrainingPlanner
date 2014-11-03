@@ -19,15 +19,15 @@
                 }
                 else
                 {
-                    <tr class="smallFont">
-                        <td class="green">@vjp.ImeVjezbe</td>
+                    <tr>
+                        <td class="smallFontGreen">@vjp.ImeVjezbe</td>
                         @if (vjp.Info == null)
                         {
-                            <td>--</td>
+                            <td class="smallFont">--</td>
                         }
                         else
                         {
-                            <td>@vjp.Info</td>
+                            <td class="smallFontNotCentered">@vjp.Info</td>
                         }
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniVjezbu", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjp.VjezbeId }, new { @class = "button_example_small" })</td>

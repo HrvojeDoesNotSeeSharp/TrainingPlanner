@@ -138,6 +138,23 @@
     color: #222;
 }
 
+.smallFontNotCentered{
+    font-family: "Trebuchet MS", Arial,  Helvetica, Tahoma, sans-serif;
+    font-size:20px;
+	margin-top: 0px; margin-bottom: 0px;
+    font-weight: normal;
+    color: #222;
+}
+
+.smallFontGreen{
+    font-family: "Trebuchet MS", Arial,  Helvetica, Tahoma, sans-serif;
+    font-size:20px;
+	margin-top: 0px; margin-bottom: 0px;
+    font-weight: normal;
+    text-align: left;
+    color: green;
+}
+
 .defaultFont{
     font-family: "Trebuchet MS", Arial,  Helvetica, Tahoma, sans-serif;
     font-size:16px;
