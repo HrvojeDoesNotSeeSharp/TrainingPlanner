@@ -28,11 +28,11 @@
 
         @if (ViewData["trening"] != null)
         {
-            @Html.ActionLink("Natrag na trening", "DodajTrening", "Home", new { id = (int)ViewData["treningId"], DodajVjezbu = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajTrening", "Home", new { id = (int)ViewData["treningId"], DodajVjezbu = 1 })#@ViewData["counter"]@ViewData["id"]">Natrag na trening</a>
         }
         @if (ViewData["izmijeni"] != null)
         {
-            @Html.ActionLink("Natrag na trening", "IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] })#@ViewData["counter"]@ViewData["id"]">Natrag na trening</a>
         }
         @if (ViewData["trening"] == null && ViewData["izmijeni"] == null)
         {

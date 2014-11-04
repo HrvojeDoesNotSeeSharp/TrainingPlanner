@@ -70,9 +70,8 @@
                 int i = 1;
                 foreach (var zagrijavanje in Model.ListaZagrijavanja)
                 {
-                    using (Html.BeginForm("SpremiZagrijavanjeInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
-                    {
-                        <tr id ="@i" class="smallFont">
+                    <form action="@Url.Action("SpremiZagrijavanjeInfo", "Home", new { izmijeni = 1 })#@i" method="post">
+                        <tr id="@i" class="smallFont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("ZagrijavanjeId", zagrijavanje.ZagrijavanjeId)
                             <td>@zagrijavanje.Naziv</td>
@@ -80,11 +79,11 @@
                             <td>@Html.TextBox("Tempo", zagrijavanje.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
-                            <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId, izmijeni = 1 }, new { @class = "button_example_br", onclick = "return confirm('Jeste li sigurni da zelite izbrisati zagrijavanje?');" })</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zagrijavanje.ZagrijavanjePopisZagrijavanjeId, izmijeni = 1, trening = 0, treningId = Model.TreningId }, new { @class = "button_example_br" })</td>
+                            <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId, izmijeni = 1 })#0">Izbriši</a></td>
+                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zagrijavanje.ZagrijavanjePopisZagrijavanjeId, izmijeni = 1, trening = 0, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
                             <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
-                    }
+                    </form>
                     i++;
                 }
             }
@@ -220,21 +219,20 @@
                 const string ist = "ist";
                 foreach (var istezanje in Model.ListaIstezanja)
                 {
-                    using (Html.BeginForm("SpremiIstezanjeInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
-                    {
+                    <form action="@Url.Action("SpremiIstezanjeInfo", "Home", new { izmijeni = 1 })#@i@ist" method="post">
                         <tr id="@i@ist" class=" smallfont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
                             <td>@istezanje.Naziv</td>
                             <td>@Html.TextBox("vrijemeIzdrzaja", istezanje.VrijemeIzdrzaja, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("vrstaIstezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
-
-                            <td>@Html.ActionLink("Izbriši", "IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId, izmijeni = 1 }, new { @class = "button_example_br", onclick = "return confirm('Jeste li sigurni da zelite izbrisati istezanje?');" })</td>
-                            <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeni = 1, trening = 0, treningId = Model.TreningId }, new { @class = "button_example_br" })</td>
+                            
+                            <td><a class="button_example_br" href="@Url.Action("IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId, izmijeni = 1 })#0ist">Izbriši</a></td>
+                            <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeni = 1, trening = 0, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
 
                             <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
-                    }
+                    </form>
                     i++;
                 }
             }

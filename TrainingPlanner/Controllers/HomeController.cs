@@ -84,7 +84,7 @@ namespace TrainingPlanner.Controllers
             }
         }
 
-        public ActionResult DetaljiZagrijavanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0)
+        public ActionResult DetaljiZagrijavanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
         {
             var zp = _context.ZagrijavanjePopis.Find(id);
             if (izmijeni == 1)
@@ -99,6 +99,7 @@ namespace TrainingPlanner.Controllers
             {
                 ViewData["treningId"] = treningId;
             }
+            ViewData["counter"] = counter;
 
             return View(zp);
         }
@@ -408,7 +409,7 @@ namespace TrainingPlanner.Controllers
             }
         }
 
-        public ActionResult DetaljiIstezanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0)
+        public ActionResult DetaljiIstezanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
         {
             var ip = _context.IstezanjePopis.Find(id);
 
@@ -425,6 +426,8 @@ namespace TrainingPlanner.Controllers
                 ViewData["treningId"] = treningId;
             }
 
+            ViewData["counter"] = counter;
+            ViewData["id"] = "ist";
             return View(ip);
         }
 
