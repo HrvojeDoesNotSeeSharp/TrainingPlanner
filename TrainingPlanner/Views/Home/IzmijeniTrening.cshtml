@@ -2,6 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    const string se = "sek";
 }
 
 <div id="contentImg">
@@ -103,7 +104,7 @@
         }
         
         <!--Vjezbe-->
-        <h2 class="green marginHeadlineTop">Vježbe</h2>
+        <h2 id="0vje" class="green marginHeadlineTop">Vježbe</h2>
 
         @if (Model.SekcijaVjezbi == null)
         {
@@ -124,11 +125,12 @@
         else
         {
             int i = 1;
+            int z = 1;
             const string sekcija = "sek";
+            const string vje = "vje";
             foreach (var item in Model.SekcijaVjezbi)
             {
                 <div id="@i@sekcija" class="treningFont">Sekcija @i</div>
-
                 <table class="responstableTrening">
                     <tr style="background-color:#C6C8C8;">
                         <td class="treningFont">Naziv</td>
@@ -136,9 +138,8 @@
                         <td class="treningFont">Broj serija</td>
                         <td class="treningFont">Težina</td>
                         <td class="treningFont">Odmor</td>
-
-                        @using (Html.BeginForm("SpremiBrojKrugova", "Home", new { izmijeni = 1 }, FormMethod.Post))
-                        {
+                        
+                        <form action="@Url.Action("SpremiBrojKrugova", "Home", new { izmijeni = 1 })#@i@sekcija" method="post">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("sekcijaId", item.SekcijaId)
                             <td style="background-color: white; border:none;">
@@ -148,14 +149,13 @@
                             <td style="background-color: white; border:none;">
                                 <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" class="button_example_br" />
                             </td>
-                        }
+                        </form>
                     </tr>
                     
                     @foreach (var vjezba in item.Vjezba)
                     {
-                        using (Html.BeginForm("SpremiVjezbuInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
-                        {
-                            <tr class="smallFont">
+                        <form action="@Url.Action("SpremiVjezbuInfo", "Home", new { izmijeni = 1 })#@i@sekcija" method="post">
+                            <tr id="@z@vje" class="smallFont">
                                 @Html.Hidden("id", Model.TreningId)
                                 @Html.Hidden("VjezbaId", vjezba.VjezbaId)
                                 <td>@vjezba.ImeVjezbe</td>
@@ -163,12 +163,13 @@
                                 <td>@Html.TextBox("brojSerija", vjezba.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
                                 <td>@Html.TextBox("Tezina", vjezba.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                                 <td>@Html.TextBox("Odmor", vjezba.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
-                                <td>@Html.ActionLink("Izbriši", "IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId, izmijeni = 1 }, new { @class = "button_example_br", onclick = "return confirm('Jeste li sigurni da zelite izbrisati vjezbu?');" })</td>
-                                <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjezba.VjezbePopisVjezbeId, izmijeni = 1, trening = 0, treningId = Model.TreningId }, new { @class = "button_example_br" })</td>
-
+                                
+                                <td><a class="button_example_br" href="@Url.Action("IzbrisiVjezbuTrening", "Home", new { id = vjezba.VjezbaId, izmijeni = 1 })#@i@sekcija">Izbriši</a></td>
+                                <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjezba.VjezbePopisVjezbeId, izmijeni = 1, trening = 0, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
                                 <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_br" /></td>
                             </tr>
-                        }
+                        </form>
+                        z++;
                     }
                 </table>
 
@@ -185,12 +186,13 @@
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = i })">Dodaj vježbu</a>
                 }
 
-                @Html.ActionLink("Izbriši sekciju vježbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId, izmijeni = 1 }, new { @class = "marginLeft marginHeadlineTop marginTextBottom button_example", onclick = "return confirm('Jeste li sigurni da zelite izbrisati sekciju vjezbi?');" })
+                <a class="marginLeft marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId, izmijeni = 1 })#0vje">Izbriši sekciju vježbi</a>
                 <hr/>
                 i++;
             }
         }
         <br />
+        
         <a id="dodajSekcijuVjezbi" class="button_example" href="@Url.Action("DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 })#dodajSekcijuVjezbi">Dodaj sekciju vježbi</a>
         
         <!--Istezanje-->
@@ -220,16 +222,15 @@
                 foreach (var istezanje in Model.ListaIstezanja)
                 {
                     <form action="@Url.Action("SpremiIstezanjeInfo", "Home", new { izmijeni = 1 })#@i@ist" method="post">
-                        <tr id="@i@ist" class=" smallfont">
+                        <tr id="@i@ist" class="smallFont">
                             @Html.Hidden("id", Model.TreningId)
                             @Html.Hidden("IstezanjeId", istezanje.IstezanjeId)
                             <td>@istezanje.Naziv</td>
                             <td>@Html.TextBox("vrijemeIzdrzaja", istezanje.VrijemeIzdrzaja, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("vrstaIstezanja", istezanje.VrstaIstezanja, new { @class = "marginInputBottom inputNumber" })</td>
-                            
+
                             <td><a class="button_example_br" href="@Url.Action("IzbrisiIstezanjeTrening", "Home", new { id = istezanje.IstezanjeId, izmijeni = 1 })#0ist">Izbriši</a></td>
                             <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeni = 1, trening = 0, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
-
                             <td><input type="submit" name="SpremiIstezanjeInfo" value="Spremi" class="button_example_br" /></td>
                         </tr>
                     </form>

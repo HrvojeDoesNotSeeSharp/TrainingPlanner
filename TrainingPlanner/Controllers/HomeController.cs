@@ -256,7 +256,7 @@ namespace TrainingPlanner.Controllers
             }
         }
 
-        public ActionResult DetaljiVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0)
+        public ActionResult DetaljiVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
         {
             var vjp = _context.VjezbePopis.Find(id);
 
@@ -273,6 +273,8 @@ namespace TrainingPlanner.Controllers
                 ViewData["treningId"] = treningId;
             }
 
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
             return View(vjp);
         }
 
