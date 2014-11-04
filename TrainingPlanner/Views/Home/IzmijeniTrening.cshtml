@@ -125,9 +125,10 @@
         else
         {
             int i = 1;
+            const string sekcija = "sek";
             foreach (var item in Model.SekcijaVjezbi)
             {
-                <div class="treningFont">Sekcija @i</div>
+                <div id="@i@sekcija" class="treningFont">Sekcija @i</div>
 
                 <table class="responstableTrening">
                     <tr style="background-color:#C6C8C8;">
@@ -150,6 +151,7 @@
                             </td>
                         }
                     </tr>
+                    
                     @foreach (var vjezba in item.Vjezba)
                     {
                         using (Html.BeginForm("SpremiVjezbuInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))
@@ -171,13 +173,27 @@
                     }
                 </table>
 
-                @Html.ActionLink("Dodaj vježbu", "DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+                if (Model.SekcijaVjezbi == null)
+                {
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj vježbu</a>
+                }
+                else if (Model.SekcijaVjezbi.ToList().Count == 0)
+                {
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj vježbu</a>
+                }
+                else
+                {
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = i })">Dodaj vježbu</a>
+                }
+
                 @Html.ActionLink("Izbriši sekciju vježbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId, izmijeni = 1 }, new { @class = "marginLeft marginHeadlineTop marginTextBottom button_example", onclick = "return confirm('Jeste li sigurni da zelite izbrisati sekciju vjezbi?');" })
-                <hr/>i++;
+                <hr/>
+                i++;
             }
         }
         <br />
         <a id="dodajSekcijuVjezbi" class="button_example" href="@Url.Action("DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 })#dodajSekcijuVjezbi">Dodaj sekciju vježbi</a>
+        
         <!--Istezanje-->
         <h2 id="0ist" class="green marginHeadlineTop">Istezanje</h2>
         <table class="responstableTrening">
@@ -201,7 +217,7 @@
                     <td class="treningFont">Vrsta istezanja</td>
                 </tr>
                 int i = 1;
-                string ist = "ist";
+                const string ist = "ist";
                 foreach (var istezanje in Model.ListaIstezanja)
                 {
                     using (Html.BeginForm("SpremiIstezanjeInfo", "Home", new { izmijeni = 1 }, FormMethod.Post))

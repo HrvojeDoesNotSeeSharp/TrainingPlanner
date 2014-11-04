@@ -8,7 +8,6 @@
 <div id="contentImg">
     <h2 class="green">Popis vježbi</h2>
     <table class="responstableTrening">
-
         @if (Model.VjezbePopis.Count == 0)
         {
             <tr>
@@ -18,8 +17,7 @@
 
         @foreach (VjezbePopis vjp in Model.VjezbePopis)
         {
-            using (Html.BeginForm("DodajVjezbuTrening", "Home", FormMethod.Post, new { id = Model.SekcijaId }))
-            {
+            <form action="@Url.Action("DodajVjezbuTrening", "Home", new { id = Model.SekcijaId })#@ViewData["counter"]@ViewData["id"]" method="post">
                 @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
                 @Html.Hidden("vjpID", vjp.VjezbeId)
                 <tr>
@@ -37,13 +35,13 @@
                         <td>
                             @foreach (var item in vjp.VjezbeSlike)
                             {
-                            <div style="float: left; display: block;">
-                                <div>
-                                    <a href="~/Content/VjezbeSlike/@item.VjezbeSlikaIme" target="_blank">
-                                        <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
-                                    </a>
+                                <div style="float: left; display: block;">
+                                    <div>
+                                        <a href="~/Content/VjezbeSlike/@item.VjezbeSlikaIme" target="_blank">
+                                            <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" />
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             }
                         </td>
                     }
@@ -53,7 +51,7 @@
                     }
                     <td><input type="submit" value="Dodaj vježbu" class="button_example" /></td>
                 </tr>
-            }
+            </form>
         }
     </table>
 

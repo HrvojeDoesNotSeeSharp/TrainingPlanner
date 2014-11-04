@@ -123,9 +123,10 @@
         else
         {
             int i = 1;
+            const string sekcija = "sek";
             foreach (var item in Model.SekcijaVjezbi)
             {
-                <div class="treningFont">Sekcija @i</div>
+                <div id="@i@sekcija" class="treningFont">Sekcija @i</div>
                 <table class="responstableTrening">
                     <tr style="background-color:#C6C8C8;">
                         <td class="treningFont">Naziv</td>
@@ -166,10 +167,23 @@
                             }
                         }
                     </table>
-                
-            @Html.ActionLink("Dodaj vježbu", "DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString() }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+
+                if (Model.SekcijaVjezbi == null)
+                {
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), counter = 0 })">Dodaj vježbu</a>
+                }
+                else if (Model.SekcijaVjezbi.ToList().Count == 0)
+                {
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), counter = 0 })">Dodaj vježbu</a>
+                }
+                else
+                {
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), counter = i })">Dodaj vježbu</a>
+                }
+
             @Html.ActionLink("Izbriši sekciju vježbi", "IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId }, new { @class = "marginLeft marginHeadlineTop marginTextBottom button_example", onclick = "return confirm('Jeste li sigurni da zelite izbrisati sekciju vjezbi?');" })
-            <hr />i++;
+            <hr />
+            i++;
             }
         }
         <br />
@@ -198,7 +212,7 @@
                     <td class="treningFont">Vrsta istezanja</td>
                 </tr>
                 int i = 1;
-                string ist = "ist";
+                const string ist = "ist";
                 foreach (var istezanje in Model.ListaIstezanja)
                 {
                     using (Html.BeginForm("SpremiIstezanjeInfo", "Home", FormMethod.Post))

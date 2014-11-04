@@ -1159,7 +1159,7 @@ namespace TrainingPlanner.Controllers
         /*Vjezbe*/
 
         [HttpGet]
-        public ActionResult DodajVjezbuTrening(int id, string id1, int izmijeni = 0)
+        public ActionResult DodajVjezbuTrening(int id, string id1, int izmijeni = 0, int counter = 0)
         {
             var vj = new VjezbePopisLista
             {
@@ -1169,11 +1169,13 @@ namespace TrainingPlanner.Controllers
             };
             ViewData["izmijeni"] = izmijeni;
             ViewData["id1"] = id1;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
             return View(vj);
         }
 
         [HttpPost]
-        public ActionResult DodajVjezbuTrening(int vjpId = 0, int id = 0, int vjpIzmijeni = 0)
+        public ActionResult DodajVjezbuTrening(int vjpId = 0, int id = 0, int vjpIzmijeni = 0, int counter = 0)
         {
             var query = from x in _context.VjezbePopis
                 where x.VjezbeId == vjpId
@@ -1198,6 +1200,8 @@ namespace TrainingPlanner.Controllers
             id = trening.TreningId;
 
             ViewData["izmijeni"] = vjpIzmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
             return vjpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new {id})
                 : RedirectToAction("DodajTrening", new {id, DodajVjezbu = 2});
