@@ -20,7 +20,7 @@
         </div>
 
         <div class="maxWidth">
-            <div class="marginText">@Html.Label("Funkcionalne sposobnosti", new { @class = "smallFont" })</div>
+            <div class="marginText">@Html.Label("Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
             @if (Model.FunkcionalneSposobnosti == null)
             {
                 <text>--</text>
@@ -32,7 +32,19 @@
         </div>
 
         <div class="maxWidth">
-            <div class="marginText">@Html.Label("Motoričke sposobnosti", new { @class = "smallFont" })</div>
+            <div class="marginText">@Html.Label("* Rezultat", new { @class = "smallFont" })</div>
+            @if (Model.NapomenaFunkcionalneSposobnosti == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.NapomenaFunkcionalneSposobnosti)
+            }
+        </div>
+
+        <div class="maxWidth">
+            <div class="marginText">@Html.Label("Motoričke sposobnosti **", new { @class = "smallFont" })</div>
             @if (Model.MotorickeSposobnosti == null)
             {
                 <text>--</text>
@@ -40,6 +52,18 @@
             else
             {
                 @Html.DisplayFor(model => model.MotorickeSposobnosti)
+            }
+        </div>
+
+        <div class="maxWidth">
+            <div class="marginText">@Html.Label("** Rezultat", new { @class = "smallFont" })</div>
+            @if (Model.NapomenaMotorickeSposobnosti == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.NapomenaMotorickeSposobnosti)
             }
         </div>
 

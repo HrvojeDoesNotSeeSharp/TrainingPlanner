@@ -149,6 +149,10 @@
                                 @Html.TextBox("brojKrugova", item.BrojKrugova, new { @class = "inputNumber" })
                             </td>
                             <td style="background-color: white; border:none;">
+                                @Html.Label("Odmor:", new { @class = "treningFont" })
+                                @Html.TextBox("odmor", item.Odmor, new { @class = "inputNumber" })
+                            </td>
+                            <td style="background-color: white; border:none;">
                                 <input type="submit" name="SpremiBrojKrugova" value="Spremi broj krugova" class="button_example_br" />
                             </td>
                         </form>

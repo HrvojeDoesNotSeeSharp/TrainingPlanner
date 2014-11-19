@@ -27,15 +27,27 @@
         </div>
 
         <div>
-            <div class="marginText">@Html.Label("Funkcionalne sposobnosti", new { @class = "smallFont" })</div>
+            <div class="marginText">@Html.Label("Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
             @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti, String.Empty, new { @class = "error" })
         </div>
 
         <div>
-            <div class="marginText">@Html.Label("Motoričke sposobnosti", new { @class = "smallFont" })</div>
+            <div class="marginInputBottom">@Html.Label("* Rezultat", new { @class = "smallFont" })</div>
+            @Html.EditorFor(model => model.NapomenaFunkcionalneSposobnosti)
+            @Html.ValidationMessageFor(model => model.NapomenaFunkcionalneSposobnosti, String.Empty, new { @class = "error" })
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Motoričke sposobnosti **", new { @class = "smallFont" })</div>
             @Html.TextAreaFor(model => model.MotorickeSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.MotorickeSposobnosti, String.Empty, new { @class = "error" })
+        </div>
+
+        <div>
+            <div class="marginInputBottom">@Html.Label("** Rezultat", new { @class = "smallFont" })</div>
+            @Html.EditorFor(model => model.NapomenaMotorickeSposobnosti)
+            @Html.ValidationMessageFor(model => model.NapomenaMotorickeSposobnosti, String.Empty, new { @class = "error" })
         </div>
 
         @if (Model.Slika.Count == 0)

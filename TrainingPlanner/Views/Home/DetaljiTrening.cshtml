@@ -75,11 +75,19 @@ else
                 <td>@vjezba.Odmor</td>
             </tr>
             }
-            @if (item.BrojKrugova != null)
+            @if (item.BrojKrugova != null && !string.IsNullOrEmpty(item.BrojKrugova))
             { 
                 <tr>
                     <td colspan="5" style="text-align:left">
                         Broj krugova:  @item.BrojKrugova
+                    </td>
+                </tr>
+            }
+            @if (item.Odmor != null && !string.IsNullOrEmpty(item.Odmor))
+            {
+                <tr>
+                    <td colspan="5" style="text-align:left">
+                        Odmor između krugova:  @item.Odmor
                     </td>
                 </tr>
             }

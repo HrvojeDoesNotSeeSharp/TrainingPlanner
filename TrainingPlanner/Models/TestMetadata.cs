@@ -19,5 +19,11 @@ namespace TrainingPlanner.Models
 
         [StringLength(1000, ErrorMessage = "Maksimum 1000 znakova")]
         public string MotorickeSposobnosti { get; set; }
+
+        [StringLength(1000, ErrorMessage = "Maksimum 1000 znakova")]
+        public string NapomenaFunkcionalneSposobnosti { get; set; }
+
+        [StringLength(1000, ErrorMessage = "Maksimum 1000 znakova")]
+        public string NapomenaMotorickeSposobnosti { get; set; }
     }
 }

@@ -1618,7 +1618,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SpremiBrojKrugova(string BrojKrugova = null, int id = 0, int sekcijaId = 0, int izmijeni = 0)
+        public ActionResult SpremiBrojKrugova(string BrojKrugova = null, string odmor = null, int id = 0, int sekcijaId = 0, int izmijeni = 0)
         {
             var query = from x in _context.SekcijaVjezbi
                         where x.SekcijaId == sekcijaId
@@ -1626,6 +1626,7 @@ namespace TrainingPlanner.Controllers
 
             var sekcija = query.Single();
             sekcija.BrojKrugova = BrojKrugova;
+            sekcija.Odmor = odmor;
 
             _context.Entry(sekcija).State = EntityState.Modified;
             _context.SaveChanges();
