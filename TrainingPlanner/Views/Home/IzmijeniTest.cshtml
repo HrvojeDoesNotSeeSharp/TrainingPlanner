@@ -27,36 +27,6 @@
         </div>
 
         <div>
-            <div class="marginText">@Html.Label("Visina", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.Visina)
-            @Html.ValidationMessageFor(model => model.Visina, String.Empty, new { @class = "error" })
-        </div>
-
-        <div>
-            <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.Tezina)
-            @Html.ValidationMessageFor(model => model.Tezina, String.Empty, new { @class = "error" })
-        </div>
-
-        <div>
-            <div class="marginText">@Html.Label("Antropometrija", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.Antropometrija)
-            @Html.ValidationMessageFor(model => model.Antropometrija, String.Empty, new { @class = "error" })
-        </div>
-
-        <div>
-            <div class="marginText">@Html.Label("Potkožno masno tkivo", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.PotkoznoMasnoTkivo)
-            @Html.ValidationMessageFor(model => model.PotkoznoMasnoTkivo, String.Empty, new { @class = "error" })
-        </div>
-
-        <div>
-            <div class="marginText">@Html.Label("Bezmasna masa", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.BezmasnaMasa)
-            @Html.ValidationMessageFor(model => model.BezmasnaMasa, String.Empty, new { @class = "error" })
-        </div>
-
-        <div>
             <div class="marginText">@Html.Label("Funkcionalne sposobnosti", new { @class = "smallFont" })</div>
             @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti, String.Empty, new { @class = "error" })

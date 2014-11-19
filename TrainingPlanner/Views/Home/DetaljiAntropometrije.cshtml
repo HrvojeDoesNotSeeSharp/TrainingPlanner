@@ -1,0 +1,68 @@
+﻿@model TrainingPlanner.Antropometrija
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sidebar"></div>
+<div id="content">
+    <div id="inputArea" style="float: left;">
+        <h2 class="green">Detalji antropometrije</h2>
+
+        <div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => model.Ime)
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Visina", new { @class = "smallFont" })</div>
+            @if (Model.Visina == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Visina)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
+            @if (Model.Tezina == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Tezina)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Potkožno masno tkivo", new { @class = "smallFont" })</div>
+            @if (Model.PotkoznoMasnoTkivo == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.PotkoznoMasnoTkivo)
+            }
+        </div>
+
+        <div>
+            <div class="marginText">@Html.Label("Bezmasna masa", new { @class = "smallFont" })</div>
+            @if (Model.BezmasnaMasa == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.BezmasnaMasa)
+            }
+        </div>
+
+        @Html.ActionLink("Antropometrija popis", "AntropometrijaPopis", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </div>
+</div>

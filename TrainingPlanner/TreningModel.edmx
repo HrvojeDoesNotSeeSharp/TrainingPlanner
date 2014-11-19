@@ -20,6 +20,8 @@
     <EntitySet Name="VjezbeSlike" EntityType="TreningModel.Store.VjezbeSlike" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IstezanjeSlike" EntityType="TreningModel.Store.IstezanjeSlike" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SekcijaVjezbi" EntityType="TreningModel.Store.SekcijaVjezbi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClanSlike" EntityType="TreningModel.Store.ClanSlike" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Antropometrija" EntityType="TreningModel.Store.Antropometrija" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -72,6 +74,14 @@
       <End Role="Istezanje" EntitySet="Istezanje" />
       <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
     </AssociationSet>
+    <AssociationSet Name="ClanSlikeClan" Association="TreningModel.Store.ClanSlikeClan">
+      <End Role="ClanSlike" EntitySet="ClanSlike" />
+      <End Role="Clan" EntitySet="Clan" />
+    </AssociationSet>
+    <AssociationSet Name="AntropometrijaClan" Association="TreningModel.Store.AntropometrijaClan">
+      <End Role="Antropometrija" EntitySet="Antropometrija" />
+      <End Role="Clan" EntitySet="Clan" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
     <Key>
@@ -94,11 +104,6 @@
     </Key>
     <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DatumTesta" Type="datetime" Nullable="false" />
-    <Property Name="Antropometrija" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Tezina" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Visina" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PotkoznoMasnoTkivo" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="BezmasnaMasa" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ClanId" Type="int" Nullable="false" />
     <Property Name="FunkcionalneSposobnosti" Type="nvarchar(max)" Nullable="true" />
@@ -219,6 +224,26 @@
     <Property Name="SekcijaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="BrojKrugova" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClanSlike">
+    <Key>
+      <PropertyRef Name="ClanSlikeId" />
+    </Key>
+    <Property Name="ClanSlikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClanSlikaIme" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClanClanId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Antropometrija">
+    <Key>
+      <PropertyRef Name="AntropometrijaId" />
+    </Key>
+    <Property Name="AntropometrijaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Visina" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tezina" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PotkoznoMasnoTkivo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezmasnaMasa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClanClanId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -376,6 +401,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ClanSlikeClan">
+    <End Role="ClanSlike" Type="TreningModel.Store.ClanSlike" Multiplicity="*" />
+    <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Clan">
+        <PropertyRef Name="ClanId" />
+      </Principal>
+      <Dependent Role="ClanSlike">
+        <PropertyRef Name="ClanClanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AntropometrijaClan">
+    <End Role="Antropometrija" Type="TreningModel.Store.Antropometrija" Multiplicity="*" />
+    <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Clan">
+        <PropertyRef Name="ClanId" />
+      </Principal>
+      <Dependent Role="Antropometrija">
+        <PropertyRef Name="ClanClanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -447,6 +496,16 @@
             <End Role="Istezanje" EntitySet="Istezanje" />
             <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
           </AssociationSet>
+          <EntitySet Name="ClanSlike" EntityType="TreningModel.ClanSlike" />
+          <AssociationSet Name="ClanSlikeClan" Association="TreningModel.ClanSlikeClan">
+            <End Role="ClanSlike" EntitySet="ClanSlike" />
+            <End Role="Clan" EntitySet="Clan" />
+          </AssociationSet>
+          <EntitySet Name="Antropometrija" EntityType="TreningModel.Antropometrija" />
+          <AssociationSet Name="AntropometrijaClan" Association="TreningModel.AntropometrijaClan">
+            <End Role="Antropometrija" EntitySet="Antropometrija" />
+            <End Role="Clan" EntitySet="Clan" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
           <Key>
@@ -464,6 +523,8 @@
           <Property Type="String" Name="Sport" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Amneza" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Napomena" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClanSlike" Relationship="TreningModel.ClanSlikeClan" FromRole="Clan" ToRole="ClanSlike" />
+          <NavigationProperty Name="Antropometrija" Relationship="TreningModel.AntropometrijaClan" FromRole="Clan" ToRole="Antropometrija" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -471,11 +532,6 @@
           </Key>
           <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
-          <Property Type="String" Name="Antropometrija" Nullable="true" />
-          <Property Type="String" Name="Tezina" Nullable="true" />
-          <Property Type="String" Name="Visina" Nullable="true" />
-          <Property Type="String" Name="PotkoznoMasnoTkivo" Nullable="true" />
-          <Property Type="String" Name="BezmasnaMasa" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clan" Relationship="TreningModel.ClanTest" FromRole="Test" ToRole="Clan" />
           <Property Type="Int32" Name="ClanId" Nullable="false" />
@@ -777,6 +833,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClanSlike">
+          <Key>
+            <PropertyRef Name="ClanSlikeId" />
+          </Key>
+          <Property Name="ClanSlikeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClanSlikaIme" Type="String" Nullable="false" />
+          <NavigationProperty Name="Clan" Relationship="TreningModel.ClanSlikeClan" FromRole="ClanSlike" ToRole="Clan" />
+          <Property Name="ClanClanId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ClanSlikeClan">
+          <End Type="TreningModel.ClanSlike" Role="ClanSlike" Multiplicity="*" />
+          <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Clan">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="ClanSlike">
+              <PropertyRef Name="ClanClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Antropometrija">
+          <Key>
+            <PropertyRef Name="AntropometrijaId" />
+          </Key>
+          <Property Name="AntropometrijaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" />
+          <Property Name="Visina" Type="String" Nullable="false" />
+          <Property Name="Tezina" Type="String" Nullable="false" />
+          <Property Name="PotkoznoMasnoTkivo" Type="String" Nullable="false" />
+          <Property Name="BezmasnaMasa" Type="String" Nullable="false" />
+          <NavigationProperty Name="Clan" Relationship="TreningModel.AntropometrijaClan" FromRole="Antropometrija" ToRole="Clan" />
+          <Property Name="ClanClanId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AntropometrijaClan">
+          <End Type="TreningModel.Antropometrija" Role="Antropometrija" Multiplicity="*" />
+          <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Clan">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="Antropometrija">
+              <PropertyRef Name="ClanClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -804,11 +906,6 @@
         <MappingFragment StoreEntitySet="Test">
           <ScalarProperty Name="TestId" ColumnName="TestId" />
           <ScalarProperty Name="DatumTesta" ColumnName="DatumTesta" />
-          <ScalarProperty Name="Antropometrija" ColumnName="Antropometrija" />
-          <ScalarProperty Name="Tezina" ColumnName="Tezina" />
-          <ScalarProperty Name="Visina" ColumnName="Visina" />
-          <ScalarProperty Name="PotkoznoMasnoTkivo" ColumnName="PotkoznoMasnoTkivo" />
-          <ScalarProperty Name="BezmasnaMasa" ColumnName="BezmasnaMasa" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
           <ScalarProperty Name="FunkcionalneSposobnosti" ColumnName="FunkcionalneSposobnosti" />
@@ -941,6 +1038,28 @@
           <ScalarProperty Name="SekcijaId" ColumnName="SekcijaId" />
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="BrojKrugova" ColumnName="BrojKrugova" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClanSlike">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.ClanSlike)">
+        <MappingFragment StoreEntitySet="ClanSlike">
+          <ScalarProperty Name="ClanSlikeId" ColumnName="ClanSlikeId" />
+          <ScalarProperty Name="ClanSlikaIme" ColumnName="ClanSlikaIme" />
+          <ScalarProperty Name="ClanClanId" ColumnName="ClanClanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Antropometrija">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Antropometrija)">
+        <MappingFragment StoreEntitySet="Antropometrija">
+          <ScalarProperty Name="AntropometrijaId" ColumnName="AntropometrijaId" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Visina" ColumnName="Visina" />
+          <ScalarProperty Name="Tezina" ColumnName="Tezina" />
+          <ScalarProperty Name="PotkoznoMasnoTkivo" ColumnName="PotkoznoMasnoTkivo" />
+          <ScalarProperty Name="BezmasnaMasa" ColumnName="BezmasnaMasa" />
+          <ScalarProperty Name="ClanClanId" ColumnName="ClanClanId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

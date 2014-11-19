@@ -14,22 +14,17 @@ namespace TrainingPlanner
     using System.ComponentModel.DataAnnotations;
     using TrainingPlanner.Models;
 
-    [MetadataType(typeof(TestMetadata))]
-    public partial class Test
+    [MetadataType(typeof(AntropometrijaMetadata))]
+    public partial class Antropometrija
     {
-        public Test()
-        {
-            this.Slika = new HashSet<Slika>();
-        }
-    
-        public int TestId { get; set; }
-        public System.DateTime DatumTesta { get; set; }
-        public string Name { get; set; }
-        public int ClanId { get; set; }
-        public string FunkcionalneSposobnosti { get; set; }
-        public string MotorickeSposobnosti { get; set; }
+        public int AntropometrijaId { get; set; }
+        public string Ime { get; set; }
+        public string Visina { get; set; }
+        public string Tezina { get; set; }
+        public string PotkoznoMasnoTkivo { get; set; }
+        public string BezmasnaMasa { get; set; }
+        public int ClanClanId { get; set; }
     
         public virtual Clan Clan { get; set; }
-        public virtual ICollection<Slika> Slika { get; set; }
     }
 }

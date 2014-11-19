@@ -110,6 +110,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Antropometrija.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Clan.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
@@ -130,6 +133,8 @@
     <Compile Include="IstezanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AntropometrijaList.cs" />
+    <Compile Include="Models\AntropometrijaMetadata.cs" />
     <Compile Include="Models\ClanMetadata.cs" />
     <Compile Include="Models\ClanTestModel.cs" />
     <Compile Include="Models\IstezanjePopisMetadata.cs" />
@@ -333,6 +338,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\AntropometrijaPopis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajAntropometriju.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniAntropometriju.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DetaljiAntropometrije.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

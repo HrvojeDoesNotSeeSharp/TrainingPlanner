@@ -11,7 +11,7 @@ namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Trening
     {
         public Trening()

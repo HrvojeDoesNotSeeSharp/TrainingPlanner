@@ -1,0 +1,53 @@
+﻿@model TrainingPlanner.Antropometrija
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    @using (Html.BeginForm("DodajAntropometriju", "Home", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.ClanClanId)
+
+        <div id="inputArea">
+            <h2 class="green">Nova antropometrija</h2>
+
+            <div>
+                <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.Ime)
+                @Html.ValidationMessageFor(model => model.Ime, String.Empty, new { @class = "error" })
+            </div>
+
+            <div>
+                <div class="marginText">@Html.Label("Visina", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.Visina)
+                @Html.ValidationMessageFor(model => model.Visina, String.Empty, new { @class = "error" })
+            </div>
+
+            <div>
+                <div class="marginText">@Html.Label("Težina", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.Tezina)
+                @Html.ValidationMessageFor(model => model.Tezina, String.Empty, new { @class = "error" })
+            </div>
+
+            <div>
+                <div class="marginText">@Html.Label("Potkožno masno tkivo", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.PotkoznoMasnoTkivo)
+                @Html.ValidationMessageFor(model => model.PotkoznoMasnoTkivo, String.Empty, new { @class = "error" })
+            </div>
+
+            <div>
+                <div class="marginText">@Html.Label("Bezmasna masa", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.BezmasnaMasa)
+                @Html.ValidationMessageFor(model => model.BezmasnaMasa, String.Empty, new { @class = "error" })
+            </div>
+
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Dodaj antropometriju" class="button_example" />
+            </div>
+
+            @Html.ActionLink("Antropometrija popis", "AntropometrijaPopis", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
+    }
+</div>

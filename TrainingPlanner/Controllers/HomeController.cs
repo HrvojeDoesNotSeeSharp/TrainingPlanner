@@ -691,6 +691,85 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpGet]
+        public ActionResult AntropometrijaPopis(int id = 0)
+        {
+            var query = from x in _context.Antropometrija
+                        where x.ClanClanId == id
+                        select x;
+
+            var query1 = from x in _context.Clan
+                         where x.ClanId == id
+                         select x;
+
+            var c = query1.Single();
+
+            var listaT = new AntropometrijaList { Clan = c };
+
+            if (query.FirstOrDefault() != null)
+            {
+                listaT.AntropometrijaLista = query.ToList();
+            }
+
+            return View(listaT);
+        }
+
+        [HttpGet]
+        public ActionResult DodajAntropometriju(int id = 0)
+        {
+            var a = new Antropometrija { ClanClanId = id };
+            return View(a);
+        }
+
+        [HttpPost]
+        public ActionResult DodajAntropometriju(Antropometrija a)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Antropometrija.Add(a);
+                _context.SaveChanges();
+                return RedirectToAction("AntropometrijaPopis", new { id = a.ClanClanId });
+            }
+            return RedirectToAction("DodajAntropometriju");
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniAntropometriju(int id = 0)
+        {
+            var a = _context.Antropometrija.Find(id);
+            return View(a);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniAntropometriju(Antropometrija a)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(a).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return RedirectToAction("AntropometrijaPopis", new { id = a.ClanClanId });
+            }
+            return RedirectToAction("IzmijeniAntropometriju", a);
+        }
+
+        public ActionResult IzbrisiAntropometriju(int id)
+        {
+            var a = _context.Antropometrija.Find(id);
+
+            _context.Antropometrija.Remove(a);
+            _context.SaveChanges();
+
+            return RedirectToAction("AntropometrijaPopis", new { id = a.ClanClanId });
+        }
+
+        public ActionResult DetaljiAntropometrije(int id)
+        {
+            var a = _context.Antropometrija.Find(id);
+            return View(a);
+
+        }
+
+        [HttpGet]
         public ActionResult DodajTest(int id = 0)
         {
             var t = new Test {ClanId = id};
