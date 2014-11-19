@@ -7,13 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using TrainingPlanner.Models;
-
 namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using TrainingPlanner.Models;
 
     [MetadataType(typeof(ClanMetadata))]
     public partial class Clan
@@ -22,6 +21,7 @@ namespace TrainingPlanner
         {
             this.Trening = new HashSet<Trening>();
             this.Test = new HashSet<Test>();
+            this.ClanSlike = new HashSet<ClanSlike>();
         }
     
         public int ClanId { get; set; }
@@ -37,5 +37,6 @@ namespace TrainingPlanner
     
         public virtual ICollection<Trening> Trening { get; set; }
         public virtual ICollection<Test> Test { get; set; }
+        public virtual ICollection<ClanSlike> ClanSlike { get; set; }
     }
 }

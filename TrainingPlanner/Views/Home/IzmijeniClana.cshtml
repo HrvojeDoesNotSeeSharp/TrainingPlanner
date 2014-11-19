@@ -5,68 +5,97 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="content">
-    @using (Html.BeginForm("IzmijeniClana", "Home", FormMethod.Post))
+<div id=@(Model.ClanSlike.Count > 0 ? "contentImg" : "content")>
+    @using (Html.BeginForm("IzmijeniClana", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)
         @Html.HiddenFor(x => x.ClanId)
 
-        <div id="inputArea">
-            <h2 class="green">Izmjeni člana</h2>
+    <div id=@(Model.ClanSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+        <h2 class="green">Izmjeni člana</h2>
 
-            <div>
-                <div class="marginInputBottom">@Html.Label("Ime", new { @class = "smallFont" })</div>
-                @Html.EditorFor(x => x.Ime)
-                @Html.ValidationMessageFor(x => x.Ime, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Prezime", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.EditorFor(x => x.Prezime)
-                @Html.ValidationMessageFor(x => x.Prezime, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Visina", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.EditorFor(x => x.Visina)
-                @Html.ValidationMessageFor(x => x.Visina, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Težina", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.EditorFor(x => x.Tezina)
-                @Html.ValidationMessageFor(x => x.Tezina, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Sport", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.EditorFor(x => x.Sport)
-                @Html.ValidationMessageFor(x => x.Sport, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.TextBoxFor(x => x.GodinaRodenja, "{0:dd/MM/yyyy}")
-                @Html.ValidationMessageFor(m => m.GodinaRodenja, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Amneza", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.TextAreaFor(x => x.Amneza, new { rows = "10", cols = "40" })
-                @Html.ValidationMessageFor(x => x.Amneza, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginText">
-                <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont marginInputBottom" })</div>
-                @Html.TextAreaFor(x => x.Napomena, new { rows = "10", cols = "40" })
-                @Html.ValidationMessageFor(x => x.Napomena, String.Empty, new { @class = "error" })
-            </div>
-
-            <div class="marginHeadlineTop marginTextBottom">
-                <input type="submit" name="Spremi" value="Spremi" class="button_example" />
-            </div>
-
-            @Html.ActionLink("Popis članova", "Index", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        <div>
+            <div class="marginInputBottom">@Html.Label("Ime", new { @class = "smallFont" })</div>
+            @Html.EditorFor(x => x.Ime)
+            @Html.ValidationMessageFor(x => x.Ime, String.Empty, new { @class = "error" })
         </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Prezime", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x => x.Prezime)
+            @Html.ValidationMessageFor(x => x.Prezime, String.Empty, new { @class = "error" })
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Visina", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x => x.Visina)
+            @Html.ValidationMessageFor(x => x.Visina, String.Empty, new { @class = "error" })
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Težina", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x => x.Tezina)
+            @Html.ValidationMessageFor(x => x.Tezina, String.Empty, new { @class = "error" })
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Sport", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.EditorFor(x => x.Sport)
+            @Html.ValidationMessageFor(x => x.Sport, String.Empty, new { @class = "error" })
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Datum rođenja", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.TextBoxFor(x => x.GodinaRodenja, "{0:dd/MM/yyyy}")
+            @Html.ValidationMessageFor(m => m.GodinaRodenja, String.Empty, new { @class = "error" })
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Amneza", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(x => x.Amneza, new { rows = "10", cols = "40" })
+            @Html.ValidationMessageFor(x => x.Amneza, String.Empty, new { @class = "error" })
+        </div>
+
+        <div class="marginText">
+            <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont marginInputBottom" })</div>
+            @Html.TextAreaFor(x => x.Napomena, new { rows = "10", cols = "40" })
+            @Html.ValidationMessageFor(x => x.Napomena, String.Empty, new { @class = "error" })
+        </div>
+
+        @if (Model.ClanSlike.Count == 0)
+        {
+            <div class="marginText">
+                @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                <div>
+                    <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                </div>
+            </div>
+        }
+
+        <div class="marginHeadlineTop marginTextBottom">
+            <input type="submit" name="Spremi" value="Spremi" class="button_example" />
+        </div>
+
+        @Html.ActionLink("Popis članova", "Index", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </div>
+        if (Model.ClanSlike.Count > 0)
+        {
+            <div id="inputAreaImages" style="float: left;">
+                <h2 style="padding-left:15px" class="green">Slike člana</h2>
+                @foreach (var item in Model.ClanSlike)
+                {
+                    <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                        <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/ClanSlike/{0}", item.ClanSlikaIme))" /></div>
+                        @Html.ActionLink("Izbriši sliku", "IzbrisiSlikuClana", "Home", new { id = Model.ClanId, slika = item.ClanSlikeId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                    </div>
+                }
+                <div class="marginText" style="clear: both;">
+                    @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                    <div>
+                        <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                    </div>
+                </div>
+            </div>
+        }
     }
 </div>

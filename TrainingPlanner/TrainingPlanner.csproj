@@ -113,6 +113,9 @@
     <Compile Include="Clan.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClanSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\DateFormatValidatorAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ClanSlike\" />
     <Folder Include="Content\IstezanjeSlike\" />
     <Folder Include="Content\Slike\" />
     <Folder Include="Content\VjezbeSlike\" />

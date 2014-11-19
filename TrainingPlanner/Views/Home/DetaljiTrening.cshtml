@@ -74,11 +74,14 @@ else
                 <td>@vjezba.Odmor</td>
             </tr>
             }
-            <tr>
-                <td colspan="5" style="text-align:left">
-                    Broj krugova:  @item.BrojKrugova
-                </td>
-            </tr>
+            @if (item.BrojKrugova != null)
+            { 
+                <tr>
+                    <td colspan="5" style="text-align:left">
+                        Broj krugova:  @item.BrojKrugova
+                    </td>
+                </tr>
+            }
             </table>
                 <br />
             }

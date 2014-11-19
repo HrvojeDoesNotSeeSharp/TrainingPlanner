@@ -514,10 +514,26 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult DodajClana(Clan c)
+        public ActionResult DodajClana(Clan c, HttpPostedFileBase[] slike)
         {
             if (ModelState.IsValid)
             {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/ClanSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new ClanSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.ClanSlikaIme = file.FileName;
+                        slika.ClanClanId = c.ClanId;
+
+                        c.ClanSlike.Add(slika);
+                        _context.ClanSlike.Add(slika);
+                    }
+                }
+
                 var age = (short) ((DateTime.Now - c.GodinaRodenja).TotalDays/365.242199);
                 c.GodineStarosti = age;
                 _context.Clan.Add(c);
@@ -608,10 +624,25 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult IzmijeniClana(Clan c)
+        public ActionResult IzmijeniClana(Clan c, HttpPostedFileBase[] slike)
         {
             if (ModelState.IsValid)
             {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/ClanSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new ClanSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.ClanSlikaIme = file.FileName;
+                        slika.ClanClanId = c.ClanId;
+
+                        c.ClanSlike.Add(slika);
+                        _context.ClanSlike.Add(slika);
+                    }
+                }
                 var age = (short) ((DateTime.Now - c.GodinaRodenja).TotalDays/365.242199);
                 c.GodineStarosti = age;
                 _context.Entry(c).State = EntityState.Modified;
@@ -620,7 +651,7 @@ namespace TrainingPlanner.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("IzmijeniClana", c);
-        }
+        }        
 
         [HttpGet]
         public ActionResult DetaljiClana(int id = 0)
@@ -1453,6 +1484,20 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return View("IzmijeniIstezanje", t);
+        }
+
+        public ActionResult IzbrisiSlikuClana(int id, int? slika)
+        {
+            var t = _context.Clan.Find(id);
+            var imageToDelete = _context.ClanSlike.Find(slika);
+
+            _context.ClanSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.ClanSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniClana", t);
         }
 
         /*Akcije se sekcijom vjezbi u treningu */

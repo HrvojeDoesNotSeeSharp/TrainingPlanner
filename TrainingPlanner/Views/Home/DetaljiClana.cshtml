@@ -7,8 +7,8 @@
 }
 
 <div id="sidebar"></div>
-<div id="content">
-    <div id="inputArea" style="float: left;" class="defaultFont">
+<div id=@(Model.Clan.ClanSlike.Count > 0 ? "contentImg" : "content")>
+    <div id=@(Model.Clan.ClanSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
         <h2 class="green">Detalji člana</h2>
         <div>
             <div class="marginInputBottom">@Html.LabelFor(x => x.Clan.Ime, new { @class = "smallFont" })</div>
@@ -85,4 +85,16 @@
         }
         @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
+    @if (Model.Clan.ClanSlike.Count > 0)
+    {
+        <div id="inputAreaImages" style="float: left;">
+            <h2 style="padding-left:15px" class="green">Slike člana</h2>
+            @foreach (var item in Model.Clan.ClanSlike)
+            {
+                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                    <div><a href="~/Content/ClanSlike/@item.ClanSlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/ClanSlike/{0}", item.ClanSlikaIme))" /></a></div>
+                </div>
+            }
+        </div>
+    }
 </div>
