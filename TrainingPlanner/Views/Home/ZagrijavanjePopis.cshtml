@@ -29,6 +29,25 @@
                         {
                             <td class="smallFontNotCentered">@zp.Info</td>
                         }
+                        @if (zp.ZagrijavanjeSlike.Count > 0)
+                        {
+                            <td>
+                                @foreach (var item in zp.ZagrijavanjeSlike)
+                                {
+                                    <div style="float: left; display: block;">
+                                        <div>
+                                            <a href="~/Content/ZagrijavanjeSlike/@item.ZagrijavanjeSlikaIme" target="_blank">
+                                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", item.ZagrijavanjeSlikaIme))" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallFont">--</td>
+                        }
                         <td>@Html.ActionLink("Izmjeni", "IzmijeniZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Izbriši", "IzbrisiZagrijavanje", "Home", new { id = zp.ZagrijavanjeId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati zagrijavanje?');" })</td>

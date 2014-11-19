@@ -66,6 +66,7 @@
                     <td class="treningFont">Naziv</td>
                     <td class="treningFont">Puls</td>
                     <td class="treningFont">Tempo</td>
+                    <td class="treningFont">Vrijeme trajanja</td>
                     <td class="treningFont">Napomena</td>
                 </tr>
                 int i = 1;
@@ -78,6 +79,7 @@
                             <td>@zagrijavanje.Naziv</td>
                             <td>@Html.TextBox("Puls", zagrijavanje.Puls, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Tempo", zagrijavanje.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("Trajanje", zagrijavanje.Trajanje, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("ZagrijavanjeNapomena", zagrijavanje.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
                             <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeTrening", "Home", new { id = zagrijavanje.ZagrijavanjeId, izmijeni = 1 })#0">Izbriši</a></td>
@@ -134,9 +136,9 @@
                 <table class="responstableTrening">
                     <tr style="background-color:#C6C8C8;">
                         <td class="treningFont">Naziv</td>
-                        <td class="treningFont">Broj ponavljanja</td>
+                        <td class="treningFont">Vrijeme trajanja</td>
                         <td class="treningFont">Broj serija</td>
-                        <td class="treningFont">Težina</td>
+                        <td class="treningFont">Težina/Opterećenje</td>
                         <td class="treningFont">Odmor</td>
                         
                         <form action="@Url.Action("SpremiBrojKrugova", "Home", new { izmijeni = 1 })#@i@sekcija" method="post">

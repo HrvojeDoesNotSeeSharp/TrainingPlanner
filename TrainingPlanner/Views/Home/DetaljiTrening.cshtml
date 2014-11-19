@@ -32,13 +32,14 @@ else
         <table class="responstable smallFont">
             <tr><td><p class="bigFont">Zagrijavanje</p></td></tr>
             <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Puls</td>
-                 <td style="border-bottom:solid">Tempo</td><td style="border-bottom:solid">Napomena</td>
+                 <td style="border-bottom:solid">Tempo</td><td style="border-bottom:solid">Vrijeme trajanja</td><td style="border-bottom:solid">Napomena</td>
             @foreach (var zagrijavanje in Model.ListaZagrijavanja)
             {
             <tr class="smallFont">
                 <td>@zagrijavanje.Naziv</td>
                 <td>@zagrijavanje.Puls</td>
                 <td>@zagrijavanje.Tempo</td>
+                <td>@zagrijavanje.Trajanje</td>
                 <td>@zagrijavanje.ZagrijavanjeNapomena</td>
             </tr>
             }
@@ -62,8 +63,8 @@ else
                 {<tr><td><p class="bigFont">Vjezbe @brojac . dio</p></td></tr>}
                 else
             {<tr><td><p class="bigFont">Vjezbe</p></td></tr>}
-            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Broj ponavljanja</td>
-                <td style="border-bottom:solid">Broj serija</td><td style="border-bottom:solid">Težina</td><td style="border-bottom:solid">Odmor</td></tr>
+            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Vrijeme trajanja</td>
+                <td style="border-bottom:solid">Broj serija</td><td style="border-bottom:solid">Težina/ Opterećenje</td><td style="border-bottom:solid">Odmor</td></tr>
             @foreach (var vjezba in item.Vjezba)
             {
             <tr>

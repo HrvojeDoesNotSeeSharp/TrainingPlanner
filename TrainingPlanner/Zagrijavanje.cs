@@ -22,6 +22,7 @@ namespace TrainingPlanner
         public string Puls { get; set; }
         public string ZagrijavanjeNapomena { get; set; }
         public int ZagrijavanjePopisZagrijavanjeId { get; set; }
+        public string Trajanje { get; set; }
     
         public virtual Trening Trening { get; set; }
         public virtual ZagrijavanjePopis ZagrijavanjePopis { get; set; }

@@ -6,7 +6,7 @@ namespace TrainingPlanner.Models
     public class TreningDataModelMetadata
     {
         [Required(ErrorMessage = "Unesite ime treninga")]
-        [StringLength(15, ErrorMessage = "Maksimum 15 znakova")]
+        [StringLength(50, ErrorMessage = "Maksimum 50 znakova")]
         public string TreningImeTreninga { get; set; }
 
         [Required(ErrorMessage = "Unesite datum treninga")]
