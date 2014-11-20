@@ -1,0 +1,42 @@
+﻿@model TrainingPlanner.Amneza
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    @using (Html.BeginForm("DodajAmnezu", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.ClanClanId)
+
+        <div id="inputArea">
+            <h2 class="green">Nova amneza</h2>
+
+            <div>
+                <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.Ime)
+                @Html.ValidationMessageFor(model => model.Ime, String.Empty, new { @class = "error" })
+            </div>
+
+            <div>
+                <div class="marginText">@Html.Label("Opis", new { @class = "smallFont" })</div>
+                @Html.TextAreaFor(model => model.Opis, new { rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(model => model.Opis, String.Empty, new { @class = "error" })
+            </div>
+
+            <div class="marginText">
+                @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                <div>
+                    <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                </div>
+            </div>
+
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Dodaj amnezu" class="button_example" />
+            </div>
+
+            @Html.ActionLink("Natrag", "Amneza", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
+    }
+</div>

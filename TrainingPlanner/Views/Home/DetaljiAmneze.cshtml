@@ -1,0 +1,44 @@
+﻿@using TrainingPlanner.Models
+@using TrainingPlanner
+@model Amneza
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sidebar"></div>
+<div id=@(Model.AmnezaSlike.Count > 0 ? "contentImg" : "content")>
+    <div id=@(Model.AmnezaSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+        <h2 class="green">Detalji amneze</h2>
+        <div>
+            <div class="marginInputBottom">@Html.LabelFor(x => x.Ime, new { @class = "smallFont" })</div>
+            <div class="defaultFont">@Html.DisplayFor(model => Model.Ime)</div>
+        </div>
+        
+        <div class="maxWidth">
+            <div class="marginText maxWidth">@Html.LabelFor(x => x.Opis, new { @class = "smallFont" })</div>
+            @if (Model.Opis == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Opis)
+            }
+        </div>
+        
+        @Html.ActionLink("Natrag", "Amneza", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </div>
+    @if (Model.AmnezaSlike.Count > 0)
+    {
+        <div id="inputAreaImages" style="float: left;">
+            <h2 style="padding-left:15px" class="green">Slike amneze</h2>
+            @foreach (var item in Model.AmnezaSlike)
+            {
+                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                    <div><a href="~/Content/AnezaSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/AmnezaSlike/{0}", item.SlikaIme))" /></a></div>
+                </div>
+            }
+        </div>
+    }
+</div>

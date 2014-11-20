@@ -691,6 +691,123 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpGet]
+        public ActionResult Amneza(int id = 0)
+        {
+            var query = from x in _context.Amneza
+                        where x.Clan.ClanId == id
+                        select x;
+
+            var query1 = from x in _context.Clan
+                         where x.ClanId == id
+                         select x;
+
+            var c = query1.Single();
+
+            var amneza = new Amneza { Clan = c };
+
+            return View(amneza);
+        }
+
+        [HttpGet]
+        public ActionResult DodajAmnezu(int id = 0)
+        {
+            var a = new Amneza { ClanClanId = id };
+            return View(a);
+        }
+
+        [HttpPost]
+        public ActionResult DodajAmnezu(Amneza a, HttpPostedFileBase[] slike)
+        {
+            if (ModelState.IsValid)
+            {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/AmnezaSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new AmnezaSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.SlikaIme = file.FileName;
+                        slika.AmnezaAmnezaId = a.AmnezaId;
+
+                        a.AmnezaSlike.Add(slika);
+                        _context.AmnezaSlike.Add(slika);
+                    }
+                }
+                _context.Amneza.Add(a);
+                _context.SaveChanges();
+                return RedirectToAction("Amneza", new { id = a.ClanClanId });
+            }
+            return RedirectToAction("DodajAmnezu");
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniAmnezu(int id = 0)
+        {
+            var a = _context.Amneza.Find(id);
+            return View(a);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniAmnezu(Amneza a, HttpPostedFileBase[] slike)
+        {
+            if (ModelState.IsValid)
+            {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/AmnezaSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new AmnezaSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.SlikaIme = file.FileName;
+                        slika.AmnezaAmnezaId = a.AmnezaId;
+
+                        a.AmnezaSlike.Add(slika);
+                        _context.AmnezaSlike.Add(slika);
+                    }
+                }
+
+                _context.Entry(a).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return RedirectToAction("Amneza", new { id = a.ClanClanId });
+            }
+            return RedirectToAction("IzmijeniAmnezu", a);
+        }
+
+        public ActionResult IzbrisiAmnezu(int id)
+        {
+            var t = _context.Amneza.Find(id);
+
+            if (t.AmnezaSlike.Count > 0)
+            {
+                var query = from x in _context.Amneza
+                            join i in _context.AmnezaSlike on x.AmnezaId equals i.AmnezaAmnezaId
+                            where x.AmnezaId == id
+                            select i;
+
+                foreach (var a in query.ToList())
+                {
+                    _context.AmnezaSlike.Remove(a);
+                }
+            }
+            _context.Amneza.Remove(t);
+            _context.SaveChanges();
+
+            return RedirectToAction("Amneza", new { id = t.ClanClanId });
+        }
+
+        public ActionResult DetaljiAmneze(int id)
+        {
+            var t = _context.Amneza.Find(id);
+            return View(t);
+
+        }
+
+        [HttpGet]
         public ActionResult AntropometrijaPopis(int id = 0)
         {
             var query = from x in _context.Antropometrija
@@ -1578,6 +1695,20 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return View("IzmijeniClana", t);
+        }
+
+        public ActionResult IzbrisiSlikuAmneze(int id, int? slika)
+        {
+            var t = _context.Amneza.Find(id);
+            var imageToDelete = _context.AmnezaSlike.Find(slika);
+
+            _context.AmnezaSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.AmnezaSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniAmnezu", t);
         }
 
         /*Akcije se sekcijom vjezbi u treningu */

@@ -1,0 +1,65 @@
+﻿@model TrainingPlanner.Amneza
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id=@(Model.AmnezaSlike.Count > 0 ? "contentImg" : "content")>
+    @using (Html.BeginForm("IzmijeniAmnezu", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.ClanClanId)
+        @Html.HiddenFor(x => x.AmnezaId)
+
+        <div id=@(Model.AmnezaSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+            <h2 class="green">Izmjeni amnezu</h2>
+
+            <div>
+                <div class="marginInputBottom">@Html.Label("Ime", new { @class = "smallFont" })</div>
+                @Html.EditorFor(x => x.Ime)
+                @Html.ValidationMessageFor(x => x.Ime, String.Empty, new { @class = "error" })
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Opis", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextAreaFor(x => x.Opis, new { rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(x => x.Opis, String.Empty, new { @class = "error" })
+            </div>
+
+            @if (Model.AmnezaSlike.Count == 0)
+            {
+                <div class="marginText">
+                    @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                    <div>
+                        <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                    </div>
+                </div>
+            }
+
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" name="Spremi" value="Spremi" class="button_example" />
+            </div>
+
+            @Html.ActionLink("Natrag", "Amneza", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
+        if (Model.AmnezaSlike.Count > 0)
+        {
+            <div id="inputAreaImages" style="float: left;">
+                <h2 style="padding-left:15px" class="green">Slike člana</h2>
+                @foreach (var item in Model.AmnezaSlike)
+                {
+                    <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                        <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/AmnezaSlike/{0}", item.SlikaIme))" /></div>
+                        @Html.ActionLink("Izbriši sliku", "IzbrisiSlikuAmneze", "Home", new { id = Model.AmnezaId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                    </div>
+                }
+                <div class="marginText" style="clear: both;">
+                    @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                    <div>
+                        <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

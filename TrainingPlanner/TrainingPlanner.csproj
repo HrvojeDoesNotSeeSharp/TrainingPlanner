@@ -110,6 +110,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Amneza.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AmnezaSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Antropometrija.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
@@ -133,6 +139,7 @@
     <Compile Include="IstezanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AmnezaMetadata.cs" />
     <Compile Include="Models\AntropometrijaList.cs" />
     <Compile Include="Models\AntropometrijaMetadata.cs" />
     <Compile Include="Models\ClanMetadata.cs" />
@@ -218,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\AmnezaSlike\" />
     <Folder Include="Content\ClanSlike\" />
     <Folder Include="Content\IstezanjeSlike\" />
     <Folder Include="Content\Slike\" />
@@ -350,6 +358,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DetaljiAntropometrije.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Amneza.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajAmnezu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniAmnezu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DetaljiAmneze.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

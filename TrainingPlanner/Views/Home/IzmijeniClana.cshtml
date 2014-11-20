@@ -51,12 +51,6 @@
         </div>
 
         <div class="marginText">
-            <div class="marginInputBottom">@Html.Label("Amneza", new { @class = "smallFont marginInputBottom" })</div>
-            @Html.TextAreaFor(x => x.Amneza, new { rows = "10", cols = "40" })
-            @Html.ValidationMessageFor(x => x.Amneza, String.Empty, new { @class = "error" })
-        </div>
-
-        <div class="marginText">
             <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont marginInputBottom" })</div>
             @Html.TextAreaFor(x => x.Napomena, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(x => x.Napomena, String.Empty, new { @class = "error" })

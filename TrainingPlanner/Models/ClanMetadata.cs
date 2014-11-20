@@ -23,10 +23,7 @@ namespace TrainingPlanner.Models
 
         [Required(ErrorMessage = "Unesite težinu")]
         [StringLength(15, ErrorMessage = "Maksimum 15 znakova")]
-        public string Tezina { get; set; }
-
-        [StringLength(1000, ErrorMessage = "Maksimum 1000 znakova")]
-        public string Amneza { get; set; }
+        public string Tezina { get; set; }        
 
         [StringLength(1000, ErrorMessage = "Maksimum 1000 znakova")]
         public string Napomena { get; set; }

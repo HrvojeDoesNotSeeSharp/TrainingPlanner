@@ -23,6 +23,7 @@ namespace TrainingPlanner
             this.Test = new HashSet<Test>();
             this.ClanSlike = new HashSet<ClanSlike>();
             this.Antropometrija = new HashSet<Antropometrija>();
+            this.Amneza = new HashSet<Amneza>();
         }
     
         public int ClanId { get; set; }
@@ -33,12 +34,12 @@ namespace TrainingPlanner
         public string Tezina { get; set; }
         public short GodineStarosti { get; set; }
         public string Sport { get; set; }
-        public string Amneza { get; set; }
         public string Napomena { get; set; }
     
         public virtual ICollection<Trening> Trening { get; set; }
         public virtual ICollection<Test> Test { get; set; }
         public virtual ICollection<ClanSlike> ClanSlike { get; set; }
         public virtual ICollection<Antropometrija> Antropometrija { get; set; }
+        public virtual ICollection<Amneza> Amneza { get; set; }
     }
 }

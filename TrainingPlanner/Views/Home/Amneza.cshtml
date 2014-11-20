@@ -1,0 +1,42 @@
+﻿@using TrainingPlanner.Models
+@model TrainingPlanner.Amneza
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sidebar"></div>
+<div id="content">
+    <h2 class="green">Amneza - @Model.Clan.Ime @Model.Clan.Prezime</h2>
+    <p>
+        <table class="responstable">
+            @if (Model.Clan.Amneza == null)
+            {
+                <tr>
+                    <td class="smallFont">Trenutno nema amneze.</td>
+                </tr>
+            }
+            @if (Model.Clan.Amneza.Count == 0)
+            {
+                <tr>
+                    <td class="smallFont">Trenutno nema amneze.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model.Clan.Amneza)
+                {
+                    <tr class="smallFont">
+                        <td class="green">@item.Ime</td>
+                        <td>@Html.ActionLink("Izmjeni", "IzmijeniAmnezu", "Home", new { id = item.AmnezaId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiAmneze", "Home", new { id = item.AmnezaId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiAmnezu", "Home", new { id = item.AmnezaId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati amnezu?');" })</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        @Html.ActionLink("Dodaj amnezu", "DodajAmnezu", "Home", new { id = Model.Clan.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
+</div>
