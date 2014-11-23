@@ -25,13 +25,10 @@ namespace TrainingPlanner
         }
     
         public int TestId { get; set; }
-        public System.DateTime DatumTesta { get; set; }
         public string Name { get; set; }
         public int ClanId { get; set; }
         public string FunkcionalneSposobnosti { get; set; }
         public string MotorickeSposobnosti { get; set; }
-        public string NapomenaFunkcionalneSposobnosti { get; set; }
-        public string NapomenaMotorickeSposobnosti { get; set; }
     
         public virtual Clan Clan { get; set; }
         public virtual ICollection<Slika> Slika { get; set; }

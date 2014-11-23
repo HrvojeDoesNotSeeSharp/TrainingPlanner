@@ -122,13 +122,10 @@
       <PropertyRef Name="TestId" />
     </Key>
     <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DatumTesta" Type="datetime" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ClanId" Type="int" Nullable="false" />
     <Property Name="FunkcionalneSposobnosti" Type="nvarchar(max)" Nullable="true" />
     <Property Name="MotorickeSposobnosti" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="NapomenaFunkcionalneSposobnosti" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="NapomenaMotorickeSposobnosti" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Trening">
     <Key>
@@ -660,15 +657,12 @@
             <PropertyRef Name="TestId" />
           </Key>
           <Property Type="Int32" Name="TestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="DatumTesta" Nullable="false" Precision="3" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clan" Relationship="TreningModel.ClanTest" FromRole="Test" ToRole="Clan" />
           <Property Type="Int32" Name="ClanId" Nullable="false" />
           <NavigationProperty Name="Slika" Relationship="TreningModel.FK_TestSlika" FromRole="Test" ToRole="Slika" />
           <Property Type="String" Name="FunkcionalneSposobnosti" Nullable="true" />
           <Property Type="String" Name="MotorickeSposobnosti" Nullable="true" />
-          <Property Name="NapomenaFunkcionalneSposobnosti" Type="String" Nullable="true" />
-          <Property Name="NapomenaMotorickeSposobnosti" Type="String" Nullable="true" />
           <NavigationProperty Name="MotorickiRezultatiTest" Relationship="TreningModel.TestMotorickiRezultatiTest" FromRole="Test" ToRole="MotorickiRezultatiTest" />
           <NavigationProperty Name="FunkcionalniRezultatiTest" Relationship="TreningModel.TestFunkcionalniRezultatiTest" FromRole="Test" ToRole="FunkcionalniRezultatiTest" />
         </EntityType>
@@ -1130,13 +1124,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Test)">
         <MappingFragment StoreEntitySet="Test">
           <ScalarProperty Name="TestId" ColumnName="TestId" />
-          <ScalarProperty Name="DatumTesta" ColumnName="DatumTesta" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
           <ScalarProperty Name="FunkcionalneSposobnosti" ColumnName="FunkcionalneSposobnosti" />
           <ScalarProperty Name="MotorickeSposobnosti" ColumnName="MotorickeSposobnosti" />
-          <ScalarProperty Name="NapomenaFunkcionalneSposobnosti" ColumnName="NapomenaFunkcionalneSposobnosti" />
-          <ScalarProperty Name="NapomenaMotorickeSposobnosti" ColumnName="NapomenaMotorickeSposobnosti" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
