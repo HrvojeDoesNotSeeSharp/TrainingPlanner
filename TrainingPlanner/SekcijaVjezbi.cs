@@ -18,17 +18,17 @@ namespace TrainingPlanner
         {
             this.Vjezba = new HashSet<Vjezba>();
             this.AerobneVjezbe = new HashSet<AerobneVjezbe>();
+            this.AnaerobneVjezbe = new HashSet<AnaerobneVjezbe>();
         }
     
         public int SekcijaId { get; set; }
         public int TreningId { get; set; }
         public string BrojKrugova { get; set; }
         public string Odmor { get; set; }
-        public int AnaerobneVjezbeAnaerobnaVjezbaId { get; set; }
     
         public virtual Trening Trening { get; set; }
         public virtual ICollection<Vjezba> Vjezba { get; set; }
         public virtual ICollection<AerobneVjezbe> AerobneVjezbe { get; set; }
-        public virtual AnaerobneVjezbe AnaerobneVjezbe { get; set; }
+        public virtual ICollection<AnaerobneVjezbe> AnaerobneVjezbe { get; set; }
     }
 }

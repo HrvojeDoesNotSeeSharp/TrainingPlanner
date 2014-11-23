@@ -277,7 +277,6 @@
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="BrojKrugova" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="AnaerobneVjezbeAnaerobnaVjezbaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClanSlike">
     <Key>
@@ -391,6 +390,7 @@
     <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="int" Nullable="false" />
+    <Property Name="SekcijaVjezbiSekcijaId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -681,14 +681,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="AnaerobneVjezbeSekcijaVjezbi">
-    <End Role="AnaerobneVjezbe" Type="TreningModel.Store.AnaerobneVjezbe" Multiplicity="1" />
-    <End Role="SekcijaVjezbi" Type="TreningModel.Store.SekcijaVjezbi" Multiplicity="*" />
+    <End Role="AnaerobneVjezbe" Type="TreningModel.Store.AnaerobneVjezbe" Multiplicity="*" />
+    <End Role="SekcijaVjezbi" Type="TreningModel.Store.SekcijaVjezbi" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="AnaerobneVjezbe">
-        <PropertyRef Name="AnaerobnaVjezbaId" />
+      <Principal Role="SekcijaVjezbi">
+        <PropertyRef Name="SekcijaId" />
       </Principal>
-      <Dependent Role="SekcijaVjezbi">
-        <PropertyRef Name="AnaerobneVjezbeAnaerobnaVjezbaId" />
+      <Dependent Role="AnaerobneVjezbe">
+        <PropertyRef Name="SekcijaVjezbiSekcijaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1097,7 +1097,6 @@
           <Property Name="Odmor" Type="String" Nullable="true" />
           <NavigationProperty Name="AerobneVjezbe" Relationship="TreningModel.SekcijaVjezbiAerobneVjezbe" FromRole="SekcijaVjezbi" ToRole="AerobneVjezbe" />
           <NavigationProperty Name="AnaerobneVjezbe" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="SekcijaVjezbi" ToRole="AnaerobneVjezbe" />
-          <Property Name="AnaerobneVjezbeAnaerobnaVjezbaId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="TreningSekcijaVjezbi">
           <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
@@ -1384,6 +1383,7 @@
           <NavigationProperty Name="AnaerobneVjezbePopis" Relationship="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe" FromRole="AnaerobneVjezbe" ToRole="AnaerobneVjezbePopis" />
           <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SekcijaVjezbi" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="AnaerobneVjezbe" ToRole="SekcijaVjezbi" />
+          <Property Name="SekcijaVjezbiSekcijaId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="SekcijaVjezbiAerobneVjezbe">
           <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="1" />
@@ -1422,14 +1422,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AnaerobneVjezbeSekcijaVjezbi">
-          <End Type="TreningModel.AnaerobneVjezbe" Role="AnaerobneVjezbe" Multiplicity="1" />
-          <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="*" />
+          <End Type="TreningModel.AnaerobneVjezbe" Role="AnaerobneVjezbe" Multiplicity="*" />
+          <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="1" />
           <ReferentialConstraint>
-            <Principal Role="AnaerobneVjezbe">
-              <PropertyRef Name="AnaerobnaVjezbaId" />
+            <Principal Role="SekcijaVjezbi">
+              <PropertyRef Name="SekcijaId" />
             </Principal>
-            <Dependent Role="SekcijaVjezbi">
-              <PropertyRef Name="AnaerobneVjezbeAnaerobnaVjezbaId" />
+            <Dependent Role="AnaerobneVjezbe">
+              <PropertyRef Name="SekcijaVjezbiSekcijaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1595,7 +1595,6 @@
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="BrojKrugova" ColumnName="BrojKrugova" />
           <ScalarProperty Name="Odmor" ColumnName="Odmor" />
-          <ScalarProperty Name="AnaerobneVjezbeAnaerobnaVjezbaId" ColumnName="AnaerobneVjezbeAnaerobnaVjezbaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1721,6 +1720,7 @@
           <ScalarProperty Name="Odmor" ColumnName="Odmor" />
           <ScalarProperty Name="Napomena" ColumnName="Napomena" />
           <ScalarProperty Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" ColumnName="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
+          <ScalarProperty Name="SekcijaVjezbiSekcijaId" ColumnName="SekcijaVjezbiSekcijaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

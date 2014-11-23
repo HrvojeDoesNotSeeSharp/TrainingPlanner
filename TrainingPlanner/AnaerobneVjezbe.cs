@@ -14,11 +14,6 @@ namespace TrainingPlanner
     
     public partial class AnaerobneVjezbe
     {
-        public AnaerobneVjezbe()
-        {
-            this.SekcijaVjezbi = new HashSet<SekcijaVjezbi>();
-        }
-    
         public int AnaerobnaVjezbaId { get; set; }
         public string Naziv { get; set; }
         public string Puls { get; set; }
@@ -27,8 +22,9 @@ namespace TrainingPlanner
         public string Odmor { get; set; }
         public string Napomena { get; set; }
         public int AnaerobneVjezbePopisAnaerobnaVjezbaId { get; set; }
+        public int SekcijaVjezbiSekcijaId { get; set; }
     
         public virtual AnaerobneVjezbePopis AnaerobneVjezbePopis { get; set; }
-        public virtual ICollection<SekcijaVjezbi> SekcijaVjezbi { get; set; }
+        public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
     }
 }
