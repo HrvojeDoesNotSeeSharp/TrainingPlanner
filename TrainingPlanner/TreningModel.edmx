@@ -30,6 +30,8 @@
     <EntitySet Name="AnaerobneVjezbePopis" EntityType="TreningModel.Store.AnaerobneVjezbePopis" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AerobneVjezbeSlike" EntityType="TreningModel.Store.AerobneVjezbeSlike" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AnaerobneVjezbeSlike" EntityType="TreningModel.Store.AnaerobneVjezbeSlike" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AerobneVjezbe" EntityType="TreningModel.Store.AerobneVjezbe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AnaerobneVjezbe" EntityType="TreningModel.Store.AnaerobneVjezbe" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -113,6 +115,22 @@
     <AssociationSet Name="AnaerobneVjezbePopisAnaerobneVjezbeSlike" Association="TreningModel.Store.AnaerobneVjezbePopisAnaerobneVjezbeSlike">
       <End Role="AnaerobneVjezbePopis" EntitySet="AnaerobneVjezbePopis" />
       <End Role="AnaerobneVjezbeSlike" EntitySet="AnaerobneVjezbeSlike" />
+    </AssociationSet>
+    <AssociationSet Name="SekcijaVjezbiAerobneVjezbe" Association="TreningModel.Store.SekcijaVjezbiAerobneVjezbe">
+      <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
+      <End Role="AerobneVjezbe" EntitySet="AerobneVjezbe" />
+    </AssociationSet>
+    <AssociationSet Name="AerobneVjezbeAerobneVjezbePopis" Association="TreningModel.Store.AerobneVjezbeAerobneVjezbePopis">
+      <End Role="AerobneVjezbe" EntitySet="AerobneVjezbe" />
+      <End Role="AerobneVjezbePopis" EntitySet="AerobneVjezbePopis" />
+    </AssociationSet>
+    <AssociationSet Name="AnaerobneVjezbePopisAnaerobneVjezbe" Association="TreningModel.Store.AnaerobneVjezbePopisAnaerobneVjezbe">
+      <End Role="AnaerobneVjezbePopis" EntitySet="AnaerobneVjezbePopis" />
+      <End Role="AnaerobneVjezbe" EntitySet="AnaerobneVjezbe" />
+    </AssociationSet>
+    <AssociationSet Name="AnaerobneVjezbeSekcijaVjezbi" Association="TreningModel.Store.AnaerobneVjezbeSekcijaVjezbi">
+      <End Role="AnaerobneVjezbe" EntitySet="AnaerobneVjezbe" />
+      <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
@@ -259,6 +277,7 @@
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="BrojKrugova" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AnaerobneVjezbeAnaerobnaVjezbaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClanSlike">
     <Key>
@@ -346,6 +365,32 @@
     <Property Name="AnaerobnaVjezbaSlikaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="int" Nullable="false" />
     <Property Name="AnaerobnaVjezbaSlikaIme" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AerobneVjezbe">
+    <Key>
+      <PropertyRef Name="AerobnaVjezbaId" />
+    </Key>
+    <Property Name="AerobnaVjezbaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Trajanje" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SekcijaVjezbiSekcijaId" Type="int" Nullable="false" />
+    <Property Name="AerobneVjezbePopisAerobnaVjezbaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AnaerobneVjezbe">
+    <Key>
+      <PropertyRef Name="AnaerobnaVjezbaId" />
+    </Key>
+    <Property Name="AnaerobnaVjezbaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="BrojSprintova" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -599,6 +644,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="SekcijaVjezbiAerobneVjezbe">
+    <End Role="SekcijaVjezbi" Type="TreningModel.Store.SekcijaVjezbi" Multiplicity="1" />
+    <End Role="AerobneVjezbe" Type="TreningModel.Store.AerobneVjezbe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SekcijaVjezbi">
+        <PropertyRef Name="SekcijaId" />
+      </Principal>
+      <Dependent Role="AerobneVjezbe">
+        <PropertyRef Name="SekcijaVjezbiSekcijaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AerobneVjezbeAerobneVjezbePopis">
+    <End Role="AerobneVjezbe" Type="TreningModel.Store.AerobneVjezbe" Multiplicity="*" />
+    <End Role="AerobneVjezbePopis" Type="TreningModel.Store.AerobneVjezbePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AerobneVjezbePopis">
+        <PropertyRef Name="AerobnaVjezbaId" />
+      </Principal>
+      <Dependent Role="AerobneVjezbe">
+        <PropertyRef Name="AerobneVjezbePopisAerobnaVjezbaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AnaerobneVjezbePopisAnaerobneVjezbe">
+    <End Role="AnaerobneVjezbePopis" Type="TreningModel.Store.AnaerobneVjezbePopis" Multiplicity="1" />
+    <End Role="AnaerobneVjezbe" Type="TreningModel.Store.AnaerobneVjezbe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnaerobneVjezbePopis">
+        <PropertyRef Name="AnaerobnaVjezbaId" />
+      </Principal>
+      <Dependent Role="AnaerobneVjezbe">
+        <PropertyRef Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AnaerobneVjezbeSekcijaVjezbi">
+    <End Role="AnaerobneVjezbe" Type="TreningModel.Store.AnaerobneVjezbe" Multiplicity="1" />
+    <End Role="SekcijaVjezbi" Type="TreningModel.Store.SekcijaVjezbi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnaerobneVjezbe">
+        <PropertyRef Name="AnaerobnaVjezbaId" />
+      </Principal>
+      <Dependent Role="SekcijaVjezbi">
+        <PropertyRef Name="AnaerobneVjezbeAnaerobnaVjezbaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -711,6 +804,24 @@
           <AssociationSet Name="AnaerobneVjezbePopisAnaerobneVjezbeSlike" Association="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbeSlike">
             <End Role="AnaerobneVjezbePopis" EntitySet="AnaerobneVjezbePopis" />
             <End Role="AnaerobneVjezbeSlike" EntitySet="AnaerobneVjezbeSlike" />
+          </AssociationSet>
+          <EntitySet Name="AerobneVjezbe" EntityType="TreningModel.AerobneVjezbe" />
+          <EntitySet Name="AnaerobneVjezbe" EntityType="TreningModel.AnaerobneVjezbe" />
+          <AssociationSet Name="SekcijaVjezbiAerobneVjezbe" Association="TreningModel.SekcijaVjezbiAerobneVjezbe">
+            <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
+            <End Role="AerobneVjezbe" EntitySet="AerobneVjezbe" />
+          </AssociationSet>
+          <AssociationSet Name="AerobneVjezbeAerobneVjezbePopis" Association="TreningModel.AerobneVjezbeAerobneVjezbePopis">
+            <End Role="AerobneVjezbe" EntitySet="AerobneVjezbe" />
+            <End Role="AerobneVjezbePopis" EntitySet="AerobneVjezbePopis" />
+          </AssociationSet>
+          <AssociationSet Name="AnaerobneVjezbePopisAnaerobneVjezbe" Association="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe">
+            <End Role="AnaerobneVjezbePopis" EntitySet="AnaerobneVjezbePopis" />
+            <End Role="AnaerobneVjezbe" EntitySet="AnaerobneVjezbe" />
+          </AssociationSet>
+          <AssociationSet Name="AnaerobneVjezbeSekcijaVjezbi" Association="TreningModel.AnaerobneVjezbeSekcijaVjezbi">
+            <End Role="AnaerobneVjezbe" EntitySet="AnaerobneVjezbe" />
+            <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
@@ -984,6 +1095,9 @@
           <NavigationProperty Name="Vjezba" Relationship="TreningModel.SekcijaVjezbiVjezba" FromRole="SekcijaVjezbi" ToRole="Vjezba" />
           <Property Type="String" Name="BrojKrugova" Nullable="true" />
           <Property Name="Odmor" Type="String" Nullable="true" />
+          <NavigationProperty Name="AerobneVjezbe" Relationship="TreningModel.SekcijaVjezbiAerobneVjezbe" FromRole="SekcijaVjezbi" ToRole="AerobneVjezbe" />
+          <NavigationProperty Name="AnaerobneVjezbe" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="SekcijaVjezbi" ToRole="AnaerobneVjezbe" />
+          <Property Name="AnaerobneVjezbeAnaerobnaVjezbaId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="TreningSekcijaVjezbi">
           <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
@@ -1187,6 +1301,7 @@
           <Property Name="Naziv" Type="String" Nullable="true" />
           <Property Name="Info" Type="String" Nullable="true" />
           <NavigationProperty Name="AerobneVjezbeSlike" Relationship="TreningModel.AerobneVjezbePopisAerobneVjezbeSlike" FromRole="AerobneVjezbePopis" ToRole="AerobneVjezbeSlike" />
+          <NavigationProperty Name="AerobneVjezbe" Relationship="TreningModel.AerobneVjezbeAerobneVjezbePopis" FromRole="AerobneVjezbePopis" ToRole="AerobneVjezbe" />
         </EntityType>
         <EntityType Name="AnaerobneVjezbePopis">
           <Key>
@@ -1196,6 +1311,7 @@
           <Property Name="Naziv" Type="String" Nullable="true" />
           <Property Name="Info" Type="String" Nullable="true" />
           <NavigationProperty Name="AnaerobneVjezbeSlike" Relationship="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbeSlike" FromRole="AnaerobneVjezbePopis" ToRole="AnaerobneVjezbeSlike" />
+          <NavigationProperty Name="AnaerobneVjezbe" Relationship="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe" FromRole="AnaerobneVjezbePopis" ToRole="AnaerobneVjezbe" />
         </EntityType>
         <EntityType Name="AerobneVjezbeSlike">
           <Key>
@@ -1236,6 +1352,84 @@
             </Principal>
             <Dependent Role="AnaerobneVjezbeSlike">
               <PropertyRef Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AerobneVjezbe">
+          <Key>
+            <PropertyRef Name="AerobnaVjezbaId" />
+          </Key>
+          <Property Name="AerobnaVjezbaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="true" />
+          <Property Name="Puls" Type="String" Nullable="true" />
+          <Property Name="Tempo" Type="String" Nullable="true" />
+          <Property Name="Trajanje" Type="String" Nullable="true" />
+          <Property Name="Napomena" Type="String" Nullable="true" />
+          <NavigationProperty Name="SekcijaVjezbi" Relationship="TreningModel.SekcijaVjezbiAerobneVjezbe" FromRole="AerobneVjezbe" ToRole="SekcijaVjezbi" />
+          <Property Name="SekcijaVjezbiSekcijaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AerobneVjezbePopis" Relationship="TreningModel.AerobneVjezbeAerobneVjezbePopis" FromRole="AerobneVjezbe" ToRole="AerobneVjezbePopis" />
+          <Property Name="AerobneVjezbePopisAerobnaVjezbaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AnaerobneVjezbe">
+          <Key>
+            <PropertyRef Name="AnaerobnaVjezbaId" />
+          </Key>
+          <Property Name="AnaerobnaVjezbaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="true" />
+          <Property Name="Puls" Type="String" Nullable="true" />
+          <Property Name="Tempo" Type="String" Nullable="true" />
+          <Property Name="BrojSprintova" Type="String" Nullable="true" />
+          <Property Name="Odmor" Type="String" Nullable="true" />
+          <Property Name="Napomena" Type="String" Nullable="true" />
+          <NavigationProperty Name="AnaerobneVjezbePopis" Relationship="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe" FromRole="AnaerobneVjezbe" ToRole="AnaerobneVjezbePopis" />
+          <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SekcijaVjezbi" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="AnaerobneVjezbe" ToRole="SekcijaVjezbi" />
+        </EntityType>
+        <Association Name="SekcijaVjezbiAerobneVjezbe">
+          <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="1" />
+          <End Type="TreningModel.AerobneVjezbe" Role="AerobneVjezbe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SekcijaVjezbi">
+              <PropertyRef Name="SekcijaId" />
+            </Principal>
+            <Dependent Role="AerobneVjezbe">
+              <PropertyRef Name="SekcijaVjezbiSekcijaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AerobneVjezbeAerobneVjezbePopis">
+          <End Type="TreningModel.AerobneVjezbe" Role="AerobneVjezbe" Multiplicity="*" />
+          <End Type="TreningModel.AerobneVjezbePopis" Role="AerobneVjezbePopis" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AerobneVjezbePopis">
+              <PropertyRef Name="AerobnaVjezbaId" />
+            </Principal>
+            <Dependent Role="AerobneVjezbe">
+              <PropertyRef Name="AerobneVjezbePopisAerobnaVjezbaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AnaerobneVjezbePopisAnaerobneVjezbe">
+          <End Type="TreningModel.AnaerobneVjezbePopis" Role="AnaerobneVjezbePopis" Multiplicity="1" />
+          <End Type="TreningModel.AnaerobneVjezbe" Role="AnaerobneVjezbe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnaerobneVjezbePopis">
+              <PropertyRef Name="AnaerobnaVjezbaId" />
+            </Principal>
+            <Dependent Role="AnaerobneVjezbe">
+              <PropertyRef Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AnaerobneVjezbeSekcijaVjezbi">
+          <End Type="TreningModel.AnaerobneVjezbe" Role="AnaerobneVjezbe" Multiplicity="1" />
+          <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnaerobneVjezbe">
+              <PropertyRef Name="AnaerobnaVjezbaId" />
+            </Principal>
+            <Dependent Role="SekcijaVjezbi">
+              <PropertyRef Name="AnaerobneVjezbeAnaerobnaVjezbaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1401,6 +1595,7 @@
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="BrojKrugova" ColumnName="BrojKrugova" />
           <ScalarProperty Name="Odmor" ColumnName="Odmor" />
+          <ScalarProperty Name="AnaerobneVjezbeAnaerobnaVjezbaId" ColumnName="AnaerobneVjezbeAnaerobnaVjezbaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1498,6 +1693,34 @@
           <ScalarProperty Name="AnaerobnaVjezbaSlikaId" ColumnName="AnaerobnaVjezbaSlikaId" />
           <ScalarProperty Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" ColumnName="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
           <ScalarProperty Name="AnaerobnaVjezbaSlikaIme" ColumnName="AnaerobnaVjezbaSlikaIme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AerobneVjezbe">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.AerobneVjezbe)">
+        <MappingFragment StoreEntitySet="AerobneVjezbe">
+          <ScalarProperty Name="AerobnaVjezbaId" ColumnName="AerobnaVjezbaId" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Puls" ColumnName="Puls" />
+          <ScalarProperty Name="Tempo" ColumnName="Tempo" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+          <ScalarProperty Name="SekcijaVjezbiSekcijaId" ColumnName="SekcijaVjezbiSekcijaId" />
+          <ScalarProperty Name="AerobneVjezbePopisAerobnaVjezbaId" ColumnName="AerobneVjezbePopisAerobnaVjezbaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnaerobneVjezbe">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.AnaerobneVjezbe)">
+        <MappingFragment StoreEntitySet="AnaerobneVjezbe">
+          <ScalarProperty Name="AnaerobnaVjezbaId" ColumnName="AnaerobnaVjezbaId" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Puls" ColumnName="Puls" />
+          <ScalarProperty Name="Tempo" ColumnName="Tempo" />
+          <ScalarProperty Name="BrojSprintova" ColumnName="BrojSprintova" />
+          <ScalarProperty Name="Odmor" ColumnName="Odmor" />
+          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+          <ScalarProperty Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" ColumnName="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

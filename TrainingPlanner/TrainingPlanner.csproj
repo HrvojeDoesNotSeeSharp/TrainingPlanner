@@ -110,6 +110,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AerobneVjezbe.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AerobneVjezbePopis.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AmnezaSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnaerobneVjezbe.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AnaerobneVjezbePopis.cs">

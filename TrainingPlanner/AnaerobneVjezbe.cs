@@ -12,19 +12,23 @@ namespace TrainingPlanner
     using System;
     using System.Collections.Generic;
     
-    public partial class AnaerobneVjezbePopis
+    public partial class AnaerobneVjezbe
     {
-        public AnaerobneVjezbePopis()
+        public AnaerobneVjezbe()
         {
-            this.AnaerobneVjezbeSlike = new HashSet<AnaerobneVjezbeSlike>();
-            this.AnaerobneVjezbe = new HashSet<AnaerobneVjezbe>();
+            this.SekcijaVjezbi = new HashSet<SekcijaVjezbi>();
         }
     
         public int AnaerobnaVjezbaId { get; set; }
         public string Naziv { get; set; }
-        public string Info { get; set; }
+        public string Puls { get; set; }
+        public string Tempo { get; set; }
+        public string BrojSprintova { get; set; }
+        public string Odmor { get; set; }
+        public string Napomena { get; set; }
+        public int AnaerobneVjezbePopisAnaerobnaVjezbaId { get; set; }
     
-        public virtual ICollection<AnaerobneVjezbeSlike> AnaerobneVjezbeSlike { get; set; }
-        public virtual ICollection<AnaerobneVjezbe> AnaerobneVjezbe { get; set; }
+        public virtual AnaerobneVjezbePopis AnaerobneVjezbePopis { get; set; }
+        public virtual ICollection<SekcijaVjezbi> SekcijaVjezbi { get; set; }
     }
 }

@@ -12,19 +12,18 @@ namespace TrainingPlanner
     using System;
     using System.Collections.Generic;
     
-    public partial class AerobneVjezbePopis
+    public partial class AerobneVjezbe
     {
-        public AerobneVjezbePopis()
-        {
-            this.AerobneVjezbeSlike = new HashSet<AerobneVjezbeSlike>();
-            this.AerobneVjezbe = new HashSet<AerobneVjezbe>();
-        }
-    
         public int AerobnaVjezbaId { get; set; }
         public string Naziv { get; set; }
-        public string Info { get; set; }
+        public string Puls { get; set; }
+        public string Tempo { get; set; }
+        public string Trajanje { get; set; }
+        public string Napomena { get; set; }
+        public int SekcijaVjezbiSekcijaId { get; set; }
+        public int AerobneVjezbePopisAerobnaVjezbaId { get; set; }
     
-        public virtual ICollection<AerobneVjezbeSlike> AerobneVjezbeSlike { get; set; }
-        public virtual ICollection<AerobneVjezbe> AerobneVjezbe { get; set; }
+        public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
+        public virtual AerobneVjezbePopis AerobneVjezbePopis { get; set; }
     }
 }
