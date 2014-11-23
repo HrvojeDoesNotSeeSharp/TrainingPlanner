@@ -45,5 +45,9 @@ namespace TrainingPlanner
         public DbSet<AmnezaSlike> AmnezaSlike { get; set; }
         public DbSet<FunkcionalniRezultatiTest> FunkcionalniRezultatiTest { get; set; }
         public DbSet<MotorickiRezultatiTest> MotorickiRezultatiTest { get; set; }
+        public DbSet<AerobneVjezbePopis> AerobneVjezbePopis { get; set; }
+        public DbSet<AnaerobneVjezbePopis> AnaerobneVjezbePopis { get; set; }
+        public DbSet<AerobneVjezbeSlike> AerobneVjezbeSlike { get; set; }
+        public DbSet<AnaerobneVjezbeSlike> AnaerobneVjezbeSlike { get; set; }
     }
 }
