@@ -3,7 +3,7 @@ using TrainingPlanner.Helpers;
 
 namespace TrainingPlanner.Models
 {
-    public class RezultatiTestMetadata
+    public class MotorickiRezultatiTestMetadata
     {
         [DateFormatValidator(ErrorMessage = "Unesite tocan format datuma - dd/mm/yyyy.")]
         public System.DateTime Datum { get; set; }

@@ -24,7 +24,8 @@
     <EntitySet Name="Antropometrija" EntityType="TreningModel.Store.Antropometrija" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Amneza" EntityType="TreningModel.Store.Amneza" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AmnezaSlike" EntityType="TreningModel.Store.AmnezaSlike" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RezultatiTest" EntityType="TreningModel.Store.RezultatiTest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FunkcionalniRezultatiTest" EntityType="TreningModel.Store.FunkcionalniRezultatiTest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MotorickiRezultatiTest" EntityType="TreningModel.Store.MotorickiRezultatiTest" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -93,9 +94,13 @@
       <End Role="Amneza" EntitySet="Amneza" />
       <End Role="Clan" EntitySet="Clan" />
     </AssociationSet>
-    <AssociationSet Name="TestRezultatiTest" Association="TreningModel.Store.TestRezultatiTest">
+    <AssociationSet Name="TestMotorickiRezultatiTest" Association="TreningModel.Store.TestMotorickiRezultatiTest">
       <End Role="Test" EntitySet="Test" />
-      <End Role="RezultatiTest" EntitySet="RezultatiTest" />
+      <End Role="MotorickiRezultatiTest" EntitySet="MotorickiRezultatiTest" />
+    </AssociationSet>
+    <AssociationSet Name="TestFunkcionalniRezultatiTest" Association="TreningModel.Store.TestFunkcionalniRezultatiTest">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="FunkcionalniRezultatiTest" EntitySet="FunkcionalniRezultatiTest" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
@@ -283,11 +288,20 @@
     <Property Name="SlikaIme" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AmnezaAmnezaId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="RezultatiTest">
+  <EntityType Name="FunkcionalniRezultatiTest">
     <Key>
-      <PropertyRef Name="ReszultatiTestId" />
+      <PropertyRef Name="FunkcionalniRezultatiTestId" />
     </Key>
-    <Property Name="ReszultatiTestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FunkcionalniRezultatiTestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="true" />
+    <Property Name="Rezultat" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TestId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MotorickiRezultatiTest">
+    <Key>
+      <PropertyRef Name="MotorickiRezultatiTestId" />
+    </Key>
+    <Property Name="MotorickiRezultatiTestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TestId" Type="int" Nullable="false" />
     <Property Name="Datum" Type="datetime" Nullable="true" />
     <Property Name="Rezultat" Type="nvarchar(max)" Nullable="true" />
@@ -496,14 +510,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TestRezultatiTest">
+  <Association Name="TestMotorickiRezultatiTest">
     <End Role="Test" Type="TreningModel.Store.Test" Multiplicity="1" />
-    <End Role="RezultatiTest" Type="TreningModel.Store.RezultatiTest" Multiplicity="*" />
+    <End Role="MotorickiRezultatiTest" Type="TreningModel.Store.MotorickiRezultatiTest" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Test">
         <PropertyRef Name="TestId" />
       </Principal>
-      <Dependent Role="RezultatiTest">
+      <Dependent Role="MotorickiRezultatiTest">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TestFunkcionalniRezultatiTest">
+    <End Role="Test" Type="TreningModel.Store.Test" Multiplicity="1" />
+    <End Role="FunkcionalniRezultatiTest" Type="TreningModel.Store.FunkcionalniRezultatiTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestId" />
+      </Principal>
+      <Dependent Role="FunkcionalniRezultatiTest">
         <PropertyRef Name="TestId" />
       </Dependent>
     </ReferentialConstraint>
@@ -599,10 +625,15 @@
             <End Role="Amneza" EntitySet="Amneza" />
             <End Role="Clan" EntitySet="Clan" />
           </AssociationSet>
-          <EntitySet Name="RezultatiTest" EntityType="TreningModel.RezultatiTest" />
-          <AssociationSet Name="TestRezultatiTest" Association="TreningModel.TestRezultatiTest">
+          <EntitySet Name="FunkcionalniRezultatiTest" EntityType="TreningModel.FunkcionalniRezultatiTest" />
+          <EntitySet Name="MotorickiRezultatiTest" EntityType="TreningModel.MotorickiRezultatiTest" />
+          <AssociationSet Name="TestMotorickiRezultatiTest" Association="TreningModel.TestMotorickiRezultatiTest">
             <End Role="Test" EntitySet="Test" />
-            <End Role="RezultatiTest" EntitySet="RezultatiTest" />
+            <End Role="MotorickiRezultatiTest" EntitySet="MotorickiRezultatiTest" />
+          </AssociationSet>
+          <AssociationSet Name="TestFunkcionalniRezultatiTest" Association="TreningModel.TestFunkcionalniRezultatiTest">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="FunkcionalniRezultatiTest" EntitySet="FunkcionalniRezultatiTest" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
@@ -638,7 +669,8 @@
           <Property Type="String" Name="MotorickeSposobnosti" Nullable="true" />
           <Property Name="NapomenaFunkcionalneSposobnosti" Type="String" Nullable="true" />
           <Property Name="NapomenaMotorickeSposobnosti" Type="String" Nullable="true" />
-          <NavigationProperty Name="RezultatiTest" Relationship="TreningModel.TestRezultatiTest" FromRole="Test" ToRole="RezultatiTest" />
+          <NavigationProperty Name="MotorickiRezultatiTest" Relationship="TreningModel.TestMotorickiRezultatiTest" FromRole="Test" ToRole="MotorickiRezultatiTest" />
+          <NavigationProperty Name="FunkcionalniRezultatiTest" Relationship="TreningModel.TestFunkcionalniRezultatiTest" FromRole="Test" ToRole="FunkcionalniRezultatiTest" />
         </EntityType>
         <EntityType Name="Trening">
           <Key>
@@ -1029,24 +1061,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="RezultatiTest">
+        <EntityType Name="FunkcionalniRezultatiTest">
           <Key>
-            <PropertyRef Name="ReszultatiTestId" />
+            <PropertyRef Name="FunkcionalniRezultatiTestId" />
           </Key>
-          <Property Type="Int32" Name="ReszultatiTestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Test" Relationship="TreningModel.TestRezultatiTest" FromRole="RezultatiTest" ToRole="Test" />
+          <Property Type="Int32" Name="FunkcionalniRezultatiTestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Datum" Nullable="true" />
+          <Property Type="String" Name="Rezultat" Nullable="true" />
+          <NavigationProperty Name="Test" Relationship="TreningModel.TestFunkcionalniRezultatiTest" FromRole="FunkcionalniRezultatiTest" ToRole="Test" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MotorickiRezultatiTest">
+          <Key>
+            <PropertyRef Name="MotorickiRezultatiTestId" />
+          </Key>
+          <Property Type="Int32" Name="MotorickiRezultatiTestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Test" Relationship="TreningModel.TestMotorickiRezultatiTest" FromRole="MotorickiRezultatiTest" ToRole="Test" />
           <Property Type="Int32" Name="TestId" Nullable="false" />
           <Property Type="DateTime" Name="Datum" Nullable="true" />
           <Property Type="String" Name="Rezultat" Nullable="true" />
         </EntityType>
-        <Association Name="TestRezultatiTest">
+        <Association Name="TestMotorickiRezultatiTest">
           <End Type="TreningModel.Test" Role="Test" Multiplicity="1" />
-          <End Type="TreningModel.RezultatiTest" Role="RezultatiTest" Multiplicity="*" />
+          <End Type="TreningModel.MotorickiRezultatiTest" Role="MotorickiRezultatiTest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Test">
               <PropertyRef Name="TestId" />
             </Principal>
-            <Dependent Role="RezultatiTest">
+            <Dependent Role="MotorickiRezultatiTest">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TestFunkcionalniRezultatiTest">
+          <End Type="TreningModel.Test" Role="Test" Multiplicity="1" />
+          <End Type="TreningModel.FunkcionalniRezultatiTest" Role="FunkcionalniRezultatiTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestId" />
+            </Principal>
+            <Dependent Role="FunkcionalniRezultatiTest">
               <PropertyRef Name="TestId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1260,10 +1314,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RezultatiTest">
-      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.RezultatiTest)">
-        <MappingFragment StoreEntitySet="RezultatiTest">
-          <ScalarProperty Name="ReszultatiTestId" ColumnName="ReszultatiTestId" />
+    <EntitySetMapping Name="FunkcionalniRezultatiTest">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.FunkcionalniRezultatiTest)">
+        <MappingFragment StoreEntitySet="FunkcionalniRezultatiTest">
+          <ScalarProperty Name="FunkcionalniRezultatiTestId" ColumnName="FunkcionalniRezultatiTestId" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Rezultat" ColumnName="Rezultat" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MotorickiRezultatiTest">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.MotorickiRezultatiTest)">
+        <MappingFragment StoreEntitySet="MotorickiRezultatiTest">
+          <ScalarProperty Name="MotorickiRezultatiTestId" ColumnName="MotorickiRezultatiTestId" />
           <ScalarProperty Name="TestId" ColumnName="TestId" />
           <ScalarProperty Name="Datum" ColumnName="Datum" />
           <ScalarProperty Name="Rezultat" ColumnName="Rezultat" />

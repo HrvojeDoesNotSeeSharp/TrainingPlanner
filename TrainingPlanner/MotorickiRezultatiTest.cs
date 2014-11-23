@@ -14,10 +14,10 @@ namespace TrainingPlanner
     using System.ComponentModel.DataAnnotations;
     using TrainingPlanner.Models;
 
-    [MetadataType(typeof(RezultatiTestMetadata))]
-    public partial class RezultatiTest
+    [MetadataType(typeof(MotorickiRezultatiTestMetadata))]
+    public partial class MotorickiRezultatiTest
     {
-        public int ReszultatiTestId { get; set; }
+        public int MotorickiRezultatiTestId { get; set; }
         public int TestId { get; set; }
         public Nullable<System.DateTime> Datum { get; set; }
         public string Rezultat { get; set; }

@@ -147,6 +147,7 @@
     <Compile Include="Models\ClanTestModel.cs" />
     <Compile Include="Models\IstezanjePopisMetadata.cs" />
     <Compile Include="Models\IstezanjeZagrijavanjeLista.cs" />
+    <Compile Include="Models\RezultatiTestMetadata.cs" />
     <Compile Include="Models\TestList.cs" />
     <Compile Include="Models\TestMetadata.cs" />
     <Compile Include="Models\TreningDataModel.cs" />
@@ -155,6 +156,9 @@
     <Compile Include="Models\VjezbePopisMetadata.cs" />
     <Compile Include="Models\ZagrijavanjePopisMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RezultatiTest.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SekcijaVjezbi.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
