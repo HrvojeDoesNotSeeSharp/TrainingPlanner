@@ -1165,7 +1165,10 @@ namespace TrainingPlanner.Controllers
                         TreningImeTreninga = firstOrDefault.x.ImeTreninga,
                         TreningTip = firstOrDefault.x.TipTreninga != null ? firstOrDefault.x.TipTreninga : null,
                         Napomena = firstOrDefault.x.Napomena,
-                        TreningId = firstOrDefault.x.TreningId
+                        TreningId = firstOrDefault.x.TreningId,
+                        NapomenaZagrijavanje = firstOrDefault.x.NapomenaZagrijavanje,
+                        NapomenaVjezba = firstOrDefault.x.NapomenaVjezba,
+                        NapomenaIstezanje = firstOrDefault.x.NapomenaIstezanje
                     };
 
                     if (query1.FirstOrDefault() != null)
@@ -1199,6 +1202,10 @@ namespace TrainingPlanner.Controllers
             tr.TipTreninga = trm.TreningTip != null ? trm.TreningTip : null;
             tr.DatumTreninga = trm.TreningDatum;
             tr.Napomena = trm.Napomena;
+            tr.NapomenaZagrijavanje = trm.NapomenaZagrijavanje;
+            tr.NapomenaVjezba = trm.NapomenaVjezba;
+            tr.NapomenaIstezanje = trm.NapomenaIstezanje;
+
             if (trm.TreningTip != null)
             {
                 tr.TipTreninga = trm.TreningTip;
@@ -1247,7 +1254,10 @@ namespace TrainingPlanner.Controllers
                         TreningImeTreninga = firstOrDefault.x.ImeTreninga,
                         TreningTip = firstOrDefault.x.TipTreninga != null ? firstOrDefault.x.TipTreninga : null,
                         TreningId = firstOrDefault.x.TreningId,
-                        Napomena = firstOrDefault.x.Napomena
+                        Napomena = firstOrDefault.x.Napomena,
+                        NapomenaZagrijavanje = firstOrDefault.x.NapomenaZagrijavanje,
+                        NapomenaVjezba = firstOrDefault.x.NapomenaVjezba,
+                        NapomenaIstezanje = firstOrDefault.x.NapomenaIstezanje
                     };
 
                     if (query1.FirstOrDefault() != null)
@@ -1380,6 +1390,9 @@ namespace TrainingPlanner.Controllers
             tr.ImeTreninga = trm.TreningImeTreninga;
             tr.DatumTreninga = trm.TreningDatum;
             tr.Napomena = trm.Napomena;
+            tr.NapomenaZagrijavanje = trm.NapomenaZagrijavanje;
+            tr.NapomenaVjezba = trm.NapomenaVjezba;
+            tr.NapomenaIstezanje = trm.NapomenaIstezanje;
 
             if (trm.TreningTip != null)
             {

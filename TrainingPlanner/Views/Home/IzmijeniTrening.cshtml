@@ -5,8 +5,20 @@
     const string se = "sek";
 }
 
+<script type="text/javascript">
+    function dodaj_napomene() {
+        var zagrijavanje = document.getElementById('NapomenaZagrijavanjeHdn');
+        zagrijavanje.value = document.getElementById('NapomenaZagrijavanje').value;
+        var vjezbe = document.getElementById('NapomenaVjezbaHdn');
+        vjezbe.value = document.getElementById('NapomenaVjezba').value;
+        var istezanje = document.getElementById('NapomenaIstezanjeHdn');
+        istezanje.value = document.getElementById('NapomenaIstezanje').value;
+        document.getElementById("dodaj_trening_form").Submit();
+    }
+</script>
+
 <div id="contentImg">
-    @using (Html.BeginForm("IzmijeniTrening", "Home", FormMethod.Post))
+    @using (Html.BeginForm("IzmijeniTrening", "Home", FormMethod.Post, new { id = "dodaj_trening_form" }))
     {
         @Html.ValidationSummary(true)
         @Html.HiddenFor(x => x.TreningId)
@@ -36,8 +48,12 @@
             @Html.ValidationMessageFor(model => model.Napomena, String.Empty, new { @class = "error" })
         </div>
 
+            @Html.HiddenFor(x => x.NapomenaZagrijavanje, new { id = "NapomenaZagrijavanjeHdn" })
+            @Html.HiddenFor(x => x.NapomenaVjezba, new { id = "NapomenaVjezbaHdn" })
+            @Html.HiddenFor(x => x.NapomenaIstezanje, new { id = "NapomenaIstezanjeHdn" })
+
         <div class="marginHeadlineTop marginTextBottom">
-            <input type="submit" value="Izmjeni trening" class="button_example" />
+            <input type="submit" value="Izmjeni trening" class="button_example" onclick="dodaj_napomene()" />
         </div>
 
         @Html.ActionLink("Popis treninga", "TreningPopis", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
@@ -91,7 +107,12 @@
                 }
             }
         </table>
-        
+        <div>
+            <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont" })</div>
+            @Html.TextAreaFor(x => x.NapomenaZagrijavanje, new { @id = "NapomenaZagrijavanje", @style = "width: 400px; height: 60px;" })
+            @Html.ValidationMessageFor(model => model.NapomenaZagrijavanje, String.Empty, new { @class = "error" })
+        </div>
+                
         @if (Model.ListaZagrijavanja == null)
         {
             <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1,  counter = 0 })">Dodaj zagrijavanje</a>
@@ -198,7 +219,13 @@
             }
         }
         <br />
-        
+
+        <div>
+            <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont" })</div>
+            @Html.TextAreaFor(x => x.NapomenaVjezba, new { @id = "NapomenaVjezba", @style = "width: 400px; height: 60px;" })
+            @Html.ValidationMessageFor(model => model.NapomenaVjezba, String.Empty, new { @class = "error" })
+        </div>
+
         <a id="dodajSekcijuVjezbi" class="button_example" href="@Url.Action("DodajSekcijuTrening", "Home", new { id = Model.TreningId, izmijeni = 1 })#dodajSekcijuVjezbi">Dodaj sekciju vježbi</a>
         
         <!--Istezanje-->
@@ -244,6 +271,11 @@
                 }
             }
         </table>
+        <div>
+            <div class="marginInputBottom">@Html.Label("Napomena", new { @class = "smallFont" })</div>
+            @Html.TextAreaFor(x => x.NapomenaIstezanje, new { @id = "NapomenaIstezanje", @style = "width: 400px; height: 60px;" })
+            @Html.ValidationMessageFor(model => model.NapomenaIstezanje, String.Empty, new { @class = "error" })
+        </div>
         @if (Model.ListaIstezanja == null)
         {
             <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, counter = 0 })">Dodaj istezanje</a>
