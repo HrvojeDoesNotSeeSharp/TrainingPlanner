@@ -20,6 +20,7 @@ namespace TrainingPlanner
         public Test()
         {
             this.Slika = new HashSet<Slika>();
+            this.RezultatiTest = new HashSet<RezultatiTest>();
         }
     
         public int TestId { get; set; }
@@ -33,5 +34,6 @@ namespace TrainingPlanner
     
         public virtual Clan Clan { get; set; }
         public virtual ICollection<Slika> Slika { get; set; }
+        public virtual ICollection<RezultatiTest> RezultatiTest { get; set; }
     }
 }

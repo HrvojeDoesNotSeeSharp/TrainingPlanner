@@ -24,6 +24,7 @@
     <EntitySet Name="Antropometrija" EntityType="TreningModel.Store.Antropometrija" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Amneza" EntityType="TreningModel.Store.Amneza" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AmnezaSlike" EntityType="TreningModel.Store.AmnezaSlike" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RezultatiTest" EntityType="TreningModel.Store.RezultatiTest" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -91,6 +92,10 @@
     <AssociationSet Name="AmnezaClan" Association="TreningModel.Store.AmnezaClan">
       <End Role="Amneza" EntitySet="Amneza" />
       <End Role="Clan" EntitySet="Clan" />
+    </AssociationSet>
+    <AssociationSet Name="TestRezultatiTest" Association="TreningModel.Store.TestRezultatiTest">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="RezultatiTest" EntitySet="RezultatiTest" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
@@ -277,6 +282,15 @@
     <Property Name="SlikaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SlikaIme" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AmnezaAmnezaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RezultatiTest">
+    <Key>
+      <PropertyRef Name="ReszultatiTestId" />
+    </Key>
+    <Property Name="ReszultatiTestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="true" />
+    <Property Name="Rezultat" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -482,6 +496,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="TestRezultatiTest">
+    <End Role="Test" Type="TreningModel.Store.Test" Multiplicity="1" />
+    <End Role="RezultatiTest" Type="TreningModel.Store.RezultatiTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestId" />
+      </Principal>
+      <Dependent Role="RezultatiTest">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -573,6 +599,11 @@
             <End Role="Amneza" EntitySet="Amneza" />
             <End Role="Clan" EntitySet="Clan" />
           </AssociationSet>
+          <EntitySet Name="RezultatiTest" EntityType="TreningModel.RezultatiTest" />
+          <AssociationSet Name="TestRezultatiTest" Association="TreningModel.TestRezultatiTest">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="RezultatiTest" EntitySet="RezultatiTest" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
           <Key>
@@ -607,6 +638,7 @@
           <Property Type="String" Name="MotorickeSposobnosti" Nullable="true" />
           <Property Name="NapomenaFunkcionalneSposobnosti" Type="String" Nullable="true" />
           <Property Name="NapomenaMotorickeSposobnosti" Type="String" Nullable="true" />
+          <NavigationProperty Name="RezultatiTest" Relationship="TreningModel.TestRezultatiTest" FromRole="Test" ToRole="RezultatiTest" />
         </EntityType>
         <EntityType Name="Trening">
           <Key>
@@ -997,6 +1029,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RezultatiTest">
+          <Key>
+            <PropertyRef Name="ReszultatiTestId" />
+          </Key>
+          <Property Type="Int32" Name="ReszultatiTestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Test" Relationship="TreningModel.TestRezultatiTest" FromRole="RezultatiTest" ToRole="Test" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+          <Property Type="DateTime" Name="Datum" Nullable="true" />
+          <Property Type="String" Name="Rezultat" Nullable="true" />
+        </EntityType>
+        <Association Name="TestRezultatiTest">
+          <End Type="TreningModel.Test" Role="Test" Multiplicity="1" />
+          <End Type="TreningModel.RezultatiTest" Role="RezultatiTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestId" />
+            </Principal>
+            <Dependent Role="RezultatiTest">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1203,6 +1257,16 @@
           <ScalarProperty Name="SlikaId" ColumnName="SlikaId" />
           <ScalarProperty Name="SlikaIme" ColumnName="SlikaIme" />
           <ScalarProperty Name="AmnezaAmnezaId" ColumnName="AmnezaAmnezaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RezultatiTest">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.RezultatiTest)">
+        <MappingFragment StoreEntitySet="RezultatiTest">
+          <ScalarProperty Name="ReszultatiTestId" ColumnName="ReszultatiTestId" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Rezultat" ColumnName="Rezultat" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
