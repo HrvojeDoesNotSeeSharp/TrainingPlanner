@@ -39,5 +39,9 @@ namespace TrainingPlanner
         public DbSet<VjezbeSlike> VjezbeSlike { get; set; }
         public DbSet<IstezanjeSlike> IstezanjeSlike { get; set; }
         public DbSet<SekcijaVjezbi> SekcijaVjezbi { get; set; }
+        public DbSet<ClanSlike> ClanSlike { get; set; }
+        public DbSet<Antropometrija> Antropometrija { get; set; }
+        public DbSet<Amneza> Amneza { get; set; }
+        public DbSet<AmnezaSlike> AmnezaSlike { get; set; }
     }
 }

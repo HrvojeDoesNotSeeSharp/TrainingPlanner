@@ -22,6 +22,8 @@
     <EntitySet Name="SekcijaVjezbi" EntityType="TreningModel.Store.SekcijaVjezbi" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClanSlike" EntityType="TreningModel.Store.ClanSlike" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Antropometrija" EntityType="TreningModel.Store.Antropometrija" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Amneza" EntityType="TreningModel.Store.Amneza" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AmnezaSlike" EntityType="TreningModel.Store.AmnezaSlike" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -82,6 +84,14 @@
       <End Role="Antropometrija" EntitySet="Antropometrija" />
       <End Role="Clan" EntitySet="Clan" />
     </AssociationSet>
+    <AssociationSet Name="AmnezaSlikeAmneza" Association="TreningModel.Store.AmnezaSlikeAmneza">
+      <End Role="AmnezaSlike" EntitySet="AmnezaSlike" />
+      <End Role="Amneza" EntitySet="Amneza" />
+    </AssociationSet>
+    <AssociationSet Name="AmnezaClan" Association="TreningModel.Store.AmnezaClan">
+      <End Role="Amneza" EntitySet="Amneza" />
+      <End Role="Clan" EntitySet="Clan" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
     <Key>
@@ -95,7 +105,6 @@
     <Property Name="Tezina" Type="nvarchar(max)" Nullable="false" />
     <Property Name="GodineStarosti" Type="smallint" Nullable="false" />
     <Property Name="Sport" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Amneza" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Test">
@@ -108,6 +117,8 @@
     <Property Name="ClanId" Type="int" Nullable="false" />
     <Property Name="FunkcionalneSposobnosti" Type="nvarchar(max)" Nullable="true" />
     <Property Name="MotorickeSposobnosti" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NapomenaFunkcionalneSposobnosti" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NapomenaMotorickeSposobnosti" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Trening">
     <Key>
@@ -119,6 +130,9 @@
     <Property Name="ImeTreninga" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ClanId" Type="int" Nullable="false" />
     <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NapomenaZagrijavanje" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NapomenaVjezba" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NapomenaIstezanje" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="IstezanjePopis">
     <Key>
@@ -157,6 +171,7 @@
     <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ZagrijavanjeNapomena" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="int" Nullable="false" />
+    <Property Name="Trajanje" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>
@@ -224,6 +239,7 @@
     <Property Name="SekcijaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="BrojKrugova" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ClanSlike">
     <Key>
@@ -244,6 +260,23 @@
     <Property Name="PotkoznoMasnoTkivo" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BezmasnaMasa" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ClanClanId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Amneza">
+    <Key>
+      <PropertyRef Name="AmnezaId" />
+    </Key>
+    <Property Name="AmnezaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Opis" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClanClanId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AmnezaSlike">
+    <Key>
+      <PropertyRef Name="SlikaId" />
+    </Key>
+    <Property Name="SlikaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SlikaIme" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AmnezaAmnezaId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -425,6 +458,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AmnezaSlikeAmneza">
+    <End Role="AmnezaSlike" Type="TreningModel.Store.AmnezaSlike" Multiplicity="*" />
+    <End Role="Amneza" Type="TreningModel.Store.Amneza" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Amneza">
+        <PropertyRef Name="AmnezaId" />
+      </Principal>
+      <Dependent Role="AmnezaSlike">
+        <PropertyRef Name="AmnezaAmnezaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AmnezaClan">
+    <End Role="Amneza" Type="TreningModel.Store.Amneza" Multiplicity="*" />
+    <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Clan">
+        <PropertyRef Name="ClanId" />
+      </Principal>
+      <Dependent Role="Amneza">
+        <PropertyRef Name="ClanClanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -506,6 +563,16 @@
             <End Role="Antropometrija" EntitySet="Antropometrija" />
             <End Role="Clan" EntitySet="Clan" />
           </AssociationSet>
+          <EntitySet Name="Amneza" EntityType="TreningModel.Amneza" />
+          <EntitySet Name="AmnezaSlike" EntityType="TreningModel.AmnezaSlike" />
+          <AssociationSet Name="AmnezaSlikeAmneza" Association="TreningModel.AmnezaSlikeAmneza">
+            <End Role="AmnezaSlike" EntitySet="AmnezaSlike" />
+            <End Role="Amneza" EntitySet="Amneza" />
+          </AssociationSet>
+          <AssociationSet Name="AmnezaClan" Association="TreningModel.AmnezaClan">
+            <End Role="Amneza" EntitySet="Amneza" />
+            <End Role="Clan" EntitySet="Clan" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
           <Key>
@@ -521,10 +588,10 @@
           <Property Type="Int16" Name="GodineStarosti" Nullable="false" />
           <NavigationProperty Name="Test" Relationship="TreningModel.ClanTest" FromRole="Clan" ToRole="Test" />
           <Property Type="String" Name="Sport" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="Amneza" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Napomena" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ClanSlike" Relationship="TreningModel.ClanSlikeClan" FromRole="Clan" ToRole="ClanSlike" />
           <NavigationProperty Name="Antropometrija" Relationship="TreningModel.AntropometrijaClan" FromRole="Clan" ToRole="Antropometrija" />
+          <NavigationProperty Name="Amneza" Relationship="TreningModel.AmnezaClan" FromRole="Clan" ToRole="Amneza" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -538,6 +605,8 @@
           <NavigationProperty Name="Slika" Relationship="TreningModel.FK_TestSlika" FromRole="Test" ToRole="Slika" />
           <Property Type="String" Name="FunkcionalneSposobnosti" Nullable="true" />
           <Property Type="String" Name="MotorickeSposobnosti" Nullable="true" />
+          <Property Name="NapomenaFunkcionalneSposobnosti" Type="String" Nullable="true" />
+          <Property Name="NapomenaMotorickeSposobnosti" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="Trening">
           <Key>
@@ -553,6 +622,9 @@
           <NavigationProperty Name="Istezanje" Relationship="TreningModel.TreningIstezanje" FromRole="Trening" ToRole="Istezanje" />
           <Property Type="String" Name="Napomena" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="SekcijaVjezbi" Relationship="TreningModel.TreningSekcijaVjezbi" FromRole="Trening" ToRole="SekcijaVjezbi" />
+          <Property Name="NapomenaZagrijavanje" Type="String" Nullable="true" />
+          <Property Name="NapomenaVjezba" Type="String" Nullable="true" />
+          <Property Name="NapomenaIstezanje" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="FK_ClanTrening">
           <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
@@ -611,6 +683,7 @@
           <Property Type="String" Name="ZagrijavanjeNapomena" Nullable="true" />
           <NavigationProperty Name="ZagrijavanjePopis" Relationship="TreningModel.ZagrijavanjeZagrijavanjePopis" FromRole="Zagrijavanje" ToRole="ZagrijavanjePopis" />
           <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="Int32" Nullable="false" />
+          <Property Name="Trajanje" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="Vjezba">
           <Key>
@@ -772,6 +845,7 @@
           <Property Type="Int32" Name="TreningId" Nullable="false" />
           <NavigationProperty Name="Vjezba" Relationship="TreningModel.SekcijaVjezbiVjezba" FromRole="SekcijaVjezbi" ToRole="Vjezba" />
           <Property Type="String" Name="BrojKrugova" Nullable="true" />
+          <Property Name="Odmor" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="TreningSekcijaVjezbi">
           <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
@@ -879,6 +953,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Amneza">
+          <Key>
+            <PropertyRef Name="AmnezaId" />
+          </Key>
+          <Property Name="AmnezaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="true" />
+          <Property Name="Opis" Type="String" Nullable="true" />
+          <NavigationProperty Name="AmnezaSlike" Relationship="TreningModel.AmnezaSlikeAmneza" FromRole="Amneza" ToRole="AmnezaSlike" />
+          <NavigationProperty Name="Clan" Relationship="TreningModel.AmnezaClan" FromRole="Amneza" ToRole="Clan" />
+          <Property Name="ClanClanId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AmnezaSlike">
+          <Key>
+            <PropertyRef Name="SlikaId" />
+          </Key>
+          <Property Name="SlikaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SlikaIme" Type="String" Nullable="true" />
+          <NavigationProperty Name="Amneza" Relationship="TreningModel.AmnezaSlikeAmneza" FromRole="AmnezaSlike" ToRole="Amneza" />
+          <Property Name="AmnezaAmnezaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AmnezaSlikeAmneza">
+          <End Type="TreningModel.AmnezaSlike" Role="AmnezaSlike" Multiplicity="*" />
+          <End Type="TreningModel.Amneza" Role="Amneza" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Amneza">
+              <PropertyRef Name="AmnezaId" />
+            </Principal>
+            <Dependent Role="AmnezaSlike">
+              <PropertyRef Name="AmnezaAmnezaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AmnezaClan">
+          <End Type="TreningModel.Amneza" Role="Amneza" Multiplicity="*" />
+          <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Clan">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="Amneza">
+              <PropertyRef Name="ClanClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -896,7 +1014,6 @@
           <ScalarProperty Name="Tezina" ColumnName="Tezina" />
           <ScalarProperty Name="GodineStarosti" ColumnName="GodineStarosti" />
           <ScalarProperty Name="Sport" ColumnName="Sport" />
-          <ScalarProperty Name="Amneza" ColumnName="Amneza" />
           <ScalarProperty Name="Napomena" ColumnName="Napomena" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -910,6 +1027,8 @@
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
           <ScalarProperty Name="FunkcionalneSposobnosti" ColumnName="FunkcionalneSposobnosti" />
           <ScalarProperty Name="MotorickeSposobnosti" ColumnName="MotorickeSposobnosti" />
+          <ScalarProperty Name="NapomenaFunkcionalneSposobnosti" ColumnName="NapomenaFunkcionalneSposobnosti" />
+          <ScalarProperty Name="NapomenaMotorickeSposobnosti" ColumnName="NapomenaMotorickeSposobnosti" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -922,6 +1041,9 @@
           <ScalarProperty Name="ImeTreninga" ColumnName="ImeTreninga" />
           <ScalarProperty Name="ClanId" ColumnName="ClanId" />
           <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+          <ScalarProperty Name="NapomenaZagrijavanje" ColumnName="NapomenaZagrijavanje" />
+          <ScalarProperty Name="NapomenaVjezba" ColumnName="NapomenaVjezba" />
+          <ScalarProperty Name="NapomenaIstezanje" ColumnName="NapomenaIstezanje" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -964,6 +1086,7 @@
           <ScalarProperty Name="Puls" ColumnName="Puls" />
           <ScalarProperty Name="ZagrijavanjeNapomena" ColumnName="ZagrijavanjeNapomena" />
           <ScalarProperty Name="ZagrijavanjePopisZagrijavanjeId" ColumnName="ZagrijavanjePopisZagrijavanjeId" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1038,6 +1161,7 @@
           <ScalarProperty Name="SekcijaId" ColumnName="SekcijaId" />
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="BrojKrugova" ColumnName="BrojKrugova" />
+          <ScalarProperty Name="Odmor" ColumnName="Odmor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1060,6 +1184,25 @@
           <ScalarProperty Name="PotkoznoMasnoTkivo" ColumnName="PotkoznoMasnoTkivo" />
           <ScalarProperty Name="BezmasnaMasa" ColumnName="BezmasnaMasa" />
           <ScalarProperty Name="ClanClanId" ColumnName="ClanClanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Amneza">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.Amneza)">
+        <MappingFragment StoreEntitySet="Amneza">
+          <ScalarProperty Name="AmnezaId" ColumnName="AmnezaId" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="ClanClanId" ColumnName="ClanClanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AmnezaSlike">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.AmnezaSlike)">
+        <MappingFragment StoreEntitySet="AmnezaSlike">
+          <ScalarProperty Name="SlikaId" ColumnName="SlikaId" />
+          <ScalarProperty Name="SlikaIme" ColumnName="SlikaIme" />
+          <ScalarProperty Name="AmnezaAmnezaId" ColumnName="AmnezaAmnezaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

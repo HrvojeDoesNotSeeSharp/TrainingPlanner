@@ -7,19 +7,19 @@
 
 <div id="inputAreaImages" class="defaultFont">
 <p class="bigFont marginHeadline">@Model.ClanIme @Model.ClanPrezime</p>
-        <table class="responstable">
-            <tr class="smallFont">
-                <td style="width:30%">
-                    @Html.DisplayFor(x => x.TreningImeTreninga)
-                </td>
-                <td style="width:30%">
-                    @Model.TreningDatum.ToShortDateString()
-                </td>
-                <td style="width:30%">
-                    @Html.DisplayFor(x => x.TreningTip)
-                </td>
-            </tr>
-        </table>
+    <table class="responstable">
+        <tr class="smallFont">
+            <td style="width:30%">
+                @Html.DisplayFor(x => x.TreningImeTreninga)
+            </td>
+            <td style="width:30%">
+                @Model.TreningDatum.ToShortDateString()
+            </td>
+            <td style="width:30%">
+                @Html.DisplayFor(x => x.TreningTip)
+            </td>
+        </tr>
+    </table>
 </div>
 
 @if (Model.ListaZagrijavanja == null)
@@ -45,6 +45,14 @@ else
             }
         </table>
 </div>
+    if (Model.NapomenaZagrijavanje != null)
+    {
+        <tr>
+            <td colspan="5" style="text-align:left">
+                Napomena zagrijavanje:  @Model.NapomenaZagrijavanje
+            </td>
+        </tr>
+    }
 }
 
 @if (Model.SekcijaVjezbi == null)

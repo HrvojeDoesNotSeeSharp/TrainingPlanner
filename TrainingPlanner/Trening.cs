@@ -27,6 +27,9 @@ namespace TrainingPlanner
         public string ImeTreninga { get; set; }
         public int ClanId { get; set; }
         public string Napomena { get; set; }
+        public string NapomenaZagrijavanje { get; set; }
+        public string NapomenaVjezba { get; set; }
+        public string NapomenaIstezanje { get; set; }
     
         public virtual Clan Clan { get; set; }
         public virtual ICollection<Zagrijavanje> Zagrijavanje { get; set; }

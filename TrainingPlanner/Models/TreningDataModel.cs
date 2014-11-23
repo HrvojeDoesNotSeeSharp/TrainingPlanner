@@ -23,6 +23,10 @@ namespace TrainingPlanner.Models
         public string TreningImeTreninga { get; set; }
         public DateTime TreningDatum { get; set; }
         public string TreningTip { get; set; }
+
+        public string NapomenaZagrijavanje { get; set; }
+        public string NapomenaVjezba { get; set; }
+        public string NapomenaIstezanje { get; set; }
         
         /*Zagrijavanje tablica*/
         public List<Zagrijavanje> ListaZagrijavanja { get; set; }
