@@ -606,10 +606,41 @@ namespace TrainingPlanner.Controllers
                     {
                         _context.Slika.Remove(sl);
                     }
+                    foreach (FunkcionalniRezultatiTest fn in a.FunkcionalniRezultatiTest.ToList())
+                    {
+                        _context.FunkcionalniRezultatiTest.Remove(fn);
+                    }
+                    foreach (MotorickiRezultatiTest mt in a.MotorickiRezultatiTest.ToList())
+                    {
+                        _context.MotorickiRezultatiTest.Remove(mt);
+                    }
                     _context.Test.Remove(a);
                 }
             }
 
+            var queryAntropometrija = from x in _context.Antropometrija
+                        where x.ClanClanId == id
+                        select x;
+
+            if (queryAntropometrija.FirstOrDefault() != null)
+            {
+                foreach (var ant in queryAntropometrija)
+	                {
+                        _context.Antropometrija.Remove(ant);
+	                }
+            }
+
+            var queryAmneza = from x in _context.Amneza
+                                      where x.ClanClanId == id
+                                      select x;
+
+            if (queryAmneza.FirstOrDefault() != null)
+            {
+                foreach (var amn in queryAmneza)
+                {
+                    _context.Amneza.Remove(amn);
+                }
+            }
             _context.Clan.Remove(c);
             _context.SaveChanges();
 
@@ -987,6 +1018,90 @@ namespace TrainingPlanner.Controllers
             var t = _context.Test.Find(id);
             return View(t);
 
+        }
+
+        [HttpGet]
+        public ActionResult DodajFunkcionalniRezultat(int id = 0)
+        {
+            FunkcionalniRezultatiTest ft = new FunkcionalniRezultatiTest(){TestId = id};
+            return View(ft);
+        }
+
+        [HttpPost]
+        public ActionResult DodajFunkcionalniRezultat(FunkcionalniRezultatiTest ft)
+        {
+            _context.FunkcionalniRezultatiTest.Add(ft);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = ft.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniFunkcionalniRezultat(int id = 0)
+        {
+            var fn = _context.FunkcionalniRezultatiTest.Find(id);
+            return View(fn);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniFunkcionalniRezultat(FunkcionalniRezultatiTest fn)
+        {
+            _context.Entry(fn).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = fn.TestId });
+        }
+
+        public ActionResult IzbrisiFunkcionalniRezultat(int id)
+        {
+            var fn = _context.FunkcionalniRezultatiTest.Find(id);
+
+            _context.FunkcionalniRezultatiTest.Remove(fn);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = fn.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult DodajMotorickiRezultat(int id = 0)
+        {
+            MotorickiRezultatiTest mt = new MotorickiRezultatiTest() { TestId = id };
+            return View(mt);
+        }
+
+        [HttpPost]
+        public ActionResult DodajMotorickiRezultat(MotorickiRezultatiTest mt)
+        {
+            _context.MotorickiRezultatiTest.Add(mt);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = mt.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniMotorickiRezultat(int id = 0)
+        {
+            var mt = _context.MotorickiRezultatiTest.Find(id);
+            return View(mt);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniMotorickiRezultat(MotorickiRezultatiTest mt)
+        {
+            _context.Entry(mt).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = mt.TestId });
+        }
+
+        public ActionResult IzbrisiMotorickiRezultat(int id)
+        {
+            var mt = _context.MotorickiRezultatiTest.Find(id);
+
+            _context.MotorickiRezultatiTest.Remove(mt);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = mt.TestId });
         }
 
         /*****************Akcije sa treningom*****************/

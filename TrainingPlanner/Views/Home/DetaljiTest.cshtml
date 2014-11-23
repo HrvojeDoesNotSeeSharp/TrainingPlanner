@@ -14,12 +14,8 @@
             <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
             @Html.DisplayFor(model => model.Name)
         </div>
-
-        <div>
-            <div class="marginText">@Html.Label("Datum", new { @class = "smallFont" })</div>
-            @Model.DatumTesta.ToShortDateString()
-        </div>
-
+        <br />
+        <hr />
         <div class="maxWidth">
             <div class="marginText">@Html.Label("Opis testa - Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
             @if (Model.FunkcionalneSposobnosti == null)
@@ -33,17 +29,24 @@
         </div>
 
         <div class="maxWidth">
-            <div class="marginText">@Html.Label("* Rezultat", new { @class = "smallFont" })</div>
-            @if (Model.NapomenaFunkcionalneSposobnosti == null)
-            {
-                <text>--</text>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.NapomenaFunkcionalneSposobnosti)
-            }
-        </div>
-
+                <div class="marginText">@Html.Label("* Rezultat", new { @class = "smallFont" })</div>
+                
+                    <table class="responstableTrening">
+                        <tr class="smallFont">
+                            <td class="green">Datum</td>
+                            <td class="green">Rezultat</td>
+                        </tr>
+                @foreach (var item in Model.FunkcionalniRezultatiTest.ToList())
+                {
+                        <tr>
+                            <td align="center">@item.Datum</td>
+                            <td align="center">@item.Rezultat</td>
+                        </tr>
+                }
+                   </table>
+            </div>
+        <br />
+        <hr />
         <div class="maxWidth">
             <div class="marginText">@Html.Label("Opis testa - Motoričke sposobnosti **", new { @class = "smallFont" })</div>
             @if (Model.MotorickeSposobnosti == null)
@@ -56,18 +59,25 @@
             }
         </div>
 
-        <div class="maxWidth">
-            <div class="marginText">@Html.Label("** Rezultat", new { @class = "smallFont" })</div>
-            @if (Model.NapomenaMotorickeSposobnosti == null)
-            {
-                <text>--</text>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.NapomenaMotorickeSposobnosti)
-            }
-        </div>
-
+         <div class="maxWidth">
+                <div class="marginText">@Html.Label("** Rezultat", new { @class = "smallFont" })</div>
+                
+                    <table class="responstableTrening">
+                        <tr class="smallFont">
+                            <td class="green">Datum</td>
+                            <td class="green">Rezultat</td>
+                        </tr>
+                @foreach (var item in Model.MotorickiRezultatiTest.ToList())
+                {
+                        <tr>
+                            <td align="center">@item.Datum</td>
+                            <td align="center">@item.Rezultat</td>
+                        </tr>
+                }
+                   </table>
+            </div>
+        <br />
+        <hr />
         @Html.ActionLink("Popis testova", "Test", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
         @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new { id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>

@@ -1,4 +1,5 @@
 ﻿@using TrainingPlanner.Helpers
+@using System
 @model TrainingPlanner.Test
 
 @{
@@ -15,42 +16,71 @@
 
     <div id=@(Model.Slika.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
         <h2 class="green">Izmjeni test</h2>
-
         <div>
             <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "error" })
         </div>
-        <div>
-            <div class="marginText">@Html.Label("Datum", new { @class = "smallFont" })</div>
-            @Html.TextBoxFor(model => model.DatumTesta, new { @Value = @Model.DatumTesta.ToShortDateString() })
-            @Html.ValidationMessageFor(model => model.DatumTesta, String.Empty, new { @class = "error" })
-        </div>
+        <br />
+        <hr />
 
         <div>
             <div class="marginText">@Html.Label("Opis testa - Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
-            @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" })
+            @Html.TextAreaFor(model => model.FunkcionalneSposobnosti)
             @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti, String.Empty, new { @class = "error" })
         </div>
-
+        <br />
         <div>
-            <div class="marginInputBottom">@Html.Label("* Rezultat", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.NapomenaFunkcionalneSposobnosti)
-            @Html.ValidationMessageFor(model => model.NapomenaFunkcionalneSposobnosti, String.Empty, new { @class = "error" })
-        </div>
+                <div class="marginInputBottom">@Html.Label("* Rezultat", new { @class = "smallFont" })</div>
+                
+                    <table class="responstableTrening">
+                        <tr class="smallFont">
+                            <td class="green">Datum</td>
+                            <td class="green">Rezultat</td>
+                            <td colspan="2">@Html.ActionLink("Dodaj funkcionalni rezultat", "DodajFunkcionalniRezultat", "Home", new { id = Model.TestId }, new { @class = "marginHeadlineTop marginTextBottom button_example", @style="-moz-transform: scale(0.75);" })</td>
+                        </tr>
+                @foreach (var item in Model.FunkcionalniRezultatiTest.ToList())
+                {
+                        <tr>
+                            <td align="center">@item.Datum.Value.ToShortDateString()</td>
+                            <td align="center">@item.Rezultat</td>
+                            <td align="center">@Html.ActionLink("Izmjeni", "IzmijeniFunkcionalniRezultat", "Home", new { id = item.FunkcionalniRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);" })</td>
+                            <td align="center">@Html.ActionLink("Izbriši", "IzbrisiFunkcionalniRezultat", "Home", new { id = item.FunkcionalniRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);", onclick = "return confirm('Jeste li sigurni da zelite izbrisati rezultat?;" })</td>
+                        </tr>
+                }
+                   </table>
+            </div>
+        <br />
+        <hr />
 
         <div>
             <div class="marginText">@Html.Label("Opis testa - Motoričke sposobnosti **", new { @class = "smallFont" })</div>
-            @Html.TextAreaFor(model => model.MotorickeSposobnosti, new { rows = "10", cols = "40" })
+            @Html.TextAreaFor(model => model.MotorickeSposobnosti)
             @Html.ValidationMessageFor(model => model.MotorickeSposobnosti, String.Empty, new { @class = "error" })
         </div>
-
+        <br />
         <div>
-            <div class="marginInputBottom">@Html.Label("** Rezultat", new { @class = "smallFont" })</div>
-            @Html.EditorFor(model => model.NapomenaMotorickeSposobnosti)
-            @Html.ValidationMessageFor(model => model.NapomenaMotorickeSposobnosti, String.Empty, new { @class = "error" })
-        </div>
-
+                <div class="marginInputBottom">@Html.Label("** Rezultat", new { @class = "smallFont" })</div>
+                
+                    <table class="responstableTrening">
+                        <tr class="smallFont">
+                            <td class="green">Datum</td>
+                            <td class="green">Rezultat</td>
+                            <td colspan="2">@Html.ActionLink("Dodaj Motoricki rezultat", "DodajMotorickiRezultat", "Home", new { id = Model.TestId }, new { @class = "marginHeadlineTop marginTextBottom button_example", @style="-moz-transform: scale(0.75);" })</td>
+                        </tr>
+                @foreach (var item in Model.MotorickiRezultatiTest.ToList())
+                {
+                        <tr>
+                            <td align="center">@item.Datum.Value.ToShortDateString()</td>
+                            <td align="center">@item.Rezultat</td>
+                            <td align="center">@Html.ActionLink("Izmjeni", "IzmijeniMotorickiRezultat", "Home", new { id = item.MotorickiRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);" })</td>
+                            <td align="center">@Html.ActionLink("Izbriši", "IzbrisiMotorickiRezultat", "Home", new { id = item.MotorickiRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);", onclick = "return confirm('Jeste li sigurni da zelite izbrisati rezultat?;" })</td>
+                        </tr>
+                }
+                   </table>
+            </div>
+        <br />
+        <hr />
         @if (Model.Slika.Count == 0)
         {
             <div class="marginText">

@@ -380,6 +380,18 @@
   <ItemGroup>
     <Content Include="Views\Home\DetaljiAmneze.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajFunkcionalniRezultat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniFunkcionalniRezultat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajMotorickiRezultat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniMotorickiRezultat.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
