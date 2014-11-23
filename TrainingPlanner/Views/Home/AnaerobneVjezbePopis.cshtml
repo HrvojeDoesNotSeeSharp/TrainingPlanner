@@ -1,0 +1,62 @@
+﻿@using TrainingPlanner
+@model List<AnaerobneVjezbePopis>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="contentImg">
+    <h2 class="green">Anaerobne vježbe</h2>
+    <p>
+        <table class="responstableTrening">
+            @foreach (AnaerobneVjezbePopis avjp in Model)
+            {
+                if (avjp.AnaerobnaVjezbaId == 0)
+                {
+                    <tr>
+                        <td class="smallFont">Trenutno nema anaerobnih vježbi.</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td class="smallFontGreen">@avjp.Naziv</td>
+                        @if (avjp.Info == null)
+                        {
+                            <td class="smallFont">--</td>
+                        }
+                        else
+                        {
+                            <td class="smallFontNotCentered">@avjp.Info</td>
+                        }
+                        @if (avjp.AnaerobneVjezbeSlike.Count > 0)
+                        {
+                            <td>
+                                @foreach (var item in avjp.AnaerobneVjezbeSlike)
+                                {
+                                    <div style="float: left; display: block;">
+                                        <div>
+                                            <a href="~/Content/VjezbeSlike/@item.AnaerobnaVjezbaSlikaIme" target="_blank">
+                                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.AnaerobnaVjezbaSlikaIme))" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallFont">--</td>
+                        }
+                        <td>@Html.ActionLink("Izmjeni", "IzmijeniAnaerobnuVjezbu", "Home", new { id = avjp.AnaerobnaVjezbaId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiAnaerobneVjezbe", "Home", new { id = avjp.AnaerobnaVjezbaId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiAnaerobnuVjezbu", "Home", new { id = avjp.AnaerobnaVjezbaId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati aerobnu vjezbu?');" })</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        @Html.ActionLink("Dodaj", "DodajNovuAnaerobnuVjezbu", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
+</div>

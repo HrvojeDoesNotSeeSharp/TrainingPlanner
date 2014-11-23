@@ -110,10 +110,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AerobneVjezbePopis.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AerobneVjezbeSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Amneza.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AmnezaSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnaerobneVjezbePopis.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnaerobneVjezbeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Antropometrija.cs">
@@ -379,6 +391,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DetaljiAmneze.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\AerobneVjezbePopis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\AnaerobneVjezbePopis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajNovuAerobnuVjezbu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajNovuAnaerobnuVjezbu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniAerobnuVjezbu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniAnaerobnuVjezbu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

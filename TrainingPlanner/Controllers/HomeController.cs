@@ -190,6 +190,178 @@ namespace TrainingPlanner.Controllers
             return View(listaVjezbi);
         }
 
+        [HttpGet]
+        public ActionResult AerobneVjezbePopis()
+        {
+            var listaAerobnihVjezbi = _context.AerobneVjezbePopis.ToList();
+            if (listaAerobnihVjezbi.Count == 0)
+            {
+                listaAerobnihVjezbi = new List<AerobneVjezbePopis>
+                {
+                    new AerobneVjezbePopis {AerobnaVjezbaId = 0, Naziv = "", Info = "", AerobneVjezbeSlike = null}
+                };
+                return View(listaAerobnihVjezbi);
+            }
+            return View(listaAerobnihVjezbi);
+        }
+
+        [HttpGet]
+        public ActionResult DodajNovuAerobnuVjezbu()
+        {
+            var avjp = new AerobneVjezbePopis();
+            return View(avjp);
+        }
+
+        [HttpPost]
+        public ActionResult DodajNovuAerobnuVjezbu(AerobneVjezbePopis avjp, HttpPostedFileBase[] slike)
+        {
+            if (ModelState.IsValid)
+            {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new AerobneVjezbeSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.AerobnaVjezbaSlikaIme = file.FileName;
+                        slika.AerobneVjezbePopisAerobnaVjezbaId = avjp.AerobnaVjezbaId;
+
+                        avjp.AerobneVjezbeSlike.Add(slika);
+                        _context.AerobneVjezbeSlike.Add(slika);
+                    }
+                }
+
+                _context.AerobneVjezbePopis.Add(avjp);
+                _context.SaveChanges();
+                return RedirectToAction("AerobneVjezbePopis", "Home");
+            }
+            return RedirectToAction("DodajNovuAerobnuVjezbu", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniAerobnuVjezbu(int id = 0)
+        {
+            var ip = _context.AerobneVjezbePopis.Find(id);
+            return View(ip);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniAerobnuVjezbu(AerobneVjezbePopis avjp, HttpPostedFileBase[] slike)
+        {
+            if (ModelState.IsValid)
+            {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+
+                    foreach (var file in slike)
+                    {
+                        var slika = new AerobneVjezbeSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.AerobnaVjezbaSlikaIme = file.FileName;
+                        slika.AerobneVjezbePopisAerobnaVjezbaId = avjp.AerobnaVjezbaId;
+
+                        avjp.AerobneVjezbeSlike.Add(slika);
+                        _context.AerobneVjezbeSlike.Add(slika);
+                    }
+                }
+
+                _context.Entry(avjp).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("AerobneVjezbePopis", "Home");
+            }
+            return RedirectToAction("IzmijeniAerobnuVjezbu", "Home", avjp);
+        }
+
+        [HttpGet]
+        public ActionResult AnaerobneVjezbePopis()
+        {
+            var listaAnaerobnihVjezbi = _context.AnaerobneVjezbePopis.ToList();
+            if (listaAnaerobnihVjezbi.Count == 0)
+            {
+                listaAnaerobnihVjezbi = new List<AnaerobneVjezbePopis>
+                {
+                    new AnaerobneVjezbePopis {AnaerobnaVjezbaId = 0, Naziv = "", Info = "", AnaerobneVjezbeSlike = null}
+                };
+                return View(listaAnaerobnihVjezbi);
+            }
+            return View(listaAnaerobnihVjezbi);
+        }
+
+        [HttpGet]
+        public ActionResult DodajNovuAnaerobnuVjezbu()
+        {
+            var avjp = new AnaerobneVjezbePopis();
+            return View(avjp);
+        }
+
+        [HttpPost]
+        public ActionResult DodajNovuAnaerobnuVjezbu(AnaerobneVjezbePopis avjp, HttpPostedFileBase[] slike)
+        {
+            if (ModelState.IsValid)
+            {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+                    foreach (var file in slike)
+                    {
+                        var slika = new AnaerobneVjezbeSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.AnaerobnaVjezbaSlikaIme = file.FileName;
+                        slika.AnaerobneVjezbePopisAnaerobnaVjezbaId = avjp.AnaerobnaVjezbaId;
+
+                        avjp.AnaerobneVjezbeSlike.Add(slika);
+                        _context.AnaerobneVjezbeSlike.Add(slika);
+                    }
+                }
+
+                _context.AnaerobneVjezbePopis.Add(avjp);
+                _context.SaveChanges();
+                return RedirectToAction("AnaerobneVjezbePopis", "Home");
+            }
+            return RedirectToAction("DodajNovuAnaerobnuVjezbu", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniAnaerobnuVjezbu(int id = 0)
+        {
+            var ip = _context.AnaerobneVjezbePopis.Find(id);
+            return View(ip);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniAnaerobnuVjezbu(AnaerobneVjezbePopis avjp, HttpPostedFileBase[] slike)
+        {
+            if (ModelState.IsValid)
+            {
+                if (slike != null && slike.FirstOrDefault() != null)
+                {
+                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+
+                    foreach (var file in slike)
+                    {
+                        var slika = new AnaerobneVjezbeSlike();
+                        file.SaveAs(path + file.FileName);
+
+                        slika.AnaerobnaVjezbaSlikaIme = file.FileName;
+                        slika.AnaerobneVjezbePopisAnaerobnaVjezbaId = avjp.AnaerobnaVjezbaId;
+
+                        avjp.AnaerobneVjezbeSlike.Add(slika);
+                        _context.AnaerobneVjezbeSlike.Add(slika);
+                    }
+                }
+
+                _context.Entry(avjp).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("AnaerobneVjezbePopis", "Home");
+            }
+            return RedirectToAction("IzmijeniAnaerobnuVjezbu", "Home", avjp);
+        }
+
         public ActionResult IzbrisiVjezbu(int id = 0)
         {
             var vjp = _context.VjezbePopis.Find(id);
@@ -1726,6 +1898,34 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return View("IzmijeniAmnezu", t);
+        }
+
+        public ActionResult IzbrisiSlikuAerobneVjezbe(int id, int? slika)
+        {
+            var t = _context.AerobneVjezbePopis.Find(id);
+            var imageToDelete = _context.AerobneVjezbeSlike.Find(slika);
+
+            _context.AerobneVjezbeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.AerobneVjezbeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniAerobnuVjezbu", t);
+        }
+
+        public ActionResult IzbrisiSlikuAnaerobneVjezbe(int id, int? slika)
+        {
+            var t = _context.AnaerobneVjezbePopis.Find(id);
+            var imageToDelete = _context.AnaerobneVjezbeSlike.Find(slika);
+
+            _context.AnaerobneVjezbeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            t.AnaerobneVjezbeSlike.Remove(imageToDelete);
+            _context.SaveChanges();
+
+            return View("IzmijeniAnaerobnuVjezbu", t);
         }
 
         /*Akcije se sekcijom vjezbi u treningu */

@@ -13,8 +13,8 @@
         <EntityTypeShape EntityType="TreningModel.VjezbePopis" Width="1.5" PointX="2.25" PointY="9.5" />
         <EntityTypeShape EntityType="TreningModel.ZagrijavanjePopis" Width="1.5" PointX="0.5" PointY="9.5" />
         <EntityTypeShape EntityType="TreningModel.Zagrijavanje" Width="1.5" PointX="4.875" PointY="6" />
-        <EntityTypeShape EntityType="TreningModel.Vjezba" Width="1.5" PointX="8.125" PointY="6.125" />
-        <EntityTypeShape EntityType="TreningModel.Istezanje" Width="1.5" PointX="4.875" PointY="15" />
+        <EntityTypeShape EntityType="TreningModel.Vjezba" Width="1.5" PointX="7.25" PointY="6" />
+        <EntityTypeShape EntityType="TreningModel.Istezanje" Width="1.5" PointX="9.125" PointY="7.375" />
         <AssociationConnector Association="TreningModel.TreningZagrijavanje" />
         <AssociationConnector Association="TreningModel.TreningIstezanje" />
         <AssociationConnector Association="TreningModel.TreningVjezba" />
@@ -31,7 +31,7 @@
         <AssociationConnector Association="TreningModel.ClanSlikeClan" />
         <EntityTypeShape EntityType="TreningModel.Antropometrija" Width="1.5" PointX="2.875" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.AntropometrijaClan" />
-        <EntityTypeShape EntityType="TreningModel.SekcijaVjezbi" Width="1.5" PointX="6.125" PointY="9.375" />
+        <EntityTypeShape EntityType="TreningModel.SekcijaVjezbi" Width="1.5" PointX="4.875" PointY="3.625" />
         <AssociationConnector Association="TreningModel.TreningSekcijaVjezbi" />
         <AssociationConnector Association="TreningModel.SekcijaVjezbiVjezba" />
         <EntityTypeShape EntityType="TreningModel.Amneza" Width="1.5" PointX="4.75" PointY="0.5" />
@@ -43,6 +43,12 @@
         <EntityTypeShape EntityType="TreningModel.MotorickiRezultatiTest" Width="1.5" PointX="10.5" PointY="1" />
         <AssociationConnector Association="TreningModel.TestMotorickiRezultatiTest" />
         <AssociationConnector Association="TreningModel.TestFunkcionalniRezultatiTest" />
+        <EntityTypeShape EntityType="TreningModel.AerobneVjezbePopis" Width="1.5" PointX="6.5" PointY="10.625" />
+        <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbePopis" Width="1.5" PointX="8.625" PointY="10.625" />
+        <EntityTypeShape EntityType="TreningModel.AerobneVjezbeSlike" Width="1.5" PointX="6.375" PointY="13.5" />
+        <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbeSlike" Width="1.5" PointX="8.625" PointY="13.5" />
+        <AssociationConnector Association="TreningModel.AerobneVjezbePopisAerobneVjezbeSlike" />
+        <AssociationConnector Association="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbeSlike" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

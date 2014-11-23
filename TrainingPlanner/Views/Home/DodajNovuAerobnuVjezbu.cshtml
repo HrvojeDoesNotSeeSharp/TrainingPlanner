@@ -1,0 +1,41 @@
+﻿@model TrainingPlanner.AerobneVjezbePopis
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    @using (Html.BeginForm("DodajNovuAerobnuVjezbu", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <div id="inputArea">
+            <h2 class="green">Nova aerobna vježba</h2>
+
+            <div>
+                <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.Naziv)
+                @Html.ValidationMessageFor(model => model.Naziv, String.Empty, new { @class = "error" })
+            </div>
+
+            <div class="marginText">
+                <div class="marginInputBottom">@Html.Label("Info", new { @class = "smallFont marginInputBottom" })</div>
+                @Html.TextAreaFor(model => model.Info, new { rows = "10", cols = "40" })
+                @Html.ValidationMessageFor(model => model.Info, String.Empty, new { @class = "error" })
+            </div>
+
+            <div class="marginText">
+                @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                <div>
+                    <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
+                </div>
+            </div>
+
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Dodaj vježbu" class="button_example" />
+            </div>
+
+            @Html.ActionLink("Lista aerobnih vježbi", "AerobneVjezbePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
+    }
+</div>
