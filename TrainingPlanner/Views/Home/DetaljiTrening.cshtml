@@ -41,6 +41,22 @@ else
                 <td>@zagrijavanje.Tempo</td>
                 <td>@zagrijavanje.Trajanje</td>
                 <td>@zagrijavanje.ZagrijavanjeNapomena</td>
+            @if (zagrijavanje.ZagrijavanjePopis.ZagrijavanjeSlike.Count > 0  )
+            {
+                <td>
+                    <div style="float: left; display: block;">
+                        <div>
+                            <a href="~/Content/ZagrijavanjeSlike/@zagrijavanje.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme" target="_blank">
+                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", zagrijavanje.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme))" />
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            }
+            else
+            {
+                <td class="smallFont">--</td>
+            }
             </tr>
             }
         </table>
@@ -81,6 +97,22 @@ else
                 <td>@vjezba.BrojSerija</td>
                 <td>@vjezba.Kilogrami</td>
                 <td>@vjezba.Odmor</td>
+            @if (vjezba.VjezbePopis.VjezbeSlike.Count > 0  )
+            {
+                <td>
+                    <div style="float: left; display: block;">
+                        <div>
+                            <a href="~/Content/ZagrijavanjeSlike/@vjezba.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme" target="_blank">
+                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", vjezba.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme))" />
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            }
+            else
+            {
+                <td class="smallFont">--</td>
+            }
             </tr>
             }
             @if (item.BrojKrugova != null && !string.IsNullOrEmpty(item.BrojKrugova))
@@ -116,13 +148,29 @@ else
         <table class="responstable">
             <tr><td><p class="bigFont">Istezanje</p></td></tr>
             <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Vrijeme izdrzaja</td>
-                <td style="border-bottom:solid">Vrijeme istezanja</td>
+                <td style="border-bottom:solid">Vrsta istezanja</td>
             @foreach (var istezanje in Model.ListaIstezanja)
             {
             <tr class="smallFont">
                 <td>@istezanje.Naziv</td>
                 <td>@istezanje.VrijemeIzdrzaja</td>
                 <td>@istezanje.VrstaIstezanja</td>
+                @if (istezanje.IstezanjePopis.IstezanjeSlike.Count > 0  )
+            {
+                <td>
+                    <div style="float: left; display: block;">
+                        <div>
+                            <a href="~/Content/ZagrijavanjeSlike/@istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme" target="_blank">
+                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme))" />
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            }
+            else
+            {
+                <td class="smallFont">--</td>
+            }
             </tr>
             }
         </table>

@@ -25,7 +25,7 @@
             </div>            
 
             <div>
-                <div class="marginText">@Html.Label("Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
+                <div class="marginText">@Html.Label("Opis testa - Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
                 @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" })
                 @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti, String.Empty, new { @class = "error" })
             </div>
@@ -37,7 +37,7 @@
             </div>
 
             <div>
-                <div class="marginText">@Html.Label("Motoričke sposobnosti **", new { @class = "smallFont" })</div>
+                <div class="marginText">@Html.Label("Opis testa - Motoričke sposobnosti **", new { @class = "smallFont" })</div>
                 @Html.TextAreaFor(model => model.MotorickeSposobnosti, new { rows = "10", cols = "40" })
                 @Html.ValidationMessageFor(model => model.MotorickeSposobnosti, String.Empty, new { @class = "error" })
             </div>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="marginText">
-                @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                @Html.Label("Dodaj datoteku", new { @class = "smallFont" })
                 <div>
                     <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
                 </div>

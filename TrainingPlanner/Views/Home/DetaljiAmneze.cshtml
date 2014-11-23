@@ -1,4 +1,5 @@
-﻿@using TrainingPlanner.Models
+﻿@using TrainingPlanner.Helpers
+@using TrainingPlanner.Models
 @using TrainingPlanner
 @model Amneza
 
@@ -32,11 +33,18 @@
     @if (Model.AmnezaSlike.Count > 0)
     {
         <div id="inputAreaImages" style="float: left;">
-            <h2 style="padding-left:15px" class="green">Slike amneze</h2>
+            <h2 style="padding-left:15px" class="green">Amneza datoteke</h2>
             @foreach (var item in Model.AmnezaSlike)
             {
                 <div style="float: left; display: block; clear:right;" class="marginHeadline">
-                    <div><a href="~/Content/AnezaSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/AmnezaSlike/{0}", item.SlikaIme))" /></a></div>
+                   @if(MIMEFileTypeDetector.GetMIMEType(item.SlikaIme) == "image/jpeg")
+                    {
+                        <div><a href="~/Content/AmnezaSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/AmnezaSlike/{0}", item.SlikaIme))" /></a></div>
+                    }
+                    else
+                    {
+                       <div><a href="~/Content/AmnezaSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content("~/Content/Slike/texticon.jpg")" /></a></div> 
+                    }
                 </div>
             }
         </div>

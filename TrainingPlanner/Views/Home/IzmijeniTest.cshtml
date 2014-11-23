@@ -1,4 +1,5 @@
-﻿@model TrainingPlanner.Test
+﻿@using TrainingPlanner.Helpers
+@model TrainingPlanner.Test
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,7 +28,7 @@
         </div>
 
         <div>
-            <div class="marginText">@Html.Label("Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
+            <div class="marginText">@Html.Label("Opis testa - Funkcionalne sposobnosti *", new { @class = "smallFont" })</div>
             @Html.TextAreaFor(model => model.FunkcionalneSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.FunkcionalneSposobnosti, String.Empty, new { @class = "error" })
         </div>
@@ -39,7 +40,7 @@
         </div>
 
         <div>
-            <div class="marginText">@Html.Label("Motoričke sposobnosti **", new { @class = "smallFont" })</div>
+            <div class="marginText">@Html.Label("Opis testa - Motoričke sposobnosti **", new { @class = "smallFont" })</div>
             @Html.TextAreaFor(model => model.MotorickeSposobnosti, new { rows = "10", cols = "40" })
             @Html.ValidationMessageFor(model => model.MotorickeSposobnosti, String.Empty, new { @class = "error" })
         </div>
@@ -53,7 +54,7 @@
         @if (Model.Slika.Count == 0)
         {
             <div class="marginText">
-                @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                @Html.Label("Dodaj datoteku", new { @class = "smallFont" })
                 <div>
                     <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
                 </div>
@@ -74,12 +75,20 @@
                 @foreach (var item in Model.Slika)
                 {
                     <div style="float: left; display: block; clear: right;" class="marginHeadline">
-                        <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></div>
-                        @Html.ActionLink("Izbriši sliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                         @if(MIMEFileTypeDetector.GetMIMEType(item.SlikaIme) == "image/jpeg")
+                                {
+                                    <div><a href="~/Content/Slike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></a></div>
+                                    @Html.ActionLink("Izbriši sliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                                }
+                            else
+                                {
+                                   <div><a href="~/Content/Slike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content("~/Content/Slike/texticon.jpg")" /></a></div> 
+                                   @Html.ActionLink("Izbriši datoteku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                                }                       
                     </div>
                 }
                 <div class="marginText" style="clear: both;">
-                    @Html.Label("Dodaj sliku", new { @class = "smallFont" })
+                    @Html.Label("Dodaj datoteku", new { @class = "smallFont" })
                     <div>
                         <input type="file" name="slike" value="" multiple="multiple" class="marginInputTop" />
                     </div>

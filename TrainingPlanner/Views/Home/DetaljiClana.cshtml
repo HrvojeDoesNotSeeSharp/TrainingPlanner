@@ -72,6 +72,22 @@
             <div class="marginText">@Html.Label("Popis testova", new { @class = "smallFont" })</div>
             <text>Nema testova</text> <br />
         }
+
+        @if (Model.ListAntropometrija.Count != 0)
+        {
+            <div class="marginText">@Html.Label("Popis antropometrija", new { @class = "smallFont" })</div>
+
+            foreach (Antropometrija a in Model.ListAntropometrija)
+            {
+                @Html.ActionLink(@a.Ime, "DetaljiAntropometrije", new { id = @a.AntropometrijaId }, new { @class = "marginHeadlineTop marginTextBottom", @style = "color:blue; text-decoration:underline;" })<br />
+            }
+
+        }
+        else
+        {
+            <div class="marginText">@Html.Label("Popis antropometrija", new { @class = "smallFont" })</div>
+            <text>Nema antropometrija</text> <br />
+        }
         @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
     @if (Model.Clan.ClanSlike.Count > 0)

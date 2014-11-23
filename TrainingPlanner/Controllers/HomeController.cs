@@ -662,7 +662,11 @@ namespace TrainingPlanner.Controllers
                 where x.ClanId == id
                 select x;
 
-            var ctm = new ClanTestModel {Clan = c, ListaTest = queryTest.ToList()};
+            var queryAntropometrija = from x in _context.Antropometrija
+                            where x.ClanClanId == id
+                            select x;
+
+            var ctm = new ClanTestModel { Clan = c, ListaTest = queryTest.ToList(), ListAntropometrija = queryAntropometrija.ToList()};
 
             return View(ctm);
         }
