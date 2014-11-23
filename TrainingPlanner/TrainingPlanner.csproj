@@ -399,6 +399,16 @@
     <Content Include="Views\Home\DetaljiAmneze.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Home\DodajFunkcionalniRezultat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniFunkcionalniRezultat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajMotorickiRezultat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniMotorickiRezultat.cshtml" />
     <Content Include="Views\Home\AerobneVjezbePopis.cshtml" />
   </ItemGroup>
   <ItemGroup>

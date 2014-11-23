@@ -1,0 +1,37 @@
+﻿@model TrainingPlanner.FunkcionalniRezultatiTest
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    @using (Html.BeginForm("IzmijeniFunkcionalniRezultat", "Home", FormMethod.Post))
+    {
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.FunkcionalniRezultatiTestId)
+        @Html.HiddenFor(x => x.TestId)
+
+        <div id="inputArea" style="float: left;">
+            <h2 class="green">Izmjeni Funkcionalne rezultate</h2>
+
+            <div>
+                <div class="marginInputBottom">@Html.Label("Datum", new { @class = "smallFont" })</div>
+                @Html.TextBoxFor(model => model.Datum, "{0:dd/MM/yyyy}")
+                @Html.ValidationMessageFor(model => model.Datum, String.Empty, new { @class = "error" })
+            </div>
+
+            <div>
+                <div class="marginText">@Html.Label("Rezultat", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.Rezultat)
+                @Html.ValidationMessageFor(model => model.Rezultat, String.Empty, new { @class = "error" })
+            </div>
+
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Spremi izmjene" class="button_example" />
+            </div>
+
+            @Html.ActionLink("Natrag na ostale rezultate", "IzmijeniTest", new { id = Model.TestId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
+    }
+</div>
