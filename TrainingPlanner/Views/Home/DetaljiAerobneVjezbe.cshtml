@@ -1,0 +1,55 @@
+﻿@model TrainingPlanner.AerobneVjezbePopis
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sidebar"></div>
+<div id=@(Model.AerobneVjezbeSlike.Count > 0 ? "contentImg" : "content")>
+    <div id=@(Model.AerobneVjezbeSlike.Count > 0 ? "inputAreaImgs" : "inputArea") style="float: left;">
+        <h2 class="green">Detalji aerobne vježbe</h2>
+
+        <div>
+            <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+            @Html.DisplayFor(model => model.Naziv)
+        </div>
+
+        <div class="marginText maxWidth">
+            <div class="marginInputBottom">@Html.Label("Info", new { @class = "smallFont marginInputBottom" })</div>
+            @if (Model.Info == null)
+            {
+                <text>--</text>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Info)
+            }
+        </div>
+
+        @if (ViewData["trening"] != null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajTrening", "Home", new { id = (int)ViewData["treningId"], DodajVjezbu = 1 })#@ViewData["counter"]@ViewData["id"]">Natrag na trening</a>
+        }
+        @if (ViewData["izmijeni"] != null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] })#@ViewData["counter"]@ViewData["id"]">Natrag na trening</a>
+        }
+        @if (ViewData["trening"] == null && ViewData["izmijeni"] == null)
+        {
+            @Html.ActionLink("Popis aerobnih vježbi", "AerobneVjezbePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        }
+    </div>
+
+    @if (Model.AerobneVjezbeSlike.Count > 0)
+    { 
+        <div id="inputAreaImages" style="float: left;" class="imageframe">
+            <h2 style="padding-left:15px" class="green">Slike aerobnih vježbi</h2>
+            @foreach (var item in Model.AerobneVjezbeSlike)
+            {
+                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                    <div><a href="~/Content/VjezbeSlike/@item.AerobnaVjezbaSlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.AerobnaVjezbaSlikaIme))" /></a></div>
+                </div>
+            }
+        </div>
+    }
+</div>

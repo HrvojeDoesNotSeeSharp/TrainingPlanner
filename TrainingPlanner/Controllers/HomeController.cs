@@ -276,6 +276,28 @@ namespace TrainingPlanner.Controllers
             return RedirectToAction("IzmijeniAerobnuVjezbu", "Home", avjp);
         }
 
+        public ActionResult DetaljiAerobneVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
+        {
+            var avjp = _context.AerobneVjezbePopis.Find(id);
+
+            if (izmijeni == 1)
+            {
+                ViewData["izmijeni"] = izmijeni;
+            }
+            if (trening == 1)
+            {
+                ViewData["trening"] = trening;
+            }
+            if (treningId > 0)
+            {
+                ViewData["treningId"] = treningId;
+            }
+
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
+            return View(avjp);
+        }
+
         [HttpGet]
         public ActionResult AnaerobneVjezbePopis()
         {
@@ -362,6 +384,160 @@ namespace TrainingPlanner.Controllers
             return RedirectToAction("IzmijeniAnaerobnuVjezbu", "Home", avjp);
         }
 
+        public ActionResult DetaljiAnaerobneVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
+        {
+            var avjp = _context.AnaerobneVjezbePopis.Find(id);
+
+            if (izmijeni == 1)
+            {
+                ViewData["izmijeni"] = izmijeni;
+            }
+            if (trening == 1)
+            {
+                ViewData["trening"] = trening;
+            }
+            if (treningId > 0)
+            {
+                ViewData["treningId"] = treningId;
+            }
+
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
+            return View(avjp);
+        }
+
+        public ActionResult IzbrisiAerobnuVjezbu(int id = 0)
+        {
+            var vjp = _context.AerobneVjezbePopis.Find(id);
+
+            //provjeri da li je ova vjezba ukljucena u neki trening i vrati id clana
+            //var vjezbe = from x in _context.Vjezba
+                         //join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
+                         //where v.VjezbeId == id
+                        // select x.VjezbePopisVjezbeId;
+
+            //var sekcije = from s in _context.SekcijaVjezbi
+             //             join v in _context.Vjezba on s.SekcijaId equals v.SekcijaId
+             //             where v.VjezbePopisVjezbeId == vjezbe.FirstOrDefault()
+             //             group s by s.SekcijaId into grp
+             //             select grp.Key;
+
+            //List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
+            //IQueryable<Clan> provjeriTrening;
+            //foreach (var s in sekcije.ToList())
+            //{
+            //    provjeriTrening = from t in _context.Trening
+            //                      join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
+            //                      where se.SekcijaId == s
+            //                      group t by t.Clan into grp
+            //                      select grp.Key;
+
+            //    if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
+            //    {
+            //        provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
+            //    }
+            //}
+
+            //List<String> clanovi = new List<string>();
+
+            //foreach (Clan c in provjeriTreningupdejtanalista)
+            //{
+            //    clanovi.Add(c.Ime + " " + c.Prezime + ", ");
+            //}
+            //iduca linija je provjera koja ne brise vjezbe ako postoji trening sa tom vjezbom
+            //if (clanovi.Count > 0)
+            //{
+            //    string joined = String.Concat(clanovi.ToArray());
+            //    return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste vjezbu:" + joined + "');"
+            //        + "window.location.href='../VjezbePopis';</script>");
+            //}
+            //else
+            //{
+                if (vjp.AerobneVjezbeSlike.Count > 0)
+                {
+                    var query = from x in _context.AerobneVjezbePopis
+                                join i in _context.AerobneVjezbeSlike on x.AerobnaVjezbaId equals i.AerobneVjezbePopisAerobnaVjezbaId
+                                where x.AerobnaVjezbaId == id
+                                select i;
+
+                    foreach (var a in query.ToList())
+                    {
+                        _context.AerobneVjezbeSlike.Remove(a);
+                    }
+                }
+
+                _context.AerobneVjezbePopis.Remove(vjp);
+                _context.SaveChanges();
+                return RedirectToAction("AerobneVjezbePopis", "Home");
+            //}
+        }
+
+        public ActionResult IzbrisiAnaerobnuVjezbu(int id = 0)
+        {
+            var vjp = _context.AnaerobneVjezbePopis.Find(id);
+
+            //provjeri da li je ova vjezba ukljucena u neki trening i vrati id clana
+            //var vjezbe = from x in _context.Vjezba
+            //join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
+            //where v.VjezbeId == id
+            // select x.VjezbePopisVjezbeId;
+
+            //var sekcije = from s in _context.SekcijaVjezbi
+            //             join v in _context.Vjezba on s.SekcijaId equals v.SekcijaId
+            //             where v.VjezbePopisVjezbeId == vjezbe.FirstOrDefault()
+            //             group s by s.SekcijaId into grp
+            //             select grp.Key;
+
+            //List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
+            //IQueryable<Clan> provjeriTrening;
+            //foreach (var s in sekcije.ToList())
+            //{
+            //    provjeriTrening = from t in _context.Trening
+            //                      join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
+            //                      where se.SekcijaId == s
+            //                      group t by t.Clan into grp
+            //                      select grp.Key;
+
+            //    if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
+            //    {
+            //        provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
+            //    }
+            //}
+
+            //List<String> clanovi = new List<string>();
+
+            //foreach (Clan c in provjeriTreningupdejtanalista)
+            //{
+            //    clanovi.Add(c.Ime + " " + c.Prezime + ", ");
+            //}
+            //iduca linija je provjera koja ne brise vjezbe ako postoji trening sa tom vjezbom
+            //if (clanovi.Count > 0)
+            //{
+            //    string joined = String.Concat(clanovi.ToArray());
+            //    return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste vjezbu:" + joined + "');"
+            //        + "window.location.href='../VjezbePopis';</script>");
+            //}
+            //else
+            //{
+            if (vjp.AnaerobneVjezbeSlike.Count > 0)
+            {
+                var query = from x in _context.AnaerobneVjezbePopis
+                            join i in _context.AnaerobneVjezbeSlike on x.AnaerobnaVjezbaId equals i.AnaerobneVjezbePopisAnaerobnaVjezbaId
+                            where x.AnaerobnaVjezbaId == id
+                            select i;
+
+                foreach (var a in query.ToList())
+                {
+                    _context.AnaerobneVjezbeSlike.Remove(a);
+                }
+            }
+
+            _context.AnaerobneVjezbePopis.Remove(vjp);
+            _context.SaveChanges();
+            return RedirectToAction("AnaerobneVjezbePopis", "Home");
+            //}
+        }
+        
         public ActionResult IzbrisiVjezbu(int id = 0)
         {
             var vjp = _context.VjezbePopis.Find(id);
