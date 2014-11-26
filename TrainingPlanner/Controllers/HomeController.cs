@@ -928,6 +928,69 @@ namespace TrainingPlanner.Controllers
 
             return View("IzmijeniIstezanje", t);
         }
+
+        [HttpGet]
+        public ActionResult PredlosciIstezanjePopis()
+        {
+            var listaPredlozakaIstezanja = _context.IstezanjeTreningTemplate.ToList();
+            if (listaPredlozakaIstezanja.Count == 0)
+            {
+                listaPredlozakaIstezanja = new List<IstezanjeTreningTemplate> { new IstezanjeTreningTemplate { IstezanjeTreningTemplateId = 0, NazivPredloska = "" } };
+                return View(listaPredlozakaIstezanja);
+            }
+            return View(listaPredlozakaIstezanja);
+        }
+
+        public ActionResult IzbrisiPredlozakIstezanja(int id = 0)
+        {
+            var pi = _context.IstezanjeTreningTemplate.Find(id);
+            /*
+            //provjeri da li je ovo istezanje ukljuceno u neki trening i vrati id clana
+            var predlozakistezanja = from x in _context.Istezanje
+                            join i in _context.IstezanjePopis on x.IstezanjePopisIstezanjeId equals i.IstezanjeId
+                            where i.IstezanjeId == id
+                            select x.IstezanjePopisIstezanjeId;
+
+            var provjeriTrening = from t in _context.Trening
+                                  join z in _context.Istezanje on t.TreningId equals z.TreningId
+                                  where z.IstezanjePopisIstezanjeId == istezanja.FirstOrDefault()
+                                  group t by t.Clan into grp
+                                  select grp.Key;
+
+            List<String> clanovi = new List<string>();
+
+            foreach (Clan c in provjeriTrening.ToList())
+            {
+                clanovi.Add(c.Ime + " " + c.Prezime + ", ");
+            }
+            //iduca linija je provjera koja ne brise istezanje ako postoji trening sa tin istezanjem
+            if (clanovi.Count > 0)
+            {
+                string joined = String.Concat(clanovi.ToArray());
+                return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste istezanje:" + joined + "');"
+                    + "window.location.href='../IstezanjePopis';</script>");
+            }
+            else
+            {
+                if (ip.IstezanjeSlike.Count > 0)
+                {
+                    var query = from x in _context.IstezanjePopis
+                                join i in _context.IstezanjeSlike on x.IstezanjeId equals i.IstezanjePopisIstezanjeId
+                                where x.IstezanjeId == id
+                                select i;
+
+                    foreach (var a in query.ToList())
+                    {
+                        _context.IstezanjeSlike.Remove(a);
+                    }
+                }
+                */
+                _context.IstezanjeTreningTemplate.Remove(pi);
+                _context.SaveChanges();
+                return RedirectToAction("IstezanjePopis", "Home");
+            }
+        }
+
         #endregion Istezanje
 
         #region Clan
@@ -1031,7 +1094,39 @@ namespace TrainingPlanner.Controllers
                     {
                         _context.Slika.Remove(sl);
                     }
+                    foreach (FunkcionalniRezultatiTest fn in a.FunkcionalniRezultatiTest.ToList())
+                    {
+                        _context.FunkcionalniRezultatiTest.Remove(fn);
+                    }
+                    foreach (MotorickiRezultatiTest mt in a.MotorickiRezultatiTest.ToList())
+                    {
+                        _context.MotorickiRezultatiTest.Remove(mt);
+                    }
                     _context.Test.Remove(a);
+                }
+            }
+
+            var queryAntropometrija = from x in _context.Antropometrija
+                                      where x.ClanClanId == id
+                                      select x;
+
+            if (queryAntropometrija.FirstOrDefault() != null)
+            {
+                foreach (var ant in queryAntropometrija)
+                {
+                    _context.Antropometrija.Remove(ant);
+                }
+            }
+
+            var queryAmneza = from x in _context.Amneza
+                              where x.ClanClanId == id
+                              select x;
+
+            if (queryAmneza.FirstOrDefault() != null)
+            {
+                foreach (var amn in queryAmneza)
+                {
+                    _context.Amneza.Remove(amn);
                 }
             }
 
@@ -1246,7 +1341,91 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return View("IzmijeniTest", t);
-        }        
+        }
+
+        [HttpGet]
+        public ActionResult DodajFunkcionalniRezultat(int id = 0)
+        {
+            FunkcionalniRezultatiTest ft = new FunkcionalniRezultatiTest() { TestId = id };
+            return View(ft);
+        }
+
+        [HttpPost]
+        public ActionResult DodajFunkcionalniRezultat(FunkcionalniRezultatiTest ft)
+        {
+            _context.FunkcionalniRezultatiTest.Add(ft);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = ft.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniFunkcionalniRezultat(int id = 0)
+        {
+            var fn = _context.FunkcionalniRezultatiTest.Find(id);
+            return View(fn);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniFunkcionalniRezultat(FunkcionalniRezultatiTest fn)
+        {
+            _context.Entry(fn).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = fn.TestId });
+        }
+
+        public ActionResult IzbrisiFunkcionalniRezultat(int id)
+        {
+            var fn = _context.FunkcionalniRezultatiTest.Find(id);
+
+            _context.FunkcionalniRezultatiTest.Remove(fn);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = fn.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult DodajMotorickiRezultat(int id = 0)
+        {
+            MotorickiRezultatiTest mt = new MotorickiRezultatiTest() { TestId = id };
+            return View(mt);
+        }
+
+        [HttpPost]
+        public ActionResult DodajMotorickiRezultat(MotorickiRezultatiTest mt)
+        {
+            _context.MotorickiRezultatiTest.Add(mt);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = mt.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult IzmijeniMotorickiRezultat(int id = 0)
+        {
+            var mt = _context.MotorickiRezultatiTest.Find(id);
+            return View(mt);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniMotorickiRezultat(MotorickiRezultatiTest mt)
+        {
+            _context.Entry(mt).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = mt.TestId });
+        }
+
+        public ActionResult IzbrisiMotorickiRezultat(int id)
+        {
+            var mt = _context.MotorickiRezultatiTest.Find(id);
+
+            _context.MotorickiRezultatiTest.Remove(mt);
+            _context.SaveChanges();
+
+            return RedirectToAction("IzmijeniTest", new { id = mt.TestId });
+        }
         #endregion Test
 
         #region Amneza

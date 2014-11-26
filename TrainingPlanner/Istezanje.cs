@@ -21,8 +21,10 @@ namespace TrainingPlanner
         public string VrijemeIzdrzaja { get; set; }
         public string VrstaIstezanja { get; set; }
         public int IstezanjePopisIstezanjeId { get; set; }
+        public int IstezanjeTreningTemplateIstezanjeTreningTemplateId { get; set; }
     
         public virtual Trening Trening { get; set; }
         public virtual IstezanjePopis IstezanjePopis { get; set; }
+        public virtual IstezanjeTreningTemplate IstezanjeTreningTemplate { get; set; }
     }
 }
