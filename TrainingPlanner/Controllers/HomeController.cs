@@ -1512,6 +1512,14 @@ namespace TrainingPlanner.Controllers
                         {
                             _context.Vjezba.Remove(vj);
                         }
+                        foreach (AerobneVjezbe avj in a.AerobneVjezbe.ToList())
+                        {
+                            _context.AerobneVjezbe.Remove(avj);
+                        }
+                        foreach (AnaerobneVjezbe nvj in a.AnaerobneVjezbe.ToList())
+                        {
+                            _context.AnaerobneVjezbe.Remove(nvj);
+                        }
                         _context.SekcijaVjezbi.Remove(a);
                     }
 
@@ -1583,6 +1591,14 @@ namespace TrainingPlanner.Controllers
                     foreach (Vjezba vj in a.Vjezba.ToList())
                     {
                         _context.Vjezba.Remove(vj);
+                    }
+                    foreach (AerobneVjezbe avj in a.AerobneVjezbe.ToList())
+                    {
+                        _context.AerobneVjezbe.Remove(avj);
+                    }
+                    foreach (AnaerobneVjezbe nvj in a.AnaerobneVjezbe.ToList())
+                    {
+                        _context.AnaerobneVjezbe.Remove(nvj);
                     }
                     _context.SekcijaVjezbi.Remove(a);
                 }
@@ -1809,6 +1825,7 @@ namespace TrainingPlanner.Controllers
                              select x;
 
                 var c = query1.Single();
+
                 trm.ClanIme = c.Ime;
                 trm.ClanPrezime = c.Prezime;
                 trm.ClanId = c.ClanId;
@@ -1964,6 +1981,7 @@ namespace TrainingPlanner.Controllers
                 SekcijaId = id,
                 Izmijeni = izmijeni
             };
+
             ViewData["izmijeni"] = izmijeni;
             ViewData["id1"] = id1;
             ViewData["counter"] = counter;
@@ -1988,30 +2006,236 @@ namespace TrainingPlanner.Controllers
             if (vjp.Slika != null)
             {
                 vj.Slika = vjp.Slika;
-            }
+            }           
 
             _context.Vjezba.Add(vj);
             _context.SaveChanges();
+            var idVjezba = vj.VjezbaId + "V,";
             var sekcija = _context.SekcijaVjezbi.Find(id);
+
+            if (sekcija.PopisVjezbi != null)
+            {
+                sekcija.PopisVjezbi = sekcija.PopisVjezbi.ToString() + idVjezba.ToString();
+            }
+            else
+            {
+                sekcija.PopisVjezbi = idVjezba.ToString();
+            }
+            _context.Entry(sekcija).State = EntityState.Modified;
+            _context.SaveChanges();
+            
             var trening = _context.Trening.Find(sekcija.TreningId);
             id = trening.TreningId;
 
             ViewData["izmijeni"] = vjpIzmijeni;
             ViewData["counter"] = counter;
-            ViewData["id"] = "sek";
+            ViewData["id"] = "sek";            
+
             return vjpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new { id })
                 : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
-        public ActionResult IzbrisiVjezbuTrening(int id = 0, int izmijeni = 0)
+        public ActionResult DodajAerobnuVjezbuTrening(int id, string id1, int izmijeni = 0, int counter = 0)
+        {
+            var vj = new AerobneVjezbePopisLista
+            {
+                AerobneVjezbePopis = _context.AerobneVjezbePopis.ToList(),
+                SekcijaId = id,
+                Izmijeni = izmijeni
+            };
+
+            ViewData["izmijeni"] = izmijeni;
+            ViewData["id1"] = id1;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
+            return View(vj);
+        }
+
+        [HttpPost]
+        public ActionResult DodajAerobnuVjezbuTrening(int avjpId = 0, int id = 0, int avjpIzmijeni = 0, int counter = 0)
+        {
+            var query = from x in _context.AerobneVjezbePopis
+                        where x.AerobnaVjezbaId == avjpId
+                        select x;
+
+            var avjp = query.Single();
+
+            var avj = new AerobneVjezbe { Naziv = avjp.Naziv, SekcijaVjezbiSekcijaId = id, AerobneVjezbePopisAerobnaVjezbaId = avjpId };
+            if (avjp.Info != null)
+            {
+                avj.Info = avjp.Info;
+            }
+            if (avjp.Slika != null)
+            {
+                avj.Slika = avjp.Slika;
+            }
+            
+            _context.AerobneVjezbe.Add(avj);
+            _context.SaveChanges();
+            var idVjezba = avj.AerobnaVjezbaId + "A,";
+            var sekcija = _context.SekcijaVjezbi.Find(id);
+
+            if (sekcija.PopisVjezbi != null)
+            {
+                sekcija.PopisVjezbi = sekcija.PopisVjezbi.ToString() + idVjezba.ToString();
+            }
+            else
+            {
+                sekcija.PopisVjezbi = idVjezba.ToString();
+            }
+            _context.Entry(sekcija).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            var trening = _context.Trening.Find(sekcija.TreningId);
+            id = trening.TreningId;
+
+            ViewData["izmijeni"] = avjpIzmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
+            return avjpIzmijeni != 0
+                ? RedirectToAction("IzmijeniTrening", new { id })
+                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpGet]
+        public ActionResult DodajAnaerobnuVjezbuTrening(int id, string id1, int izmijeni = 0, int counter = 0)
+        {
+            var vj = new AnaerobneVjezbePopisLista
+            {
+                AnaerobneVjezbePopis = _context.AnaerobneVjezbePopis.ToList(),
+                SekcijaId = id,
+                Izmijeni = izmijeni
+            };
+
+            ViewData["izmijeni"] = izmijeni;
+            ViewData["id1"] = id1;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
+            return View(vj);
+        }
+
+        [HttpPost]
+        public ActionResult DodajAnaerobnuVjezbuTrening(int avjpId = 0, int id = 0, int avjpIzmijeni = 0, int counter = 0)
+        {
+            var query = from x in _context.AnaerobneVjezbePopis
+                        where x.AnaerobnaVjezbaId == avjpId
+                        select x;
+
+            var avjp = query.Single();
+
+            var avj = new AnaerobneVjezbe { Naziv = avjp.Naziv, SekcijaVjezbiSekcijaId = id, AnaerobneVjezbePopisAnaerobnaVjezbaId = avjpId };
+            if (avjp.Info != null)
+            {
+                avj.Info = avjp.Info;
+            }
+            if (avjp.Slika != null)
+            {
+                avj.Slika = avjp.Slika;
+            }
+            
+            _context.AnaerobneVjezbe.Add(avj);
+            _context.SaveChanges();
+            var idVjezba = avj.AnaerobnaVjezbaId + "N,";
+            var sekcija = _context.SekcijaVjezbi.Find(id);
+
+            if (sekcija.PopisVjezbi != null)
+            {
+                sekcija.PopisVjezbi = sekcija.PopisVjezbi.ToString() + idVjezba.ToString();
+            }
+            else
+            {
+                sekcija.PopisVjezbi = idVjezba.ToString();
+            }
+            _context.Entry(sekcija).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            var trening = _context.Trening.Find(sekcija.TreningId);
+            id = trening.TreningId;
+
+            ViewData["izmijeni"] = avjpIzmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";
+            return avjpIzmijeni != 0
+                ? RedirectToAction("IzmijeniTrening", new { id })
+                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpGet]
+        public ActionResult IzbrisiVjezbuTrening(int id = 0, int index = 0, int izmijeni = 0)
         {
             var vj = _context.Vjezba.Find(id);
             var sec = _context.SekcijaVjezbi.Find(vj.SekcijaId);
             id = sec.TreningId;
 
+            var vjezbeIds = sec.PopisVjezbi.ToString();
+            List<string> vjezbeList = new List<string>();
+            foreach (string vjezbaId in vjezbeIds.Split(','))
+            {
+                vjezbeList.Add(vjezbaId);
+            }
+            vjezbeList.RemoveAt(index);
+            string novaListaVjezbi = string.Join(",", vjezbeList.ToArray());
+            sec.PopisVjezbi = novaListaVjezbi;
+            _context.Entry(sec).State = EntityState.Modified;
+            _context.SaveChanges();
+
             _context.Vjezba.Remove(vj);
+            _context.SaveChanges();
+
+            return izmijeni != 0
+                ? RedirectToAction("IzmijeniTrening", new { id })
+                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpGet]
+        public ActionResult IzbrisiAerobnuVjezbuTrening(int id = 0, int index = 0, int izmijeni = 0)
+        {
+            var vj = _context.AerobneVjezbe.Find(id);
+            var sec = _context.SekcijaVjezbi.Find(vj.SekcijaVjezbiSekcijaId);
+            id = sec.TreningId;
+
+            var vjezbeIds = sec.PopisVjezbi.ToString();
+            List<string> vjezbeList = new List<string>();
+            foreach (string vjezbaId in vjezbeIds.Split(','))
+            {
+                vjezbeList.Add(vjezbaId);
+            }
+            vjezbeList.RemoveAt(index);
+            string novaListaVjezbi = string.Join(",", vjezbeList.ToArray());
+            sec.PopisVjezbi = novaListaVjezbi;
+            _context.Entry(sec).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            _context.AerobneVjezbe.Remove(vj);
+            _context.SaveChanges();
+
+            return izmijeni != 0
+                ? RedirectToAction("IzmijeniTrening", new { id })
+                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpGet]
+        public ActionResult IzbrisiAnaerobnuVjezbuTrening(int id = 0, int index = 0, int izmijeni = 0)
+        {
+            var vj = _context.AnaerobneVjezbe.Find(id);
+            var sec = _context.SekcijaVjezbi.Find(vj.SekcijaVjezbiSekcijaId);
+            id = sec.TreningId;
+
+            var vjezbeIds = sec.PopisVjezbi.ToString();
+            List<string> vjezbeList = new List<string>();
+            foreach (string vjezbaId in vjezbeIds.Split(','))
+            {
+                vjezbeList.Add(vjezbaId);
+            }
+            vjezbeList.RemoveAt(index);
+            string novaListaVjezbi = string.Join(",", vjezbeList.ToArray());
+            sec.PopisVjezbi = novaListaVjezbi;
+            _context.Entry(sec).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            _context.AnaerobneVjezbe.Remove(vj);
             _context.SaveChanges();
 
             return izmijeni != 0
@@ -2032,6 +2256,51 @@ namespace TrainingPlanner.Controllers
             vj.BrojSerija = brojSerija;
             vj.Kilogrami = tezina;
             vj.Odmor = odmor;
+
+            _context.Entry(vj).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return izmijeni != 0
+               ? RedirectToAction("IzmijeniTrening", new { id })
+               : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpPost]
+        public ActionResult SpremiAerobnuVjezbuInfo(string Puls, string Tempo = null, string Trajanje = null,
+            string ANapomena = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
+        {
+            var query = from x in _context.AerobneVjezbe
+                        where x.AerobnaVjezbaId == vjezbaId
+                        select x;
+
+            var vj = query.Single();
+            vj.Puls = Puls;
+            vj.Tempo = Tempo;
+            vj.Trajanje = Trajanje;
+            vj.Napomena = ANapomena;
+
+            _context.Entry(vj).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return izmijeni != 0
+               ? RedirectToAction("IzmijeniTrening", new { id })
+               : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        public ActionResult SpremiAnaerobnuVjezbuInfo(string Puls = null, string Tempo = null, string BrojSprintova = null,
+            string TrajanjeSprinta = null, string Odmor = null, string NNapomena = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
+        {
+            var query = from x in _context.AnaerobneVjezbe
+                        where x.AnaerobnaVjezbaId == vjezbaId
+                        select x;
+
+            var vj = query.Single();
+            vj.Puls = Puls;
+            vj.Tempo = Tempo;
+            vj.BrojSprintova = BrojSprintova;
+            vj.TrajanjeSprinta = TrajanjeSprinta;
+            vj.Odmor = Odmor;
+            vj.Napomena = NNapomena;
 
             _context.Entry(vj).State = EntityState.Modified;
             _context.SaveChanges();
@@ -2145,6 +2414,21 @@ namespace TrainingPlanner.Controllers
                 foreach (var a in sekcija.Vjezba.ToList())
                 {
                     _context.Vjezba.Remove(a);
+                }
+            }
+            if (sekcija.AerobneVjezbe != null)
+            {
+                foreach (var av in sekcija.AerobneVjezbe.ToList())
+                {
+                    _context.AerobneVjezbe.Remove(av);
+                }
+            }
+
+            if (sekcija.AnaerobneVjezbe != null)
+            {
+                foreach (var nv in sekcija.AnaerobneVjezbe.ToList())
+                {
+                    _context.AnaerobneVjezbe.Remove(nv);
                 }
             }
 

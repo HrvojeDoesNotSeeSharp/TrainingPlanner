@@ -161,6 +161,7 @@
     <Compile Include="IstezanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="Models\AmnezaMetadata.cs" />
     <Compile Include="Models\AntropometrijaList.cs" />
     <Compile Include="Models\AntropometrijaMetadata.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Models\TestMetadata.cs" />
     <Compile Include="Models\TreningDataModel.cs" />
     <Compile Include="Models\TreningDataModelMetadata.cs" />
+    <Compile Include="Models\AerobneVjezbePopisLista.cs" />
     <Compile Include="Models\VjezbePopisLista.cs" />
     <Compile Include="Models\VjezbePopisMetadata.cs" />
     <Compile Include="Models\ZagrijavanjePopisMetadata.cs" />
@@ -431,6 +433,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DetaljiAnaerobneVjezbe.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajAerobnuVjezbuTrening.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajAnaerobnuVjezbuTrening.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

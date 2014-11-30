@@ -23,6 +23,7 @@ namespace TrainingPlanner
         public int AnaerobnaVjezbaId { get; set; }
         public string Naziv { get; set; }
         public string Info { get; set; }
+        public byte[] Slika { get; set; }
     
         public virtual ICollection<AnaerobneVjezbeSlike> AnaerobneVjezbeSlike { get; set; }
         public virtual ICollection<AnaerobneVjezbe> AnaerobneVjezbe { get; set; }

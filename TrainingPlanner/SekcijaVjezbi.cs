@@ -25,6 +25,7 @@ namespace TrainingPlanner
         public int TreningId { get; set; }
         public string BrojKrugova { get; set; }
         public string Odmor { get; set; }
+        public string PopisVjezbi { get; set; }
     
         public virtual Trening Trening { get; set; }
         public virtual ICollection<Vjezba> Vjezba { get; set; }

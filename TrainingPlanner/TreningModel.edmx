@@ -277,6 +277,7 @@
     <Property Name="TreningId" Type="int" Nullable="false" />
     <Property Name="BrojKrugova" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PopisVjezbi" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ClanSlike">
     <Key>
@@ -340,6 +341,7 @@
     <Property Name="AerobnaVjezbaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Naziv" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="AnaerobneVjezbePopis">
     <Key>
@@ -348,6 +350,7 @@
     <Property Name="AnaerobnaVjezbaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Naziv" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="AerobneVjezbeSlike">
     <Key>
@@ -377,6 +380,9 @@
     <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
     <Property Name="SekcijaVjezbiSekcijaId" Type="int" Nullable="false" />
     <Property Name="AerobneVjezbePopisAerobnaVjezbaId" Type="int" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="AnaerobneVjezbe">
     <Key>
@@ -391,6 +397,10 @@
     <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="int" Nullable="false" />
     <Property Name="SekcijaVjezbiSekcijaId" Type="int" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
+    <Property Name="TrajanjeSprinta" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -1097,6 +1107,7 @@
           <Property Name="Odmor" Type="String" Nullable="true" />
           <NavigationProperty Name="AerobneVjezbe" Relationship="TreningModel.SekcijaVjezbiAerobneVjezbe" FromRole="SekcijaVjezbi" ToRole="AerobneVjezbe" />
           <NavigationProperty Name="AnaerobneVjezbe" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="SekcijaVjezbi" ToRole="AnaerobneVjezbe" />
+          <Property Name="PopisVjezbi" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="TreningSekcijaVjezbi">
           <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
@@ -1301,6 +1312,7 @@
           <Property Name="Info" Type="String" Nullable="true" />
           <NavigationProperty Name="AerobneVjezbeSlike" Relationship="TreningModel.AerobneVjezbePopisAerobneVjezbeSlike" FromRole="AerobneVjezbePopis" ToRole="AerobneVjezbeSlike" />
           <NavigationProperty Name="AerobneVjezbe" Relationship="TreningModel.AerobneVjezbeAerobneVjezbePopis" FromRole="AerobneVjezbePopis" ToRole="AerobneVjezbe" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
         </EntityType>
         <EntityType Name="AnaerobneVjezbePopis">
           <Key>
@@ -1311,6 +1323,7 @@
           <Property Name="Info" Type="String" Nullable="true" />
           <NavigationProperty Name="AnaerobneVjezbeSlike" Relationship="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbeSlike" FromRole="AnaerobneVjezbePopis" ToRole="AnaerobneVjezbeSlike" />
           <NavigationProperty Name="AnaerobneVjezbe" Relationship="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe" FromRole="AnaerobneVjezbePopis" ToRole="AnaerobneVjezbe" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
         </EntityType>
         <EntityType Name="AerobneVjezbeSlike">
           <Key>
@@ -1368,6 +1381,9 @@
           <Property Name="SekcijaVjezbiSekcijaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AerobneVjezbePopis" Relationship="TreningModel.AerobneVjezbeAerobneVjezbePopis" FromRole="AerobneVjezbe" ToRole="AerobneVjezbePopis" />
           <Property Name="AerobneVjezbePopisAerobnaVjezbaId" Type="Int32" Nullable="false" />
+          <Property Name="Ime" Type="String" Nullable="true" />
+          <Property Name="Info" Type="String" Nullable="true" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
         </EntityType>
         <EntityType Name="AnaerobneVjezbe">
           <Key>
@@ -1384,6 +1400,10 @@
           <Property Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SekcijaVjezbi" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="AnaerobneVjezbe" ToRole="SekcijaVjezbi" />
           <Property Name="SekcijaVjezbiSekcijaId" Type="Int32" Nullable="false" />
+          <Property Name="Ime" Type="String" Nullable="true" />
+          <Property Name="Info" Type="String" Nullable="true" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
+          <Property Name="TrajanjeSprinta" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="SekcijaVjezbiAerobneVjezbe">
           <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="1" />
@@ -1595,6 +1615,7 @@
           <ScalarProperty Name="TreningId" ColumnName="TreningId" />
           <ScalarProperty Name="BrojKrugova" ColumnName="BrojKrugova" />
           <ScalarProperty Name="Odmor" ColumnName="Odmor" />
+          <ScalarProperty Name="PopisVjezbi" ColumnName="PopisVjezbi" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1665,6 +1686,7 @@
           <ScalarProperty Name="AerobnaVjezbaId" ColumnName="AerobnaVjezbaId" />
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1674,6 +1696,7 @@
           <ScalarProperty Name="AnaerobnaVjezbaId" ColumnName="AnaerobnaVjezbaId" />
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1706,6 +1729,9 @@
           <ScalarProperty Name="Napomena" ColumnName="Napomena" />
           <ScalarProperty Name="SekcijaVjezbiSekcijaId" ColumnName="SekcijaVjezbiSekcijaId" />
           <ScalarProperty Name="AerobneVjezbePopisAerobnaVjezbaId" ColumnName="AerobneVjezbePopisAerobnaVjezbaId" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1721,6 +1747,10 @@
           <ScalarProperty Name="Napomena" ColumnName="Napomena" />
           <ScalarProperty Name="AnaerobneVjezbePopisAnaerobnaVjezbaId" ColumnName="AnaerobneVjezbePopisAnaerobnaVjezbaId" />
           <ScalarProperty Name="SekcijaVjezbiSekcijaId" ColumnName="SekcijaVjezbiSekcijaId" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="TrajanjeSprinta" ColumnName="TrajanjeSprinta" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
