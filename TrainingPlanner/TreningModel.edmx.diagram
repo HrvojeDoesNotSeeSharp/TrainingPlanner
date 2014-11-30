@@ -55,6 +55,8 @@
         <AssociationConnector Association="TreningModel.AerobneVjezbeAerobneVjezbePopis" />
         <AssociationConnector Association="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe" />
         <AssociationConnector Association="TreningModel.AnaerobneVjezbeSekcijaVjezbi" />
+        <EntityTypeShape EntityType="TreningModel.IstezanjeTreningTemplate" Width="1.5" PointX="11.375" PointY="8.25" />
+        <AssociationConnector Association="TreningModel.IstezanjeTreningTemplateIstezanje" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
