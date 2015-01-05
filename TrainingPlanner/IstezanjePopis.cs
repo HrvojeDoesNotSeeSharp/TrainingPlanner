@@ -16,12 +16,14 @@ namespace TrainingPlanner
     using System.Collections.Generic;
 
     [MetadataType(typeof(IstezanjePopisMetadata))]
+    
     public partial class IstezanjePopis
     {
         public IstezanjePopis()
         {
             this.IstezanjeSlike = new HashSet<IstezanjeSlike>();
             this.Istezanje = new HashSet<Istezanje>();
+            this.IstezanjeTreningTemplate = new HashSet<IstezanjeTreningTemplate>();
         }
     
         public int IstezanjeId { get; set; }
@@ -30,5 +32,6 @@ namespace TrainingPlanner
     
         public virtual ICollection<IstezanjeSlike> IstezanjeSlike { get; set; }
         public virtual ICollection<Istezanje> Istezanje { get; set; }
+        public virtual ICollection<IstezanjeTreningTemplate> IstezanjeTreningTemplate { get; set; }
     }
 }

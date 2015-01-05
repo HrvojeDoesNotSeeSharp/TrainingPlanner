@@ -1,0 +1,62 @@
+﻿@using TrainingPlanner
+@model List<IstezanjePopis>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="contentImg">
+    <h2 class="green">Vježbe istezanja</h2>
+    <p>
+        <table class="responstableTrening">
+            @foreach (IstezanjePopis ip in Model)
+            {
+                if (ip.IstezanjeId == 0)
+                {
+                    <tr>
+                        <td class="smallFont">Trenutno nema vježbi istezanja.</td>
+                    </tr>
+                }
+                else
+                {
+                    using (Html.BeginForm("DodajIstezanjeUPredlozak", "Home", FormMethod.Post, new { id = ip.IstezanjeId, id1 = ViewData["TemplateId"] }))
+                    {
+                    <tr>
+                        <td class="smallFontGreen">@ip.Naziv</td>
+                        @if (ip.Info == null)
+                        {
+                            <td class="smallFont">--</td>
+                        }
+                        else
+                        {
+                            <td class="smallFontNotCentered">@ip.Info</td>
+                        }
+                        @if (ip.IstezanjeSlike.Count > 0)
+                        {
+                            <td>
+                                @foreach (var item in ip.IstezanjeSlike)
+                                {
+                                    <div style="float: left; display: block;">
+                                        <div>
+                                            <a href="~/Content/IstezanjeSlike/@item.IstezanjeSlikaIme" target="_blank">
+                                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", item.IstezanjeSlikaIme))" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallFont">--</td>
+                        }
+                        <td><input type="submit" value="Dodaj istezanje" class="button_example" /></td>
+                    </tr>
+                    }
+            }
+            }
+        </table>
+
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
+</div>

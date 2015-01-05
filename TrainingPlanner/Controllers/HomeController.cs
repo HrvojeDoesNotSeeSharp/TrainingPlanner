@@ -929,6 +929,10 @@ namespace TrainingPlanner.Controllers
             return View("IzmijeniIstezanje", t);
         }
 
+        #endregion Istezanje
+
+        #region IstezanjePredlozak
+
         [HttpGet]
         public ActionResult PredlosciIstezanjePopis()
         {
@@ -987,11 +991,103 @@ namespace TrainingPlanner.Controllers
                 */
                 _context.IstezanjeTreningTemplate.Remove(pi);
                 _context.SaveChanges();
-                return RedirectToAction("IstezanjePopis", "Home");
+                return RedirectToAction("PredlosciIstezanjePopis", "Home");
             }
+
+        [HttpGet]
+        public ActionResult DodajPredlozakIstezanja(int id = 0)
+        {
+            var predlozakModel = new IstezanjeTemplateListaIstezanjaModel();
+
+            if (id != 0)
+            {
+                var queryTemp = from x in _context.IstezanjeTreningTemplate
+                                where x.IstezanjeTreningTemplateId == id
+                                select x;
+
+                var temp = queryTemp.Single();
+
+                var queryIst = from t in _context.IstezanjeTreningTemplate
+                               from i in _context.IstezanjePopis
+                               where t.IstezanjeTreningTemplateId == id
+                               select i;
+
+                predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanja = queryIst.ToList() };
+            }
+            else
+            {
+                IstezanjeTreningTemplate ITT = new IstezanjeTreningTemplate()
+                {
+                    //NazivPredloska = " "
+                };
+                predlozakModel.ITT = ITT;
+
+                _context.IstezanjeTreningTemplate.Add(predlozakModel.ITT);
+                _context.SaveChanges();
+            }
+
+            return View(predlozakModel);
         }
 
-        #endregion Istezanje
+        [HttpPost]
+        public ActionResult DodajPredlozakIstezanja(IstezanjeTemplateListaIstezanjaModel predlozakModel)
+        {
+            
+            return View(predlozakModel);
+        }
+
+        [HttpGet]
+        public ActionResult DodajIstezanjeUPredlozak(int id = 0)
+        {
+            var listaIstezanja = _context.IstezanjePopis.ToList();
+            if (listaIstezanja.Count == 0)
+            {
+                listaIstezanja = new List<IstezanjePopis> { new IstezanjePopis { IstezanjeId = 0, Naziv = "", Info = "" } };
+                return View(listaIstezanja);
+            }
+
+            ViewData["TemplateId"] = id;
+
+            return View(listaIstezanja);
+        }
+
+        [HttpPost]
+        public ActionResult DodajIstezanjeUPredlozak(int id = 0, int id1 = 0)
+        {
+            var queryIst = from x in _context.IstezanjePopis
+                        where x.IstezanjeId == id
+                        select x;
+
+            var queryTemp = from x in _context.IstezanjeTreningTemplate
+                        where x.IstezanjeTreningTemplateId == id1
+                        select x;
+
+            var ist = queryIst.Single();
+
+            var temp = queryTemp.Single();
+
+            temp.IstezanjePopis.Add(ist);
+
+            _context.Entry(temp).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("DodajPredlozakIstezanja", new { id = id1 });
+        }
+
+        public ActionResult IzbrisiIstezanjeIzPredloska(int id = 0, int id1 = 0)
+        {
+            var temp = _context.IstezanjeTreningTemplate.Find(id1);
+            var ist = _context.IstezanjePopis.Find(id);
+
+            temp.IstezanjePopis.Remove(ist);
+
+            _context.Entry(temp).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("DodajPredlozakIstezanja", new { id = id1 });
+        }
+
+        #endregion IstezanjePredlozak
 
         #region Clan
         [HttpGet]

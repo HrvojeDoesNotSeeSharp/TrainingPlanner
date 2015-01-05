@@ -25,6 +25,5 @@ namespace TrainingPlanner
     
         public virtual Trening Trening { get; set; }
         public virtual IstezanjePopis IstezanjePopis { get; set; }
-        public virtual IstezanjeTreningTemplate IstezanjeTreningTemplate { get; set; }
     }
 }

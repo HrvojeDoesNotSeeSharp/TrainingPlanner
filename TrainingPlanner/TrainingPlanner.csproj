@@ -162,12 +162,17 @@
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
+    <Compile Include="IstezanjeTreningTemplate.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AmnezaMetadata.cs" />
     <Compile Include="Models\AntropometrijaList.cs" />
     <Compile Include="Models\AntropometrijaMetadata.cs" />
     <Compile Include="Models\ClanMetadata.cs" />
     <Compile Include="Models\ClanTestModel.cs" />
     <Compile Include="Models\IstezanjePopisMetadata.cs" />
+    <Compile Include="Models\IstezanjeTemplateListaIstezanjaModel.cs" />
+    <Compile Include="Models\IstezanjeTreningTemplateMetadata.cs" />
     <Compile Include="Models\IstezanjeZagrijavanjeLista.cs" />
     <Compile Include="Models\FunkcionalniRezultatiTestMetadata.cs" />
     <Compile Include="Models\MotorickiRezultatiTestMetadata.cs" />
@@ -439,6 +444,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DodajAnaerobnuVjezbuTrening.cshtml" />
+    <Content Include="Views\Home\PredlosciIstezanjePopis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajPredlozakIstezanja.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajIstezanjeUPredlozak.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,36 @@
+﻿@using TrainingPlanner
+@model List<IstezanjeTreningTemplate>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sidebar"></div>
+<div id="content">
+    <h2 class="green">Predlosci istezanja</h2>
+    <p>
+        <table class="responstable">
+            @foreach (var predlozak in Model)
+            {
+                if (predlozak.IstezanjeTreningTemplateId == 0)
+                {
+                    <tr>
+                        <td class="smallFont">Trenutno nema predlozaka.</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="smallFont">
+                        <td class="green">@predlozak.NazivPredloska</td>
+                        <td>@Html.ActionLink("Izmjeni", "IzmijeniPredlozakIstezanja", "Home", new { id = predlozak.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiPredlozakIstezanja", "Home", new { id = predlozak.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbriši", "IzbrisiPredlozakIstezanja", "Home", new { id = predlozak.IstezanjeTreningTemplateId }, new { @class = "button_example_small", onclick = "return confirm('Jeste li sigurni da zelite izbrisati predlozak?');" })</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        @Html.ActionLink("Dodaj predlozak", "DodajPredlozakIstezanja", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+    </p>
+</div>

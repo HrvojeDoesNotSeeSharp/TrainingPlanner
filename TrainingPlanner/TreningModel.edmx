@@ -33,6 +33,7 @@
     <EntitySet Name="AerobneVjezbe" EntityType="TreningModel.Store.AerobneVjezbe" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AnaerobneVjezbe" EntityType="TreningModel.Store.AnaerobneVjezbe" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IstezanjeTreningTemplate" EntityType="TreningModel.Store.IstezanjeTreningTemplate" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IstezanjeTreningTemplateIstezanjePopis" EntityType="TreningModel.Store.IstezanjeTreningTemplateIstezanjePopis" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
       <End Role="Trening" EntitySet="Trening" />
@@ -133,9 +134,13 @@
       <End Role="AnaerobneVjezbe" EntitySet="AnaerobneVjezbe" />
       <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
     </AssociationSet>
-    <AssociationSet Name="IstezanjeTreningTemplateIstezanje" Association="TreningModel.Store.IstezanjeTreningTemplateIstezanje">
+    <AssociationSet Name="FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate" Association="TreningModel.Store.FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate">
       <End Role="IstezanjeTreningTemplate" EntitySet="IstezanjeTreningTemplate" />
-      <End Role="Istezanje" EntitySet="Istezanje" />
+      <End Role="IstezanjeTreningTemplateIstezanjePopis" EntitySet="IstezanjeTreningTemplateIstezanjePopis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis" Association="TreningModel.Store.FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis">
+      <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
+      <End Role="IstezanjeTreningTemplateIstezanjePopis" EntitySet="IstezanjeTreningTemplateIstezanjePopis" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
@@ -414,6 +419,14 @@
     </Key>
     <Property Name="IstezanjeTreningTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NazivPredloska" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IstezanjeTreningTemplateIstezanjePopis">
+    <Key>
+      <PropertyRef Name="IstezanjeTreningTemplate_IstezanjeTreningTemplateId" />
+      <PropertyRef Name="IstezanjePopis_IstezanjeId" />
+    </Key>
+    <Property Name="IstezanjeTreningTemplate_IstezanjeTreningTemplateId" Type="int" Nullable="false" />
+    <Property Name="IstezanjePopis_IstezanjeId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ClanTrening">
     <End Role="Clan" Type="TreningModel.Store.Clan" Multiplicity="1" />
@@ -715,15 +728,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="IstezanjeTreningTemplateIstezanje">
+  <Association Name="FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate">
     <End Role="IstezanjeTreningTemplate" Type="TreningModel.Store.IstezanjeTreningTemplate" Multiplicity="1" />
-    <End Role="Istezanje" Type="TreningModel.Store.Istezanje" Multiplicity="*" />
+    <End Role="IstezanjeTreningTemplateIstezanjePopis" Type="TreningModel.Store.IstezanjeTreningTemplateIstezanjePopis" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="IstezanjeTreningTemplate">
         <PropertyRef Name="IstezanjeTreningTemplateId" />
       </Principal>
-      <Dependent Role="Istezanje">
-        <PropertyRef Name="IstezanjeTreningTemplateIstezanjeTreningTemplateId" />
+      <Dependent Role="IstezanjeTreningTemplateIstezanjePopis">
+        <PropertyRef Name="IstezanjeTreningTemplate_IstezanjeTreningTemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis">
+    <End Role="IstezanjeTreningTemplateIstezanjePopis" Type="TreningModel.Store.IstezanjeTreningTemplateIstezanjePopis" Multiplicity="*" />
+    <End Role="IstezanjePopis" Type="TreningModel.Store.IstezanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="IstezanjePopis">
+        <PropertyRef Name="IstezanjeId" />
+      </Principal>
+      <Dependent Role="IstezanjeTreningTemplateIstezanjePopis">
+        <PropertyRef Name="IstezanjePopis_IstezanjeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -859,9 +884,9 @@
             <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
           </AssociationSet>
           <EntitySet Name="IstezanjeTreningTemplate" EntityType="TreningModel.IstezanjeTreningTemplate" />
-          <AssociationSet Name="IstezanjeTreningTemplateIstezanje" Association="TreningModel.IstezanjeTreningTemplateIstezanje">
+          <AssociationSet Name="IstezanjeTreningTemplateIstezanjePopis" Association="TreningModel.IstezanjeTreningTemplateIstezanjePopis">
             <End Role="IstezanjeTreningTemplate" EntitySet="IstezanjeTreningTemplate" />
-            <End Role="Istezanje" EntitySet="Istezanje" />
+            <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clan">
@@ -936,6 +961,7 @@
           <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="IstezanjeSlike" Relationship="TreningModel.IstezanjeSlikeIstezanjePopis" FromRole="IstezanjePopis" ToRole="IstezanjeSlike" />
           <NavigationProperty Name="Istezanje" Relationship="TreningModel.IstezanjeIstezanjePopis" FromRole="IstezanjePopis" ToRole="Istezanje" />
+          <NavigationProperty Name="IstezanjeTreningTemplate" Relationship="TreningModel.IstezanjeTreningTemplateIstezanjePopis" FromRole="IstezanjePopis" ToRole="IstezanjeTreningTemplate" />
         </EntityType>
         <EntityType Name="VjezbePopis">
           <Key>
@@ -1004,7 +1030,6 @@
           <Property Type="String" Name="VrstaIstezanja" Nullable="true" />
           <NavigationProperty Name="IstezanjePopis" Relationship="TreningModel.IstezanjeIstezanjePopis" FromRole="Istezanje" ToRole="IstezanjePopis" />
           <Property Name="IstezanjePopisIstezanjeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="IstezanjeTreningTemplate" Relationship="TreningModel.IstezanjeTreningTemplateIstezanje" FromRole="Istezanje" ToRole="IstezanjeTreningTemplate" />
           <Property Type="Int32" Name="IstezanjeTreningTemplateIstezanjeTreningTemplateId" Nullable="false" />
         </EntityType>
         <Association Name="TreningZagrijavanje">
@@ -1491,19 +1516,11 @@
           </Key>
           <Property Type="Int32" Name="IstezanjeTreningTemplateId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="NazivPredloska" Nullable="false" />
-          <NavigationProperty Name="Istezanje" Relationship="TreningModel.IstezanjeTreningTemplateIstezanje" FromRole="IstezanjeTreningTemplate" ToRole="Istezanje" />
+          <NavigationProperty Name="IstezanjePopis" Relationship="TreningModel.IstezanjeTreningTemplateIstezanjePopis" FromRole="IstezanjeTreningTemplate" ToRole="IstezanjePopis" />
         </EntityType>
-        <Association Name="IstezanjeTreningTemplateIstezanje">
-          <End Type="TreningModel.IstezanjeTreningTemplate" Role="IstezanjeTreningTemplate" Multiplicity="1" />
-          <End Type="TreningModel.Istezanje" Role="Istezanje" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IstezanjeTreningTemplate">
-              <PropertyRef Name="IstezanjeTreningTemplateId" />
-            </Principal>
-            <Dependent Role="Istezanje">
-              <PropertyRef Name="IstezanjeTreningTemplateIstezanjeTreningTemplateId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="IstezanjeTreningTemplateIstezanjePopis">
+          <End Type="TreningModel.IstezanjeTreningTemplate" Role="IstezanjeTreningTemplate" Multiplicity="*" />
+          <End Type="TreningModel.IstezanjePopis" Role="IstezanjePopis" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1815,6 +1832,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="IstezanjeTreningTemplateIstezanjePopis" TypeName="TreningModel.IstezanjeTreningTemplateIstezanjePopis" StoreEntitySet="IstezanjeTreningTemplateIstezanjePopis">
+      <EndProperty Name="IstezanjeTreningTemplate">
+        <ScalarProperty Name="IstezanjeTreningTemplateId" ColumnName="IstezanjeTreningTemplate_IstezanjeTreningTemplateId" />
+      </EndProperty>
+      <EndProperty Name="IstezanjePopis">
+        <ScalarProperty Name="IstezanjeId" ColumnName="IstezanjePopis_IstezanjeId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

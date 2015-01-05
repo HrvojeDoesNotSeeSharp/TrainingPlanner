@@ -16,12 +16,12 @@ namespace TrainingPlanner
     {
         public IstezanjeTreningTemplate()
         {
-            this.Istezanje = new HashSet<Istezanje>();
+            this.IstezanjePopis = new HashSet<IstezanjePopis>();
         }
     
         public int IstezanjeTreningTemplateId { get; set; }
         public string NazivPredloska { get; set; }
     
-        public virtual ICollection<Istezanje> Istezanje { get; set; }
+        public virtual ICollection<IstezanjePopis> IstezanjePopis { get; set; }
     }
 }

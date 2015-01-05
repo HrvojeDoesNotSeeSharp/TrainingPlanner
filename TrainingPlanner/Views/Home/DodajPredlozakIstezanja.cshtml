@@ -1,0 +1,52 @@
+﻿@model TrainingPlanner.Models.IstezanjeTemplateListaIstezanjaModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    @using (Html.BeginForm("DodajPredlozakIstezanja", "Home", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+
+        <div id="inputArea">
+            <h2 class="green">Predlozak istezanja</h2>
+
+            <div>
+                <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+                @Html.EditorFor(model => model.ITT.NazivPredloska)
+                @Html.ValidationMessageFor(model => model.ITT.NazivPredloska, String.Empty, new { @class = "error" })
+            </div>
+            <table class="responstableTrening">         
+            @if (Model.ListaIstezanja == null)
+            {
+                <tr>
+                        <td class="smallFont">Prazan template.</td>
+                </tr>
+            }
+            else if (Model.ListaIstezanja.ToList().Count == 0)
+            {
+                <tr>
+                        <td class="smallFont">Prazan template.</td>
+                </tr>
+            }
+            else
+            {
+            foreach (var istezanje in Model.ListaIstezanja)
+            {
+                <tr class="smallFont">
+                        <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeIzPredloska", "Home", new { id = istezanje.IstezanjeId, id1 = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanje", "Home", new { id = istezanje.IstezanjeId }, new { @class = "button_example_small" })</td>
+                </tr>
+            }
+            }
+            </table>
+            @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeUPredlozak", "Home", new { id = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+                <!--new { id = Model.ITT.IstezanjeTreningTemplateId }-->
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Dodaj predlozak" class="button_example" />
+            </div>
+            @Html.ActionLink("Popis clanova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        </div>
+    }
+</div>
