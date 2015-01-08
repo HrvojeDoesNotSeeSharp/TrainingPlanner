@@ -1,0 +1,49 @@
+﻿@model TrainingPlanner.Models.IstezanjeTemplateListaIstezanjaModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+
+        @Html.ValidationSummary(true)
+
+            <h2 class="green">Predlozak istezanja</h2>
+            <div>
+                <div class="marginInputBottom">@Html.Label(Model.ITT.NazivPredloska, new { @class = "smallFont" })</div>
+            </div>
+            <table class="responstableTrening">         
+            @if (Model.ListaIstezanjeT == null)
+            {
+                <tr>
+                        <td class="smallFont">Prazan template.</td>
+                </tr>
+            }
+            else if (Model.ListaIstezanjeT.ToList().Count == 0)
+            {
+                <tr>
+                        <td class="smallFont">Prazan template.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var istezanje in Model.ListaIstezanjeT)
+            {
+                <tr>
+                        <td class="smallFontGreen">@istezanje.NazivT</td>
+                        @if (istezanje.InfoT == null)
+                        {
+                            <td class="smallFont">--</td>
+                        }
+                        else
+                        {
+                            <td class="smallFontNotCentered">@istezanje.InfoT</td>
+                        }
+                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, detaljiPredlozak = 1, templateId = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
+                    </tr>
+            }
+            }
+            </table>
+            @Html.ActionLink("Natrag na predloske", "PredlosciIstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+</div>
+

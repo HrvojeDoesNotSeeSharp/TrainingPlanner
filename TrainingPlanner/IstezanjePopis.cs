@@ -23,7 +23,7 @@ namespace TrainingPlanner
         {
             this.IstezanjeSlike = new HashSet<IstezanjeSlike>();
             this.Istezanje = new HashSet<Istezanje>();
-            this.IstezanjeTreningTemplate = new HashSet<IstezanjeTreningTemplate>();
+            this.IstezanjeT = new HashSet<IstezanjeT>();
         }
     
         public int IstezanjeId { get; set; }
@@ -32,6 +32,6 @@ namespace TrainingPlanner
     
         public virtual ICollection<IstezanjeSlike> IstezanjeSlike { get; set; }
         public virtual ICollection<Istezanje> Istezanje { get; set; }
-        public virtual ICollection<IstezanjeTreningTemplate> IstezanjeTreningTemplate { get; set; }
+        public virtual ICollection<IstezanjeT> IstezanjeT { get; set; }
     }
 }

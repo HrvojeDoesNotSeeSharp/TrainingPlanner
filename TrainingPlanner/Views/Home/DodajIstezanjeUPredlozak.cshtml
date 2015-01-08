@@ -19,8 +19,7 @@
                 }
                 else
                 {
-                    using (Html.BeginForm("DodajIstezanjeUPredlozak", "Home", FormMethod.Post, new { id = ip.IstezanjeId, id1 = ViewData["TemplateId"] }))
-                    {
+                    <form action="@Url.Action("DodajIstezanjeUPredlozak", "Home", new { id1 = ip.IstezanjeId, id2 = Convert.ToInt32(ViewData["TemplateId"]), predlozakIzmijeni = ViewData["predlozakIzmijeni"] })" method="post">
                     <tr>
                         <td class="smallFontGreen">@ip.Naziv</td>
                         @if (ip.Info == null)
@@ -52,11 +51,11 @@
                         }
                         <td><input type="submit" value="Dodaj istezanje" class="button_example" /></td>
                     </tr>
-                    }
+            </form>
             }
             }
         </table>
 
-        @Html.ActionLink("Popis članova", "Index", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Natrag na predlozak", "DodajPredlozakIstezanja", "Home", new { id = Convert.ToInt32(ViewData["TemplateId"]) }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </p>
 </div>

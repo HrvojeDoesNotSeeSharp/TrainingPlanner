@@ -181,6 +181,18 @@ namespace TrainingPlanner.Controllers
                     }
                 }
 
+                //provjeri da li je ovo ZagrijavanjePopis vezano za neko Zagrijavanje i update sva Zagrijavanje (Trening dio)
+                var zagrijavanja = from x in _context.Zagrijavanje
+                                join z in _context.ZagrijavanjePopis on x.ZagrijavanjePopisZagrijavanjeId equals z.ZagrijavanjeId
+                                where z.ZagrijavanjeId == zp.ZagrijavanjeId
+                                select x;
+                foreach (Zagrijavanje z in zagrijavanja.ToList())
+                {
+                    z.Naziv = zp.Naziv;
+                    z.Info = zp.Info;
+                    _context.Entry(z).State = EntityState.Modified;
+                }
+
                 _context.Entry(zp).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("ZagrijavanjePopis", "Home");
@@ -357,6 +369,19 @@ namespace TrainingPlanner.Controllers
                     }
                 }
 
+
+                //provjeri da li je ova VjezbePopis vezana za neku Vjezba i update sve Vjezba (Trening dio)
+                var vjezbe = from x in _context.Vjezba
+                             join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
+                             where v.VjezbeId == vjp.VjezbeId
+                             select x;
+                foreach (Vjezba v in vjezbe.ToList())
+                {
+                    v.ImeVjezbe = vjp.ImeVjezbe;
+                    v.Info = vjp.Info;
+                    _context.Entry(v).State = EntityState.Modified;
+                }
+
                 _context.Entry(vjp).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("VjezbePopis", "Home");
@@ -459,6 +484,18 @@ namespace TrainingPlanner.Controllers
                     }
                 }
 
+                //provjeri da li je ova AerobneVjezbepopis vezana za neku AerobneVjezbe i update sve AerobneVjezbe (Trening dio)
+                var aerobnevjezbe = from x in _context.AerobneVjezbe
+                             join a in _context.AerobneVjezbePopis on x.AerobneVjezbePopisAerobnaVjezbaId equals a.AerobnaVjezbaId
+                             where a.AerobnaVjezbaId == avjp.AerobnaVjezbaId
+                             select x;
+                foreach (AerobneVjezbe a in aerobnevjezbe.ToList())
+                {
+                    a.Ime = avjp.Naziv;
+                    a.Info = avjp.Info;
+                    _context.Entry(a).State = EntityState.Modified;
+                }
+
                 _context.Entry(avjp).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("AerobneVjezbePopis", "Home");
@@ -486,6 +523,72 @@ namespace TrainingPlanner.Controllers
             ViewData["counter"] = counter;
             ViewData["id"] = "sek";
             return View(avjp);
+        }
+
+        public ActionResult IzbrisiAerobnuVjezbu(int id = 0)
+        {
+            var avjp = _context.AerobneVjezbePopis.Find(id);
+
+            //provjeri da li je ova aerobna vjezba ukljucena u neki trening i vrati id clana
+            var aerobnevjezbe = from x in _context.AerobneVjezbe
+                                join a in _context.AerobneVjezbePopis on x.AerobneVjezbePopisAerobnaVjezbaId equals a.AerobnaVjezbaId
+                                where a.AerobnaVjezbaId == id
+                                select x.AerobneVjezbePopisAerobnaVjezbaId;
+
+            var sekcije = from s in _context.SekcijaVjezbi
+                          join a in _context.AerobneVjezbe on s.SekcijaId equals a.SekcijaVjezbiSekcijaId
+                          where a.AerobneVjezbePopisAerobnaVjezbaId == aerobnevjezbe.FirstOrDefault()
+                          group s by s.SekcijaId into grp
+                          select grp.Key;
+
+            List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
+            IQueryable<Clan> provjeriTrening;
+            foreach (var s in sekcije.ToList())
+            {
+                provjeriTrening = from t in _context.Trening
+                                  join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
+                                  where se.SekcijaId == s
+                                  group t by t.Clan into grp
+                                  select grp.Key;
+
+                if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
+                {
+                    provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
+                }
+            }
+
+            List<String> clanovi = new List<string>();
+
+            foreach (Clan c in provjeriTreningupdejtanalista)
+            {
+                clanovi.Add(c.Ime + " " + c.Prezime + ", ");
+            }
+            //iduca linija je provjera koja ne brise aerobne vjezbe ako postoji trening sa tom vjezbom
+            if (clanovi.Count > 0)
+            {
+                string joined = String.Concat(clanovi.ToArray());
+                return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste aerobnu vjezbu:" + joined + "');"
+                    + "window.location.href='../AerobneVjezbePopis';</script>");
+            }
+            else 
+            {
+                if(avjp.AerobneVjezbeSlike.Count > 0)
+                {
+                    var query = from x in _context.AerobneVjezbePopis
+                                join i in _context.AerobneVjezbeSlike on x.AerobnaVjezbaId equals i.AerobneVjezbePopisAerobnaVjezbaId
+                                where x.AerobnaVjezbaId == id
+                                select i;
+
+                    foreach (var a in query.ToList())
+                    {
+                        _context.AerobneVjezbeSlike.Remove(a);
+                    }
+                }
+
+            _context.AerobneVjezbePopis.Remove(avjp);
+            _context.SaveChanges();
+            return RedirectToAction("AerobneVjezbePopis", "Home");
+            }
         }
 
         public ActionResult IzbrisiSlikuAerobneVjezbe(int id, int? slika)
@@ -583,6 +686,18 @@ namespace TrainingPlanner.Controllers
                     }
                 }
 
+                //provjeri da li je ova AerobneVjezbepopis vezana za neku AerobneVjezbe i update sve AerobneVjezbe (Trening dio)
+                var anaerobnevjezbe = from x in _context.AnaerobneVjezbe
+                                      join an in _context.AnaerobneVjezbePopis on x.AnaerobneVjezbePopisAnaerobnaVjezbaId equals an.AnaerobnaVjezbaId
+                                      where an.AnaerobnaVjezbaId == avjp.AnaerobnaVjezbaId
+                                      select x;
+                foreach (AnaerobneVjezbe an in anaerobnevjezbe.ToList())
+                {
+                    an.Ime = avjp.Naziv;
+                    an.Info = avjp.Info;
+                    _context.Entry(an).State = EntityState.Modified;
+                }
+
                 _context.Entry(avjp).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("AnaerobneVjezbePopis", "Home");
@@ -612,136 +727,70 @@ namespace TrainingPlanner.Controllers
             return View(avjp);
         }
 
-        public ActionResult IzbrisiAerobnuVjezbu(int id = 0)
-        {
-            var vjp = _context.AerobneVjezbePopis.Find(id);
-
-            //provjeri da li je ova vjezba ukljucena u neki trening i vrati id clana
-            //var vjezbe = from x in _context.Vjezba
-            //join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
-            //where v.VjezbeId == id
-            // select x.VjezbePopisVjezbeId;
-
-            //var sekcije = from s in _context.SekcijaVjezbi
-            //             join v in _context.Vjezba on s.SekcijaId equals v.SekcijaId
-            //             where v.VjezbePopisVjezbeId == vjezbe.FirstOrDefault()
-            //             group s by s.SekcijaId into grp
-            //             select grp.Key;
-
-            //List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
-            //IQueryable<Clan> provjeriTrening;
-            //foreach (var s in sekcije.ToList())
-            //{
-            //    provjeriTrening = from t in _context.Trening
-            //                      join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
-            //                      where se.SekcijaId == s
-            //                      group t by t.Clan into grp
-            //                      select grp.Key;
-
-            //    if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
-            //    {
-            //        provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
-            //    }
-            //}
-
-            //List<String> clanovi = new List<string>();
-
-            //foreach (Clan c in provjeriTreningupdejtanalista)
-            //{
-            //    clanovi.Add(c.Ime + " " + c.Prezime + ", ");
-            //}
-            //iduca linija je provjera koja ne brise vjezbe ako postoji trening sa tom vjezbom
-            //if (clanovi.Count > 0)
-            //{
-            //    string joined = String.Concat(clanovi.ToArray());
-            //    return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste vjezbu:" + joined + "');"
-            //        + "window.location.href='../VjezbePopis';</script>");
-            //}
-            //else
-            //{
-            if (vjp.AerobneVjezbeSlike.Count > 0)
-            {
-                var query = from x in _context.AerobneVjezbePopis
-                            join i in _context.AerobneVjezbeSlike on x.AerobnaVjezbaId equals i.AerobneVjezbePopisAerobnaVjezbaId
-                            where x.AerobnaVjezbaId == id
-                            select i;
-
-                foreach (var a in query.ToList())
-                {
-                    _context.AerobneVjezbeSlike.Remove(a);
-                }
-            }
-
-            _context.AerobneVjezbePopis.Remove(vjp);
-            _context.SaveChanges();
-            return RedirectToAction("AerobneVjezbePopis", "Home");
-            //}
-        }
-
         public ActionResult IzbrisiAnaerobnuVjezbu(int id = 0)
         {
-            var vjp = _context.AnaerobneVjezbePopis.Find(id);
+            var anvjp = _context.AnaerobneVjezbePopis.Find(id);
 
             //provjeri da li je ova vjezba ukljucena u neki trening i vrati id clana
-            //var vjezbe = from x in _context.Vjezba
-            //join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
-            //where v.VjezbeId == id
-            // select x.VjezbePopisVjezbeId;
+            var anaerobnevjezbe = from x in _context.AnaerobneVjezbe
+                                  join an in _context.AnaerobneVjezbePopis on x.AnaerobneVjezbePopisAnaerobnaVjezbaId equals an.AnaerobnaVjezbaId
+                                  where an.AnaerobnaVjezbaId == id
+                                  select x.AnaerobneVjezbePopisAnaerobnaVjezbaId;
 
-            //var sekcije = from s in _context.SekcijaVjezbi
-            //             join v in _context.Vjezba on s.SekcijaId equals v.SekcijaId
-            //             where v.VjezbePopisVjezbeId == vjezbe.FirstOrDefault()
-            //             group s by s.SekcijaId into grp
-            //             select grp.Key;
+            var sekcije = from s in _context.SekcijaVjezbi
+                          join an in _context.AnaerobneVjezbe on s.SekcijaId equals an.SekcijaVjezbiSekcijaId
+                          where an.AnaerobneVjezbePopisAnaerobnaVjezbaId == anaerobnevjezbe.FirstOrDefault()
+                          group s by s.SekcijaId into grp
+                          select grp.Key;
 
-            //List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
-            //IQueryable<Clan> provjeriTrening;
-            //foreach (var s in sekcije.ToList())
-            //{
-            //    provjeriTrening = from t in _context.Trening
-            //                      join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
-            //                      where se.SekcijaId == s
-            //                      group t by t.Clan into grp
-            //                      select grp.Key;
-
-            //    if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
-            //    {
-            //        provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
-            //    }
-            //}
-
-            //List<String> clanovi = new List<string>();
-
-            //foreach (Clan c in provjeriTreningupdejtanalista)
-            //{
-            //    clanovi.Add(c.Ime + " " + c.Prezime + ", ");
-            //}
-            //iduca linija je provjera koja ne brise vjezbe ako postoji trening sa tom vjezbom
-            //if (clanovi.Count > 0)
-            //{
-            //    string joined = String.Concat(clanovi.ToArray());
-            //    return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste vjezbu:" + joined + "');"
-            //        + "window.location.href='../VjezbePopis';</script>");
-            //}
-            //else
-            //{
-            if (vjp.AnaerobneVjezbeSlike.Count > 0)
+            List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
+            IQueryable<Clan> provjeriTrening;
+            foreach (var s in sekcije.ToList())
             {
-                var query = from x in _context.AnaerobneVjezbePopis
-                            join i in _context.AnaerobneVjezbeSlike on x.AnaerobnaVjezbaId equals i.AnaerobneVjezbePopisAnaerobnaVjezbaId
-                            where x.AnaerobnaVjezbaId == id
-                            select i;
+                provjeriTrening = from t in _context.Trening
+                                  join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
+                                  where se.SekcijaId == s
+                                  group t by t.Clan into grp
+                                  select grp.Key;
 
-                foreach (var a in query.ToList())
+                if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
                 {
-                    _context.AnaerobneVjezbeSlike.Remove(a);
+                    provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
                 }
             }
 
-            _context.AnaerobneVjezbePopis.Remove(vjp);
-            _context.SaveChanges();
-            return RedirectToAction("AnaerobneVjezbePopis", "Home");
-            //}
+            List<String> clanovi = new List<string>();
+
+            foreach (Clan c in provjeriTreningupdejtanalista)
+            {
+                clanovi.Add(c.Ime + " " + c.Prezime + ", ");
+            }
+            //iduca linija je provjera koja ne brise anaerobne vjezbe ako postoji trening sa tom vjezbom
+            if (clanovi.Count > 0)
+            {
+                string joined = String.Concat(clanovi.ToArray());
+                return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste anaerobnu vjezbu:" + joined + "');"
+                    + "window.location.href='../AnaerobneVjezbePopis';</script>");
+            }
+            else
+            {
+                if (anvjp.AnaerobneVjezbeSlike.Count > 0)
+                {
+                    var query = from x in _context.AnaerobneVjezbePopis
+                                join i in _context.AnaerobneVjezbeSlike on x.AnaerobnaVjezbaId equals i.AnaerobneVjezbePopisAnaerobnaVjezbaId
+                                where x.AnaerobnaVjezbaId == id
+                                select i;
+
+                    foreach (var a in query.ToList())
+                    {
+                        _context.AnaerobneVjezbeSlike.Remove(a);
+                    }
+                }
+
+                _context.AnaerobneVjezbePopis.Remove(anvjp);
+                _context.SaveChanges();
+                return RedirectToAction("AnaerobneVjezbePopis", "Home");
+            }
         }
 
         public ActionResult IzbrisiSlikuAnaerobneVjezbe(int id, int? slika)
@@ -794,11 +843,37 @@ namespace TrainingPlanner.Controllers
             {
                 clanovi.Add(c.Ime + " " + c.Prezime + ", ");
             }
+
+            //provjeri da li je ovo istezanje ukljuceno u neki predlozak i vrati id templatea
+            var istezanjaT = from x in _context.IstezanjeT
+                             join i in _context.IstezanjePopis on x.IstezanjePopisIstezanjeId equals i.IstezanjeId
+                             where i.IstezanjeId == id
+                             select x.IstezanjePopisIstezanjeId;
+
+            var provjeriPredlozak = from p in _context.IstezanjeTreningTemplate
+                                    join z in _context.IstezanjeT on p.IstezanjeTreningTemplateId equals z.IstezanjeTreningTemplateIstezanjeTreningTemplateId
+                                    where z.IstezanjePopisIstezanjeId == istezanjaT.FirstOrDefault()
+                                    group p by p into grp
+                                    select grp.Key;
+
+            List<String> predlosci = new List<string>();
+
+            foreach (IstezanjeTreningTemplate itt in provjeriPredlozak.ToList())
+            {
+                predlosci.Add(itt.NazivPredloska + ", ");
+            }
+
             //iduca linija je provjera koja ne brise istezanje ako postoji trening sa tin istezanjem
             if (clanovi.Count > 0)
             {
                 string joined = String.Concat(clanovi.ToArray());
                 return Content("<script language='javascript' type='text/javascript'>alert('Ovi clanovi koriste istezanje:" + joined + "');"
+                    + "window.location.href='../IstezanjePopis';</script>");
+            }
+            else if (predlosci.Count > 0)
+            {
+                string joined = String.Concat(predlosci.ToArray());
+                return Content("<script language='javascript' type='text/javascript'>alert('Ovi predlosci koriste istezanje:" + joined + "');"
                     + "window.location.href='../IstezanjePopis';</script>");
             }
             else
@@ -822,7 +897,7 @@ namespace TrainingPlanner.Controllers
             }
         }
 
-        public ActionResult DetaljiIstezanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
+        public ActionResult DetaljiIstezanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0, int dodajPredlozak = 0, int izmijeniPredlozak = 0, int detaljiPredlozak = 0, int templateId = 0)
         {
             var ip = _context.IstezanjePopis.Find(id);
 
@@ -838,6 +913,23 @@ namespace TrainingPlanner.Controllers
             {
                 ViewData["treningId"] = treningId;
             }
+            if (dodajPredlozak == 1)
+            {
+                ViewData["dodajPredlozak"] = dodajPredlozak;
+            }
+            if (izmijeniPredlozak == 1)
+            {
+                ViewData["izmijeniPredlozak"] = izmijeniPredlozak;
+            }
+            if (detaljiPredlozak == 1)
+            {
+                ViewData["detaljiPredlozak"] = detaljiPredlozak;
+            }
+            if (templateId > 0)
+            {
+                ViewData["templateId"] = templateId;
+            }
+
 
             ViewData["counter"] = counter;
             ViewData["id"] = "ist";
@@ -908,6 +1000,30 @@ namespace TrainingPlanner.Controllers
                     }
                 }
 
+                //provjeri da li je ovo IstezanjePopis vezano za neko Istezanje i update sva Istezanje (Trening dio)
+                var istezanja = from x in _context.Istezanje
+                                join i in _context.IstezanjePopis on x.IstezanjePopisIstezanjeId equals i.IstezanjeId
+                                where i.IstezanjeId == ip.IstezanjeId
+                                select x;
+                foreach (Istezanje i in istezanja.ToList())
+                {
+                    i.Naziv = ip.Naziv;
+                    i.Info = ip.Info;
+                    _context.Entry(i).State = EntityState.Modified;
+                }
+                
+                //provjeri da li je ovo IstezanjePopis vezano za neko IstezanjeT i update sva IstezanjeT (Predlozak dio)
+                var istezanjaT = from x in _context.IstezanjeT
+                                 join i in _context.IstezanjePopis on x.IstezanjePopisIstezanjeId equals i.IstezanjeId
+                                 where i.IstezanjeId == ip.IstezanjeId
+                                 select x;
+                foreach (IstezanjeT i in istezanjaT.ToList())
+                {
+                    i.NazivT = ip.Naziv;
+                    i.InfoT = ip.Info;
+                    _context.Entry(i).State = EntityState.Modified;
+                }
+
                 _context.Entry(ip).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("IstezanjePopis", "Home");
@@ -936,18 +1052,40 @@ namespace TrainingPlanner.Controllers
         [HttpGet]
         public ActionResult PredlosciIstezanjePopis()
         {
+            foreach (IstezanjeTreningTemplate ITT in _context.IstezanjeTreningTemplate.ToList())
+            {
+                if (ITT.NazivPredloska == "")
+                {
+                    var queryIst =  from x in _context.IstezanjeT
+                                    join i in _context.IstezanjeTreningTemplate 
+                                    on x.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals i.IstezanjeTreningTemplateId
+                                    where i.NazivPredloska == ""
+                                    select x;
+
+                    foreach (IstezanjeT Ist in queryIst)
+                    {
+                        _context.IstezanjeT.Remove(Ist);
+                    }
+
+                    _context.IstezanjeTreningTemplate.Remove(ITT);
+                    _context.SaveChanges();
+                }
+            }
+
             var listaPredlozakaIstezanja = _context.IstezanjeTreningTemplate.ToList();
+
             if (listaPredlozakaIstezanja.Count == 0)
             {
                 listaPredlozakaIstezanja = new List<IstezanjeTreningTemplate> { new IstezanjeTreningTemplate { IstezanjeTreningTemplateId = 0, NazivPredloska = "" } };
                 return View(listaPredlozakaIstezanja);
             }
+
             return View(listaPredlozakaIstezanja);
         }
 
         public ActionResult IzbrisiPredlozakIstezanja(int id = 0)
         {
-            var pi = _context.IstezanjeTreningTemplate.Find(id);
+            var ITT = _context.IstezanjeTreningTemplate.Find(id);
             /*
             //provjeri da li je ovo istezanje ukljuceno u neki trening i vrati id clana
             var predlozakistezanja = from x in _context.Istezanje
@@ -989,10 +1127,84 @@ namespace TrainingPlanner.Controllers
                     }
                 }
                 */
-                _context.IstezanjeTreningTemplate.Remove(pi);
+
+                var queryIst = from x in _context.IstezanjeT
+                               join i in _context.IstezanjeTreningTemplate
+                               on x.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals i.IstezanjeTreningTemplateId
+                               where i.IstezanjeTreningTemplateId == id
+                               select x;
+
+                foreach (IstezanjeT Ist in queryIst)
+                {
+                    _context.IstezanjeT.Remove(Ist);
+                }
+
+                _context.IstezanjeTreningTemplate.Remove(ITT);
                 _context.SaveChanges();
+
                 return RedirectToAction("PredlosciIstezanjePopis", "Home");
             }
+
+        [HttpGet]
+        public ActionResult IzmijeniPredlozakIstezanja(int id = 0)
+        {
+            var predlozakModel = new IstezanjeTemplateListaIstezanjaModel();
+
+            var queryTemp = from t in _context.IstezanjeTreningTemplate
+                            where t.IstezanjeTreningTemplateId == id
+                            select t;
+
+            var temp = queryTemp.Single();
+
+            var queryIst = from i in _context.IstezanjeT
+                           join t in _context.IstezanjeTreningTemplate
+                           on i.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals t.IstezanjeTreningTemplateId
+                           where t.IstezanjeTreningTemplateId == id
+                           select i;
+
+            predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanjeT = queryIst.ToList() };
+
+            return View(predlozakModel);
+        }
+
+        [HttpPost]
+        public ActionResult IzmijeniPredlozakIstezanja(IstezanjeTemplateListaIstezanjaModel predlozakModel)
+        {
+            var query = from x in _context.IstezanjeTreningTemplate
+                        where x.IstezanjeTreningTemplateId == predlozakModel.ITT.IstezanjeTreningTemplateId
+                        select x;
+
+            var ITT = query.Single();
+
+            ITT.NazivPredloska = predlozakModel.ITT.NazivPredloska;
+
+            _context.Entry(ITT).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("PredlosciIstezanjePopis");
+        }
+
+        [HttpGet]
+        public ActionResult DetaljiPredlozakIstezanja(int id = 0)
+        {
+            var predlozakModel = new IstezanjeTemplateListaIstezanjaModel();
+
+            var queryTemp = from t in _context.IstezanjeTreningTemplate
+                            where t.IstezanjeTreningTemplateId == id
+                            select t;
+
+            var temp = queryTemp.Single();
+
+            var queryIst = from i in _context.IstezanjeT
+                           join t in _context.IstezanjeTreningTemplate
+                           on i.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals t.IstezanjeTreningTemplateId
+                           where t.IstezanjeTreningTemplateId == id
+                           select i;
+
+            predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanjeT = queryIst.ToList() };
+
+            return View(predlozakModel);
+        }
 
         [HttpGet]
         public ActionResult DodajPredlozakIstezanja(int id = 0)
@@ -1001,24 +1213,25 @@ namespace TrainingPlanner.Controllers
 
             if (id != 0)
             {
-                var queryTemp = from x in _context.IstezanjeTreningTemplate
-                                where x.IstezanjeTreningTemplateId == id
-                                select x;
+                var queryTemp = from t in _context.IstezanjeTreningTemplate
+                                where t.IstezanjeTreningTemplateId == id
+                                select t;
 
                 var temp = queryTemp.Single();
 
-                var queryIst = from t in _context.IstezanjeTreningTemplate
-                               from i in _context.IstezanjePopis
+                var queryIst = from i in _context.IstezanjeT
+                               join t in _context.IstezanjeTreningTemplate
+                               on i.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals t.IstezanjeTreningTemplateId
                                where t.IstezanjeTreningTemplateId == id
                                select i;
 
-                predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanja = queryIst.ToList() };
+                predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanjeT = queryIst.ToList() };
             }
             else
             {
                 IstezanjeTreningTemplate ITT = new IstezanjeTreningTemplate()
                 {
-                    //NazivPredloska = " "
+                    NazivPredloska = ""
                 };
                 predlozakModel.ITT = ITT;
 
@@ -1032,59 +1245,77 @@ namespace TrainingPlanner.Controllers
         [HttpPost]
         public ActionResult DodajPredlozakIstezanja(IstezanjeTemplateListaIstezanjaModel predlozakModel)
         {
-            
-            return View(predlozakModel);
+            var query = from x in _context.IstezanjeTreningTemplate
+                        where x.IstezanjeTreningTemplateId == predlozakModel.ITT.IstezanjeTreningTemplateId
+                        select x;
+
+            var ITT = query.Single();
+
+            ITT.NazivPredloska = predlozakModel.ITT.NazivPredloska;
+
+            _context.Entry(ITT).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("PredlosciIstezanjePopis");
         }
 
         [HttpGet]
-        public ActionResult DodajIstezanjeUPredlozak(int id = 0)
+        public ActionResult DodajIstezanjeUPredlozak(int id = 0, int predlozakIzmijeni = 0)
         {
             var listaIstezanja = _context.IstezanjePopis.ToList();
+            ViewData["predlozakIzmijeni"] = predlozakIzmijeni;
+
             if (listaIstezanja.Count == 0)
             {
                 listaIstezanja = new List<IstezanjePopis> { new IstezanjePopis { IstezanjeId = 0, Naziv = "", Info = "" } };
+                ViewData["TemplateId"] = id;
                 return View(listaIstezanja);
             }
 
             ViewData["TemplateId"] = id;
-
             return View(listaIstezanja);
         }
 
         [HttpPost]
-        public ActionResult DodajIstezanjeUPredlozak(int id = 0, int id1 = 0)
+        public ActionResult DodajIstezanjeUPredlozak(int id1 = 0, int id2 = 0, int predlozakIzmijeni = 0)
         {
-            var queryIst = from x in _context.IstezanjePopis
-                        where x.IstezanjeId == id
-                        select x;
+            var queryIst  = from x in _context.IstezanjePopis
+                            where x.IstezanjeId == id1
+                            select x;
 
-            var queryTemp = from x in _context.IstezanjeTreningTemplate
-                        where x.IstezanjeTreningTemplateId == id1
-                        select x;
+            var queryTemp = from t in _context.IstezanjeTreningTemplate
+                            where t.IstezanjeTreningTemplateId == id2
+                            select t;
 
             var ist = queryIst.Single();
 
             var temp = queryTemp.Single();
 
-            temp.IstezanjePopis.Add(ist);
+            IstezanjeT istT = new IstezanjeT() {
+            NazivT = ist.Naziv,
+            InfoT = ist.Info,
+            IstezanjeTreningTemplateIstezanjeTreningTemplateId = id2,
+            IstezanjePopisIstezanjeId = ist.IstezanjeId
+            };
 
-            _context.Entry(temp).State = EntityState.Modified;
+            _context.IstezanjeT.Add(istT);
             _context.SaveChanges();
 
-            return RedirectToAction("DodajPredlozakIstezanja", new { id = id1 });
+            return predlozakIzmijeni != 0
+                ? RedirectToAction("IzmijeniPredlozakIstezanja", new { id = id2 })
+                : RedirectToAction("DodajPredlozakIstezanja", new { id = id2 });
         }
 
-        public ActionResult IzbrisiIstezanjeIzPredloska(int id = 0, int id1 = 0)
+        public ActionResult IzbrisiIstezanjeIzPredloska(int id = 0, int id1 = 0, int predlozakIzmijeni = 0)
         {
-            var temp = _context.IstezanjeTreningTemplate.Find(id1);
-            var ist = _context.IstezanjePopis.Find(id);
+            var istT = _context.IstezanjeT.Find(id);
 
-            temp.IstezanjePopis.Remove(ist);
-
-            _context.Entry(temp).State = EntityState.Modified;
+            _context.IstezanjeT.Remove(istT);
             _context.SaveChanges();
 
-            return RedirectToAction("DodajPredlozakIstezanja", new { id = id1 });
+            return predlozakIzmijeni != 0
+                ? RedirectToAction("IzmijeniPredlozakIstezanja", new { id = id1 })
+                : RedirectToAction("DodajPredlozakIstezanja", new { id = id1 });
         }
 
         #endregion IstezanjePredlozak

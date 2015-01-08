@@ -5,7 +5,7 @@
 }
 
 <div id="content">
-    @using (Html.BeginForm("DodajPredlozakIstezanja", "Home", FormMethod.Post))
+    @using (Html.BeginForm("IzmijeniPredlozakIstezanja", "Home", FormMethod.Post))
     {
         @Html.ValidationSummary(true)
 
@@ -44,16 +44,17 @@
                         {
                             <td class="smallFontNotCentered">@istezanje.InfoT</td>
                         }
-                        <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeIzPredloska", "Home", new { id = istezanje.IstezanjeTId, id1 = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
-                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, dodajPredlozak = 1, templateId = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeIzPredloska", "Home", new { id = istezanje.IstezanjeTId, id1 = Model.ITT.IstezanjeTreningTemplateId, predlozakIzmijeni = 1 }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeniPredlozak = 1, templateId = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
                     </tr>
             }
             }
             </table>
-            @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeUPredlozak", "Home", new { id = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-                <div class="marginHeadlineTop marginTextBottom">
-                    <input type="submit" value="Dodaj predlozak" class="button_example"/>
-                    @Html.ActionLink("Natrag na predloske", "PredlosciIstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example", style="float:right" })
-                </div>
+            @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeUPredlozak", "Home", new { id = Model.ITT.IstezanjeTreningTemplateId, predlozakIzmijeni = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Izmijeni predlozak" class="button_example"/>
+                @Html.ActionLink("Natrag na predloske", "PredlosciIstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example", style="float:right" })
+            </div>
     }
 </div>
+
