@@ -3,19 +3,33 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript">
+    function validateName() {
+        var input = $("#ITT_NazivPredloska").val();
+        if (input.length > 0) {
+            return true;
+        }
+        $(".error").html("Unesite naziv");
+        return false;
+    }
+    function removeerror() {
+        $(".error").empty();
+    }
+    
 
+</script>
 <div id="content">
-    @using (Html.BeginForm("DodajPredlozakIstezanja", "Home", FormMethod.Post))
+    @using (Html.BeginForm("DodajPredlozakIstezanja", "Home", FormMethod.Post, new {@onsubmit="return validateName();"}))
     {
-        @Html.ValidationSummary(true)
+        
 
             <h2 class="green">Predlozak istezanja</h2>
 
             <div style ="padding-bottom:20px; ">
                 @Html.HiddenFor(model => model.ITT.IstezanjeTreningTemplateId)
                 <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
-                @Html.TextBoxFor(model => model.ITT.NazivPredloska, new { @class = "inputArea" })
-                @Html.ValidationMessageFor(model => model.ITT.NazivPredloska, String.Empty, new { @class = "error" })
+                @Html.TextBoxFor(model => model.ITT.NazivPredloska, new { @class = "inputArea", @onfocus="removeerror();"})
+                <label id="validatenam" class="error"></label>
             </div>
             <table class="responstableTrening">         
             @if (Model.ListaIstezanjeT == null)
@@ -33,7 +47,7 @@
             else
             {
                 foreach (var istezanje in Model.ListaIstezanjeT)
-            {
+                {
                 <tr>
                         <td class="smallFontGreen">@istezanje.NazivT</td>
                         @if (istezanje.InfoT == null)
@@ -47,13 +61,13 @@
                         <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeIzPredloska", "Home", new { id = istezanje.IstezanjeTId, id1 = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
                         <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, dodajPredlozak = 1, templateId = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
                     </tr>
-            }
+                }
             }
             </table>
             @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeUPredlozak", "Home", new { id = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
                 <div class="marginHeadlineTop marginTextBottom">
-                    <input type="submit" value="Dodaj predlozak" class="button_example"/>
-                    @Html.ActionLink("Natrag na predloske", "PredlosciIstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example", style="float:right" })
+                    <input id="dodajpredlozak" type="submit" value="Dodaj predlozak" class="button_example"/>
+                    @Html.ActionLink("Natrag na predloske", "PredlosciIstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example", style = "float:right" })
                 </div>
     }
 </div>

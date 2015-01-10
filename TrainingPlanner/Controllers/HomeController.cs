@@ -1185,7 +1185,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpGet]
-        public ActionResult DetaljiPredlozakIstezanja(int id = 0)
+        public ActionResult DetaljiPredlozakIstezanja(int id = 0, int treningId = 0, int izmijeni = 0)
         {
             var predlozakModel = new IstezanjeTemplateListaIstezanjaModel();
 
@@ -1200,6 +1200,9 @@ namespace TrainingPlanner.Controllers
                            on i.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals t.IstezanjeTreningTemplateId
                            where t.IstezanjeTreningTemplateId == id
                            select i;
+
+            ViewData["treningId"] = treningId;
+            ViewData["izmijeni"] = izmijeni;
 
             predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanjeT = queryIst.ToList() };
 
@@ -2892,6 +2895,49 @@ namespace TrainingPlanner.Controllers
                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         } 
         #endregion IstezanjeTrening
+
+        #region PredlozakTrening
+
+        [HttpGet]
+        public ActionResult DodajPredlozakTrening(int id, int izmijeni = 0)
+        {
+            var pp = _context.IstezanjeTreningTemplate.ToList();
+            ViewData["treningId"] = id;
+            ViewData["izmijeni"] = izmijeni;
+            return View(pp);
+        }
+
+        [HttpPost]
+        public ActionResult DodajPredlozakTrening(int id = 0, int templateId = 0, int izmijeni = 0)
+        {
+            var trening = _context.Trening.Find(id);
+
+            var predlozak = _context.IstezanjeTreningTemplate.Find(templateId);
+
+            var query = from x in _context.IstezanjeT
+                        where x.IstezanjeTreningTemplateIstezanjeTreningTemplateId == predlozak.IstezanjeTreningTemplateId
+                        select x;
+
+            Istezanje i = new Istezanje();
+
+            foreach (IstezanjeT it in query.ToList())
+            {
+                i.Naziv = it.NazivT;
+                i.Info = it.InfoT;
+                i.TreningId = id;
+                i.IstezanjePopisIstezanjeId = it.IstezanjePopisIstezanjeId;
+                _context.Istezanje.Add(i);
+                _context.SaveChanges();
+            }
+
+            ViewData["izmijeni"] = izmijeni;
+
+            return izmijeni != 0
+                ? RedirectToAction("IzmijeniTrening", new { id })
+                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        #endregion PredlozakTrening
 
         #region SekcijeTrening
         public ActionResult DodajSekcijuTrening(int id, int izmijeni = 0)
