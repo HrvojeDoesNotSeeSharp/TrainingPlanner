@@ -164,12 +164,11 @@
     <Compile Include="IstezanjeT.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="IstezanjeTreningTemplate.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="Models\AmnezaMetadata.cs" />
+    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="Models\AntropometrijaList.cs" />
     <Compile Include="Models\AntropometrijaMetadata.cs" />
     <Compile Include="Models\ClanMetadata.cs" />

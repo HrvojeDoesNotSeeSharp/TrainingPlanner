@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/11/2015 16:25:04
+-- Date Created: 01/11/2015 19:41:07
 -- Generated from EDMX file: D:\TrainingPlanner\TrainingPlanner\TreningModel.edmx
 -- --------------------------------------------------
 
@@ -92,20 +92,20 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AnaerobneVjezbeSekcijaVjezbi]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AnaerobneVjezbe] DROP CONSTRAINT [FK_AnaerobneVjezbeSekcijaVjezbi];
 GO
-IF OBJECT_ID(N'[dbo].[FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis] DROP CONSTRAINT [FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate];
+IF OBJECT_ID(N'[dbo].[FK_IstezanjePopisIstezanjeT]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[IstezanjeT] DROP CONSTRAINT [FK_IstezanjePopisIstezanjeT];
 GO
-IF OBJECT_ID(N'[dbo].[FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis] DROP CONSTRAINT [FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis];
+IF OBJECT_ID(N'[dbo].[FK_IstezanjeTreningTemplateIstezanjeT]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[IstezanjeT] DROP CONSTRAINT [FK_IstezanjeTreningTemplateIstezanjeT];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZagrijavanjeVjezbaSekcijaVjezbi]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet] DROP CONSTRAINT [FK_ZagrijavanjeVjezbaSekcijaVjezbi];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ZagrijavanjeVjezbaTrening]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet] DROP CONSTRAINT [FK_ZagrijavanjeVjezbaTrening];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ZagrijavanjeVjezbaZagrijavanjePopis]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet] DROP CONSTRAINT [FK_ZagrijavanjeVjezbaZagrijavanjePopis];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ZagrijavanjeVjezbaSekcijaVjezbi]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet] DROP CONSTRAINT [FK_ZagrijavanjeVjezbaSekcijaVjezbi];
 GO
 
 -- --------------------------------------------------
@@ -193,11 +193,11 @@ GO
 IF OBJECT_ID(N'[dbo].[IstezanjeTreningTemplate]', 'U') IS NOT NULL
     DROP TABLE [dbo].[IstezanjeTreningTemplate];
 GO
+IF OBJECT_ID(N'[dbo].[IstezanjeT]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[IstezanjeT];
+GO
 IF OBJECT_ID(N'[dbo].[ZagrijavanjeVjezbaSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ZagrijavanjeVjezbaSet];
-GO
-IF OBJECT_ID(N'[dbo].[IstezanjeTreningTemplateIstezanjePopis]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis];
 GO
 
 -- --------------------------------------------------
@@ -306,8 +306,7 @@ CREATE TABLE [dbo].[Istezanje] (
     [TreningId] int  NOT NULL,
     [VrijemeIzdrzaja] nvarchar(max)  NULL,
     [VrstaIstezanja] nvarchar(max)  NULL,
-    [IstezanjePopisIstezanjeId] int  NOT NULL,
-    [IstezanjeTreningTemplateIstezanjeTreningTemplateId] int  NOT NULL
+    [IstezanjePopisIstezanjeId] int  NOT NULL
 );
 GO
 
@@ -483,6 +482,16 @@ CREATE TABLE [dbo].[IstezanjeTreningTemplate] (
 );
 GO
 
+-- Creating table 'IstezanjeT'
+CREATE TABLE [dbo].[IstezanjeT] (
+    [IstezanjeTId] int IDENTITY(1,1) NOT NULL,
+    [NazivT] nvarchar(max)  NOT NULL,
+    [InfoT] nvarchar(max)  NULL,
+    [IstezanjePopisIstezanjeId] int  NOT NULL,
+    [IstezanjeTreningTemplateIstezanjeTreningTemplateId] int  NOT NULL
+);
+GO
+
 -- Creating table 'ZagrijavanjeVjezbaSet'
 CREATE TABLE [dbo].[ZagrijavanjeVjezbaSet] (
     [ZagrijavanjeVjezbaId] int IDENTITY(1,1) NOT NULL,
@@ -491,18 +500,12 @@ CREATE TABLE [dbo].[ZagrijavanjeVjezbaSet] (
     [Tempo] nvarchar(max)  NULL,
     [Puls] nvarchar(max)  NULL,
     [ZagrijavanjeNapomena] nvarchar(max)  NULL,
+    [ZagrijavanjePopisZagrijavanjeId] int  NOT NULL,
     [Trajanje] nvarchar(max)  NULL,
-    [Slika] varbinary(max)  NULL,
+    [SekcijaVjezbiSekcijaId] int  NOT NULL,
     [TreningTreningId] int  NOT NULL,
     [ZagrijavanjePopisZagrijavanjeId1] int  NOT NULL,
-    [SekcijaVjezbiSekcijaId] int  NOT NULL
-);
-GO
-
--- Creating table 'IstezanjeTreningTemplateIstezanjePopis'
-CREATE TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis] (
-    [IstezanjeTreningTemplate_IstezanjeTreningTemplateId] int  NOT NULL,
-    [IstezanjePopis_IstezanjeId] int  NOT NULL
+    [Slika] varbinary(max)  NULL
 );
 GO
 
@@ -672,16 +675,16 @@ ADD CONSTRAINT [PK_IstezanjeTreningTemplate]
     PRIMARY KEY CLUSTERED ([IstezanjeTreningTemplateId] ASC);
 GO
 
+-- Creating primary key on [IstezanjeTId] in table 'IstezanjeT'
+ALTER TABLE [dbo].[IstezanjeT]
+ADD CONSTRAINT [PK_IstezanjeT]
+    PRIMARY KEY CLUSTERED ([IstezanjeTId] ASC);
+GO
+
 -- Creating primary key on [ZagrijavanjeVjezbaId] in table 'ZagrijavanjeVjezbaSet'
 ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet]
 ADD CONSTRAINT [PK_ZagrijavanjeVjezbaSet]
     PRIMARY KEY CLUSTERED ([ZagrijavanjeVjezbaId] ASC);
-GO
-
--- Creating primary key on [IstezanjeTreningTemplate_IstezanjeTreningTemplateId], [IstezanjePopis_IstezanjeId] in table 'IstezanjeTreningTemplateIstezanjePopis'
-ALTER TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis]
-ADD CONSTRAINT [PK_IstezanjeTreningTemplateIstezanjePopis]
-    PRIMARY KEY CLUSTERED ([IstezanjeTreningTemplate_IstezanjeTreningTemplateId], [IstezanjePopis_IstezanjeId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1063,28 +1066,49 @@ ON [dbo].[AnaerobneVjezbe]
     ([SekcijaVjezbiSekcijaId]);
 GO
 
--- Creating foreign key on [IstezanjeTreningTemplate_IstezanjeTreningTemplateId] in table 'IstezanjeTreningTemplateIstezanjePopis'
-ALTER TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis]
-ADD CONSTRAINT [FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate]
-    FOREIGN KEY ([IstezanjeTreningTemplate_IstezanjeTreningTemplateId])
-    REFERENCES [dbo].[IstezanjeTreningTemplate]
-        ([IstezanjeTreningTemplateId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [IstezanjePopis_IstezanjeId] in table 'IstezanjeTreningTemplateIstezanjePopis'
-ALTER TABLE [dbo].[IstezanjeTreningTemplateIstezanjePopis]
-ADD CONSTRAINT [FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis]
-    FOREIGN KEY ([IstezanjePopis_IstezanjeId])
+-- Creating foreign key on [IstezanjePopisIstezanjeId] in table 'IstezanjeT'
+ALTER TABLE [dbo].[IstezanjeT]
+ADD CONSTRAINT [FK_IstezanjePopisIstezanjeT]
+    FOREIGN KEY ([IstezanjePopisIstezanjeId])
     REFERENCES [dbo].[IstezanjePopis]
         ([IstezanjeId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis'
-CREATE INDEX [IX_FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjePopis]
-ON [dbo].[IstezanjeTreningTemplateIstezanjePopis]
-    ([IstezanjePopis_IstezanjeId]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_IstezanjePopisIstezanjeT'
+CREATE INDEX [IX_FK_IstezanjePopisIstezanjeT]
+ON [dbo].[IstezanjeT]
+    ([IstezanjePopisIstezanjeId]);
+GO
+
+-- Creating foreign key on [IstezanjeTreningTemplateIstezanjeTreningTemplateId] in table 'IstezanjeT'
+ALTER TABLE [dbo].[IstezanjeT]
+ADD CONSTRAINT [FK_IstezanjeTreningTemplateIstezanjeT]
+    FOREIGN KEY ([IstezanjeTreningTemplateIstezanjeTreningTemplateId])
+    REFERENCES [dbo].[IstezanjeTreningTemplate]
+        ([IstezanjeTreningTemplateId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_IstezanjeTreningTemplateIstezanjeT'
+CREATE INDEX [IX_FK_IstezanjeTreningTemplateIstezanjeT]
+ON [dbo].[IstezanjeT]
+    ([IstezanjeTreningTemplateIstezanjeTreningTemplateId]);
+GO
+
+-- Creating foreign key on [SekcijaVjezbiSekcijaId] in table 'ZagrijavanjeVjezbaSet'
+ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet]
+ADD CONSTRAINT [FK_ZagrijavanjeVjezbaSekcijaVjezbi]
+    FOREIGN KEY ([SekcijaVjezbiSekcijaId])
+    REFERENCES [dbo].[SekcijaVjezbi]
+        ([SekcijaId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ZagrijavanjeVjezbaSekcijaVjezbi'
+CREATE INDEX [IX_FK_ZagrijavanjeVjezbaSekcijaVjezbi]
+ON [dbo].[ZagrijavanjeVjezbaSet]
+    ([SekcijaVjezbiSekcijaId]);
 GO
 
 -- Creating foreign key on [TreningTreningId] in table 'ZagrijavanjeVjezbaSet'
@@ -1115,21 +1139,6 @@ GO
 CREATE INDEX [IX_FK_ZagrijavanjeVjezbaZagrijavanjePopis]
 ON [dbo].[ZagrijavanjeVjezbaSet]
     ([ZagrijavanjePopisZagrijavanjeId1]);
-GO
-
--- Creating foreign key on [SekcijaVjezbiSekcijaId] in table 'ZagrijavanjeVjezbaSet'
-ALTER TABLE [dbo].[ZagrijavanjeVjezbaSet]
-ADD CONSTRAINT [FK_ZagrijavanjeVjezbaSekcijaVjezbi]
-    FOREIGN KEY ([SekcijaVjezbiSekcijaId])
-    REFERENCES [dbo].[SekcijaVjezbi]
-        ([SekcijaId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ZagrijavanjeVjezbaSekcijaVjezbi'
-CREATE INDEX [IX_FK_ZagrijavanjeVjezbaSekcijaVjezbi]
-ON [dbo].[ZagrijavanjeVjezbaSet]
-    ([SekcijaVjezbiSekcijaId]);
 GO
 
 -- --------------------------------------------------
