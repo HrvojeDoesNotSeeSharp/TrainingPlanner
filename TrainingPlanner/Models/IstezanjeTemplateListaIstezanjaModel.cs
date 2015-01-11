@@ -8,6 +8,6 @@ namespace TrainingPlanner.Models
     public class IstezanjeTemplateListaIstezanjaModel
     {
         public IstezanjeTreningTemplate ITT { get; set; }
-        public List<IstezanjePopis> ListaIstezanja { get; set; }
+        public List<IstezanjeT> ListaIstezanjeT { get; set; }
     }
 }

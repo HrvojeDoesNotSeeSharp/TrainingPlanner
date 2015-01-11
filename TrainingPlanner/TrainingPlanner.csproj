@@ -161,6 +161,10 @@
     <Compile Include="IstezanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IstezanjeT.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="IstezanjeTreningTemplate.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
@@ -454,6 +458,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DodajIstezanjeUPredlozak.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IzmijeniPredlozakIstezanja.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DetaljiPredlozakIstezanja.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\DodajPredlozakTrening.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

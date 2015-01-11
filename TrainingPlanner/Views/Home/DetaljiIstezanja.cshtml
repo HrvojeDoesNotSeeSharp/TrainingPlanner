@@ -34,7 +34,19 @@
         {
             <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzmijeniTrening", "Home", new { id = (int)ViewData["treningId"] })#@ViewData["counter"]@ViewData["id"]">Natrag na trening</a>
         }
-        @if (ViewData["trening"] == null && ViewData["izmijeni"] == null)
+        @if (ViewData["dodajPredlozak"] != null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajPredlozakIstezanja", "Home", new { id = (int)ViewData["templateId"]})">Natrag na predlozak</a>
+        }
+        @if (ViewData["izmijeniPredlozak"] != null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzmijeniPredlozakIstezanja", "Home", new { id = (int)ViewData["templateId"]})">Natrag na predlozak</a>
+        }
+        @if (ViewData["detaljiPredlozak"] != null)
+        {
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DetaljiPredlozakIstezanja", "Home", new { id = (int)ViewData["templateId"]})">Natrag na predlozak</a>
+        }
+        @if (ViewData["trening"] == null && ViewData["izmijeni"] == null && ViewData["dodajPredlozak"] == null && ViewData["izmijeniPredlozak"] == null && ViewData["detaljiPredlozak"] == null)
         {
             @Html.ActionLink("Popis istezanja", "IstezanjePopis", null, new { @class = "marginHeadlineTop marginTextBottom button_example" })
         }

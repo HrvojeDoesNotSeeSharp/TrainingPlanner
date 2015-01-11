@@ -11,17 +11,16 @@ namespace TrainingPlanner
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class IstezanjeTreningTemplate
+    
+    public partial class IstezanjeT
     {
-        public IstezanjeTreningTemplate()
-        {
-            this.IstezanjeT = new HashSet<IstezanjeT>();
-        }
+        public int IstezanjeTId { get; set; }
+        public string NazivT { get; set; }
+        public string InfoT { get; set; }
+        public int IstezanjePopisIstezanjeId { get; set; }
+        public int IstezanjeTreningTemplateIstezanjeTreningTemplateId { get; set; }
     
-        public int IstezanjeTreningTemplateId { get; set; }
-        public string NazivPredloska { get; set; }
-    
-        public virtual ICollection<IstezanjeT> IstezanjeT { get; set; }
+        public virtual IstezanjePopis IstezanjePopis { get; set; }
+        public virtual IstezanjeTreningTemplate IstezanjeTreningTemplate { get; set; }
     }
 }

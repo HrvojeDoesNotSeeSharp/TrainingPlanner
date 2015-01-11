@@ -1,0 +1,60 @@
+﻿@model TrainingPlanner.Models.IstezanjeTemplateListaIstezanjaModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    @using (Html.BeginForm("IzmijeniPredlozakIstezanja", "Home", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+
+            <h2 class="green">Predlozak istezanja</h2>
+
+            <div style ="padding-bottom:20px; ">
+                @Html.HiddenFor(model => model.ITT.IstezanjeTreningTemplateId)
+                <div class="marginInputBottom">@Html.Label("Naziv", new { @class = "smallFont" })</div>
+                @Html.TextBoxFor(model => model.ITT.NazivPredloska, new { @class = "inputArea" })
+                @Html.ValidationMessageFor(model => model.ITT.NazivPredloska, String.Empty, new { @class = "error" })
+            </div>
+            <table class="responstableTrening">         
+            @if (Model.ListaIstezanjeT == null)
+            {
+                <tr>
+                        <td class="smallFont">Prazan template.</td>
+                </tr>
+            }
+            else if (Model.ListaIstezanjeT.ToList().Count == 0)
+            {
+                <tr>
+                        <td class="smallFont">Prazan template.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var istezanje in Model.ListaIstezanjeT)
+            {
+                <tr>
+                        <td class="smallFontGreen">@istezanje.NazivT</td>
+                        @if (istezanje.InfoT == null)
+                        {
+                            <td class="smallFont">--</td>
+                        }
+                        else
+                        {
+                            <td class="smallFontNotCentered">@istezanje.InfoT</td>
+                        }
+                        <td>@Html.ActionLink("Izbrisi", "IzbrisiIstezanjeIzPredloska", "Home", new { id = istezanje.IstezanjeTId, id1 = Model.ITT.IstezanjeTreningTemplateId, predlozakIzmijeni = 1 }, new { @class = "button_example_small" })</td>
+                        <td>@Html.ActionLink("Detalji", "DetaljiIstezanja", "Home", new { id = istezanje.IstezanjePopisIstezanjeId, izmijeniPredlozak = 1, templateId = Model.ITT.IstezanjeTreningTemplateId }, new { @class = "button_example_small" })</td>
+                    </tr>
+            }
+            }
+            </table>
+            @Html.ActionLink("Dodaj istezanje", "DodajIstezanjeUPredlozak", "Home", new { id = Model.ITT.IstezanjeTreningTemplateId, predlozakIzmijeni = 1 }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+            <div class="marginHeadlineTop marginTextBottom">
+                <input type="submit" value="Izmijeni predlozak" class="button_example"/>
+                @Html.ActionLink("Natrag na predloske", "PredlosciIstezanjePopis", "Home", null, new { @class = "marginHeadlineTop marginTextBottom button_example", style="float:right" })
+            </div>
+    }
+</div>
+

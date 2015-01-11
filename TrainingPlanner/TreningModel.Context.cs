@@ -53,5 +53,6 @@ namespace TrainingPlanner
         public DbSet<AnaerobneVjezbe> AnaerobneVjezbe { get; set; }
         public DbSet<IstezanjeTreningTemplate> IstezanjeTreningTemplate { get; set; }
         public DbSet<ZagrijavanjeVjezba> ZagrijavanjeVjezbaSet { get; set; }
+        public DbSet<IstezanjeT> IstezanjeT { get; set; }
     }
 }
