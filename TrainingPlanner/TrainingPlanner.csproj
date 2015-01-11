@@ -161,10 +161,10 @@
     <Compile Include="IstezanjeSlike.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="IstezanjeTreningTemplate.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnaerobneVjezbePopisLista.cs" />
     <Compile Include="Models\AmnezaMetadata.cs" />
     <Compile Include="Models\AntropometrijaList.cs" />
     <Compile Include="Models\AntropometrijaMetadata.cs" />
@@ -231,6 +231,9 @@
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZagrijavanjeSlike.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZagrijavanjeVjezba.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

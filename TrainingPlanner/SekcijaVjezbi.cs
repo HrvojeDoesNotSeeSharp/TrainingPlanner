@@ -19,6 +19,7 @@ namespace TrainingPlanner
             this.Vjezba = new HashSet<Vjezba>();
             this.AerobneVjezbe = new HashSet<AerobneVjezbe>();
             this.AnaerobneVjezbe = new HashSet<AnaerobneVjezbe>();
+            this.ZagrijavanjeVjezba = new HashSet<ZagrijavanjeVjezba>();
         }
     
         public int SekcijaId { get; set; }
@@ -31,5 +32,6 @@ namespace TrainingPlanner
         public virtual ICollection<Vjezba> Vjezba { get; set; }
         public virtual ICollection<AerobneVjezbe> AerobneVjezbe { get; set; }
         public virtual ICollection<AnaerobneVjezbe> AnaerobneVjezbe { get; set; }
+        public virtual ICollection<ZagrijavanjeVjezba> ZagrijavanjeVjezba { get; set; }
     }
 }

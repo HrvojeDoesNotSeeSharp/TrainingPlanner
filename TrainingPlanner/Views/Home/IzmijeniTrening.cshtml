@@ -115,15 +115,15 @@
 
         @if (Model.ListaZagrijavanja == null)
         {
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1,  counter = 0 })">Dodaj zagrijavanje</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, sekcija = 0, refferer = "", counter = 0 })">Dodaj zagrijavanje</a>
         }
         else if (Model.ListaZagrijavanja.ToList().Count == 0)
         {
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new {id = Model.TreningId, izmijeni = 1, counter = 0})">Dodaj zagrijavanje</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, sekcija = 0, refferer = "", counter = 0 })">Dodaj zagrijavanje</a>
         }
         else
         {
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1,  counter = Model.ListaZagrijavanja.Count - 1 })">Dodaj zagrijavanje</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, sekcija = 0, refferer = "", counter = Model.ListaZagrijavanja.Count - 1 })">Dodaj zagrijavanje</a>
         }
 
         <!--Vjezbe-->
@@ -174,6 +174,7 @@
                         var brojacZaHeaderVjezbe = 0;
                         var brojacZaHeaderAerobneVjezbe = 0;
                         var brojacZaHeaderAnaerobneVjezbe = 0;
+                        var brojacZaHeaderZagrijavanje = 0;
                 }
                 @if (item.PopisVjezbi != null)
                     {
@@ -194,17 +195,21 @@
                             if (currentIndex > 0)
                             {
                                 var lastAddedItem = vjezbeList.ElementAt(currentIndex - 1);
-                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "A" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "N")
+                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "A" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "N" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "Z")
                                 {
                                     brojacZaHeaderVjezbe = 0;
                                 }
-                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "V" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "N")
+                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "V" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "N" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "Z")
                                 {
                                     brojacZaHeaderAerobneVjezbe = 0;
                                 }
-                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "V" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "A")
+                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "V" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "A" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "Z")
                                 {
                                     brojacZaHeaderAnaerobneVjezbe = 0;
+                                }
+                                if (lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "A" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "V" || lastAddedItem.Substring(lastAddedItem.Length - 1, 1) == "N")
+                                {
+                                    brojacZaHeaderZagrijavanje = 0;
                                 }
                             }
                             if (tablica == "V")
@@ -303,6 +308,36 @@
                         </tr>
                     </form>
                             }
+                            if (tablica == "Z")
+                            {
+                                if (brojacZaHeaderZagrijavanje == 0)
+                                {
+                                    <tr style="background-color:#C6C8C8;">
+                                        <td class="treningFont">Naziv</td>
+                                        <td class="treningFont">Puls</td>
+                                        <td class="treningFont">Tempo</td>
+                                        <td class="treningFont">Vrijeme trajanja</td>
+                                        <td class="treningFont">Napomena</td>
+                                    </tr>
+                                }
+                                var zvj = item.ZagrijavanjeVjezba.FirstOrDefault(x => x.ZagrijavanjeVjezbaId == Convert.ToInt32(vjezbaId));
+                                brojacZaHeaderZagrijavanje++;
+                                <form action="@Url.Action("SpremiZagrijavanjeUVjezbuInfo", "Home", new { izmijeni = 1 })#@i@sekcija" method="post">
+                                    <tr id="@z@vje" class="smallFont">
+                                        @Html.Hidden("id", Model.TreningId)
+                                        @Html.Hidden("VjezbaId", zvj.ZagrijavanjeVjezbaId)
+                                        <td>@zvj.Naziv</td>
+                                        <td>@Html.TextBox("Puls", zvj.Puls, new { @class = "marginInputBottom inputNumber" })</td>
+                                        <td>@Html.TextBox("Tempo", zvj.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
+                                        <td>@Html.TextBox("Trajanje", zvj.Trajanje, new { @class = "marginInputBottom inputNumber" })</td>
+                                        <td>@Html.TextBox("ZagrijavanjeNapomena", zvj.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
+
+                                        <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeIzVjezbeTrening", "Home", new { id = zvj.ZagrijavanjeVjezbaId, index = currentIndex, izmijeni = 1 })#0">Izbriši</a></td>
+                                        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zvj.ZagrijavanjePopisZagrijavanjeId1, izmijeni = 1, trening = 0, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
+                                        <td><input type="submit" name="SpremiZagrijavanjeUVjezbuInfo" value="Spremi" class="button_example_br" /></td>
+                                    </tr>
+                                </form>
+                            }
                         }
                     }
             </table>
@@ -312,18 +347,21 @@
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj aerobnu vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAnaerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj anaerobnu vježbu</a>
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj zagrijavanje</a>
                 }
                 else if (Model.SekcijaVjezbi.ToList().Count == 0)
                 {
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj vježbu</a>            
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj aerobnu vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAnaerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj anaerobnu vježbu</a>
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj zagrijavanje</a>
                 }
                 else
                 {
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = i })">Dodaj vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj aerobnu vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAnaerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj anaerobnu vježbu</a>
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId.ToString(), izmijeni = 1, counter = 0, refferer = "vjezba", sekcija = item.SekcijaId })">Dodaj zagrijavanje</a>
                 }
 
             <a class="marginLeft marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId, izmijeni = 1 })#0vje">Izbriši sekciju vježbi</a>

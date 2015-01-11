@@ -33,6 +33,7 @@
     <EntitySet Name="AerobneVjezbe" EntityType="TreningModel.Store.AerobneVjezbe" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AnaerobneVjezbe" EntityType="TreningModel.Store.AnaerobneVjezbe" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IstezanjeTreningTemplate" EntityType="TreningModel.Store.IstezanjeTreningTemplate" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ZagrijavanjeVjezbaSet" EntityType="TreningModel.Store.ZagrijavanjeVjezbaSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IstezanjeTreningTemplateIstezanjePopis" EntityType="TreningModel.Store.IstezanjeTreningTemplateIstezanjePopis" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ClanTrening" Association="TreningModel.Store.FK_ClanTrening">
       <End Role="Clan" EntitySet="Clan" />
@@ -142,6 +143,18 @@
       <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
       <End Role="IstezanjeTreningTemplateIstezanjePopis" EntitySet="IstezanjeTreningTemplateIstezanjePopis" />
     </AssociationSet>
+    <AssociationSet Name="ZagrijavanjeVjezbaTrening" Association="TreningModel.Store.ZagrijavanjeVjezbaTrening">
+      <End Role="ZagrijavanjeVjezba" EntitySet="ZagrijavanjeVjezbaSet" />
+      <End Role="Trening" EntitySet="Trening" />
+    </AssociationSet>
+    <AssociationSet Name="ZagrijavanjeVjezbaZagrijavanjePopis" Association="TreningModel.Store.ZagrijavanjeVjezbaZagrijavanjePopis">
+      <End Role="ZagrijavanjeVjezba" EntitySet="ZagrijavanjeVjezbaSet" />
+      <End Role="ZagrijavanjePopis" EntitySet="ZagrijavanjePopis" />
+    </AssociationSet>
+    <AssociationSet Name="ZagrijavanjeVjezbaSekcijaVjezbi" Association="TreningModel.Store.ZagrijavanjeVjezbaSekcijaVjezbi">
+      <End Role="ZagrijavanjeVjezba" EntitySet="ZagrijavanjeVjezbaSet" />
+      <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clan">
     <Key>
@@ -205,6 +218,7 @@
     <Property Name="ZagrijavanjeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Zagrijavanje">
     <Key>
@@ -219,6 +233,7 @@
     <Property Name="ZagrijavanjeNapomena" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="int" Nullable="false" />
     <Property Name="Trajanje" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Vjezba">
     <Key>
@@ -419,6 +434,22 @@
     </Key>
     <Property Name="IstezanjeTreningTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NazivPredloska" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ZagrijavanjeVjezbaSet">
+    <Key>
+      <PropertyRef Name="ZagrijavanjeVjezbaId" />
+    </Key>
+    <Property Name="ZagrijavanjeVjezbaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tempo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Puls" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ZagrijavanjeNapomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Trajanje" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Slika" Type="varbinary(max)" Nullable="true" />
+    <Property Name="TreningTreningId" Type="int" Nullable="false" />
+    <Property Name="ZagrijavanjePopisZagrijavanjeId1" Type="int" Nullable="false" />
+    <Property Name="SekcijaVjezbiSekcijaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="IstezanjeTreningTemplateIstezanjePopis">
     <Key>
@@ -728,6 +759,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ZagrijavanjeVjezbaTrening">
+    <End Role="ZagrijavanjeVjezba" Type="TreningModel.Store.ZagrijavanjeVjezbaSet" Multiplicity="*" />
+    <End Role="Trening" Type="TreningModel.Store.Trening" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Trening">
+        <PropertyRef Name="TreningId" />
+      </Principal>
+      <Dependent Role="ZagrijavanjeVjezba">
+        <PropertyRef Name="TreningTreningId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ZagrijavanjeVjezbaZagrijavanjePopis">
+    <End Role="ZagrijavanjeVjezba" Type="TreningModel.Store.ZagrijavanjeVjezbaSet" Multiplicity="*" />
+    <End Role="ZagrijavanjePopis" Type="TreningModel.Store.ZagrijavanjePopis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ZagrijavanjePopis">
+        <PropertyRef Name="ZagrijavanjeId" />
+      </Principal>
+      <Dependent Role="ZagrijavanjeVjezba">
+        <PropertyRef Name="ZagrijavanjePopisZagrijavanjeId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ZagrijavanjeVjezbaSekcijaVjezbi">
+    <End Role="ZagrijavanjeVjezba" Type="TreningModel.Store.ZagrijavanjeVjezbaSet" Multiplicity="*" />
+    <End Role="SekcijaVjezbi" Type="TreningModel.Store.SekcijaVjezbi" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SekcijaVjezbi">
+        <PropertyRef Name="SekcijaId" />
+      </Principal>
+      <Dependent Role="ZagrijavanjeVjezba">
+        <PropertyRef Name="SekcijaVjezbiSekcijaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IstezanjeTreningTemplateIstezanjePopis_IstezanjeTreningTemplate">
     <End Role="IstezanjeTreningTemplate" Type="TreningModel.Store.IstezanjeTreningTemplate" Multiplicity="1" />
     <End Role="IstezanjeTreningTemplateIstezanjePopis" Type="TreningModel.Store.IstezanjeTreningTemplateIstezanjePopis" Multiplicity="*" />
@@ -888,7 +955,20 @@
             <End Role="IstezanjeTreningTemplate" EntitySet="IstezanjeTreningTemplate" />
             <End Role="IstezanjePopis" EntitySet="IstezanjePopis" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="ZagrijavanjeVjezbaSet" EntityType="TreningModel.ZagrijavanjeVjezba" />
+          <AssociationSet Name="ZagrijavanjeVjezbaTrening" Association="TreningModel.ZagrijavanjeVjezbaTrening">
+            <End Role="ZagrijavanjeVjezba" EntitySet="ZagrijavanjeVjezbaSet" />
+            <End Role="Trening" EntitySet="Trening" />
+          </AssociationSet>
+          <AssociationSet Name="ZagrijavanjeVjezbaZagrijavanjePopis" Association="TreningModel.ZagrijavanjeVjezbaZagrijavanjePopis">
+            <End Role="ZagrijavanjeVjezba" EntitySet="ZagrijavanjeVjezbaSet" />
+            <End Role="ZagrijavanjePopis" EntitySet="ZagrijavanjePopis" />
+          </AssociationSet>
+          <AssociationSet Name="ZagrijavanjeVjezbaSekcijaVjezbi" Association="TreningModel.ZagrijavanjeVjezbaSekcijaVjezbi">
+            <End Role="ZagrijavanjeVjezba" EntitySet="ZagrijavanjeVjezbaSet" />
+            <End Role="SekcijaVjezbi" EntitySet="SekcijaVjezbi" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Clan">
           <Key>
             <PropertyRef Name="ClanId" />
@@ -939,6 +1019,7 @@
           <Property Name="NapomenaZagrijavanje" Type="String" Nullable="true" />
           <Property Name="NapomenaVjezba" Type="String" Nullable="true" />
           <Property Name="NapomenaIstezanje" Type="String" Nullable="true" />
+          <NavigationProperty Name="ZagrijavanjeVjezba" Relationship="TreningModel.ZagrijavanjeVjezbaTrening" FromRole="Trening" ToRole="ZagrijavanjeVjezba" />
         </EntityType>
         <Association Name="FK_ClanTrening">
           <End Type="TreningModel.Clan" Role="Clan" Multiplicity="1" />
@@ -983,6 +1064,8 @@
           <Property Type="String" Name="Info" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ZagrijavanjeSlike" Relationship="TreningModel.ZagrijavanjeSlikeZagrijavanjePopis" FromRole="ZagrijavanjePopis" ToRole="ZagrijavanjeSlike" />
           <NavigationProperty Name="Zagrijavanje" Relationship="TreningModel.ZagrijavanjeZagrijavanjePopis" FromRole="ZagrijavanjePopis" ToRole="Zagrijavanje" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="ZagrijavanjeVjezba" Relationship="TreningModel.ZagrijavanjeVjezbaZagrijavanjePopis" FromRole="ZagrijavanjePopis" ToRole="ZagrijavanjeVjezba" />
         </EntityType>
         <EntityType Name="Zagrijavanje">
           <Key>
@@ -999,6 +1082,7 @@
           <NavigationProperty Name="ZagrijavanjePopis" Relationship="TreningModel.ZagrijavanjeZagrijavanjePopis" FromRole="Zagrijavanje" ToRole="ZagrijavanjePopis" />
           <Property Name="ZagrijavanjePopisZagrijavanjeId" Type="Int32" Nullable="false" />
           <Property Name="Trajanje" Type="String" Nullable="true" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
         </EntityType>
         <EntityType Name="Vjezba">
           <Key>
@@ -1165,6 +1249,7 @@
           <NavigationProperty Name="AerobneVjezbe" Relationship="TreningModel.SekcijaVjezbiAerobneVjezbe" FromRole="SekcijaVjezbi" ToRole="AerobneVjezbe" />
           <NavigationProperty Name="AnaerobneVjezbe" Relationship="TreningModel.AnaerobneVjezbeSekcijaVjezbi" FromRole="SekcijaVjezbi" ToRole="AnaerobneVjezbe" />
           <Property Name="PopisVjezbi" Type="String" Nullable="true" />
+          <NavigationProperty Name="ZagrijavanjeVjezba" Relationship="TreningModel.ZagrijavanjeVjezbaSekcijaVjezbi" FromRole="SekcijaVjezbi" ToRole="ZagrijavanjeVjezba" />
         </EntityType>
         <Association Name="TreningSekcijaVjezbi">
           <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
@@ -1522,7 +1607,62 @@
           <End Type="TreningModel.IstezanjeTreningTemplate" Role="IstezanjeTreningTemplate" Multiplicity="*" />
           <End Type="TreningModel.IstezanjePopis" Role="IstezanjePopis" Multiplicity="*" />
         </Association>
-      </Schema>
+        <EntityType Name="ZagrijavanjeVjezba">
+          <Key>
+            <PropertyRef Name="ZagrijavanjeVjezbaId" />
+          </Key>
+          <Property Name="ZagrijavanjeVjezbaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Info" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tempo" Type="String" Nullable="true" />
+          <Property Name="Puls" Type="String" Nullable="true" />
+          <Property Name="ZagrijavanjeNapomena" Type="String" Nullable="true" />
+          <Property Name="Trajanje" Type="String" Nullable="true" />
+          <Property Name="Slika" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="Trening" Relationship="TreningModel.ZagrijavanjeVjezbaTrening" FromRole="ZagrijavanjeVjezba" ToRole="Trening" />
+          <Property Name="TreningTreningId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ZagrijavanjePopis" Relationship="TreningModel.ZagrijavanjeVjezbaZagrijavanjePopis" FromRole="ZagrijavanjeVjezba" ToRole="ZagrijavanjePopis" />
+          <Property Name="ZagrijavanjePopisZagrijavanjeId1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SekcijaVjezbi" Relationship="TreningModel.ZagrijavanjeVjezbaSekcijaVjezbi" FromRole="ZagrijavanjeVjezba" ToRole="SekcijaVjezbi" />
+          <Property Name="SekcijaVjezbiSekcijaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ZagrijavanjeVjezbaTrening">
+          <End Type="TreningModel.ZagrijavanjeVjezba" Role="ZagrijavanjeVjezba" Multiplicity="*" />
+          <End Type="TreningModel.Trening" Role="Trening" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Trening">
+              <PropertyRef Name="TreningId" />
+            </Principal>
+            <Dependent Role="ZagrijavanjeVjezba">
+              <PropertyRef Name="TreningTreningId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ZagrijavanjeVjezbaZagrijavanjePopis">
+          <End Type="TreningModel.ZagrijavanjeVjezba" Role="ZagrijavanjeVjezba" Multiplicity="*" />
+          <End Type="TreningModel.ZagrijavanjePopis" Role="ZagrijavanjePopis" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ZagrijavanjePopis">
+              <PropertyRef Name="ZagrijavanjeId" />
+            </Principal>
+            <Dependent Role="ZagrijavanjeVjezba">
+              <PropertyRef Name="ZagrijavanjePopisZagrijavanjeId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ZagrijavanjeVjezbaSekcijaVjezbi">
+          <End Type="TreningModel.ZagrijavanjeVjezba" Role="ZagrijavanjeVjezba" Multiplicity="*" />
+          <End Type="TreningModel.SekcijaVjezbi" Role="SekcijaVjezbi" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="SekcijaVjezbi">
+              <PropertyRef Name="SekcijaId" />
+            </Principal>
+            <Dependent Role="ZagrijavanjeVjezba">
+              <PropertyRef Name="SekcijaVjezbiSekcijaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1594,6 +1734,7 @@
           <ScalarProperty Name="ZagrijavanjeId" ColumnName="ZagrijavanjeId" />
           <ScalarProperty Name="Naziv" ColumnName="Naziv" />
           <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1609,6 +1750,7 @@
           <ScalarProperty Name="ZagrijavanjeNapomena" ColumnName="ZagrijavanjeNapomena" />
           <ScalarProperty Name="ZagrijavanjePopisZagrijavanjeId" ColumnName="ZagrijavanjePopisZagrijavanjeId" />
           <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1829,6 +1971,23 @@
         <MappingFragment StoreEntitySet="IstezanjeTreningTemplate">
           <ScalarProperty Name="IstezanjeTreningTemplateId" ColumnName="IstezanjeTreningTemplateId" />
           <ScalarProperty Name="NazivPredloska" ColumnName="NazivPredloska" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZagrijavanjeVjezbaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TreningModel.ZagrijavanjeVjezba)">
+        <MappingFragment StoreEntitySet="ZagrijavanjeVjezbaSet">
+          <ScalarProperty Name="ZagrijavanjeVjezbaId" ColumnName="ZagrijavanjeVjezbaId" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Tempo" ColumnName="Tempo" />
+          <ScalarProperty Name="Puls" ColumnName="Puls" />
+          <ScalarProperty Name="ZagrijavanjeNapomena" ColumnName="ZagrijavanjeNapomena" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="TreningTreningId" ColumnName="TreningTreningId" />
+          <ScalarProperty Name="ZagrijavanjePopisZagrijavanjeId1" ColumnName="ZagrijavanjePopisZagrijavanjeId1" />
+          <ScalarProperty Name="SekcijaVjezbiSekcijaId" ColumnName="SekcijaVjezbiSekcijaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
