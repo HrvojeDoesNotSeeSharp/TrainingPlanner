@@ -237,6 +237,7 @@
                                         <td class="treningFont">Puls</td>
                                         <td class="treningFont">Tempo</td>
                                         <td class="treningFont">Trajanje</td>
+                                        <td class="treningFont">Odmor</td>
                                         <td class="treningFont">Napomena</td>
                                     </tr>
                                 }
@@ -250,8 +251,9 @@
                                         <td>@Html.TextBox("Puls", avj.Puls, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("Tempo", avj.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("Trajanje", avj.Trajanje, new { @class = "marginInputBottom inputNumber" })</td>
+                                        <td>@Html.TextBox("Odmor", avj.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("ANapomena", avj.Napomena, new { @class = "marginInputBottom inputNumber" })</td>
-
+                                        
                                         <td><a class="button_example_br" href="@Url.Action("IzbrisiAerobnuVjezbuTrening", "Home", new { id = avj.AerobnaVjezbaId, index = currentIndex })#@i@sekcija">Izbriši</a></td>
                                         <td>@Html.ActionLink("Detalji", "DetaljiAerobneVjezbe", "Home", new { id = avj.AerobneVjezbePopisAerobnaVjezbaId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
                                         <td><input type="submit" name="SpremiAerobnuVjezbuInfo" value="Spremi" class="button_example_br" /></td>
@@ -314,6 +316,7 @@
                                         <td>@Html.TextBox("Puls", zvj.Puls, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("Tempo", zvj.Tempo, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("Trajanje", zvj.Trajanje, new { @class = "marginInputBottom inputNumber" })</td>
+                                        <td>@Html.TextBox("Odmor", zvj.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("ZagrijavanjeNapomena", zvj.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
                                         <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeIzVjezbeTrening", "Home", new { id = zvj.ZagrijavanjeVjezbaId, index = currentIndex })#0">Izbriši</a></td>

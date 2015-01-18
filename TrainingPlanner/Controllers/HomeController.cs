@@ -491,7 +491,7 @@ namespace TrainingPlanner.Controllers
                              select x;
                 foreach (AerobneVjezbe a in aerobnevjezbe.ToList())
                 {
-                    a.Ime = avjp.Naziv;
+                    a.Naziv = avjp.Naziv;
                     a.Info = avjp.Info;
                     _context.Entry(a).State = EntityState.Modified;
                 }
@@ -693,7 +693,7 @@ namespace TrainingPlanner.Controllers
                                       select x;
                 foreach (AnaerobneVjezbe an in anaerobnevjezbe.ToList())
                 {
-                    an.Ime = avjp.Naziv;
+                    an.Naziv = avjp.Naziv;
                     an.Info = avjp.Info;
                     _context.Entry(an).State = EntityState.Modified;
                 }
@@ -1516,7 +1516,11 @@ namespace TrainingPlanner.Controllers
                                       where x.ClanClanId == id
                                       select x;
 
-            var ctm = new ClanTestModel { Clan = c, ListaTest = queryTest.ToList(), ListAntropometrija = queryAntropometrija.ToList() };
+            var queryAmneza = from x in _context.Amneza
+                                      where x.ClanClanId == id
+                                      select x;
+
+            var ctm = new ClanTestModel { Clan = c, ListaTest = queryTest.ToList(), ListAntropometrija = queryAntropometrija.ToList(), ListaAmneza = queryAmneza.ToList() };
 
             return View(ctm);
         }
@@ -2871,7 +2875,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SpremiAerobnuVjezbuInfo(string Puls, string Tempo = null, string Trajanje = null,
+        public ActionResult SpremiAerobnuVjezbuInfo(string Puls, string Tempo = null, string Trajanje = null, string Odmor = null,
             string ANapomena = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
         {
             var query = from x in _context.AerobneVjezbe
@@ -2882,6 +2886,7 @@ namespace TrainingPlanner.Controllers
             vj.Puls = Puls;
             vj.Tempo = Tempo;
             vj.Trajanje = Trajanje;
+            vj.Odmor = Odmor;
             vj.Napomena = ANapomena;
 
             _context.Entry(vj).State = EntityState.Modified;
@@ -2916,7 +2921,7 @@ namespace TrainingPlanner.Controllers
         }
 
         public ActionResult SpremiZagrijavanjeUVjezbuInfo(string Puls = null, string Tempo = null,
-            string Trajanje = null, string ZagrijavanjeNapomena = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
+            string Trajanje = null, string Odmor = null, string ZagrijavanjeNapomena = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
         {
             var query = from x in _context.ZagrijavanjeVjezbaSet
                         where x.ZagrijavanjeVjezbaId == vjezbaId
@@ -2926,6 +2931,7 @@ namespace TrainingPlanner.Controllers
             vj.Puls = Puls;
             vj.Tempo = Tempo;
             vj.Trajanje = Trajanje;
+            vj.Odmor = Odmor;
             vj.ZagrijavanjeNapomena = ZagrijavanjeNapomena;
 
             _context.Entry(vj).State = EntityState.Modified;

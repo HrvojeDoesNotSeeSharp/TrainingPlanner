@@ -29,6 +29,7 @@
         </div>
         
         @Html.ActionLink("Natrag", "Amneza", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
+        @Html.ActionLink("Detalji o članu", "DetaljiClana", "Home", new { id = Model.ClanClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
     @if (Model.AmnezaSlike.Count > 0)
     {

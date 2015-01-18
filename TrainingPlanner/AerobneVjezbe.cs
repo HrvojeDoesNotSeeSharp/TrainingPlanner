@@ -22,9 +22,9 @@ namespace TrainingPlanner
         public string Napomena { get; set; }
         public int SekcijaVjezbiSekcijaId { get; set; }
         public int AerobneVjezbePopisAerobnaVjezbaId { get; set; }
-        public string Ime { get; set; }
         public string Info { get; set; }
         public byte[] Slika { get; set; }
+        public string Odmor { get; set; }
     
         public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
         public virtual AerobneVjezbePopis AerobneVjezbePopis { get; set; }
