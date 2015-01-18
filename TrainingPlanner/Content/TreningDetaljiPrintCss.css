@@ -1,0 +1,44 @@
+﻿body {
+}
+
+.page {
+    font-size:14px;
+}
+
+.subpage {
+    font-size:14px;
+}
+
+table {
+    width: auto;
+    height: auto;
+    font-size:13px;
+    border:1px dotted;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align:center;
+    width: 56px;
+    height:50px;
+}
+
+.noborder{
+    border:none;
+    font-size: 16px;
+    width:33%;
+    text-align:center;
+}
+
+hr {
+    width:620px;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
