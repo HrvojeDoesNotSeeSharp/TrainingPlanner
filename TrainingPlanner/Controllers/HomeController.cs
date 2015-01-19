@@ -369,7 +369,6 @@ namespace TrainingPlanner.Controllers
                     }
                 }
 
-
                 //provjeri da li je ova VjezbePopis vezana za neku Vjezba i update sve Vjezba (Trening dio)
                 var vjezbe = from x in _context.Vjezba
                              join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
@@ -1995,13 +1994,8 @@ namespace TrainingPlanner.Controllers
             {
                 if (tr.ImeTreninga == null)
                 {
-                    var query5 = from x in _context.Trening
-                                 join z in _context.ZagrijavanjeVjezbaSet on x.TreningId equals z.TreningTreningId
-                                 where x.TreningId == tr.TreningId
-                                 select z;
-
-                    var query4 = from x in _context.Trening
-                                 join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
+                    var query6 = from x in _context.Trening
+                                 join z in _context.ZagrijavanjeSkupina on x.TreningId equals z.TreningTreningId
                                  where x.TreningId == tr.TreningId
                                  select z;
 
@@ -2014,16 +2008,6 @@ namespace TrainingPlanner.Controllers
                                  join i in _context.Istezanje on x.TreningId equals i.TreningId
                                  where x.TreningId == tr.TreningId
                                  select i;
-
-                    foreach (var a in query5.ToList())
-                    {
-                        _context.ZagrijavanjeVjezbaSet.Remove(a);
-                    }
-
-                    foreach (var a in query4.ToList())
-                    {
-                        _context.Zagrijavanje.Remove(a);
-                    }
 
                     foreach (SekcijaVjezbi a in query2.ToList())
                     {
@@ -2039,7 +2023,24 @@ namespace TrainingPlanner.Controllers
                         {
                             _context.AnaerobneVjezbe.Remove(nvj);
                         }
+                        foreach (ZagrijavanjeVjezba zvj in a.ZagrijavanjeVjezba.ToList())
+                        {
+                            _context.ZagrijavanjeVjezbaSet.Remove(zvj);
+                        }
                         _context.SekcijaVjezbi.Remove(a);
+                    }
+
+                    foreach (ZagrijavanjeSkupina zs in query6.ToList())
+                    {
+                        foreach(Zagrijavanje z in zs.Zagrijavanje.ToList())
+                        {
+                            _context.Zagrijavanje.Remove(z);
+                        }
+                        foreach (VjezbaZagrijavanje vz in zs.VjezbaZagrijavanje.ToList())
+                        {
+                            _context.VjezbaZagrijavanjeSet.Remove(vz);
+                        }
+                        _context.ZagrijavanjeSkupina.Remove(zs);
                     }
 
                     foreach (var a in query3.ToList())
@@ -2081,7 +2082,7 @@ namespace TrainingPlanner.Controllers
                         select new { x, y };
 
             var query1 = from x in _context.Trening
-                         join z in _context.Zagrijavanje on x.TreningId equals z.TreningId
+                         join z in _context.ZagrijavanjeSkupina on x.TreningId equals z.TreningTreningId
                          where x.TreningId == id
                          select z;
 
@@ -2095,11 +2096,6 @@ namespace TrainingPlanner.Controllers
                          where x.TreningId == id
                          select i;
 
-            var query4 = from x in _context.Trening
-                         join z in _context.ZagrijavanjeVjezbaSet on x.TreningId equals z.TreningTreningId
-                         where x.TreningId == id
-                         select z;
-
             var firstOrDefault = query.FirstOrDefault();
             if (firstOrDefault != null)
             {
@@ -2107,7 +2103,15 @@ namespace TrainingPlanner.Controllers
 
                 foreach (var a in query1.ToList())
                 {
-                    _context.Zagrijavanje.Remove(a);
+                    foreach(Zagrijavanje z in a.Zagrijavanje.ToList())
+                    {
+                        _context.Zagrijavanje.Remove(z);
+                    }
+                    foreach(VjezbaZagrijavanje vz in a.VjezbaZagrijavanje.ToList())
+                    {
+                        _context.VjezbaZagrijavanjeSet.Remove(vz);
+                    }
+                    _context.ZagrijavanjeSkupina.Remove(a);
                 }
 
                 foreach (var a in query2.ToList())
@@ -2124,17 +2128,16 @@ namespace TrainingPlanner.Controllers
                     {
                         _context.AnaerobneVjezbe.Remove(nvj);
                     }
+                    foreach (ZagrijavanjeVjezba zvj in a.ZagrijavanjeVjezba.ToList())
+                    {
+                        _context.ZagrijavanjeVjezbaSet.Remove(zvj);
+                    }
                     _context.SekcijaVjezbi.Remove(a);
                 }
 
                 foreach (var a in query3.ToList())
                 {
                     _context.Istezanje.Remove(a);
-                }
-
-                foreach (var a in query4.ToList())
-                {
-                    _context.ZagrijavanjeVjezbaSet.Remove(a);
                 }
 
                 var tr = firstOrDefault.x;
@@ -2327,12 +2330,12 @@ namespace TrainingPlanner.Controllers
             {
                 trm.TreningId = id;
 
-                var query4 = from x in _context.Zagrijavanje
-                             join y in _context.Trening on x.TreningId equals y.TreningId
+                var query5 = from x in _context.ZagrijavanjeSkupina
+                             join y in _context.Trening on x.TreningTreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaZagrijavanja = query4.ToList();
+                trm.ZagrijavanjeSkupina = query5.ToList();
 
                 var query3 = from x in _context.Istezanje
                              join y in _context.Trening on x.TreningId equals y.TreningId
@@ -2363,12 +2366,12 @@ namespace TrainingPlanner.Controllers
             {
                 trm.TreningId = id;
 
-                var query4 = from x in _context.Zagrijavanje
-                             join y in _context.Trening on x.TreningId equals y.TreningId
+                var query5 = from x in _context.ZagrijavanjeSkupina
+                             join y in _context.Trening on x.TreningTreningId equals y.TreningId
                              where y.TreningId == id
                              select x;
 
-                trm.ListaZagrijavanja = query4.ToList();
+                trm.ZagrijavanjeSkupina = query5.ToList();
 
                 var query3 = from x in _context.Istezanje
                              join y in _context.Trening on x.TreningId equals y.TreningId
@@ -2419,7 +2422,7 @@ namespace TrainingPlanner.Controllers
             }
 
             _context.Entry(tr).State = EntityState.Modified;
-            _context.SaveChanges();
+            _context.SaveChanges();            
 
             return RedirectToAction("TreningPopis", new { id = tr.ClanId });
         }
@@ -2443,7 +2446,7 @@ namespace TrainingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0, int counter = 0)
+        public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0, int counter = 0, int skupina = 0)
         {
             var query = from x in _context.ZagrijavanjePopis
                         where x.ZagrijavanjeId == zgpId
@@ -2451,7 +2454,20 @@ namespace TrainingPlanner.Controllers
 
             var zgp = query.Single();
 
-            var zg = new Zagrijavanje { Naziv = zgp.Naziv, TreningId = id, ZagrijavanjePopisZagrijavanjeId = zgpId};
+            if (skupina == 0)
+            { 
+                var skupina1 = new ZagrijavanjeSkupina { TreningTreningId = id };
+                _context.ZagrijavanjeSkupina.Add(skupina1);
+                _context.SaveChanges();
+            }
+
+            var query1 = from x in _context.ZagrijavanjeSkupina
+                         where x.TreningTreningId == id
+                         select x.ZagrijavanjeSkupinaId;
+
+            var sId = Convert.ToInt32(query1.FirstOrDefault());
+
+            var zg = new Zagrijavanje { Naziv = zgp.Naziv, TreningId = id, ZagrijavanjePopisZagrijavanjeId = zgpId, ZagrijavanjeSkupinaZagrijavanjeSkupinaId  = sId };
             if (zgp.Info != null)
             {
                 zg.Info = zgp.Info;
@@ -2460,18 +2476,48 @@ namespace TrainingPlanner.Controllers
             _context.Zagrijavanje.Add(zg);
             _context.SaveChanges();
 
+            var idVjezba = zg.ZagrijavanjeId + "ZZ,";
+            var sekcija = _context.ZagrijavanjeSkupina.Find(sId);
+
+            if (sekcija.PopisZagrijavanja != null)
+            {
+                sekcija.PopisZagrijavanja = sekcija.PopisZagrijavanja.ToString() + idVjezba.ToString();
+            }
+            else
+            {
+                sekcija.PopisZagrijavanja = idVjezba.ToString();
+            }
+
+            _context.Entry(sekcija).State = EntityState.Modified;
+            _context.SaveChanges();
+            
             ViewData["izmijeni"] = zgpIzmijeni;
             ViewData["counter"] = counter;
+            ViewData["skupina"] = skupina;
             return zgpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new { id })
                 : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
-        public ActionResult IzbrisiZagrijavanjeTrening(int id = 0, int izmijeni = 0)
+        public ActionResult IzbrisiZagrijavanjeTrening(int id = 0, int izmijeni = 0, int index = 0)
         {
             var zg = _context.Zagrijavanje.Find(id);
-            id = zg.TreningId;
+
+            var sku = _context.ZagrijavanjeSkupina.Find(zg.ZagrijavanjeSkupinaZagrijavanjeSkupinaId);
+            id = sku.TreningTreningId;
+            var zgIds = sku.PopisZagrijavanja.ToString();
+            List<string> ZagrijavanjaList = new List<string>();
+
+            foreach (string zagrijavanjeId in zgIds.Split(','))
+            {
+                ZagrijavanjaList.Add(zagrijavanjeId);
+            }
+            ZagrijavanjaList.RemoveAt(index);
+            string novaLista = string.Join(",", ZagrijavanjaList.ToArray());
+            sku.PopisZagrijavanja = novaLista;
+            _context.Entry(sku).State = EntityState.Modified;
+            _context.SaveChanges();
             _context.Zagrijavanje.Remove(zg);
             _context.SaveChanges();
 
@@ -2505,7 +2551,7 @@ namespace TrainingPlanner.Controllers
 
         #region VjezbeTrening
         [HttpGet]
-        public ActionResult DodajVjezbuTrening(int id, string id1, int izmijeni = 0, int counter = 0)
+        public ActionResult DodajVjezbuTrening(int id, string id1, int izmijeni = 0, int counter = 0, int skupina = 0, string refferer = "")
         {
             var vj = new VjezbePopisLista
             {
@@ -2518,11 +2564,13 @@ namespace TrainingPlanner.Controllers
             ViewData["id1"] = id1;
             ViewData["counter"] = counter;
             ViewData["id"] = "sek";
+            ViewData["skupina"] = skupina;
+            ViewData["refferer"] = refferer;
             return View(vj);
         }
 
         [HttpPost]
-        public ActionResult DodajVjezbuTrening(int vjpId = 0, int id = 0, int vjpIzmijeni = 0, int counter = 0)
+        public ActionResult DodajVjezbuTrening(int id = 0, int vjpId = 0, int id1 = 0, int vjpIzmijeni = 0, int counter = 0)
         {
             var query = from x in _context.VjezbePopis
                         where x.VjezbeId == vjpId
@@ -2530,6 +2578,7 @@ namespace TrainingPlanner.Controllers
 
             var vjp = query.Single();
 
+            
             var vj = new Vjezba { ImeVjezbe = vjp.ImeVjezbe, SekcijaId = id, VjezbePopisVjezbeId = vjpId };
             if (vjp.Info != null)
             {
@@ -2542,6 +2591,7 @@ namespace TrainingPlanner.Controllers
 
             _context.Vjezba.Add(vj);
             _context.SaveChanges();
+
             var idVjezba = vj.VjezbaId + "V,";
             var sekcija = _context.SekcijaVjezbi.Find(id);
 
@@ -2555,13 +2605,76 @@ namespace TrainingPlanner.Controllers
             }
             _context.Entry(sekcija).State = EntityState.Modified;
             _context.SaveChanges();
-            
+
             var trening = _context.Trening.Find(sekcija.TreningId);
+            id = trening.TreningId;
+  
+            ViewData["izmijeni"] = vjpIzmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "sek";            
+
+            return vjpIzmijeni != 0
+                ? RedirectToAction("IzmijeniTrening", new { id })
+                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpPost]
+        public ActionResult DodajVjezbuUZagrijavanjeTrening(int id = 0, int vjpId = 0, int id1 = 0, int vjpIzmijeni = 0, int counter = 0, int skupina = 0, string refferer = "")
+        {
+            var query = from x in _context.VjezbePopis
+                        where x.VjezbeId == vjpId
+                        select x;
+
+            var vjp = query.Single();
+
+            if(skupina == 0 && refferer == "zagrijavanje")
+            {
+                var zskupina = new ZagrijavanjeSkupina { TreningTreningId = id1 };
+                _context.ZagrijavanjeSkupina.Add(zskupina);
+                _context.SaveChanges();   
+            }
+
+            var query1 = from x in _context.ZagrijavanjeSkupina
+                        where x.TreningTreningId == id1
+                        select x.ZagrijavanjeSkupinaId;
+
+            var sId = Convert.ToInt32(query1.FirstOrDefault());
+
+            var vj = new VjezbaZagrijavanje { ImeVjezbe = vjp.ImeVjezbe, ZagrijavanjeSkupinaZagrijavanjeSkupinaId = sId, VjezbePopisVjezbeId = vjpId };
+
+            if (vjp.Info != null)
+            {
+                vj.Info = vjp.Info;
+            }
+            if (vjp.Slika != null)
+            {
+                vj.Slika = vjp.Slika;
+            }
+
+            _context.VjezbaZagrijavanjeSet.Add(vj);
+            _context.SaveChanges();
+
+            var idVjezba = vj.VjezbaId + "ZV,";
+            var skupina1 = _context.ZagrijavanjeSkupina.Find(sId);
+
+            if (skupina1.PopisZagrijavanja != null)
+            {
+                skupina1.PopisZagrijavanja = skupina1.PopisZagrijavanja.ToString() + idVjezba.ToString();
+            }
+            else
+            {
+                skupina1.PopisZagrijavanja = idVjezba.ToString();
+            }
+            _context.Entry(skupina1).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            var trening = _context.Trening.Find(skupina1.TreningTreningId);
             id = trening.TreningId;
 
             ViewData["izmijeni"] = vjpIzmijeni;
             ViewData["counter"] = counter;
-            ViewData["id"] = "sek";            
+            ViewData["skupina"] = skupina;
+            ViewData["id"] = "sek";
 
             return vjpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new { id })
@@ -2763,8 +2876,35 @@ namespace TrainingPlanner.Controllers
             _context.SaveChanges();
 
             return izmijeni != 0
-                ? RedirectToAction("IzmijeniTrening", new { id })
-                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+            ? RedirectToAction("IzmijeniTrening", new { id })
+            : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
+        }
+
+        [HttpGet]
+        public ActionResult IzbrisiVjezbuIzZagrijavanjaTrening(int id = 0, int index = 0, int izmijeni = 0)
+        {
+            var vjz = _context.VjezbaZagrijavanjeSet.Find(id);
+            var sku = _context.ZagrijavanjeSkupina.Find(vjz.ZagrijavanjeSkupinaZagrijavanjeSkupinaId);
+            id = sku.TreningTreningId;
+
+            var vjzIds = sku.PopisZagrijavanja.ToString();
+            List<string> vjezbeZagrijavanjaList = new List<string>();
+            foreach (string vjezbaZagrijavanjeId in vjzIds.Split(','))
+            {
+                vjezbeZagrijavanjaList.Add(vjezbaZagrijavanjeId);
+            }
+            vjezbeZagrijavanjaList.RemoveAt(index);
+
+            string novaLista = string.Join(",", vjezbeZagrijavanjaList.ToArray());
+            sku.PopisZagrijavanja = novaLista;
+            _context.Entry(sku).State = EntityState.Modified;
+            _context.SaveChanges();
+            _context.VjezbaZagrijavanjeSet.Remove(vjz);
+            _context.SaveChanges();
+
+            return izmijeni != 0
+            ? RedirectToAction("IzmijeniTrening", new { id })
+            : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
 
         [HttpGet]
@@ -2850,21 +2990,39 @@ namespace TrainingPlanner.Controllers
 
         [HttpPost]
         public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string brojSerija = null, string tezina = null,
-            string odmor = null, int id = 0, int vjezbaId = 0, int izmijeni = 0)
+            string odmor = null, int id = 0, int vjezbaId = 0, int izmijeni = 0, string refferer = "")
         {
-            var query = from x in _context.Vjezba
-                        where x.VjezbaId == vjezbaId
-                        select x;
+            if (refferer == "zagrijavanje")
+            { 
+                var query1 = from x in _context.VjezbaZagrijavanjeSet
+                             where x.VjezbaId == vjezbaId
+                             select x;
+                var vj = query1.Single();
 
-            var vj = query.Single();
-            vj.BrojPonavljanja = brojPonavljanja;
-            vj.BrojSerija = brojSerija;
-            vj.Kilogrami = tezina;
-            vj.Odmor = odmor;
+                vj.BrojPonavljanja = brojPonavljanja;
+                vj.BrojSerija = brojSerija;
+                vj.Kilogrami = tezina;
+                vj.Odmor = odmor;
 
-            _context.Entry(vj).State = EntityState.Modified;
-            _context.SaveChanges();
+                _context.Entry(vj).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            else
+            {
+                var query = from x in _context.Vjezba
+                            where x.VjezbaId == vjezbaId
+                            select x;
+                var vj = query.Single();
 
+                vj.BrojPonavljanja = brojPonavljanja;
+                vj.BrojSerija = brojSerija;
+                vj.Kilogrami = tezina;
+                vj.Odmor = odmor;
+
+                _context.Entry(vj).State = EntityState.Modified;
+                _context.SaveChanges();
+            }     
+            
             return izmijeni != 0
                ? RedirectToAction("IzmijeniTrening", new { id })
                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
@@ -3135,8 +3293,7 @@ namespace TrainingPlanner.Controllers
                ? RedirectToAction("IzmijeniTrening", new { id })
                : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
         }
-        #endregion SekcijeTrening
-      
+        #endregion SekcijeTrening      
     }
 
     //klasa za nested forme

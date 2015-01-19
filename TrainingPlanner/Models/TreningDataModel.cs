@@ -37,6 +37,9 @@ namespace TrainingPlanner.Models
         /*Istezanje tablica*/
         public List<Istezanje> ListaIstezanja { get; set; }
 
+        /*ZagrijavanjeSkupina tablica*/
+        public List<ZagrijavanjeSkupina> ZagrijavanjeSkupina { get; set; }
+
         public string Napomena { get; set; }
     }
 }

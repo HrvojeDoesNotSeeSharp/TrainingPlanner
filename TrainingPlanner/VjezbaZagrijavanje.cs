@@ -12,22 +12,20 @@ namespace TrainingPlanner
     using System;
     using System.Collections.Generic;
     
-    public partial class Zagrijavanje
+    public partial class VjezbaZagrijavanje
     {
-        public int ZagrijavanjeId { get; set; }
-        public string Naziv { get; set; }
-        public string Info { get; set; }
-        public int TreningId { get; set; }
-        public string Tempo { get; set; }
-        public string Puls { get; set; }
-        public string ZagrijavanjeNapomena { get; set; }
-        public int ZagrijavanjePopisZagrijavanjeId { get; set; }
-        public string Trajanje { get; set; }
+        public int VjezbaId { get; set; }
+        public string ImeVjezbe { get; set; }
         public byte[] Slika { get; set; }
+        public string Info { get; set; }
+        public string BrojPonavljanja { get; set; }
+        public string BrojSerija { get; set; }
+        public string Kilogrami { get; set; }
+        public string Odmor { get; set; }
+        public int VjezbePopisVjezbeId { get; set; }
         public int ZagrijavanjeSkupinaZagrijavanjeSkupinaId { get; set; }
     
-        public virtual Trening Trening { get; set; }
-        public virtual ZagrijavanjePopis ZagrijavanjePopis { get; set; }
+        public virtual VjezbePopis VjezbePopis { get; set; }
         public virtual ZagrijavanjeSkupina ZagrijavanjeSkupina { get; set; }
     }
 }

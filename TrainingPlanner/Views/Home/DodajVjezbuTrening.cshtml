@@ -3,6 +3,18 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var refferer = ViewData["refferer"];
+    var action = "";
+    var skId = 0;
+    if (refferer.Equals("zagrijavanje"))
+    {
+        action = "DodajVjezbuUZagrijavanjeTrening";
+        skId = (int)ViewData["skupina"];
+    }
+    else
+    {
+        action = "DodajVjezbuTrening";
+    }
 }
 
 <div id="contentImg">
@@ -17,7 +29,7 @@
 
         @foreach (VjezbePopis vjp in Model.VjezbePopis)
         {
-            <form action="@Url.Action("DodajVjezbuTrening", "Home", new { id = Model.SekcijaId })#@ViewData["counter"]@ViewData["id"]" method="post">
+            <form action="@Url.Action(action, "Home", new { id = Model.SekcijaId, skupina = skId, id1 = ViewData["id1"], refferer = ViewData["refferer"] })#@ViewData["counter"]@ViewData["id"]" method="post">
                 @Html.Hidden("vjpIzmijeni", Model.Izmijeni)
                 @Html.Hidden("vjpID", vjp.VjezbeId)
                 <tr>

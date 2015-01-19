@@ -6,30 +6,26 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using TrainingPlanner.Models;
 
 namespace TrainingPlanner
 {
-    [MetadataType(typeof(VjezbePopisMetadata))]
-    public partial class VjezbePopis
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class ZagrijavanjeSkupina
     {
-        public VjezbePopis()
+        public ZagrijavanjeSkupina()
         {
-            this.VjezbeSlike = new HashSet<VjezbeSlike>();
-            this.Vjezba = new HashSet<Vjezba>();
+            this.Zagrijavanje = new HashSet<Zagrijavanje>();
             this.VjezbaZagrijavanje = new HashSet<VjezbaZagrijavanje>();
         }
     
-        public int VjezbeId { get; set; }
-        public string ImeVjezbe { get; set; }
-        public byte[] Slika { get; set; }
-        public string Info { get; set; }
+        public int ZagrijavanjeSkupinaId { get; set; }
+        public string PopisZagrijavanja { get; set; }
+        public int TreningTreningId { get; set; }
     
-        public virtual ICollection<VjezbeSlike> VjezbeSlike { get; set; }
-        public virtual ICollection<Vjezba> Vjezba { get; set; }
+        public virtual ICollection<Zagrijavanje> Zagrijavanje { get; set; }
+        public virtual Trening Trening { get; set; }
         public virtual ICollection<VjezbaZagrijavanje> VjezbaZagrijavanje { get; set; }
     }
 }

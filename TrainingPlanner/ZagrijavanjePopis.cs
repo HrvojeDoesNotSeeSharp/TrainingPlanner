@@ -15,6 +15,7 @@ namespace TrainingPlanner
     using TrainingPlanner.Models;
 
     [MetadataType(typeof(ZagrijavanjePopisMetadata))]
+    
     public partial class ZagrijavanjePopis
     {
         public ZagrijavanjePopis()

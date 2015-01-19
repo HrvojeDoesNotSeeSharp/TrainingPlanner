@@ -221,6 +221,9 @@
     <Compile Include="Vjezba.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="VjezbaZagrijavanje.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="VjezbePopis.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
@@ -231,6 +234,9 @@
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZagrijavanjePopis.cs">
+      <DependentUpon>TreningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZagrijavanjeSkupina.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZagrijavanjeSlike.cs">
