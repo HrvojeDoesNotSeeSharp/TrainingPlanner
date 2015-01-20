@@ -81,10 +81,11 @@
                                 <td>@zag.Puls</td>
                                 <td>@zag.Tempo</td>
                                 <td>@zag.Trajanje</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisZagrijavanja.Contains("VZ")){
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>}
                                 <td>@zag.ZagrijavanjeNapomena</td>
                                 @if (zag.ZagrijavanjePopis.ZagrijavanjeSlike.Count > 0  )
                                 {
@@ -100,7 +101,7 @@
                                 }
                                 else
                                 {
-                                    <td>--</td>
+                                    <td>-</td>
                                 }
                             </tr>
                         }
@@ -110,20 +111,21 @@
                             var vjzag = item.VjezbaZagrijavanje.FirstOrDefault(x => x.VjezbaId == Convert.ToInt32(zagId));
                             <tr>
                                 <td>@vjzag.ImeVjezbe</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisZagrijavanja.Contains("ZZ")){
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>}
                                 <td>@vjzag.BrojPonavljanja</td>
                                 <td>@vjzag.BrojSerija</td>
                                 <td>@vjzag.Kilogrami</td>
                                 <td>@vjzag.Odmor</td>
-                                <td></td>
+                                <td>-</td>
                                 @if (vjzag.VjezbePopis.VjezbeSlike.Count > 0  )
                                 {
                                     <td>
                                         <div>
                                             <div>
-                                                <a href="~/Content/VjezbeSlike/" target="_blank">
+                                                <a href="~/Content/VjezbeSlike/@vjzag.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme" target="_blank">
                                                     <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", vjzag.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme))" />
                                                 </a>
                                             </div>
@@ -132,7 +134,7 @@
                                 }
                                 else
                                 {
-                                    <td>--</td>
+                                    <td>-</td>
                                 }
                             </tr>
                         }
@@ -177,20 +179,21 @@
                     }
                     <tr>
                         <td>Naziv</td>
-                        @if(item.PopisVjezbi.Contains("VV")){
-                        <td>Broj ponavljanja</td>
-                        }
-                        @if(item.PopisVjezbi.Contains("VV")){  
+                        @if(item.PopisVjezbi != null){
+                            
+                        if(item.PopisVjezbi.Contains("VV")){
+                        <td>Broj ponavljanja</td> 
                         <td>Broj serija</td>
                         <td>Težina/ Opterećenje</td>
                         }
-                        @if(item.PopisVjezbi.Contains("AV") || item.PopisVjezbi.Contains("NV") || item.PopisVjezbi.Contains("ZV")){
+                        if(item.PopisVjezbi.Contains("AV") || item.PopisVjezbi.Contains("NV") || item.PopisVjezbi.Contains("ZV")){
                         <td>Puls</td>
                         <td>Tempo</td>
                         <td>Trajanje</td>
                         }
-                        @if(item.PopisVjezbi.Contains("NV")){  
+                        if(item.PopisVjezbi.Contains("NV")){  
                         <td>Broj sprintova</td>
+                        }
                         }
                         <td>Odmor</td>
                         <td>Napomena</td>
@@ -222,18 +225,20 @@
                                 <td>@vj.BrojPonavljanja</td>
                                 <td>@vj.BrojSerija</td>
                                 <td>@vj.Kilogrami</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisVjezbi.Contains("AV") || item.PopisVjezbi.Contains("NV") || item.PopisVjezbi.Contains("ZV")){
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>}
+                                @if(item.PopisVjezbi.Contains("NV")){
+                                <td>-</td>}
                                 <td>@vj.Odmor</td>
-                                <td></td>
+                                <td>-</td>
                                 @if (vj.VjezbePopis.VjezbeSlike.Count > 0  )
                                 {
                                     <td>
                                         <div>
                                             <div>
-                                                <a href="~/Content/ZagrijavanjeSlike/@vj.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme" target="_blank">
+                                                <a href="~/Content/VjezbeSlike/@vj.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme" target="_blank">
                                                     <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", vj.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme))" />
                                                 </a>
                                             </div>
@@ -242,7 +247,7 @@
                                 }
                                 else
                                 {
-                                    <td>--</td>
+                                    <td>-</td>
                                 }
                             </tr>
                         }                            
@@ -251,21 +256,23 @@
                             var avj = item.AerobneVjezbe.FirstOrDefault(x => x.AerobnaVjezbaId == Convert.ToInt32(vjezbaId));
                             <tr>
                                 <td>@avj.Naziv</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisVjezbi.Contains("VV")){
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>}
                                 <td>@avj.Puls</td>
                                 <td>@avj.Tempo</td>
                                 <td>@avj.Trajanje</td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisVjezbi.Contains("NV")){
+                                <td>-</td>}
+                                <td>@avj.Odmor</td>
                                 <td>@avj.Napomena</td>
                                 @if (avj.AerobneVjezbePopis.AerobneVjezbeSlike.Count > 0  )
                                 {
                                     <td>
                                         <div>
                                             <div>
-                                                <a href="~/Content/ZagrijavanjeSlike/@avj.AerobneVjezbePopis.AerobneVjezbeSlike.FirstOrDefault().AerobnaVjezbaSlikaIme" target="_blank">
+                                                <a href="~/Content/VjezbeSlike/@avj.AerobneVjezbePopis.AerobneVjezbeSlike.FirstOrDefault().AerobnaVjezbaSlikaIme" target="_blank">
                                                     <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", avj.AerobneVjezbePopis.AerobneVjezbeSlike.FirstOrDefault().AerobnaVjezbaSlikaIme))" />
                                                 </a>
                                             </div>
@@ -274,7 +281,7 @@
                                 }
                                 else
                                 {
-                                    <td>--</td>
+                                    <td>-</td>
                                 }
                             </tr>
                         }
@@ -284,9 +291,10 @@
                         var nvj = item.AnaerobneVjezbe.FirstOrDefault(x => x.AnaerobnaVjezbaId == Convert.ToInt32(vjezbaId));
                             <tr>
                                 <td>@nvj.Naziv</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisVjezbi.Contains("VV")){
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>}
                                 <td>@nvj.Puls</td>
                                 <td>@nvj.Tempo</td>
                                 <td>@nvj.TrajanjeSprinta</td>
@@ -298,7 +306,7 @@
                                     <td>
                                         <div>
                                             <div>
-                                                <a href="~/Content/ZagrijavanjeSlike/@nvj.AnaerobneVjezbePopis.AnaerobneVjezbeSlike.FirstOrDefault().AnaerobnaVjezbaSlikaIme" target="_blank">
+                                                <a href="~/Content/VjezbeSlike/@nvj.AnaerobneVjezbePopis.AnaerobneVjezbeSlike.FirstOrDefault().AnaerobnaVjezbaSlikaIme" target="_blank">
                                                     <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", nvj.AnaerobneVjezbePopis.AnaerobneVjezbeSlike.FirstOrDefault().AnaerobnaVjezbaSlikaIme))" />
                                                 </a>
                                             </div>
@@ -307,7 +315,7 @@
                                 }
                                 else
                                 {
-                                    <td>--</td>
+                                    <td>-</td>
                                 }
                             </tr>
                         }
@@ -317,14 +325,16 @@
                             var zvj = item.ZagrijavanjeVjezba.FirstOrDefault(x => x.ZagrijavanjeVjezbaId == Convert.ToInt32(vjezbaId));
                             <tr>
                                 <td>@zvj.Naziv</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisVjezbi.Contains("VV")){
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>}
                                 <td>@zvj.Puls</td>
                                 <td>@zvj.Tempo</td>
                                 <td>@zvj.Trajanje</td>
-                                <td></td>
-                                <td></td>
+                                @if(item.PopisVjezbi.Contains("NV")){
+                                <td>-</td>}
+                                <td>@zvj.Odmor</td>
                                 <td>@zvj.ZagrijavanjeNapomena</td>
                                 @if (zvj.ZagrijavanjePopis.ZagrijavanjeSlike.Count > 0  )
                                 {
@@ -332,7 +342,7 @@
                                         <div>
                                             <div>
                                                 <a href="~/Content/ZagrijavanjeSlike/@zvj.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme" target="_blank">
-                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", zvj.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme))" />
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", zvj.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme))" />
                                                 </a>
                                             </div>
                                         </div>
@@ -340,7 +350,7 @@
                                 }
                                 else
                                 {
-                                    <td>--</td>
+                                    <td>-</td>
                                 }
                             </tr>
                         }
@@ -365,7 +375,7 @@
                 </tr>
                 }
             </table>
-            }        
+            }       
     </div>
     }
     @if (Model.NapomenaVjezba != null)
@@ -403,7 +413,7 @@
                         <td>
                             <div>
                                 <div>
-                                    <a href="~/Content/ZagrijavanjeSlike/@istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme" target="_blank">
+                                    <a href="~/Content/IstezanjeSlike/@istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme" target="_blank">
                                         <img width="50" height="50" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme))" />
                                     </a>
                                 </div>
@@ -412,7 +422,7 @@
                     }
                     else
                     {
-                        <td>--</td>
+                        <td>-</td>
                     }
                 </tr>
             }            
