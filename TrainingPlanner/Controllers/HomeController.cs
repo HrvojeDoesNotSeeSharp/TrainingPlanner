@@ -1497,6 +1497,19 @@ namespace TrainingPlanner.Controllers
                 }
             }
 
+            var queryslikeclana = from x in _context.ClanSlike
+                                  join cl in _context.Clan on x.ClanSlikeId equals cl.ClanId
+                                  where x.ClanClanId == id
+                                  select x;
+            if (queryslikeclana.FirstOrDefault() != null)
+            {
+                foreach (var slik in queryslikeclana)
+                {
+                    _context.ClanSlike.Remove(slik);
+                }
+            }
+
+
             _context.Clan.Remove(c);
             _context.SaveChanges();
 
