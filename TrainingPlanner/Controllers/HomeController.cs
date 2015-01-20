@@ -239,33 +239,74 @@ namespace TrainingPlanner.Controllers
         {
             var vjp = _context.VjezbePopis.Find(id);
 
-            //provjeri da li je ova vjezba ukljucena u neki trening i vrati id clana
-            var vjezbe = from x in _context.Vjezba
+            //nadji id od ove vjezbe ako je ukljucena u zagrijavanje
+            var vj = from x in _context.VjezbaZagrijavanjeSet
+                     join i in _context.VjezbePopis on x.VjezbePopisVjezbeId equals i.VjezbeId
+                     where x.VjezbePopisVjezbeId == id
+                     select x.VjezbaId;            
+
+            //provjeri da li je ova vjezba ukljucena u neku sekciju i vrati id od sekcije
+            var vjezba = from x in _context.Vjezba
                          join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
                          where v.VjezbeId == id
-                         select x.VjezbePopisVjezbeId;
-
-            var sekcije = from s in _context.SekcijaVjezbi
-                          join v in _context.Vjezba on s.SekcijaId equals v.SekcijaId
-                          where v.VjezbePopisVjezbeId == vjezbe.FirstOrDefault()
-                          group s by s.SekcijaId into grp
-                          select grp.Key;
+                         select x.SekcijaId;
 
             List<Clan> provjeriTreningupdejtanalista = new List<Clan>();
             IQueryable<Clan> provjeriTrening;
-            foreach (var s in sekcije.ToList())
-            {
-                provjeriTrening = from t in _context.Trening
-                                  join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
-                                  where se.SekcijaId == s
-                                  group t by t.Clan into grp
-                                  select grp.Key;
+            IQueryable<Clan> provjeriTreningA;
 
-                if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
+            if (vj.Any())
+            {
+                foreach (var v in vj.ToList())
                 {
-                    provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
+                    //provjeri dali je ova vjezba ukljucena u neku skupinu zagrijavanja
+                    var zagrijavanje = from x in _context.VjezbaZagrijavanjeSet
+                                       where x.VjezbaId == v
+                                       select x.ZagrijavanjeSkupinaZagrijavanjeSkupinaId;
+
+                    //vrati id od treninga u koji je ukljucena ova skupina
+                    var skupina = from x in _context.ZagrijavanjeSkupina
+                                  where x.ZagrijavanjeSkupinaId == zagrijavanje.FirstOrDefault()
+                                  select x.TreningTreningId;
+
+                    foreach (var sk in skupina.ToList())
+                    {
+                        provjeriTreningA = from t in _context.Trening
+                                           join a in _context.ZagrijavanjeSkupina on t.TreningId equals a.TreningTreningId
+                                           where t.TreningId == sk
+                                           group t by t.Clan into grp
+                                           select grp.Key;
+
+                        if (!provjeriTreningupdejtanalista.Contains(provjeriTreningA.FirstOrDefault()))
+                        {
+                            provjeriTreningupdejtanalista.Add(provjeriTreningA.FirstOrDefault());
+                        }
+                    }      
                 }
             }
+
+            if (vjezba.Any())
+            {
+                foreach (var s in vjezba.ToList())
+                {
+                    //vrati id od treninga u koji je ukljucena ova sekcija
+                    var sekcija = from x in _context.SekcijaVjezbi
+                                  where x.SekcijaId == s
+                                  select x.TreningId;
+
+                    //vrati clana koji koristi trening u koji je ukljucena vjezba
+                    provjeriTrening = from t in _context.Trening
+                                      join se in _context.SekcijaVjezbi on t.TreningId equals se.TreningId
+                                      where se.SekcijaId == s
+                                      group t by t.Clan into grp
+                                      select grp.Key;
+
+                    if (!provjeriTreningupdejtanalista.Contains(provjeriTrening.FirstOrDefault()))
+                    {
+                        provjeriTreningupdejtanalista.Add(provjeriTrening.FirstOrDefault());
+                    }
+                }
+            }                  
 
             List<String> clanovi = new List<string>();
 
