@@ -23,7 +23,6 @@ namespace TrainingPlanner
         public string Trajanje { get; set; }
         public int SekcijaVjezbiSekcijaId { get; set; }
         public int ZagrijavanjePopisZagrijavanjeId1 { get; set; }
-        public byte[] Slika { get; set; }
         public string Odmor { get; set; }
     
         public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }

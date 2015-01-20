@@ -16,7 +16,6 @@ namespace TrainingPlanner
     {
         public int VjezbaId { get; set; }
         public string ImeVjezbe { get; set; }
-        public byte[] Slika { get; set; }
         public string Info { get; set; }
         public string BrojPonavljanja { get; set; }
         public string BrojSerija { get; set; }
@@ -24,6 +23,7 @@ namespace TrainingPlanner
         public string Odmor { get; set; }
         public int SekcijaId { get; set; }
         public int VjezbePopisVjezbeId { get; set; }
+        public string Napomena { get; set; }
     
         public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
         public virtual VjezbePopis VjezbePopis { get; set; }

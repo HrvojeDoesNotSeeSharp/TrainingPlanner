@@ -24,7 +24,6 @@ namespace TrainingPlanner
         public int AnaerobneVjezbePopisAnaerobnaVjezbaId { get; set; }
         public int SekcijaVjezbiSekcijaId { get; set; }
         public string Info { get; set; }
-        public byte[] Slika { get; set; }
         public string TrajanjeSprinta { get; set; }
     
         public virtual AnaerobneVjezbePopis AnaerobneVjezbePopis { get; set; }

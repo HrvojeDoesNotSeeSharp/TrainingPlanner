@@ -240,7 +240,7 @@ namespace TrainingPlanner.Controllers
             {
                 listaVjezbi = new List<VjezbePopis>
                 {
-                    new VjezbePopis {VjezbeId = 0, ImeVjezbe = "", Info = "", Slika = null}
+                    new VjezbePopis {VjezbeId = 0, ImeVjezbe = "", Info = ""}
                 };
                 return View(listaVjezbi);
             }
@@ -2703,11 +2703,7 @@ namespace TrainingPlanner.Controllers
             if (vjp.Info != null)
             {
                 vj.Info = vjp.Info;
-            }
-            if (vjp.Slika != null)
-            {
-                vj.Slika = vjp.Slika;
-            }           
+            }         
 
             _context.Vjezba.Add(vj);
             _context.SaveChanges();
@@ -2765,10 +2761,6 @@ namespace TrainingPlanner.Controllers
             if (vjp.Info != null)
             {
                 vj.Info = vjp.Info;
-            }
-            if (vjp.Slika != null)
-            {
-                vj.Slika = vjp.Slika;
             }
 
             _context.VjezbaZagrijavanjeSet.Add(vj);
@@ -2832,10 +2824,6 @@ namespace TrainingPlanner.Controllers
             {
                 avj.Info = avjp.Info;
             }
-            if (avjp.Slika != null)
-            {
-                avj.Slika = avjp.Slika;
-            }
             
             _context.AerobneVjezbe.Add(avj);
             _context.SaveChanges();
@@ -2878,10 +2866,7 @@ namespace TrainingPlanner.Controllers
             {
                 zvj.Info = zvjp.Info;
             }
-            if (zvjp.Slika != null)
-            {
-                zvj.Slika = zvjp.Slika;
-            }
+
             _context.ZagrijavanjeVjezbaSet.Add(zvj);
             _context.SaveChanges();
             var idVjezba = zvj.ZagrijavanjeVjezbaId + "ZV,";
@@ -2940,10 +2925,6 @@ namespace TrainingPlanner.Controllers
             if (avjp.Info != null)
             {
                 avj.Info = avjp.Info;
-            }
-            if (avjp.Slika != null)
-            {
-                avj.Slika = avjp.Slika;
             }
             
             _context.AnaerobneVjezbe.Add(avj);
@@ -3110,7 +3091,7 @@ namespace TrainingPlanner.Controllers
 
         [HttpPost]
         public ActionResult SpremiVjezbuInfo(string brojPonavljanja, string brojSerija = null, string tezina = null,
-            string odmor = null, int id = 0, int vjezbaId = 0, int izmijeni = 0, string refferer = "")
+            string odmor = null, string NapomenaVj = null, int id = 0, int vjezbaId = 0, int izmijeni = 0, string refferer = "")
         {
             if (refferer == "zagrijavanje")
             { 
@@ -3123,6 +3104,7 @@ namespace TrainingPlanner.Controllers
                 vj.BrojSerija = brojSerija;
                 vj.Kilogrami = tezina;
                 vj.Odmor = odmor;
+                vj.Napomena = NapomenaVj;
 
                 _context.Entry(vj).State = EntityState.Modified;
                 _context.SaveChanges();
@@ -3138,6 +3120,7 @@ namespace TrainingPlanner.Controllers
                 vj.BrojSerija = brojSerija;
                 vj.Kilogrami = tezina;
                 vj.Odmor = odmor;
+                vj.Napomena = NapomenaVj;
 
                 _context.Entry(vj).State = EntityState.Modified;
                 _context.SaveChanges();
