@@ -1,194 +1,443 @@
 ﻿@using TrainingPlanner
 @model TrainingPlanner.Models.TreningDataModel
 
-@{
-    Layout = "~/Views/_LayoutWithCSS.cshtml";
-}
+<link href="@Url.Content("~/Content/TreningDetaljiPrintCss.css")" rel="stylesheet" type="text/css" />
 
-<div id="inputAreaImages" class="defaultFont">
-<p class="bigFont marginHeadline">@Model.ClanIme @Model.ClanPrezime</p>
-    <table class="responstable">
-        <tr class="smallFont">
-            <td style="width:30%">
-                @Html.DisplayFor(x => x.TreningImeTreninga)
-            </td>
-            <td style="width:30%">
-                @Model.TreningDatum.ToShortDateString()
-            </td>
-            <td style="width:30%">
-                @Html.DisplayFor(x => x.TreningTip)
-            </td>
-        </tr>
-    </table>
-</div>
-
-@if (Model.ListaZagrijavanja == null)
-{ }
-else if (Model.ListaZagrijavanja.ToList().Count == 0)
-{ }
-else
-{
-<div id="inputAreaImages" class="defaultFont">
-        <table class="responstable smallFont">
-            <tr><td><p class="bigFont">Zagrijavanje</p></td></tr>
-            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Puls</td>
-                 <td style="border-bottom:solid">Tempo</td><td style="border-bottom:solid">Vrijeme trajanja</td><td style="border-bottom:solid">Napomena</td>
-            @foreach (var zagrijavanje in Model.ListaZagrijavanja)
-            {
-            <tr class="smallFont">
-                <td>@zagrijavanje.Naziv</td>
-                <td>@zagrijavanje.Puls</td>
-                <td>@zagrijavanje.Tempo</td>
-                <td>@zagrijavanje.Trajanje</td>
-                <td>@zagrijavanje.ZagrijavanjeNapomena</td>
-            @if (zagrijavanje.ZagrijavanjePopis.ZagrijavanjeSlike.Count > 0  )
-            {
-                <td>
-                    <div style="float: left; display: block;">
-                        <div>
-                            <a href="~/Content/ZagrijavanjeSlike/@zagrijavanje.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme" target="_blank">
-                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", zagrijavanje.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme))" />
-                            </a>
-                        </div>
-                    </div>
+<div class="page">
+    <div>
+    <p class="noborder">@Model.ClanIme @Model.ClanPrezime</p>
+        <hr align="left"/>
+        <table class="noborder">
+            <tr>
+                <td class="noborder">
+                    @Html.DisplayFor(x => x.TreningImeTreninga)
                 </td>
-            }
-            else
-            {
-                <td class="smallFont">--</td>
-            }
+                <td class="noborder">
+                    @Model.TreningDatum.ToShortDateString()
+                </td>
+                <td class="noborder">
+                    @Html.DisplayFor(x => x.TreningTip)
+                </td>
             </tr>
-            }
         </table>
-</div>
-    if (Model.NapomenaZagrijavanje != null)
+    </div>
+    <br />
+    @if (Model.ZagrijavanjeSkupina == null)
+    { }
+    else if (Model.ZagrijavanjeSkupina.ToList().Count == 0)
+    { }
+    else
+    {
+    <div>
+        <table>
+            @foreach (var item in Model.ZagrijavanjeSkupina)
+            {
+                if (item.PopisZagrijavanja != null)
+                {
+                    <thead>
+                        <tr>
+                            <td colspan="15" style="text-align:left; height:20px;"><p>Zagrijavanje</p></td>
+                        </tr>
+                        <tr>
+                            <td>Naziv</td>
+                            @if(item.PopisZagrijavanja.Contains("ZZ"))
+                            {
+                                <td>Puls</td>
+                                <td>Tempo</td>
+                                <td>Vrijeme trajanja</td>
+                            }
+                            @if(item.PopisZagrijavanja.Contains("VZ"))
+                            {
+                                <td>Broj ponavljanja</td>
+                                <td>Broj serija</td>
+                                <td>Tezina</td>
+                                <td>Odmor</td>
+                            }
+                            <td>Napomena</td>
+                            <td>Slika</td>
+                        </tr>
+                    </thead>
+
+                    var zagrijavanjaIds = item.PopisZagrijavanja.ToString();
+                    List<string> zagrijavanjaList = new List<string>();
+
+                    foreach (string zagrijavanjeId in zagrijavanjaIds.Split(','))
+                    {
+                        zagrijavanjaList.Add(zagrijavanjeId);
+                    }
+                    zagrijavanjaList.RemoveAt(zagrijavanjaList.Count - 1);
+
+                    foreach (var zagrijavanje in zagrijavanjaList)
+                    {
+                        var tab = zagrijavanje.Substring(zagrijavanje.Length - 2, 2);
+                        var zagId = zagrijavanje.Remove(zagrijavanje.Length - 2);
+
+                        if (tab == "ZZ")
+                        {
+                            var zag = item.Zagrijavanje.FirstOrDefault(x => x.ZagrijavanjeId == Convert.ToInt32(zagId));
+
+                            <tr>
+                                <td>@zag.Naziv</td>
+                                <td>@zag.Puls</td>
+                                <td>@zag.Tempo</td>
+                                <td>@zag.Trajanje</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@zag.ZagrijavanjeNapomena</td>
+                                @if (zag.ZagrijavanjePopis.ZagrijavanjeSlike.Count > 0  )
+                                {
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <a href="~/Content/ZagrijavanjeSlike/@zag.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme" target="_blank">
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/ZagrijavanjeSlike/{0}", zag.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme))" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>--</td>
+                                }
+                            </tr>
+                        }
+
+                        if (tab == "VZ")
+                        {
+                            var vjzag = item.VjezbaZagrijavanje.FirstOrDefault(x => x.VjezbaId == Convert.ToInt32(zagId));
+                            <tr>
+                                <td>@vjzag.ImeVjezbe</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@vjzag.BrojPonavljanja</td>
+                                <td>@vjzag.BrojSerija</td>
+                                <td>@vjzag.Kilogrami</td>
+                                <td>@vjzag.Odmor</td>
+                                <td></td>
+                                @if (vjzag.VjezbePopis.VjezbeSlike.Count > 0  )
+                                {
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <a href="~/Content/VjezbeSlike/" target="_blank">
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", vjzag.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme))" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>--</td>
+                                }
+                            </tr>
+                        }
+                    }
+                }
+            }            
+        </table>            
+        <br />
+    </div>
+    }
+    @if (Model.NapomenaZagrijavanje != null)
     {
         <tr>
-            <td colspan="5" style="text-align:left">
-                Napomena zagrijavanje:  @Model.NapomenaZagrijavanje
+            <td colspan="15" style="text-align:left">
+                Napomena za zagrijavanje:  @Model.NapomenaZagrijavanje
             </td>
         </tr>
     }
-}
-
-@if (Model.SekcijaVjezbi == null)
-{ }
-else if (Model.SekcijaVjezbi.ToList().Count == 0)
-{ }
-else
-{
-<div id="inputAreaImages" class="defaultFont">
+    @if (Model.SekcijaVjezbi == null)
+    { }
+    else if (Model.SekcijaVjezbi.ToList().Count == 0)
+    { }
+    else
+    {
+    <div>
         @{int brojac = 0;}
-            @foreach (var item in Model.SekcijaVjezbi)
-            {
-                brojac++;
-            <table class="responstable smallFont">
-                @if (Model.SekcijaVjezbi.ToList().Count > 1)
-                {<tr><td><p class="bigFont">Vjezbe @brojac . dio</p></td></tr>}
-                else
-            {<tr><td><p class="bigFont">Vjezbe</p></td></tr>}
-            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Vrijeme trajanja</td>
-                <td style="border-bottom:solid">Broj serija</td><td style="border-bottom:solid">Težina/ Opterećenje</td><td style="border-bottom:solid">Odmor</td></tr>
-            @foreach (var vjezba in item.Vjezba)
-            {
-            <tr>
-                <td>@vjezba.ImeVjezbe</td>
-                <td>@vjezba.BrojPonavljanja</td>
-                <td>@vjezba.BrojSerija</td>
-                <td>@vjezba.Kilogrami</td>
-                <td>@vjezba.Odmor</td>
-            @if (vjezba.VjezbePopis.VjezbeSlike.Count > 0  )
-            {
-                <td>
-                    <div style="float: left; display: block;">
-                        <div>
-                            <a href="~/Content/ZagrijavanjeSlike/@vjezba.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme" target="_blank">
-                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", vjezba.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme))" />
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            }
-            else
-            {
-                <td class="smallFont">--</td>
-            }
-            </tr>
-            }
-            @if (item.BrojKrugova != null && !string.IsNullOrEmpty(item.BrojKrugova))
-            { 
+        @foreach (var item in Model.SekcijaVjezbi)
+        {
+            brojac++;
+            <br />
+            <table>
+                <thead>
+                    @if (Model.SekcijaVjezbi.ToList().Count > 1)
+                    {
+                        <tr>
+                            <td colspan="15" style="text-align:left; height:20px;"><p>Vjezbe @brojac . dio</p></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr><td colspan="15" style="text-align:left; height:20px;"><p>Vjezbe</p></td></tr>
+                    }
+                    <tr>
+                        <td>Naziv</td>
+                        @if(item.PopisVjezbi.Contains("VV")){
+                        <td>Broj ponavljanja</td>
+                        }
+                        @if(item.PopisVjezbi.Contains("VV")){  
+                        <td>Broj serija</td>
+                        <td>Težina/ Opterećenje</td>
+                        }
+                        @if(item.PopisVjezbi.Contains("AV") || item.PopisVjezbi.Contains("NV") || item.PopisVjezbi.Contains("ZV")){
+                        <td>Puls</td>
+                        <td>Tempo</td>
+                        <td>Trajanje</td>
+                        }
+                        @if(item.PopisVjezbi.Contains("NV")){  
+                        <td>Broj sprintova</td>
+                        }
+                        <td>Odmor</td>
+                        <td>Napomena</td>
+                        <td>Slika</td>
+                    </tr>
+                </thead>
+                
+                @if (item.PopisVjezbi != null)
+                {
+                    var vjezbeIds = item.PopisVjezbi.ToString();
+                    List<string> vjezbeList = new List<string>();
+
+                    foreach (string vjezbaId in vjezbeIds.Split(','))
+                    {
+                        vjezbeList.Add(vjezbaId);
+                    }
+                    vjezbeList.RemoveAt(vjezbeList.Count - 1);
+
+                    foreach (var vjezba in vjezbeList)
+                    {
+                        var tablica = vjezba.Substring(vjezba.Length - 2, 2);
+                        var vjezbaId = vjezba.Remove(vjezba.Length - 2);
+                            
+                        if (tablica == "VV")
+                        {
+                            var vj = item.Vjezba.FirstOrDefault(x => x.VjezbaId == Convert.ToInt32(vjezbaId));                                
+                            <tr>
+                                <td>@vj.ImeVjezbe</td>
+                                <td>@vj.BrojPonavljanja</td>
+                                <td>@vj.BrojSerija</td>
+                                <td>@vj.Kilogrami</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@vj.Odmor</td>
+                                <td></td>
+                                @if (vj.VjezbePopis.VjezbeSlike.Count > 0  )
+                                {
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <a href="~/Content/ZagrijavanjeSlike/@vj.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme" target="_blank">
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", vj.VjezbePopis.VjezbeSlike.FirstOrDefault().VjezbeSlikaIme))" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>--</td>
+                                }
+                            </tr>
+                        }                            
+                        if (tablica == "AV")
+                        {
+                            var avj = item.AerobneVjezbe.FirstOrDefault(x => x.AerobnaVjezbaId == Convert.ToInt32(vjezbaId));
+                            <tr>
+                                <td>@avj.Naziv</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@avj.Puls</td>
+                                <td>@avj.Tempo</td>
+                                <td>@avj.Trajanje</td>
+                                <td></td>
+                                <td></td>
+                                <td>@avj.Napomena</td>
+                                @if (avj.AerobneVjezbePopis.AerobneVjezbeSlike.Count > 0  )
+                                {
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <a href="~/Content/ZagrijavanjeSlike/@avj.AerobneVjezbePopis.AerobneVjezbeSlike.FirstOrDefault().AerobnaVjezbaSlikaIme" target="_blank">
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", avj.AerobneVjezbePopis.AerobneVjezbeSlike.FirstOrDefault().AerobnaVjezbaSlikaIme))" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>--</td>
+                                }
+                            </tr>
+                        }
+                    
+                        if (tablica == "NV")
+                        {
+                        var nvj = item.AnaerobneVjezbe.FirstOrDefault(x => x.AnaerobnaVjezbaId == Convert.ToInt32(vjezbaId));
+                            <tr>
+                                <td>@nvj.Naziv</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@nvj.Puls</td>
+                                <td>@nvj.Tempo</td>
+                                <td>@nvj.TrajanjeSprinta</td>
+                                <td>@nvj.BrojSprintova</td>
+                                <td>@nvj.Odmor</td>
+                                <td>@nvj.Napomena</td>
+                                @if (nvj.AnaerobneVjezbePopis.AnaerobneVjezbeSlike.Count > 0  )
+                                {
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <a href="~/Content/ZagrijavanjeSlike/@nvj.AnaerobneVjezbePopis.AnaerobneVjezbeSlike.FirstOrDefault().AnaerobnaVjezbaSlikaIme" target="_blank">
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", nvj.AnaerobneVjezbePopis.AnaerobneVjezbeSlike.FirstOrDefault().AnaerobnaVjezbaSlikaIme))" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>--</td>
+                                }
+                            </tr>
+                        }
+                            
+                        if (tablica == "ZV")
+                        {
+                            var zvj = item.ZagrijavanjeVjezba.FirstOrDefault(x => x.ZagrijavanjeVjezbaId == Convert.ToInt32(vjezbaId));
+                            <tr>
+                                <td>@zvj.Naziv</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@zvj.Puls</td>
+                                <td>@zvj.Tempo</td>
+                                <td>@zvj.Trajanje</td>
+                                <td></td>
+                                <td></td>
+                                <td>@zvj.ZagrijavanjeNapomena</td>
+                                @if (zvj.ZagrijavanjePopis.ZagrijavanjeSlike.Count > 0  )
+                                {
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <a href="~/Content/ZagrijavanjeSlike/@zvj.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme" target="_blank">
+                                                    <img width="50" height="50" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", zvj.ZagrijavanjePopis.ZagrijavanjeSlike.FirstOrDefault().ZagrijavanjeSlikaIme))" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>--</td>
+                                }
+                            </tr>
+                        }
+                    }
+                }
+             </table>        
+             <table>       
+                @if (item.BrojKrugova != null && !string.IsNullOrEmpty(item.BrojKrugova))
+                { 
                 <tr>
-                    <td colspan="5" style="text-align:left">
+                    <td colspan="15" style="text-align:left; height:20px; width:303px;">
                         Broj krugova:  @item.BrojKrugova
                     </td>
                 </tr>
-            }
-            @if (item.Odmor != null && !string.IsNullOrEmpty(item.Odmor))
-            {
+                }
+                @if (item.Odmor != null && !string.IsNullOrEmpty(item.Odmor))
+                {
                 <tr>
-                    <td colspan="5" style="text-align:left">
+                    <td colspan="15" style="text-align:left; height:20px;">
                         Odmor između krugova:  @item.Odmor
                     </td>
                 </tr>
-            }
+                }
             </table>
-                <br />
-            }
-        
-</div>
-}
+            }        
+    </div>
+    }
+    @if (Model.NapomenaVjezba != null)
+    {
+        <p>Napomena za vjezbe:  @Model.NapomenaVjezba</p>
+    }
 
-@if (Model.ListaIstezanja == null)
-{ }
-else if (Model.ListaIstezanja.ToList().Count == 0)
-{ }
-else
-{
-<div id="inputAreaImages" class="defaultFont">
-        <table class="responstable">
-            <tr><td><p class="bigFont">Istezanje</p></td></tr>
-            <tr style="font-size:24px"><td style="border-bottom:solid">Naziv</td><td style="border-bottom:solid">Vrijeme izdrzaja</td>
-                <td style="border-bottom:solid">Vrsta istezanja</td>
+    @if (Model.ListaIstezanja == null)
+    { }
+    else if (Model.ListaIstezanja.ToList().Count == 0)
+    { }
+    else
+    {
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td colspan="15" style="text-align:left; height:20px;"><p>Istezanje</p></td>
+            </tr>
+            <tr>
+                <td>Naziv</td>
+                <td>Vrijeme izdrzaja</td>
+                <td>Vrsta istezanja</td>
+                <td>Slika</td>
+            </tr>
+            </thead>
             @foreach (var istezanje in Model.ListaIstezanja)
             {
-            <tr class="smallFont">
-                <td>@istezanje.Naziv</td>
-                <td>@istezanje.VrijemeIzdrzaja</td>
-                <td>@istezanje.VrstaIstezanja</td>
-                @if (istezanje.IstezanjePopis.IstezanjeSlike.Count > 0  )
-            {
-                <td>
-                    <div style="float: left; display: block;">
-                        <div>
-                            <a href="~/Content/ZagrijavanjeSlike/@istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme" target="_blank">
-                                <img class="marginLeft" width="50" height="50" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme))" />
-                            </a>
-                        </div>
-                    </div>
-                </td>
+                <tr>
+                    <td>@istezanje.Naziv</td>
+                    <td>@istezanje.VrijemeIzdrzaja</td>
+                    <td>@istezanje.VrstaIstezanja</td>
+                    @if (istezanje.IstezanjePopis.IstezanjeSlike.Count > 0  )
+                    {
+                        <td>
+                            <div>
+                                <div>
+                                    <a href="~/Content/ZagrijavanjeSlike/@istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme" target="_blank">
+                                        <img width="50" height="50" src="@Url.Content(String.Format("~/Content/IstezanjeSlike/{0}", istezanje.IstezanjePopis.IstezanjeSlike.FirstOrDefault().IstezanjeSlikaIme))" />
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>--</td>
+                    }
+                </tr>
             }
-            else
+            @if (Model.NapomenaIstezanje != null)
             {
-                <td class="smallFont">--</td>
-            }
-            </tr>
+                <tr>
+                    <td colspan="15" style="text-align:left">
+                        Napomena za istezanje:  @Model.NapomenaIstezanje
+                    </td>
+                </tr>
             }
         </table>
+        <br />        
+    </div>
+    <br />
+    }
+    @if (Model.NapomenaIstezanje != null)
+    {
+        <p>Napomena za istezanje:  @Model.NapomenaIstezanje</p>
+    }
+    <div>
+            @if (Model.Napomena != null)
+            {
+                <p>Napomena za trening:  @Model.Napomena</p>
+            }
+    </div>
+    <p>@Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, new { @class = "no-print" })</p>
 </div>
-}
-
-<div>
-        <div class="marginText">@Html.Label("Napomena", new {@class = "smallFont"})</div>
-        @if(Model.Napomena == null)
-        {
-            <text>--</text>
-        }
-        else
-        {
-            @Html.TextAreaFor(model => model.Napomena, new { rows = "10", cols = "137" , @readonly = true})
-        } 
-</div>
-
-<p>
-    @Html.ActionLink("Natrag na popis treninga", "TreningPopis", "Home", new {id = Model.ClanId }, new { @class = "marginHeadlineTop marginTextBottom button_example" })
-</p>

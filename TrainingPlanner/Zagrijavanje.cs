@@ -17,7 +17,6 @@ namespace TrainingPlanner
         public int ZagrijavanjeId { get; set; }
         public string Naziv { get; set; }
         public string Info { get; set; }
-        public int TreningId { get; set; }
         public string Tempo { get; set; }
         public string Puls { get; set; }
         public string ZagrijavanjeNapomena { get; set; }
@@ -26,7 +25,6 @@ namespace TrainingPlanner
         public byte[] Slika { get; set; }
         public int ZagrijavanjeSkupinaZagrijavanjeSkupinaId { get; set; }
     
-        public virtual Trening Trening { get; set; }
         public virtual ZagrijavanjePopis ZagrijavanjePopis { get; set; }
         public virtual ZagrijavanjeSkupina ZagrijavanjeSkupina { get; set; }
     }

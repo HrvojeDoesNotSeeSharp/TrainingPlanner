@@ -16,10 +16,8 @@ namespace TrainingPlanner
     {
         public Trening()
         {
-            this.Zagrijavanje = new HashSet<Zagrijavanje>();
             this.Istezanje = new HashSet<Istezanje>();
             this.SekcijaVjezbi = new HashSet<SekcijaVjezbi>();
-            this.ZagrijavanjeVjezba = new HashSet<ZagrijavanjeVjezba>();
             this.ZagrijavanjeSkupina = new HashSet<ZagrijavanjeSkupina>();
         }
     
@@ -34,10 +32,8 @@ namespace TrainingPlanner
         public string NapomenaIstezanje { get; set; }
     
         public virtual Clan Clan { get; set; }
-        public virtual ICollection<Zagrijavanje> Zagrijavanje { get; set; }
         public virtual ICollection<Istezanje> Istezanje { get; set; }
         public virtual ICollection<SekcijaVjezbi> SekcijaVjezbi { get; set; }
-        public virtual ICollection<ZagrijavanjeVjezba> ZagrijavanjeVjezba { get; set; }
         public virtual ICollection<ZagrijavanjeSkupina> ZagrijavanjeSkupina { get; set; }
     }
 }

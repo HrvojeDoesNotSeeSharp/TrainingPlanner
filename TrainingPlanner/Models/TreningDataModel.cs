@@ -27,9 +27,6 @@ namespace TrainingPlanner.Models
         public string NapomenaZagrijavanje { get; set; }
         public string NapomenaVjezba { get; set; }
         public string NapomenaIstezanje { get; set; }
-        
-        /*Zagrijavanje tablica*/
-        public List<Zagrijavanje> ListaZagrijavanja { get; set; }
 
         /*Sekcija popisa vjezbi*/
         public List<SekcijaVjezbi> SekcijaVjezbi { get; set; }

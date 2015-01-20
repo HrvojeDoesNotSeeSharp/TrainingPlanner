@@ -88,6 +88,21 @@
             <div class="marginText">@Html.Label("Popis antropometrija", new { @class = "smallFont" })</div>
             <text>Nema antropometrija</text> <br />
         }
+        @if (Model.ListaAmneza.Count != 0)
+        {
+            <div class="marginText">@Html.Label("Popis amneza", new { @class = "smallFont" })</div>
+
+            foreach (Amneza am in Model.ListaAmneza)
+            {
+                @Html.ActionLink(@am.Ime, "DetaljiAmneze", new { id = @am.AmnezaId }, new { @class = "marginHeadlineTop marginTextBottom", @style = "color:blue; text-decoration:underline;" })<br />
+            }
+
+        }
+        else
+        {
+            <div class="marginText">@Html.Label("Popis amneza", new { @class = "smallFont" })</div>
+            <text>Nema amneza</text> <br />
+        }
         @Html.ActionLink("Popis članova", "Index", "Home", new { @class = "marginHeadlineTop marginTextBottom button_example" })
     </div>
     @if (Model.Clan.ClanSlike.Count > 0)
