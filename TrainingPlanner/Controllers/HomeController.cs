@@ -211,6 +211,18 @@ namespace TrainingPlanner.Controllers
                     _context.Entry(z).State = EntityState.Modified;
                 }
 
+                //provjeri da li je ovo ZagrijavanjePopis vezano za neko ZagrijavanjeVjezba i update sva Zagrijavanje (Trening dio)
+                var zagrijavanjaVjezbe = from x in _context.ZagrijavanjeVjezbaSet
+                                         join z in _context.ZagrijavanjePopis on x.ZagrijavanjePopisZagrijavanjeId1 equals z.ZagrijavanjeId
+                                         where z.ZagrijavanjeId == zp.ZagrijavanjeId
+                                         select x;
+                foreach (ZagrijavanjeVjezba z in zagrijavanjaVjezbe.ToList())
+                {
+                    z.Naziv = zp.Naziv;
+                    z.Info = zp.Info;
+                    _context.Entry(z).State = EntityState.Modified;
+                }
+
                 _context.Entry(zp).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("ZagrijavanjePopis", "Home");
@@ -434,6 +446,18 @@ namespace TrainingPlanner.Controllers
                              where v.VjezbeId == vjp.VjezbeId
                              select x;
                 foreach (Vjezba v in vjezbe.ToList())
+                {
+                    v.ImeVjezbe = vjp.ImeVjezbe;
+                    v.Info = vjp.Info;
+                    _context.Entry(v).State = EntityState.Modified;
+                }
+
+                //provjeri da li je ova VjezbePopis vezana za neku VjezbaZagrijavanje i update sve VjezbaZagrijavanje (Trening dio)
+                var vjezbeZagrijavanje = from x in _context.VjezbaZagrijavanjeSet
+                                         join v in _context.VjezbePopis on x.VjezbePopisVjezbeId equals v.VjezbeId
+                                         where v.VjezbeId == vjp.VjezbeId
+                                         select x;
+                foreach (VjezbaZagrijavanje v in vjezbeZagrijavanje.ToList())
                 {
                     v.ImeVjezbe = vjp.ImeVjezbe;
                     v.Info = vjp.Info;
