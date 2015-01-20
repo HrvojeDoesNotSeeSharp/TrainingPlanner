@@ -195,7 +195,7 @@
             else if (Model.ZagrijavanjeSkupina.ToList().Count == 0)
             {
                 <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId, izmijeni = 1, sekcija = 0, refferer = "", counter = 0 })">Dodaj zagrijavanje</a>
-                <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = 0, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0, skupina = Model.ZagrijavanjeSkupina.FirstOrDefault().ZagrijavanjeSkupinaId, refferer = "zagrijavanje" })">>Dodaj vježbu</a>
+                <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = 0, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0, skupina = 0, refferer = "zagrijavanje" })">>Dodaj vježbu</a>
             }
             else
             {
