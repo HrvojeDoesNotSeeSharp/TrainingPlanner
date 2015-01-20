@@ -144,7 +144,6 @@
                                             <td class="treningFont">Vrijeme trajanja</td>
                                             <td class="treningFont">Broj serija</td>
                                             <td class="treningFont">Težina/Opterećenje</td>
-                                            <td class="treningFont">Odmor</td>
                                         </tr>
                                     }
                                     var vjZag = item.VjezbaZagrijavanje.FirstOrDefault(x => x.VjezbaId == Convert.ToInt32(zagId));
@@ -163,8 +162,7 @@
                                             <td>@Html.TextBox("brojPonavljanja", vjZag.BrojPonavljanja, new { @class = "marginInputBottom inputNumber" })</td>
                                             <td>@Html.TextBox("brojSerija", vjZag.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
                                             <td>@Html.TextBox("Tezina", vjZag.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
-                                            <td>@Html.TextBox("Odmor", vjZag.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
-
+                                            
                                             <td><a class="button_example_br" href="@Url.Action("IzbrisiVjezbuIzZagrijavanjaTrening", "Home", new { id = vjZag.VjezbaId, index = currIdx })#@ii@zsekcija">Izbriši</a></td>
                                             <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjZag.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = ii }, new { @class = "button_example_br" })</td>
                                             <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_br" /></td>

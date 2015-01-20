@@ -488,7 +488,6 @@
     <Property Name="BrojPonavljanja" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BrojSerija" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Kilogrami" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="VjezbePopisVjezbeId" Type="int" Nullable="false" />
     <Property Name="ZagrijavanjeSkupinaZagrijavanjeSkupinaId" Type="int" Nullable="false" />
   </EntityType>
@@ -1785,7 +1784,6 @@
           <Property Name="BrojPonavljanja" Type="String" Nullable="true" />
           <Property Name="BrojSerija" Type="String" Nullable="true" />
           <Property Name="Kilogrami" Type="String" Nullable="true" />
-          <Property Name="Odmor" Type="String" Nullable="true" />
           <NavigationProperty Name="VjezbePopis" Relationship="TreningModel.VjezbaZagrijavanjeVjezbePopis" FromRole="VjezbaZagrijavanje" ToRole="VjezbePopis" />
           <Property Name="VjezbePopisVjezbeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ZagrijavanjeSkupina" Relationship="TreningModel.VjezbaZagrijavanjeZagrijavanjeSkupina" FromRole="VjezbaZagrijavanje" ToRole="ZagrijavanjeSkupina" />
@@ -2172,7 +2170,6 @@
           <ScalarProperty Name="BrojPonavljanja" ColumnName="BrojPonavljanja" />
           <ScalarProperty Name="BrojSerija" ColumnName="BrojSerija" />
           <ScalarProperty Name="Kilogrami" ColumnName="Kilogrami" />
-          <ScalarProperty Name="Odmor" ColumnName="Odmor" />
           <ScalarProperty Name="VjezbePopisVjezbeId" ColumnName="VjezbePopisVjezbeId" />
           <ScalarProperty Name="ZagrijavanjeSkupinaZagrijavanjeSkupinaId" ColumnName="ZagrijavanjeSkupinaZagrijavanjeSkupinaId" />
         </MappingFragment>

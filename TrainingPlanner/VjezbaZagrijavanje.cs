@@ -21,7 +21,6 @@ namespace TrainingPlanner
         public string BrojPonavljanja { get; set; }
         public string BrojSerija { get; set; }
         public string Kilogrami { get; set; }
-        public string Odmor { get; set; }
         public int VjezbePopisVjezbeId { get; set; }
         public int ZagrijavanjeSkupinaZagrijavanjeSkupinaId { get; set; }
     

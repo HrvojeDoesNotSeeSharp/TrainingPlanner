@@ -3150,7 +3150,6 @@ namespace TrainingPlanner.Controllers
                 vj.BrojPonavljanja = brojPonavljanja;
                 vj.BrojSerija = brojSerija;
                 vj.Kilogrami = tezina;
-                vj.Odmor = odmor;
 
                 _context.Entry(vj).State = EntityState.Modified;
                 _context.SaveChanges();
