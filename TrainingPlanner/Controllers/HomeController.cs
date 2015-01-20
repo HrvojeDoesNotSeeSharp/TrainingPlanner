@@ -38,44 +38,39 @@ namespace TrainingPlanner.Controllers
         {
             var zp = _context.ZagrijavanjePopis.Find(id);
 
-            //provjeri dali je ovo zagrijavanje ukljuceno u neku skupinu i vrati id clana
+            //provjeri dali je ovo zagrijavanje ukljuceno u neku skupinu i vrati id skupine
             var zagrijavanja = from x in _context.Zagrijavanje
-                               join i in _context.ZagrijavanjePopis on x.ZagrijavanjePopisZagrijavanjeId equals i.ZagrijavanjeId
+                               join i in _context.ZagrijavanjePopis on x.ZagrijavanjeId equals i.ZagrijavanjeId
                                where i.ZagrijavanjeId == id
                                select x.ZagrijavanjeSkupinaZagrijavanjeSkupinaId;
 
-            var skupina = _context.ZagrijavanjeSkupina.Find(Convert.ToInt32(zagrijavanja.FirstOrDefault()));
-            var trId = skupina.TreningTreningId;
+            //vrati id od treninga u koji je ukljucena skupina
+            var skupina = from x in _context.ZagrijavanjeSkupina
+                          where x.ZagrijavanjeSkupinaId == zagrijavanja.FirstOrDefault()
+                          select x.TreningTreningId;
 
-            //var provjeriTrening = from t in _context.Trening
-            //                      join z in _context.ZagrijavanjeSkupina on t.TreningId equals z.TreningTreningId
-            //                      where t.TreningId == trId
-            //                      group t by t.Clan into grp
-            //                      select grp.Key;
-
-            //provjeri dali je ovo zagrijavanje ukljuceno u neku sekciju i vrati id clana
+            //provjeri dali je ovo zagrijavanje ukljuceno u neku sekciju i vrati id sekcije
             var zagrijavanjaSekcija = from x in _context.ZagrijavanjeVjezbaSet
                                       join i in _context.ZagrijavanjePopis on x.ZagrijavanjePopisZagrijavanjeId1 equals i.ZagrijavanjeId
                                       where i.ZagrijavanjeId == id
                                       select x.SekcijaVjezbiSekcijaId;
 
-            var sekcija = _context.SekcijaVjezbi.Find(Convert.ToInt32(zagrijavanjaSekcija.FirstOrDefault()));
-            var treId = sekcija.TreningId;
+            //vrati id od treninga u koji je ukljucena sekcija
+            var sekcija = from x in _context.SekcijaVjezbi
+                          where x.SekcijaId == zagrijavanjaSekcija.FirstOrDefault()
+                          select x.TreningId;
 
-            var provjeriTreningS = from t in _context.Trening
+            //vrati clana koji koristi trening u koji je ukljuceno zagrijavanje
+            var provjeriTrening = from t in _context.Trening
                                    join z in _context.SekcijaVjezbi on t.TreningId equals z.TreningId
                                    join a in _context.ZagrijavanjeSkupina on t.TreningId equals a.TreningTreningId
-                                   where t.TreningId == treId || t.TreningId == trId
+                                   where t.TreningId == sekcija.FirstOrDefault() || t.TreningId == skupina.FirstOrDefault()
                                    group t by t.Clan into grp
-                                   select grp.Key;
+                                   select grp.Key;        
 
             List<String> clanovi = new List<string>();
 
-            //foreach (Clan c in provjeriTrening.ToList())
-            //{
-            //    clanovi.Add(c.Ime + " " + c.Prezime + ", ");
-            //}
-            foreach (Clan c in provjeriTreningS.ToList())
+            foreach (Clan c in provjeriTrening.ToList())
             {
                 clanovi.Add(c.Ime + " " + c.Prezime + ", ");
             }
