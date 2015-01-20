@@ -7,13 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using TrainingPlanner.Models;
+
 namespace TrainingPlanner
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using TrainingPlanner.Models;
-
     [MetadataType(typeof(ZagrijavanjePopisMetadata))]
     
     public partial class ZagrijavanjePopis
@@ -28,7 +28,6 @@ namespace TrainingPlanner
         public int ZagrijavanjeId { get; set; }
         public string Naziv { get; set; }
         public string Info { get; set; }
-        public byte[] Slika { get; set; }
     
         public virtual ICollection<ZagrijavanjeSlike> ZagrijavanjeSlike { get; set; }
         public virtual ICollection<Zagrijavanje> Zagrijavanje { get; set; }

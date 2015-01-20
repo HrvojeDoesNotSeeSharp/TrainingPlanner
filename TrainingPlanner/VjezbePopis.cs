@@ -6,6 +6,7 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,6 +15,7 @@ using TrainingPlanner.Models;
 namespace TrainingPlanner
 {
     [MetadataType(typeof(VjezbePopisMetadata))]
+    
     public partial class VjezbePopis
     {
         public VjezbePopis()
@@ -25,7 +27,6 @@ namespace TrainingPlanner
     
         public int VjezbeId { get; set; }
         public string ImeVjezbe { get; set; }
-        public byte[] Slika { get; set; }
         public string Info { get; set; }
     
         public virtual ICollection<VjezbeSlike> VjezbeSlike { get; set; }
