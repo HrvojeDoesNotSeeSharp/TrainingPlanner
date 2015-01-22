@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Helpers\MIMEFileTypeDetector.cs" />
     <Compile Include="Istezanje.cs">
       <DependentUpon>TreningModel.tt</DependentUpon>
@@ -257,6 +258,7 @@
     <Content Include="Content\JavaScripts\jquery.validate.js" />
     <Content Include="Content\JavaScripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\layout.css" />
+    <Content Include="Content\TreningDetaljiPrintCss.css" />
     <Content Include="Content\Vanjski.css" />
     <Content Include="Global.asax" />
     <Content Include="TreningModel.edmx.sql" />
@@ -271,12 +273,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\AmnezaSlike\" />
-    <Folder Include="Content\ClanSlike\" />
-    <Folder Include="Content\IstezanjeSlike\" />
-    <Folder Include="Content\Slike\" />
-    <Folder Include="Content\VjezbeSlike\" />
-    <Folder Include="Content\ZagrijavanjeSlike\" />
+    <Folder Include="Content\MaleSlike\" />
+    <Folder Include="Content\VelikeSlike\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
