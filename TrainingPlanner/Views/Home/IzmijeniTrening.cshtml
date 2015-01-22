@@ -442,8 +442,8 @@
                 else
                 {
             <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = i })">Dodaj vježbu</a>
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj aerobnu vježbu</a>
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAnaerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = 0 })">Dodaj anaerobnu vježbu</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = i })">Dodaj aerobnu vježbu</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAnaerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), izmijeni = 1, counter = i })">Dodaj anaerobnu vježbu</a>
             <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId.ToString(), izmijeni = 1, counter = i, refferer = "vjezba", s = sekcija, sekcija = item.SekcijaId })">Dodaj zagrijavanje</a>
                 }
 
