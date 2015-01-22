@@ -504,8 +504,8 @@
         }
         else
         {
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, counter =  Model.ListaIstezanja.Count })">Dodaj istezanje</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, counter =  0 })">Dodaj istezanje</a>
         }
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajPredlozakTrening", "Home", new { id = Model.TreningId, counter = Model.ListaIstezanja.Count })">Dodaj predlozak istezanja</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajPredlozakTrening", "Home", new { id = Model.TreningId, counter = 0 })">Dodaj predlozak istezanja</a>
     </div>
 </div>
