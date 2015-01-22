@@ -1136,8 +1136,14 @@ $.extend( $.validator, {
 		},
 
 		// http://jqueryvalidation.org/date-method/
-		date: function( value, element ) {
-			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+		//date: function( value, element ) {
+		//	return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+	    //},
+
+        //promijenjeno jer chrome dopusta samo US format datuma pa validacija ne radi dobro, originalni kod je iznad zakomentiran
+		date: function (value, element) {
+		    var d = value.split("/");
+		    return this.optional(element) || !/Invalid|NaN/.test(new Date((/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) ? d[1] + "/" + d[0] + "/" + d[2] : value));
 		},
 
 		// http://jqueryvalidation.org/dateISO-method/
