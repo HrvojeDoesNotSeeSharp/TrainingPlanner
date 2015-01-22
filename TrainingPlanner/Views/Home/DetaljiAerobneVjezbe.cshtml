@@ -46,7 +46,7 @@
             <h2 style="padding-left:15px" class="green">Slike aerobnih vježbi</h2>
             @foreach (var item in Model.AerobneVjezbeSlike)
             {
-                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                <div style="float: left; display: block; clear:right; height:260px;" class="marginHeadline">
                     <div><a href="~/Content/VelikeSlike/@item.AerobnaVjezbaSlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.AerobnaVjezbaSlikaIme))" /></a></div>
                 </div>
             }

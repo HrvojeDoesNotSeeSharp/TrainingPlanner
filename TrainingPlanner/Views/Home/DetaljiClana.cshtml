@@ -111,7 +111,7 @@
             <h2 style="padding-left:15px" class="green">Slike člana</h2>
             @foreach (var item in Model.Clan.ClanSlike)
             {
-                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                <div style="float: left; display: block; clear:right; height:260px;" class="marginHeadline">
                     <div><a href="~/Content/VelikeSlike/@item.ClanSlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.ClanSlikaIme))" /></a></div>
                 </div>
             }

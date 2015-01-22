@@ -105,14 +105,14 @@
                 @foreach (var item in Model.Slika)
                 {
                     <div style="float: left; display: block; clear: right;" class="marginHeadline">
-                         @if(MIMEFileTypeDetector.GetMIMEType(item.SlikaIme) == "image/jpeg")
-                                {
-                                    <div><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.SlikaIme))" /></a></div>
-                                    @Html.ActionLink("Izbriši sliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
-                                }
-                            else
-                                {
-                                   <div><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content("~/Content/VelikeSlike/texticon.jpg")" /></a></div> 
+                         @if (MIMEFileTypeDetector.GetMIMEType(item.SlikaIme) == "image/jpeg")
+                         {
+                                   <div style="height:300px"><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.SlikaIme))" /></a></div>
+                                   @Html.ActionLink("Izbriši sliku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
+                         }
+                         else
+                         {
+                                   <div style="height:300px"><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content("~/Content/VelikeSlike/texticon.jpg")" /></a></div>
                                    @Html.ActionLink("Izbriši datoteku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
                                 }                       
                     </div>

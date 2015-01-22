@@ -50,7 +50,7 @@
                 @foreach (var item in Model.AnaerobneVjezbeSlike)
                 {
                     <div style="float: left; display: block; clear:right;" class="marginHeadline">
-                        <div><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.AnaerobnaVjezbaSlikaIme))" /></div>
+                        <div style="height:300px"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.AnaerobnaVjezbaSlikaIme))" /></div>
                         @Html.ActionLink("Izbriši sliku", "IzbrisiSlikuAnaerobneVjezbe", "Home", new { id = Model.AnaerobnaVjezbaId, slika = item.AnaerobnaVjezbaSlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
                     </div>
                 }

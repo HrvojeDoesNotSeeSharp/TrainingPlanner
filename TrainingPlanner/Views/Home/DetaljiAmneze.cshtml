@@ -37,7 +37,7 @@
             <h2 style="padding-left:15px" class="green">Amneza datoteke</h2>
             @foreach (var item in Model.AmnezaSlike)
             {
-                <div style="float: left; display: block; clear:right;" class="marginHeadline">
+                <div style="float: left; display: block; clear:right; height:260px;" class="marginHeadline">
                    @if(MIMEFileTypeDetector.GetMIMEType(item.SlikaIme) == "image/jpeg")
                     {
                         <div><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.SlikaIme))" /></a></div>
