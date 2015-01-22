@@ -314,7 +314,7 @@
                             <td>@Html.TextBox("brojSerija", vj.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Tezina", vj.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                             <td>@Html.TextBox("Odmor", vj.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
-                            <td>@Html.TextBox("NapomenaVj", vj.Napomena, new { @class = "marginInputBottom inputNumber" })</td>
+                            <td>@Html.TextBox("NapomenaVj", vj.NapomenaVjezba, new { @class = "marginInputBottom inputNumber" })</td>
 
                             <td><a class="button_example_br" href="@Url.Action("IzbrisiVjezbuTrening", "Home", new { id = vj.VjezbaId, index = currentIndex, izmijeni = 1 })#@i@sekcija">Izbriši</a></td>
                             <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vj.VjezbePopisVjezbeId, izmijeni = 1, trening = 0, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>

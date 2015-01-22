@@ -23,7 +23,7 @@ namespace TrainingPlanner
         public string Odmor { get; set; }
         public int SekcijaId { get; set; }
         public int VjezbePopisVjezbeId { get; set; }
-        public string Napomena { get; set; }
+        public string NapomenaVjezba { get; set; }
     
         public virtual SekcijaVjezbi SekcijaVjezbi { get; set; }
         public virtual VjezbePopis VjezbePopis { get; set; }

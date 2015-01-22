@@ -26,7 +26,7 @@
 
         @foreach (ZagrijavanjePopis zgp in Model.ZagrijavanjePopis)
         {
-            <form action="@Url.Action(action, "Home", new { id = Model.TreningId, sekcija = (int)ViewData["sekcija"] })#@ViewData["counter"]" method="post">
+            <form action="@Url.Action(action, "Home", new { id = Model.TreningId, sekcija = (int)ViewData["sekcija"] })#@ViewData["counter"]@ViewData["s"]" method="post">
                 @Html.Hidden("zgpIzmijeni", Model.Izmijeni)
                 @Html.Hidden("zgpId", zgp.ZagrijavanjeId)
                 <tr>

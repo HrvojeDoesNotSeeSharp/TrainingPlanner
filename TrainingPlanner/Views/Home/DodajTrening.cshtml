@@ -129,7 +129,7 @@
                                             <td>@Html.TextBox("ZagrijavanjeNapomena", zag.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
                                             <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeTrening", "Home", new { id = zag.ZagrijavanjeId, index = currIdx })#0">Izbriši</a></td>
-                                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zag.ZagrijavanjePopisZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
+                                            <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zag.ZagrijavanjePopisZagrijavanjeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i, reff = "" }, new { @class = "button_example_br" })</td>
                                             <td><input type="submit" name="SpremiZagrijavanjeInfo" value="Spremi" class="button_example_br" /></td>
                                         </tr>
                                     </form>
@@ -165,8 +165,8 @@
                                             <td>@Html.TextBox("Tezina", vjZag.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                                             <td>@Html.TextBox("NapomenaVj", vjZag.Napomena, new { @class = "marginInputBottom inputNumber" })</td>
 
-                                            <td><a class="button_example_br" href="@Url.Action("IzbrisiVjezbuIzZagrijavanjaTrening", "Home", new { id = vjZag.VjezbaId, index = currIdx })#@ii@zsekcija">Izbriši</a></td>
-                                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjZag.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = ii }, new { @class = "button_example_br" })</td>
+                                            <td><a class="button_example_br" href="@Url.Action("IzbrisiVjezbuIzZagrijavanjaTrening", "Home", new { id = vjZag.VjezbaId, index = currIdx })#0">Izbriši</a></td>
+                                            <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vjZag.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = ii, reff = "" }, new { @class = "button_example_br" })</td>
                                             <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_br" /></td>
                                         </tr>
                                     </form>
@@ -306,10 +306,10 @@
                                         <td>@Html.TextBox("brojSerija", vj.BrojSerija, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("Tezina", vj.Kilogrami, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("Odmor", vj.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
-                                        <td>@Html.TextBox("NapomenaVj", vj.Napomena, new { @class = "marginInputBottom inputNumber" })</td>
+                                        <td>@Html.TextBox("NapomenaVj", vj.NapomenaVjezba, new { @class = "marginInputBottom inputNumber" })</td>
 
                                         <td><a class="button_example_br" href="@Url.Action("IzbrisiVjezbuTrening", "Home", new { id = vj.VjezbaId, index = currentIndex })#@i@sekcija">Izbriši</a></td>
-                                        <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vj.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
+                                        <td>@Html.ActionLink("Detalji", "DetaljiVjezbe", "Home", new { id = vj.VjezbePopisVjezbeId, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i, reff = "sekc" }, new { @class = "button_example_br" })</td>
                                         <td><input type="submit" name="SpremiVjezbuInfo" value="Spremi" class="button_example_br" /></td>
                                     </tr>
                                 </form>
@@ -407,8 +407,8 @@
                                         <td>@Html.TextBox("Odmor", zvj.Odmor, new { @class = "marginInputBottom inputNumber" })</td>
                                         <td>@Html.TextBox("ZagrijavanjeNapomena", zvj.ZagrijavanjeNapomena, new { @class = "marginInputBottom inputNumber" })</td>
 
-                                        <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeIzVjezbeTrening", "Home", new { id = zvj.ZagrijavanjeVjezbaId, index = currentIndex })#0">Izbriši</a></td>
-                                        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zvj.ZagrijavanjePopisZagrijavanjeId1, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i }, new { @class = "button_example_br" })</td>
+                                        <td><a class="button_example_br" href="@Url.Action("IzbrisiZagrijavanjeIzVjezbeTrening", "Home", new { id = zvj.ZagrijavanjeVjezbaId, index = currentIndex })#@i@sekcija">Izbriši</a></td>
+                                        <td>@Html.ActionLink("Detalji", "DetaljiZagrijavanja", "Home", new { id = zvj.ZagrijavanjePopisZagrijavanjeId1, izmijeni = 0, trening = 1, treningId = Model.TreningId, counter = i, reff = "sek" }, new { @class = "button_example_br" })</td>
                                         <td><input type="submit" name="SpremiZagrijavanjeUVjezbuInfo" value="Spremi" class="button_example_br" /></td>
                                     </tr>
                                 </form>
@@ -436,7 +436,7 @@
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), counter = i, skupina = "" })">Dodaj vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), counter = i })">Dodaj aerobnu vježbu</a>
                     <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajAnaerobnuVjezbuTrening", "Home", new { id = item.SekcijaId, id1 = Model.TreningId.ToString(), counter = i })">Dodaj anaerobnu vježbu</a>
-                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId.ToString(), counter = i, refferer = "vjezba", sekcija = item.SekcijaId })">Dodaj zagrijavanje</a>
+                    <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajZagrijavanjeTrening", "Home", new { id = Model.TreningId.ToString(), counter = i, s = sekcija, refferer = "vjezba", sekcija = item.SekcijaId })">Dodaj zagrijavanje</a>
                 }
                 <a class="marginLeft marginHeadlineTop marginTextBottom button_example" href="@Url.Action("IzbrisiSekcijuVjezbi", "Home", new { id = item.SekcijaId })#0vje">Izbriši sekciju vježbi</a>
                 <hr />
@@ -506,6 +506,6 @@
         {
             <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajIstezanjeTrening", "Home", new { id = Model.TreningId, counter =  Model.ListaIstezanja.Count })">Dodaj istezanje</a>
         }
-            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajPredlozakTrening", "Home", new { id = Model.TreningId})">Dodaj predlozak istezanja</a>
+            <a class="marginHeadlineTop marginTextBottom button_example" href="@Url.Action("DodajPredlozakTrening", "Home", new { id = Model.TreningId, counter = Model.ListaIstezanja.Count })">Dodaj predlozak istezanja</a>
     </div>
 </div>

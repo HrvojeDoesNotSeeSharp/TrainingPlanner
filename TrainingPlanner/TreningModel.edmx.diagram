@@ -11,7 +11,7 @@
         <AssociationConnector Association="TreningModel.FK_ClanTrening" />
         <EntityTypeShape EntityType="TreningModel.IstezanjePopis" Width="1.5" PointX="0.625" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="TreningModel.VjezbePopis" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TreningModel.ZagrijavanjePopis" Width="1.5" PointX="9.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreningModel.ZagrijavanjePopis" Width="1.625" PointX="9.5" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TreningModel.Istezanje" Width="1.5" PointX="0.625" PointY="10.875" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.TreningIstezanje" />
         <AssociationConnector Association="TreningModel.TreningVjezba" />
@@ -43,13 +43,13 @@
         <AssociationConnector Association="TreningModel.TestMotorickiRezultatiTest" />
         <AssociationConnector Association="TreningModel.TestFunkcionalniRezultatiTest" />
         <EntityTypeShape EntityType="TreningModel.AerobneVjezbePopis" Width="1.5" PointX="7.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbePopis" Width="1.625" PointX="11.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbePopis" Width="1.625" PointX="12" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TreningModel.AerobneVjezbeSlike" Width="1.5" PointX="7.75" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbeSlike" Width="1.5" PointX="11.25" PointY="15" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.AerobneVjezbePopisAerobneVjezbeSlike" />
         <AssociationConnector Association="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbeSlike" />
         <EntityTypeShape EntityType="TreningModel.AerobneVjezbe" Width="1.5" PointX="7.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbe" Width="1.625" PointX="11.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreningModel.AnaerobneVjezbe" Width="3" PointX="11.25" PointY="7.5" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.SekcijaVjezbiAerobneVjezbe" />
         <AssociationConnector Association="TreningModel.AerobneVjezbeAerobneVjezbePopis" />
         <AssociationConnector Association="TreningModel.AnaerobneVjezbePopisAnaerobneVjezbe" />
@@ -58,18 +58,18 @@
         <EntityTypeShape EntityType="TreningModel.IstezanjeT" Width="1.5" PointX="2.5" PointY="18.25" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.IstezanjePopisIstezanjeT" />
         <AssociationConnector Association="TreningModel.IstezanjeTreningTemplateIstezanjeT" />
-        <EntityTypeShape EntityType="TreningModel.ZagrijavanjeVjezba" Width="1.5" PointX="9.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreningModel.ZagrijavanjeVjezba" Width="2" PointX="9.5" PointY="7.375" IsExpanded="true" />
         <AssociationConnector Association="TreningModel.ZagrijavanjeVjezbaSekcijaVjezbi" />
         <AssociationConnector Association="TreningModel.ZagrijavanjeVjezbaZagrijavanjePopis" />
-        <EntityTypeShape EntityType="TreningModel.Zagrijavanje" Width="1.5" PointX="2.625" PointY="13.5" />
+        <EntityTypeShape EntityType="TreningModel.Zagrijavanje" Width="2.625" PointX="2.125" PointY="13.25" />
         <AssociationConnector Association="TreningModel.ZagrijavanjeZagrijavanjePopis" />
         <EntityTypeShape EntityType="TreningModel.Vjezba" Width="1.5" PointX="6" PointY="7.125" />
         <AssociationConnector Association="TreningModel.SekcijaVjezbiVjezba" />
         <AssociationConnector Association="TreningModel.VjezbaVjezbePopis" />
-        <EntityTypeShape EntityType="TreningModel.ZagrijavanjeSkupina" Width="1.5" PointX="2.625" PointY="10.875" />
+        <EntityTypeShape EntityType="TreningModel.ZagrijavanjeSkupina" Width="1.875" PointX="2.625" PointY="10.875" />
         <AssociationConnector Association="TreningModel.ZagrijavanjeSkupinaZagrijavanje" />
         <AssociationConnector Association="TreningModel.ZagrijavanjeSkupinaTrening" />
-        <EntityTypeShape EntityType="TreningModel.VjezbaZagrijavanje" Width="1.5" PointX="4.25" PointY="14" />
+        <EntityTypeShape EntityType="TreningModel.VjezbaZagrijavanje" Width="1.75" PointX="4.5" PointY="16.875" />
         <AssociationConnector Association="TreningModel.VjezbaZagrijavanjeVjezbePopis" />
         <AssociationConnector Association="TreningModel.VjezbaZagrijavanjeZagrijavanjeSkupina" />
       </Diagram>

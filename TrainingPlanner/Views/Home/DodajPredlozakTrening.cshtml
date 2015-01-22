@@ -17,11 +17,11 @@
 
         @foreach (IstezanjeTreningTemplate itt in Model)
         {
-            <form action="@Url.Action("DodajPredlozakTrening", "Home", new { id = Convert.ToInt32(ViewData["treningId"]), templateId = itt.IstezanjeTreningTemplateId, izmijeni = ViewData["izmijeni"] })" method="post">
+            <form action="@Url.Action("DodajPredlozakTrening", "Home", new { id = Convert.ToInt32(ViewData["treningId"]), templateId = itt.IstezanjeTreningTemplateId, izmijeni = ViewData["izmijeni"] })#@ViewData["counter"]@ViewData["id"]" method="post">
 
                 <tr>
                     <td class="smallFontGreen">@itt.NazivPredloska</td>
-                    <td>@Html.ActionLink("Detalji", "DetaljiPredlozakIstezanja", "Home", new { id = itt.IstezanjeTreningTemplateId, treningId = Convert.ToInt32(ViewData["treningId"]), izmijeni = Convert.ToInt32(ViewData["izmijeni"])}, new { @class="button_example" })</td>
+                    <td>@Html.ActionLink("Detalji", "DetaljiPredlozakIstezanja", "Home", new { id = itt.IstezanjeTreningTemplateId, treningId = Convert.ToInt32(ViewData["treningId"]), izmijeni = Convert.ToInt32(ViewData["izmijeni"]) }, new { @class = "button_example" })</td>
                     <td><input type="submit" value="Dodaj predlozak" class="button_example" /></td>
                 </tr>
             </form>
