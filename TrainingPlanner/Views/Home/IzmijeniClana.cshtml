@@ -79,7 +79,7 @@
                 @foreach (var item in Model.ClanSlike)
                 {
                     <div style="float: left; display: block; clear:right;" class="marginHeadline">
-                        <div><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/ClanSlike/{0}", item.ClanSlikaIme))" /></div>
+                        <div><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.ClanSlikaIme))" /></div>
                         @Html.ActionLink("Izbriši sliku", "IzbrisiSlikuClana", "Home", new { id = Model.ClanId, slika = item.ClanSlikeId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
                     </div>
                 }

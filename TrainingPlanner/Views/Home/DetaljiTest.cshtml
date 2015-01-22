@@ -91,11 +91,11 @@
                 <div style="float: left; display: block; clear: right;" class="marginHeadline">
                     @if(MIMEFileTypeDetector.GetMIMEType(item.SlikaIme) == "image/jpeg")
                     {
-                        <div><a href="~/Content/Slike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/Slike/{0}", item.SlikaIme))" /></a></div>
+                        <div><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.SlikaIme))" /></a></div>
                     }
                     else
                     {
-                       <div><a href="~/Content/Slike/@item.SlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content("~/Content/Slike/texticon.jpg")" /></a></div> 
+                       <div><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content("~/Content/VelikeSlike/texticon.jpg")" /></a></div> 
                     }
                 </div>
             }

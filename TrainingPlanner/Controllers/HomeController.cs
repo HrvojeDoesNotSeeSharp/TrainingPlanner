@@ -5,6 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TrainingPlanner.Models;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using TrainingPlanner.Helpers;
 
 namespace TrainingPlanner.Controllers
 {
@@ -163,11 +167,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new ZagrijavanjeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.ZagrijavanjeSlikaIme = file.FileName;
                         slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
@@ -212,12 +223,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/ZagrijavanjeSlike/");
-
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new ZagrijavanjeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.ZagrijavanjeSlikaIme = file.FileName;
                         slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
@@ -418,11 +435,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new VjezbeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.VjezbeSlikaIme = file.FileName;
                         slika.VjezbePopisVjezbeId = vjp.VjezbeId;
@@ -453,12 +477,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/VjezbeSlike/");
-
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new VjezbeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.VjezbeSlikaIme = file.FileName;
                         slika.VjezbePopisVjezbeId = vjp.VjezbeId;
@@ -544,11 +574,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new AerobneVjezbeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.AerobnaVjezbaSlikaIme = file.FileName;
                         slika.AerobneVjezbePopisAerobnaVjezbaId = avjp.AerobnaVjezbaId;
@@ -579,12 +616,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/VjezbeSlike/");
-
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new AerobneVjezbeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.AerobnaVjezbaSlikaIme = file.FileName;
                         slika.AerobneVjezbePopisAerobnaVjezbaId = avjp.AerobnaVjezbaId;
@@ -746,11 +789,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/VjezbeSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new AnaerobneVjezbeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.AnaerobnaVjezbaSlikaIme = file.FileName;
                         slika.AnaerobneVjezbePopisAnaerobnaVjezbaId = avjp.AnaerobnaVjezbaId;
@@ -781,12 +831,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/VjezbeSlike/");
-
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new AnaerobneVjezbeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.AnaerobnaVjezbaSlikaIme = file.FileName;
                         slika.AnaerobneVjezbePopisAnaerobnaVjezbaId = avjp.AnaerobnaVjezbaId;
@@ -1060,11 +1116,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/IstezanjeSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new IstezanjeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.IstezanjeSlikaIme = file.FileName;
                         slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
@@ -1095,12 +1158,18 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/IstezanjeSlike/");
-
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
+                    var pathMIN = Server.MapPath("~/Content/MaleSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new IstezanjeSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+
+                        var newimageMin = image.ScaleImageMin();
+                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
 
                         slika.IstezanjeSlikaIme = file.FileName;
                         slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
@@ -1448,11 +1517,14 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/ClanSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new ClanSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
                         slika.ClanSlikaIme = file.FileName;
                         slika.ClanClanId = c.ClanId;
@@ -1623,11 +1695,14 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/ClanSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new ClanSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
                         slika.ClanSlikaIme = file.FileName;
                         slika.ClanClanId = c.ClanId;
@@ -1721,11 +1796,14 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/Slike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new Slika();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
                         slika.SlikaIme = file.FileName;
                         slika.TestTestId = t.TestId;
@@ -1777,11 +1855,14 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/Slike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new Slika();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
                         slika.SlikaIme = file.FileName;
                         slika.TestTestId = t.TestId;
@@ -1938,11 +2019,14 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/AmnezaSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new AmnezaSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
                         slika.SlikaIme = file.FileName;
                         slika.AmnezaAmnezaId = a.AmnezaId;
@@ -1972,11 +2056,14 @@ namespace TrainingPlanner.Controllers
             {
                 if (slike != null && slike.FirstOrDefault() != null)
                 {
-                    var path = Server.MapPath("~/Content/AmnezaSlike/");
+                    var path = Server.MapPath("~/Content/VelikeSlike/");
                     foreach (var file in slike)
                     {
                         var slika = new AmnezaSlike();
-                        file.SaveAs(path + file.FileName);
+
+                        Image image = Image.FromStream(file.InputStream);
+                        var newimage = image.ScaleImage();
+                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
                         slika.SlikaIme = file.FileName;
                         slika.AmnezaAmnezaId = a.AmnezaId;

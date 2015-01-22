@@ -47,7 +47,7 @@
             @foreach (var item in Model.VjezbeSlike)
             {
                 <div style="float: left; display: block; clear:right;" class="marginHeadline">
-                    <div><a href="~/Content/VjezbeSlike/@item.VjezbeSlikaIme" target="_blank"><img class="marginLeft" width="250" height="250" src="@Url.Content(String.Format("~/Content/VjezbeSlike/{0}", item.VjezbeSlikaIme))" /></a></div>
+                    <div><a href="~/Content/VelikeSlike/@item.VjezbeSlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content(String.Format("~/Content/VelikeSlike/{0}", item.VjezbeSlikaIme))" /></a></div>
                 </div>
             }
         </div>
