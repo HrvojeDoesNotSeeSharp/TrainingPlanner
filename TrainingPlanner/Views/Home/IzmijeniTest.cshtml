@@ -45,7 +45,7 @@
                             <td align="center">@item.Datum.Value.ToShortDateString()</td>
                             <td align="center">@item.Rezultat</td>
                             <td align="center">@Html.ActionLink("Izmjeni", "IzmijeniFunkcionalniRezultat", "Home", new { id = item.FunkcionalniRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);" })</td>
-                            <td align="center">@Html.ActionLink("Izbriši", "IzbrisiFunkcionalniRezultat", "Home", new { id = item.FunkcionalniRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);", onclick = "return confirm('Jeste li sigurni da zelite izbrisati rezultat?;" })</td>
+                            <td align="center">@Html.ActionLink("Izbriši", "IzbrisiFunkcionalniRezultat", "Home", new { id = item.FunkcionalniRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);", onclick = "return confirm('Jeste li sigurni da zelite izbrisati rezultat?');" })</td>
                         </tr>
                 }
                    </table>
@@ -74,7 +74,7 @@
                             <td align="center">@item.Datum.Value.ToShortDateString()</td>
                             <td align="center">@item.Rezultat</td>
                             <td align="center">@Html.ActionLink("Izmjeni", "IzmijeniMotorickiRezultat", "Home", new { id = item.MotorickiRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);" })</td>
-                            <td align="center">@Html.ActionLink("Izbriši", "IzbrisiMotorickiRezultat", "Home", new { id = item.MotorickiRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);", onclick = "return confirm('Jeste li sigurni da zelite izbrisati rezultat?;" })</td>
+                            <td align="center">@Html.ActionLink("Izbriši", "IzbrisiMotorickiRezultat", "Home", new { id = item.MotorickiRezultatiTestId }, new { @class = "button_example_small", @style="-moz-transform: scale(0.75);", onclick = "return confirm('Jeste li sigurni da zelite izbrisati rezultat?');" })</td>
                         </tr>
                 }
                    </table>
