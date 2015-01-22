@@ -255,7 +255,7 @@
     <Property Name="Odmor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="SekcijaId" Type="int" Nullable="false" />
     <Property Name="VjezbePopisVjezbeId" Type="int" Nullable="false" />
-    <Property Name="Napomena" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NapomenaVjezba" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Istezanje">
     <Key>
@@ -1159,7 +1159,7 @@
           <Property Type="Int32" Name="SekcijaId" Nullable="false" />
           <NavigationProperty Name="VjezbePopis" Relationship="TreningModel.VjezbaVjezbePopis" FromRole="Vjezba" ToRole="VjezbePopis" />
           <Property Name="VjezbePopisVjezbeId" Type="Int32" Nullable="false" />
-          <Property Type="String" Name="Napomena" Nullable="true" />
+          <Property Type="String" Name="NapomenaVjezba" Nullable="true" />
         </EntityType>
         <EntityType Name="Istezanje">
           <Key>
@@ -1898,7 +1898,7 @@
           <ScalarProperty Name="Odmor" ColumnName="Odmor" />
           <ScalarProperty Name="SekcijaId" ColumnName="SekcijaId" />
           <ScalarProperty Name="VjezbePopisVjezbeId" ColumnName="VjezbePopisVjezbeId" />
-          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+          <ScalarProperty Name="NapomenaVjezba" ColumnName="NapomenaVjezba" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

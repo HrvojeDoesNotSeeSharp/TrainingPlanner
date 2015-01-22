@@ -133,7 +133,7 @@ namespace TrainingPlanner.Controllers
             }
         }
 
-        public ActionResult DetaljiZagrijavanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
+        public ActionResult DetaljiZagrijavanja(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0, string reff = null)
         {
             var zp = _context.ZagrijavanjePopis.Find(id);
             if (izmijeni == 1)
@@ -148,8 +148,15 @@ namespace TrainingPlanner.Controllers
             {
                 ViewData["treningId"] = treningId;
             }
-            ViewData["counter"] = counter;
-
+            if (reff == "sek")
+            {
+                ViewData["counter"] = counter + "sek";
+            }
+            else
+            {
+                ViewData["counter"] = counter;
+            }
+            
             return View(zp);
         }
 
@@ -399,7 +406,7 @@ namespace TrainingPlanner.Controllers
             }
         }
 
-        public ActionResult DetaljiVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0)
+        public ActionResult DetaljiVjezbe(int id = 0, int izmijeni = 0, int trening = 0, int treningId = 0, int counter = 0, string reff = null)
         {
             var vjp = _context.VjezbePopis.Find(id);
 
@@ -417,7 +424,16 @@ namespace TrainingPlanner.Controllers
             }
 
             ViewData["counter"] = counter;
-            ViewData["id"] = "sek";
+
+            if (reff == "sekc")
+            {
+                ViewData["id"] = "sek";
+            }
+            else
+            {
+                ViewData["id"] = "";
+            }
+            
             return View(vjp);
         }
 
@@ -2665,7 +2681,7 @@ namespace TrainingPlanner.Controllers
 
         #region ZagrijavanjeTrening
         [HttpGet]
-        public ActionResult DodajZagrijavanjeTrening(int id, int sekcija, int izmijeni = 0, int counter = 0, string refferer = "")
+        public ActionResult DodajZagrijavanjeTrening(int id, int sekcija, int izmijeni = 0, int counter = 0, string s = "", string refferer = "")
         {
             var zgp = new IstezanjeZagrijavanjeLista
             {
@@ -2677,11 +2693,12 @@ namespace TrainingPlanner.Controllers
             ViewData["counter"] = counter;
             ViewData["refferer"] = refferer;
             ViewData["sekcija"] = sekcija;
+            ViewData["s"] = s;
             return View(zgp);
         }
 
         [HttpPost]
-        public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0, int counter = 0, int skupina = 0)
+        public ActionResult DodajZagrijavanjeTrening(int zgpId = 0, int id = 0, int zgpIzmijeni = 0, int counter = 0, string s = "", int skupina = 0)
         {
             var query = from x in _context.ZagrijavanjePopis
                         where x.ZagrijavanjeId == zgpId
@@ -2729,6 +2746,7 @@ namespace TrainingPlanner.Controllers
             ViewData["izmijeni"] = zgpIzmijeni;
             ViewData["counter"] = counter;
             ViewData["skupina"] = skupina;
+            ViewData["s"] = s;
             return zgpIzmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new { id })
                 : RedirectToAction("DodajTrening", new { id, DodajVjezbu = 2 });
@@ -3235,7 +3253,7 @@ namespace TrainingPlanner.Controllers
                 vj.BrojSerija = brojSerija;
                 vj.Kilogrami = tezina;
                 vj.Odmor = odmor;
-                vj.Napomena = NapomenaVj;
+                vj.NapomenaVjezba = NapomenaVj;
 
                 _context.Entry(vj).State = EntityState.Modified;
                 _context.SaveChanges();
@@ -3394,16 +3412,18 @@ namespace TrainingPlanner.Controllers
         #region PredlozakTrening
 
         [HttpGet]
-        public ActionResult DodajPredlozakTrening(int id, int izmijeni = 0)
+        public ActionResult DodajPredlozakTrening(int id, int izmijeni = 0, int counter = 0)
         {
             var pp = _context.IstezanjeTreningTemplate.ToList();
             ViewData["treningId"] = id;
             ViewData["izmijeni"] = izmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "ist";
             return View(pp);
         }
 
         [HttpPost]
-        public ActionResult DodajPredlozakTrening(int id = 0, int templateId = 0, int izmijeni = 0)
+        public ActionResult DodajPredlozakTrening(int id = 0, int templateId = 0, int izmijeni = 0, int counter = 0)
         {
             var trening = _context.Trening.Find(id);
 
@@ -3426,6 +3446,8 @@ namespace TrainingPlanner.Controllers
             }
 
             ViewData["izmijeni"] = izmijeni;
+            ViewData["counter"] = counter;
+            ViewData["id"] = "ist";
 
             return izmijeni != 0
                 ? RedirectToAction("IzmijeniTrening", new { id })
