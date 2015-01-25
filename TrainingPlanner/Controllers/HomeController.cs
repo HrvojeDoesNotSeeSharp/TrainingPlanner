@@ -180,12 +180,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new ZagrijavanjeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.ZagrijavanjeSlikaIme = file.FileName;
                         slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
@@ -236,12 +243,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new ZagrijavanjeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.ZagrijavanjeSlikaIme = file.FileName;
                         slika.ZagrijavanjePopisZagrijavanjeId = zp.ZagrijavanjeId;
@@ -457,12 +471,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new VjezbeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.VjezbeSlikaIme = file.FileName;
                         slika.VjezbePopisVjezbeId = vjp.VjezbeId;
@@ -499,12 +520,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new VjezbeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.VjezbeSlikaIme = file.FileName;
                         slika.VjezbePopisVjezbeId = vjp.VjezbeId;
@@ -596,12 +624,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new AerobneVjezbeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.AerobnaVjezbaSlikaIme = file.FileName;
                         slika.AerobneVjezbePopisAerobnaVjezbaId = avjp.AerobnaVjezbaId;
@@ -638,12 +673,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new AerobneVjezbeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.AerobnaVjezbaSlikaIme = file.FileName;
                         slika.AerobneVjezbePopisAerobnaVjezbaId = avjp.AerobnaVjezbaId;
@@ -811,12 +853,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new AnaerobneVjezbeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.AnaerobnaVjezbaSlikaIme = file.FileName;
                         slika.AnaerobneVjezbePopisAnaerobnaVjezbaId = avjp.AnaerobnaVjezbaId;
@@ -853,12 +902,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new AnaerobneVjezbeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.AnaerobnaVjezbaSlikaIme = file.FileName;
                         slika.AnaerobneVjezbePopisAnaerobnaVjezbaId = avjp.AnaerobnaVjezbaId;
@@ -1138,12 +1194,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new IstezanjeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.IstezanjeSlikaIme = file.FileName;
                         slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
@@ -1180,12 +1243,19 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new IstezanjeSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
 
-                        var newimageMin = image.ScaleImageMin();
-                        newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                            var newimageMin = image.ScaleImageMin();
+                            newimageMin.Save(pathMIN + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.IstezanjeSlikaIme = file.FileName;
                         slika.IstezanjePopisIstezanjeId = ip.IstezanjeId;
@@ -1395,9 +1465,14 @@ namespace TrainingPlanner.Controllers
                            on i.IstezanjeTreningTemplateIstezanjeTreningTemplateId equals t.IstezanjeTreningTemplateId
                            where t.IstezanjeTreningTemplateId == id
                            select i;
-
-            ViewData["treningId"] = treningId;
-            ViewData["izmijeni"] = izmijeni;
+            if (izmijeni == 1)
+            {
+                ViewData["izmijeni"] = izmijeni;
+            }
+            if (treningId == 1)
+            {
+                ViewData["trening"] = treningId;
+            }
 
             predlozakModel = new IstezanjeTemplateListaIstezanjaModel() { ITT = temp, ListaIstezanjeT = queryIst.ToList() };
 
@@ -1537,10 +1612,15 @@ namespace TrainingPlanner.Controllers
                     foreach (var file in slike)
                     {
                         var slika = new ClanSlike();
-
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.ClanSlikaIme = file.FileName;
                         slika.ClanClanId = c.ClanId;
@@ -1716,9 +1796,16 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new ClanSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.ClanSlikaIme = file.FileName;
                         slika.ClanClanId = c.ClanId;
@@ -1817,9 +1904,16 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new Slika();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.SlikaIme = file.FileName;
                         slika.TestTestId = t.TestId;
@@ -1876,9 +1970,16 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new Slika();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.SlikaIme = file.FileName;
                         slika.TestTestId = t.TestId;
@@ -2040,9 +2141,16 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new AmnezaSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.SlikaIme = file.FileName;
                         slika.AmnezaAmnezaId = a.AmnezaId;
@@ -2077,9 +2185,16 @@ namespace TrainingPlanner.Controllers
                     {
                         var slika = new AmnezaSlike();
 
-                        Image image = Image.FromStream(file.InputStream);
-                        var newimage = image.ScaleImage();
-                        newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        if (MIMEFileTypeDetector.GetMIMEType(file.FileName) == "image/jpeg")
+                        {
+                            Image image = Image.FromStream(file.InputStream);
+                            var newimage = image.ScaleImage();
+                            newimage.Save(path + file.FileName, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            file.SaveAs(path + file.FileName);
+                        }
 
                         slika.SlikaIme = file.FileName;
                         slika.AmnezaAmnezaId = a.AmnezaId;

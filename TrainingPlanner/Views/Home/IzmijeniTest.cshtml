@@ -112,7 +112,7 @@
                          }
                          else
                          {
-                                   <div style="height:300px"><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img class="marginLeft" src="@Url.Content("~/Content/VelikeSlike/texticon.jpg")" /></a></div>
+                                   <div style="height:300px"><a href="~/Content/VelikeSlike/@item.SlikaIme" target="_blank"><img height="250px"  class="marginLeft" src="@Url.Content("~/Content/VelikeSlike/texticon.jpg")" /></a></div>
                                    @Html.ActionLink("Izbriši datoteku", "IzbrisiSliku", "Home", new { id = Model.TestId, slika = item.SlikaId }, new { @class = "marginLeft marginInputTop marginTextBottom button_example" })
                                 }                       
                     </div>
